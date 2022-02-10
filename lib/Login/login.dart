@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revoo/Login/signup.dart';
+import 'package:revoo/home/admindashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key= const Key('LoginScreen')}) : super(key: key);
@@ -88,7 +89,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                                 ),
                               ),
-                              SizedBox(height: 20,),
+                              SizedBox(height: 30,),
                               TextFormField(
                                 decoration: InputDecoration(
                                     filled: true,
@@ -114,16 +115,21 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                               ),
                               SizedBox(height: 20,),
 
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Center(child: Text('SIGN IN',style: TextStyle(
-                                    color: Colors.white,fontSize: 20
-                                  ),)),
-                                ),
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
+                              InkWell(
+                                onTap: (){
+                                  Get.to(AdminDashboard());
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(child: Text('SIGN IN',style: TextStyle(
+                                      color: Colors.white,fontSize: 20
+                                    ),)),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
+                                  ),
                                 ),
                               ),
                               SizedBox(height: 10,),

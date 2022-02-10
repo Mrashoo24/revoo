@@ -34,8 +34,8 @@ class _SignupState extends State<Signup> {
 
               ),
               Positioned(
-                  bottom: 35,
-                  right : -35,
+                  bottom: 165,
+                  right : -15,
 
                   child: Container(child: Image.asset('asset/smallcircle.png', width: 200,),)
 
@@ -54,7 +54,7 @@ class _SignupState extends State<Signup> {
                         borderRadius: BorderRadius.circular(20)
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 30.0,left: 30.0,top: 15,bottom: 20),
+                      padding: const EdgeInsets.only(right: 30.0,left: 30.0,top: 25,bottom: 20),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -188,6 +188,15 @@ class _SignupState extends State<Signup> {
                                 gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
                             ),
                           ),
+                          SizedBox(height: 10,),
+
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: InkWell(
+                                  onTap: (){
+                                    Get.to(Signup());
+                                  },
+                                  child: Text('Already hav an account?',style: TextStyle(color: Colors.yellow.shade700),))),
 
                         ],
                       ),
