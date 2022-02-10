@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:revoo/constants/constants.dart';
 
 class AdminDashboard extends StatefulWidget {
-  const AdminDashboard({Key? key}) : super(key: key);
+  const AdminDashboard({Key key= const Key('AdminDashboard')}) : super(key: key);
 
   @override
   _AdminDashboardState createState() => _AdminDashboardState();

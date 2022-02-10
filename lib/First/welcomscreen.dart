@@ -5,7 +5,7 @@ import 'package:revoo/Login/login.dart';
 import 'package:revoo/constants/constants.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  const WelcomeScreen({Key key = const Key('Welcome')}) : super(key: key);
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
