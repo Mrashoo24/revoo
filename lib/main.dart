@@ -4,12 +4,16 @@ import 'package:revoo/First/welcomscreen.dart';
 import 'package:revoo/Login/login.dart';
 import 'package:revoo/WelcomeScreens/SplashScreen.dart';
 import 'package:revoo/home/admindashboard.dart';
+import 'package:revoo/sales.dart';
+
+
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({Key key= const Key('MyApp')}) : super(key: key);
 
   // This widget is the root of your application.
@@ -29,7 +33,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: AdminDashboard(),
       debugShowCheckedModeBanner: false,
     );
   }

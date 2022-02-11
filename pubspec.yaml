@@ -39,6 +39,11 @@ dependencies:
   splash_screen_view: ^3.0.0
   video_player: ^2.2.10
   cell_calendar: ^0.5.0+1
+  charts_flutter: ^0.12.0
+  pie_chart: ^5.1.0
+  animated_bottom_navigation_bar: ^0.3.2
+  percent_indicator: ^3.4.0
+
 
 dev_dependencies:
   flutter_test:

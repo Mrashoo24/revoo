@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:revoo/constants/constants.dart';
 import 'package:cell_calendar/cell_calendar.dart';
+
+import '../sales.dart';
 
 class AdminDashboard extends StatefulWidget {
   const AdminDashboard({Key key= const Key('AdminDashboard')}) : super(key: key);
@@ -39,6 +42,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
         ],
       ),
       bottomNavigationBar: Container(
+
         height: 100,
         child: Stack(
           children: [
@@ -65,6 +69,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             children: [
                               ClipRect(child: Image.asset('asset/share.png')),
                               ClipRect(child: Image.asset('asset/share.png')),
+                              Opacity(
+                                opacity: 0.01,
+                                  child: ClipRect(child: Image.asset('asset/share.png'))
+                              ),
                               ClipRect(child: Image.asset('asset/share.png')),
                               ClipRect(child: Image.asset('asset/share.png')),
 
@@ -88,7 +96,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
             ),
           ],
         ),
-      ),
+      )
+      ,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -96,6 +105,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               children: [
                 Container(
                   width: Get.width,
+                  height: Get.height*0.5,
                   child: ClipRect(
                     child: Image.asset(
                     'asset/dcbg.png',fit: BoxFit.fill,),
@@ -239,7 +249,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(35.0),
+                        padding: const EdgeInsets.only(bottom: 35.0,top: 35),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -287,8 +297,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
                         ),
 
-                      ),
 
+                      ),
                       Stack(
                         children: [
                           Padding(
@@ -380,7 +390,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
             SizedBox(height: 30,),
 
         Container(
-          height: 300,
+          height: Get.height*0.3,
           child: CellCalendar(
             cellCalendarPageController: cellCalendarPageController,
               events: sampleEvents,
@@ -485,6 +495,147 @@ class _AdminDashboardState extends State<AdminDashboard> {
             buildCard('Veiw Departments','40\nDepartments'),
             buildCard('Daily Logins','40\nDaily Logins'),
 
+            Container(
+              height: Get.height*0.3,
+                child: HomePage()),
+
+            Padding(
+                padding: const EdgeInsets.only(bottom: 35.0,top: 35),
+              child: Card(
+                elevation: 10,
+                color: Colors.grey.shade200,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0)
+                ),
+                child: Padding(
+                  padding:   EdgeInsets.symmetric(horizontal: 8.0,vertical: Get.height*0.05),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 12,),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0,left: 8,right: 8),
+                        child: Text("Department Progress",
+                          style: TextStyle(
+                              color: kblue,fontSize: 25
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      SizedBox(height: Get.height*0.06,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 12,),
+                          Container(
+                            width: Get.width*0.20,
+                            child: Text("HR",
+                              style: TextStyle(
+                                  color: Colors.grey.shade700,fontSize: 18
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          Expanded(
+                            child: LinearPercentIndicator(
+                              // width: MediaQuery.of(context).size.width*0.4,
+                              animation: true,
+                              lineHeight: 20.0,
+                              animationDuration: 2500,
+                              percent: 0.8,
+                              // center: Text("\₹ ${widget.urgentcase.raised}",style: TextStyle(color: kwhite,letterSpacing: 2),),
+                              linearStrokeCap: LinearStrokeCap.roundAll ,
+
+                              linearGradient: LinearGradient(
+                                colors: [
+                                  Kdblue,
+                                  Colors.lightBlueAccent
+                                ]
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: Get.height*0.02,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 12,),
+                          Container(
+                            width: Get.width*0.20,
+                            child: Text("Finance",
+                              style: TextStyle(
+                                  color: Colors.grey.shade700,fontSize: 18
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          Expanded(
+                            child: LinearPercentIndicator(
+                              // width: MediaQuery.of(context).size.width*0.4,
+                              animation: true,
+                              lineHeight: 20.0,
+                              animationDuration: 2500,
+                              percent: 0.8,
+                              // center: Text("\₹ ${widget.urgentcase.raised}",style: TextStyle(color: kwhite,letterSpacing: 2),),
+                              linearStrokeCap: LinearStrokeCap.roundAll ,
+
+                              linearGradient: LinearGradient(
+                                  colors: [
+                                    Kdblue,
+                                    Colors.lightBlueAccent
+                                  ]
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: Get.height*0.02,),
+
+                      Row(
+                        children: [
+                          SizedBox(height: 12,),
+                          Container(
+                            width: Get.width*0.20,
+                            child: Text("Account",
+                              style: TextStyle(
+                                  color: Colors.grey.shade700,fontSize: 18
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          Expanded(
+                            child: LinearPercentIndicator(
+                              // width: MediaQuery.of(context).size.width*0.4,
+                              animation: true,
+                              lineHeight: 20.0,
+                              animationDuration: 2500,
+                              percent: 0.8,
+                              // center: Text("\₹ ${widget.urgentcase.raised}",style: TextStyle(color: kwhite,letterSpacing: 2),),
+                              linearStrokeCap: LinearStrokeCap.roundAll ,
+
+                              linearGradient: LinearGradient(
+                                  colors: [
+                                    Kdblue,
+                                    Colors.lightBlueAccent
+                                  ]
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+
+
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+
+
 
           ],
 
@@ -497,43 +648,48 @@ class _AdminDashboardState extends State<AdminDashboard> {
   Padding buildCard(String title,String subtitle) {
     return Padding(
             padding: const EdgeInsets.only(left: 25,right: 25,bottom: 15),
-            child: Container(
-              height: Get.height*0.21,
-              child: Card(
-                elevation: 10,
-                child:Stack(
-                  children: [
-                    Container(
-                      width: Get.width,
-                      height: Get.height*0.21,
-                      child: ClipRect(child: Image.asset("asset/cardbg.png",fit: BoxFit.fill,)),
+            child: Card(
+              elevation: 10,
+              child:Stack(
+                children: [
+                  Container(
+                    width: Get.width,
+
+                    child: ClipRect(child: Image.asset("asset/cardbg.png",fit: BoxFit.fill,)),
 
 
-                    ),
-                    Column(
-                      children: [
-                        Align(
-                            child: Padding(
-                              padding:  EdgeInsets.only(top: 20,right: 25),
-                              child: Text (title,style: TextStyle(color: Colors.white,fontSize: 18),),
-                            ),
-                          alignment: Alignment.topRight,
-
-                        ),
-                        Align(
+                  ),
+                  Column(
+                    children: [
+                      Align(
                           child: Padding(
-                            padding:  EdgeInsets.only(top: 40,left: 25,bottom: 20),
-                            child: Text (subtitle,style: TextStyle(color: kblue,fontSize: 25),),
+                            padding:  EdgeInsets.only(top: 20,right: 25),
+                            child: Text (title,style: TextStyle(color: Colors.white,fontSize: 18),),
                           ),
-                          alignment: Alignment.bottomLeft,
+                        alignment: Alignment.topRight,
 
+                      ),
+                      Align(
+                        child: Padding(
+                          padding:  EdgeInsets.only(top: 40,left: 25,bottom: 20),
+                          child: Text (subtitle,style: TextStyle(color: kblue,fontSize: 25),),
                         ),
-                      ],
-                    ),
-                  ],
-                )
+                        alignment: Alignment.bottomLeft,
+
+                      ),
+
+                    ],
+
+                  ),
+
+
+
+                ],
               ),
+
+
             ),
           );
+
   }
 }
