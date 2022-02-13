@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:revoo/Login/login.dart';
+import 'package:revoo/profile/userProfileTeams.dart';
+import 'package:revoo/profile/userProjectsProfile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      //home: LoginScreen(),
+      //home: userProjectProfile(),
+      home: userProfileTeams(),
       debugShowCheckedModeBanner: false,
     );
   }

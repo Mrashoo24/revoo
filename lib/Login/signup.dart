@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/profile/userProjectsProfile.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -188,7 +189,12 @@ class _SignupState extends State<Signup> {
                                 gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
                             ),
                           ),
-
+                          Align(
+                            alignment: Alignment.center,
+                            child: InkWell(
+                              onTap: (){Get.to(userprofile());},
+                            ),
+                          )
                         ],
                       ),
                     ),
