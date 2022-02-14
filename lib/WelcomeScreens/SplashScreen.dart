@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:revoo/Login/login.dart';
 import 'package:video_player/video_player.dart';
+
+import '../First/welcomscreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key = const Key('')}) : super(key: key);
@@ -33,14 +36,17 @@ class _SplashScreenState extends State<SplashScreen> {
         _visible = true;
       });
   });
-
-  Future.delayed(Duration(seconds: 6), () {
+  Future.delayed(Duration(seconds: 8), () {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-            builder: (context) => LoginScreen()),
+
+            builder: (context) => WelcomeScreen()),
             (e) => false);
+
   });
+
+
     super.initState();
   }
 
@@ -83,5 +89,9 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+
   }
 }
+
+
+

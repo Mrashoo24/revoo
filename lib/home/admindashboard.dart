@@ -5,7 +5,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:revoo/constants/constants.dart';
 import 'package:cell_calendar/cell_calendar.dart';
 
-import '../sales.dart';
+import '../piechart.dart';
 
 class AdminDashboard extends StatefulWidget {
   const AdminDashboard({Key key= const Key('AdminDashboard')}) : super(key: key);
@@ -32,6 +32,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.only(left: 12.0),
+
           child: Image.asset('asset/navicon.png'),
         ),
         actions: [
@@ -68,13 +69,13 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               ClipRect(child: Image.asset('asset/share.png')),
-                              ClipRect(child: Image.asset('asset/share.png')),
+                              ClipRect(child: Image.asset('asset/homedash.png')),
                               Opacity(
                                 opacity: 0.01,
                                   child: ClipRect(child: Image.asset('asset/share.png'))
                               ),
-                              ClipRect(child: Image.asset('asset/share.png')),
-                              ClipRect(child: Image.asset('asset/share.png')),
+                              ClipRect(child: Image.asset('asset/groupdash.png')),
+                              ClipRect(child: Image.asset('asset/pathdash.png')),
 
                             ],
                           ),
@@ -386,11 +387,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
               ],
             ),
             SizedBox(height: 60,),
-            Text ('My Calendar',style: TextStyle(color: Kdblue,fontSize: 25),),
+            Text ('My Calendar',style: TextStyle(color: Kdblue,fontSize: 20),),
             SizedBox(height: 30,),
 
         Container(
-          height: Get.height*0.3,
+          height: Get.height*0.5,
           child: CellCalendar(
             cellCalendarPageController: cellCalendarPageController,
               events: sampleEvents,
@@ -496,11 +497,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
             buildCard('Daily Logins','40\nDaily Logins'),
 
             Container(
-              height: Get.height*0.3,
+              height: Get.height*0.4,
                 child: HomePage()),
 
             Padding(
-                padding: const EdgeInsets.only(bottom: 35.0,top: 35),
+                padding: const EdgeInsets.only(bottom: 35.0,top: 15,),
               child: Card(
                 elevation: 10,
                 color: Colors.grey.shade200,

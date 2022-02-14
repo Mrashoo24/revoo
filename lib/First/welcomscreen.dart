@@ -45,14 +45,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         onTap: (){
                           Get.to(LoginScreen());
                         },
-                        child: Row(
-                          children: [
-                            Container(
-                                child: Text('Continue',style: TextStyle(fontSize: 25,color: kyellow),
-                                )),
-                            SizedBox(width: 20,),
-                            Image.asset('asset/rightarrow.png')
-                          ],
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Container(
+                                  child: Text('Continue',style: TextStyle(fontSize: 25,color: kyellow),
+                                  )),
+                              SizedBox(width: 20,),
+                              Image.asset('asset/rightarrow.png')
+                            ],
+                          ),
                         ),
                       ),
                     ],

@@ -4,7 +4,9 @@ import 'package:revoo/First/welcomscreen.dart';
 import 'package:revoo/Login/login.dart';
 import 'package:revoo/WelcomeScreens/SplashScreen.dart';
 import 'package:revoo/home/admindashboard.dart';
-import 'package:revoo/sales.dart';
+import 'package:revoo/piechart.dart';
+
+import 'logout1stpage.dart';
 
 
 
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: AdminDashboard(),
+      home: SplashScreen (),
       debugShowCheckedModeBanner: false,
     );
   }
