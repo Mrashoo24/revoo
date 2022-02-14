@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       //home: LoginScreen(),
-      //home: userProjectProfile(),
-      home: userProfileTeams(),
+      home: userProjectProfile(),
+      //home: userProfileTeams(),
       debugShowCheckedModeBanner: false,
     );
   }
