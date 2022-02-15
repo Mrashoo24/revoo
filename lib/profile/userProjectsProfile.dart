@@ -145,21 +145,22 @@ class userprofile extends State<userProjectProfile> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: projectNameinprofile(selected: true),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: projectNameinprofile(selected: selected),
-                      ),
-                      GestureDetector(
-                        onTap: () {selected = true;},
-                        child: projectNameinprofile(selected: selected),
-                      ),
-
-
-
+                      // GestureDetector(
+                      //   onTap: () {},
+                      //   child: projectNameinprofile(selected: true),
+                      // ),
+                      // GestureDetector(
+                      //   onTap: () {},
+                      //   child: projectNameinprofile(selected: selected),
+                      // ),
+                      // GestureDetector(
+                      //   onTap: () {selected = true;},
+                      //   child: projectNameinprofile(selected: selected),
+                      // ),
+                      buildContent(context),
+                      buildContent(context),
+                      buildContent(context),
+                      buildContent(context),
                     ],
                   )
                 ],
@@ -190,6 +191,28 @@ class userprofile extends State<userProjectProfile> {
           )),
     );
   }
+
+  Widget buildContent(BuildContext context){
+    return ExpansionTile(
+      expandedAlignment: Alignment.center,
+        title:  projectNameinprofile(selected: false),
+      trailing: GestureDetector(
+        onTap: () {},
+        child: ImageIcon(
+          AssetImage('asset/threedots.png'),
+          color: Colors.blue,
+        ),
+      ),
+      children: [
+        ContentElements(),
+        ContentElements(),
+        ContentElementsforStatus(),
+        ContentElements(),
+        ContentElements(),
+      ],
+    );
+  }
+
 }
 
 AppBar _buildappBar() {
@@ -260,4 +283,89 @@ Widget _bottomNevigationBar() {
             ]),
       ));
 }
+//
+// class Contents {
+//   final Widget entry;
+//   Contents({required this.entry});
+// }
 
+// final List<Contents> data = <Contents>[
+//   Contents(
+//       entry: ContentElements()
+//   ),
+//
+//   Contents(
+//       entry: ContentElements()
+//   ),
+//   Contents(
+//       entry: ContentElements()
+//   ),
+//   Contents(
+//       entry: ContentElements()
+//   ),
+// ];
+
+Widget ContentElements (){
+  return Container(
+    padding : EdgeInsets.symmetric(horizontal: 30,vertical: 0),
+    color: Colors.grey.withOpacity(0.3),
+    child:
+        Wrap(
+          spacing: 50,
+          runSpacing: 10,
+          alignment: WrapAlignment.center,
+          children: [
+            Text(' Type '),
+            Text('Front-end Development project'),
+            SizedBox(width: Get.width,child:Divider(thickness: 1,color: Colors.blueAccent,) ,)
+          ],
+        ),
+    );
+}
+
+
+Widget ContentElementsforStatus (){
+  return Container(
+    padding : EdgeInsets.symmetric(horizontal: 30,vertical: 0),
+    color: Colors.grey.withOpacity(0.3),
+    child:
+    Wrap(
+      spacing: 80,
+      runSpacing: 10,
+      alignment: WrapAlignment.spaceEvenly,
+      children: [
+        Text(' Status '),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Review'),
+            GestureDetector(
+              onTap: (){Marked(true);},
+              onDoubleTap: (){Marked(false);},
+              child: Wrap(
+                spacing: 20,
+                children: [
+                  Text("Marked complete"),
+                  Marked(false),
+                ],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(width: Get.width,
+          child:Divider(thickness: 1,color: Colors.blueAccent,) ,)
+      ],
+    ),
+  );
+}
+
+Widget Marked(bool value){
+  return Container(
+    height: 10,
+    width: 10,
+    color: value ? Colors.blue : Colors.white,
+    // decoration: BoxDecoration(
+    //   border: Border.all(color: Colors.blue)
+    // ),
+  );
+}

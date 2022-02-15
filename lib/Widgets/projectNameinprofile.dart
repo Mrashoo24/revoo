@@ -17,6 +17,7 @@ class projectNameinprofile extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
         width: Get.width * 0.9,
         height: 60,
         decoration: BoxDecoration(
@@ -29,15 +30,8 @@ class projectNameinprofile extends StatelessWidget {
             fit: BoxFit.fitWidth,
           ),
         ),
-        child: ExpansionTile(
-            trailing: GestureDetector(
-              onTap: () {},
-              child: ImageIcon(
-                AssetImage('asset/threedots.png'),
-                color: Colors.white,
-              ),
-            ),
-            title: Wrap(
+
+        child: Wrap(
               children: [
                 Text(
                   '${projectName}',
@@ -64,33 +58,34 @@ class projectNameinprofile extends StatelessWidget {
                 ),
               ],
             ),
-            children: [
-              Card(
-                    color: Colors.black,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('Type'),
-                            Text('Team'),
-                            Text('Status'),
-                            Text('Lead'),
-                            Text('DeadLine'),
-                          ],
-                        ),
-                        Column(children: [
-                          Text('Type'),
-                          Text('Team'),
-                          Text('Status'),
-                          Text('Lead'),
-                          Text('DeadLine'),
-                        ]),
-                      ],
-                    )),
-            ]));
+            // children: [
+            //   Card(
+            //         color: Colors.black,
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.start,
+            //           crossAxisAlignment: CrossAxisAlignment.center,
+            //           children: [
+            //             Column(
+            //               mainAxisAlignment: MainAxisAlignment.start,
+            //               mainAxisSize: MainAxisSize.min,
+            //               children: [
+            //                 Text('Type'),
+            //                 Text('Team'),
+            //                 Text('Status'),
+            //                 Text('Lead'),
+            //                 Text('DeadLine'),
+            //               ],
+            //             ),
+            //             Column(children: [
+            //               Text('Type'),
+            //               Text('Team'),
+            //               Text('Status'),
+            //               Text('Lead'),
+            //               Text('DeadLine'),
+            //             ]),
+            //           ],
+            //         )),
+            // ]
+    );
   }
 }
