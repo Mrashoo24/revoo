@@ -8,3 +8,5 @@ var kblue = Color(0xFF0D3974);
 
 var Kdblue = Color(0xFF1B57A7);
 
+var bgGrey = Color(0xFFEAEBED);
+

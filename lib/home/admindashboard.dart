@@ -5,6 +5,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:revoo/constants/constants.dart';
 import 'package:cell_calendar/cell_calendar.dart';
 
+
 import '../piechart.dart';
 
 class AdminDashboard extends StatefulWidget {
@@ -23,82 +24,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
     CalendarEvent(eventName: "Event 2",eventDate: DateTime.now()),
   ];
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 12.0),
 
-          child: Image.asset('asset/navicon.png'),
-        ),
-        actions: [
-              Image.asset('asset/bellicon.png'),
-          Image.asset('asset/settingsicon.png'),
-          Image.asset('asset/usericon.png'),
-          SizedBox(width: 12,),
-        ],
-      ),
-      bottomNavigationBar: Container(
-
-        height: 100,
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-
-                child: Stack(
-                  children: [
-                    Align(
-
-                      child: Container(
-                        height: Get.height*0.08,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                          color: Kdblue,
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ClipRect(child: Image.asset('asset/share.png')),
-                              ClipRect(child: Image.asset('asset/homedash.png')),
-                              Opacity(
-                                opacity: 0.01,
-                                  child: ClipRect(child: Image.asset('asset/share.png'))
-                              ),
-                              ClipRect(child: Image.asset('asset/groupdash.png')),
-                              ClipRect(child: Image.asset('asset/pathdash.png')),
-
-                            ],
-                          ),
-                        ),
-                      ),
-                      alignment: Alignment.bottomCenter,
-                    ),
-
-                  ],
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: Image.asset('asset/bnbAdd.png'),
-              ),
-            ),
-          ],
-        ),
-      )
-      ,
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revoo/Login/signup.dart';
 import 'package:revoo/home/admindashboard.dart';
+import 'package:revoo/home/homepage.dart';
 
 
  
@@ -119,7 +120,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                               InkWell(
                                 onTap: (){
-                                  Get.to(AdminDashboard());
+                                  Get.to(HomePageMain());
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
