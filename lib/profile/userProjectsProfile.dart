@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:revoo/Widgets/projectNameinprofile.dart';
-import 'package:revoo/Widgets/showProjectnameDetailcard.dart';
+
 
 class userProjectProfile extends StatefulWidget {
   @override
@@ -66,6 +66,7 @@ class userprofile extends State<userProjectProfile> {
                     ),
                   ),
                   Container(
+                    // width: Get.width,
                       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                       child: Padding(
                         padding: EdgeInsets.only(left: 2),
@@ -83,6 +84,7 @@ class userprofile extends State<userProjectProfile> {
                               width: Get.width * 0.3,
                             ),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 IconButton(
                                   onPressed: () {},
@@ -307,13 +309,13 @@ Widget _bottomNevigationBar() {
 
 Widget ContentElements (){
   return Container(
-    padding : EdgeInsets.symmetric(horizontal: 30,vertical: 0),
+    padding : EdgeInsets.symmetric(horizontal: 20,vertical: 0),
     color: Colors.grey.withOpacity(0.3),
     child:
         Wrap(
           spacing: 50,
           runSpacing: 10,
-          alignment: WrapAlignment.center,
+          alignment: WrapAlignment.spaceBetween,
           children: [
             Text(' Type '),
             Text('Front-end Development project'),

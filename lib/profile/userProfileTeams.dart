@@ -191,9 +191,9 @@ class _teamState extends State<userProfileTeams> {
                                       'asset/blackcircleForuserTeams.png'),
                                 ],
                               )),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        // SizedBox(
+                        //   height: 15,
+                        // ),
                         Container(
                             padding: EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 5),
@@ -232,11 +232,11 @@ class _teamState extends State<userProfileTeams> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text("Meetings"),
-                                  SizedBox(height: 20,),
+                                  SizedBox(height: 18,),
                                   Text("Meetings"),
-                                  SizedBox(height: 20,),
+                                  SizedBox(height: 18,),
                                   Text("Meetings"),
-                                  SizedBox(height: 20,),
+                                  SizedBox(height: 18,),
                                   Text("Meetings"),
                                 ],
                               ),
