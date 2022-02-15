@@ -34,8 +34,8 @@ class userprofile extends State<userProjectProfile> {
           body: SingleChildScrollView(
             child: Container(
               width: Get.width,
+              margin: EdgeInsets.only(left: 10,right: 10,top: 20,bottom: 20),
 
-              padding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
               child: Column(
                 children: [
                   Container(
@@ -67,10 +67,12 @@ class userprofile extends State<userProjectProfile> {
                       ],
                     ),
                   ),
+                  SizedBox(height: 10,),
                   Container(
                      width: Get.width,
 
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             "All projects",
@@ -79,9 +81,6 @@ class userprofile extends State<userProjectProfile> {
                               color: Color(0xff1B57A7),
                               fontWeight: FontWeight.w400,
                             ),
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.3,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -154,10 +153,10 @@ class userprofile extends State<userProjectProfile> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      buildContent(context,0),
-                      buildContent(context,1),
-                      buildContent(context,2),
-                      buildContent(context,3),
+                      buildContent(context,'Project Name 1'),
+                       buildContent(context,'Project Name 2'),
+                       buildContent(context,'Project Name 3'),
+                      // buildContent(context,3),
                     ],
                   )
                 ],
@@ -189,58 +188,50 @@ class userprofile extends State<userProjectProfile> {
     );
   }
   bool expandName = false;
-  Widget buildContent(BuildContext context,index){
+  Widget buildContent(BuildContext context,name){
     return
-      ExpansionPanelList(
-        animationDuration: Duration(milliseconds: 500),
 
-        expansionCallback: (index,bool){
-          expandName = !bool;
-          setState(() {
-
-          });
-
-        },
-
-      children: [
-        ExpansionPanel(headerBuilder: (context,opened){
-          return ListTile(
-            title: Text('Item 1'),
-          );
-        },
-            canTapOnHeader: true,
-            isExpanded:expandName,
-            body: Column(
+      Padding(
+        padding: const EdgeInsets.only(top: 15.0),
+        child: ClipRRect(
+          borderRadius:    BorderRadius.circular(10),
+          child: ExpansionTile(
+            backgroundColor: Kdblue,
+          collapsedBackgroundColor: Kdblue,
+          expandedAlignment: Alignment.center,
+            title:  projectNameinprofile(selected: false,name:name),
+          trailing: GestureDetector(
+            onTap: () {},
+            child: ImageIcon(
+              AssetImage('asset/threedots.png'),
+              color: Colors.white,
+            ),
+          ),
           children: [
-            ContentElements(),
-            ContentElements(),
-            ContentElementsforStatus(),
-            ContentElements(),
-            ContentElements(),
-          ],
-        ))
-      ],
-    );
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  ContentElements('Front-end Development project','Type'),
+                  Divider(color: Colors.black,thickness: 1,),
+                  ContentElements('Front-end Development project','Team'),
+                  Divider(color: Colors.black,thickness: 1,),
 
-    //   ExpansionTile(
-    //     backgroundColor: Kdblue,
-    //   expandedAlignment: Alignment.center,
-    //     title:  projectNameinprofile(selected: false),
-    //   trailing: GestureDetector(
-    //     onTap: () {},
-    //     child: ImageIcon(
-    //       AssetImage('asset/threedots.png'),
-    //       color: Colors.blue,
-    //     ),
-    //   ),
-    //   children: [
-    //     ContentElements(),
-    //     ContentElements(),
-    //     ContentElementsforStatus(),
-    //     ContentElements(),
-    //     ContentElements(),
-    //   ],
-    // );
+                  ContentElementsforStatus(),
+                  Divider(color: Colors.black,thickness: 1,),
+
+                  ContentElements('Admin/leadname','Lead'),
+                  Divider(color: Colors.black,thickness: 1,),
+
+                  ContentElements('March 07,2022','Deadline'),
+                ],
+              ),
+            )
+
+          ],
+    ),
+        ),
+      );
   }
 
 }
@@ -335,55 +326,54 @@ Widget _bottomNevigationBar() {
 //   ),
 // ];
 
-Widget ContentElements (){
-  return Container(
-    padding : EdgeInsets.symmetric(horizontal: 20,vertical: 0),
-    color: Colors.grey.withOpacity(0.3),
-    child:
-        Wrap(
-          spacing: 50,
-          runSpacing: 10,
-          alignment: WrapAlignment.spaceBetween,
-          children: [
-            Text(' Type '),
-            Text('Front-end Development project'),
-            SizedBox(width: Get.width,child:Divider(thickness: 1,color: Colors.blueAccent,) ,)
-          ],
-        ),
-    );
+Widget ContentElements (String name,String type){
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+
+      children: [
+        Container(
+            width: 120,
+            child: Text(type)),
+        Expanded(child: Text(name,style: TextStyle(color: kyellow),)),
+      ],
+    ),
+  );
 }
 
 
 Widget ContentElementsforStatus (){
-  return Container(
-    padding : EdgeInsets.symmetric(horizontal: 30,vertical: 0),
-    color: Colors.grey.withOpacity(0.3),
-    child:
-    Wrap(
-      spacing: 80,
-      runSpacing: 10,
-      alignment: WrapAlignment.spaceEvenly,
+  return Padding(
+    padding: const EdgeInsets.only(left: 5.0),
+    child: Row(
+
       children: [
-        Text(' Status '),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Review'),
-            GestureDetector(
-              onTap: (){Marked(true);},
-              onDoubleTap: (){Marked(false);},
-              child: Wrap(
-                spacing: 20,
-                children: [
-                  Text("Marked complete"),
-                  Marked(false),
-                ],
-              ),
-            ),
-          ],
+        Container(
+            width: 125,
+            child: Text(' Status ')
         ),
-        SizedBox(width: Get.width,
-          child:Divider(thickness: 1,color: Colors.blueAccent,) ,)
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('In Review',style: TextStyle(color: kyellow)),
+              GestureDetector(
+                onTap: (){},
+                onDoubleTap: (){},
+                child: Wrap(
+                  spacing: 20,
+                  children: [
+                    Text("Marked complete",style: TextStyle(color: Kdblue),),
+                    Marked(false),
+
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
       ],
     ),
   );
@@ -391,11 +381,13 @@ Widget ContentElementsforStatus (){
 
 Widget Marked(bool value){
   return Container(
-    height: 10,
-    width: 10,
-    color: value ? Colors.blue : Colors.white,
-    // decoration: BoxDecoration(
-    //   border: Border.all(color: Colors.blue)
-    // ),
+    height: 15,
+    width: 15,
+
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.blue),
+      color: value ? Colors.blue : Colors.white,
+
+    ),
   );
 }
