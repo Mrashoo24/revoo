@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
+import '../../constants/constants.dart';
 import '../Widgets/projectNameinprofile.dart';
 
 
@@ -33,14 +34,13 @@ class userprofile extends State<userProjectProfile> {
           body: SingleChildScrollView(
             child: Container(
               width: Get.width,
-              height: Get.height,
+
               padding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
-              child: ListView(
+              child: Column(
                 children: [
                   Container(
                     width: Get.width,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width / 15, vertical: 10),
+
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -68,50 +68,45 @@ class userprofile extends State<userProjectProfile> {
                     ),
                   ),
                   Container(
-                    // width: Get.width,
-                      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 2),
-                        child: Row(
-                          children: [
-                            Text(
-                              "All projects",
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: Color(0xff1B57A7),
-                                fontWeight: FontWeight.w300,
+                     width: Get.width,
+
+                      child: Row(
+                        children: [
+                          Text(
+                            "All projects",
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color(0xff1B57A7),
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                            width: Get.width * 0.3,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: Image.asset(
+                                  'asset/addicon.png',
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: Get.width * 0.3,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Image.asset(
-                                    'asset/addicon.png',
-                                    fit: BoxFit.fitWidth,
-                                  ),
+                              Text(
+                                "create a project..",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontFamily: 'Neue Haas Grotesk Display Pro',
                                 ),
-                                Text(
-                                  "create a project..",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontFamily: 'Neue Haas Grotesk Display Pro',
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                              ),
+                            ],
+                          )
+                        ],
                       )),
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(left: 15.0, right: 200, bottom: 5),
+                  Container(
+                    margin: EdgeInsets.only(right: Get.width/2),
                     child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
                         suffixIcon: Icon(FontAwesomeIcons.search),
@@ -120,15 +115,25 @@ class userprofile extends State<userProjectProfile> {
                         hintStyle: TextStyle(
                           color: Colors.black.withOpacity(0.4),
                         ),
+                        filled: true,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff1B57A7),
+                              color: Kdblue,
                             ),
                             borderRadius: BorderRadius.circular(20.0)),
-                        fillColor: Color(0xffEAEBED),
+                        fillColor: ktextcolor,
                       ),
                       style: TextStyle(color: Colors.black),
                       onChanged: (value) {
@@ -149,22 +154,10 @@ class userprofile extends State<userProjectProfile> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // GestureDetector(
-                      //   onTap: () {},
-                      //   child: projectNameinprofile(selected: true),
-                      // ),
-                      // GestureDetector(
-                      //   onTap: () {},
-                      //   child: projectNameinprofile(selected: selected),
-                      // ),
-                      // GestureDetector(
-                      //   onTap: () {selected = true;},
-                      //   child: projectNameinprofile(selected: selected),
-                      // ),
-                      buildContent(context),
-                      buildContent(context),
-                      buildContent(context),
-                      buildContent(context),
+                      buildContent(context,0),
+                      buildContent(context,1),
+                      buildContent(context,2),
+                      buildContent(context,3),
                     ],
                   )
                 ],
@@ -195,26 +188,59 @@ class userprofile extends State<userProjectProfile> {
           )),
     );
   }
+  bool expandName = false;
+  Widget buildContent(BuildContext context,index){
+    return
+      ExpansionPanelList(
+        animationDuration: Duration(milliseconds: 500),
 
-  Widget buildContent(BuildContext context){
-    return ExpansionTile(
-      expandedAlignment: Alignment.center,
-        title:  projectNameinprofile(selected: false),
-      trailing: GestureDetector(
-        onTap: () {},
-        child: ImageIcon(
-          AssetImage('asset/threedots.png'),
-          color: Colors.blue,
-        ),
-      ),
+        expansionCallback: (index,bool){
+          expandName = !bool;
+          setState(() {
+
+          });
+
+        },
+
       children: [
-        ContentElements(),
-        ContentElements(),
-        ContentElementsforStatus(),
-        ContentElements(),
-        ContentElements(),
+        ExpansionPanel(headerBuilder: (context,opened){
+          return ListTile(
+            title: Text('Item 1'),
+          );
+        },
+            canTapOnHeader: true,
+            isExpanded:expandName,
+            body: Column(
+          children: [
+            ContentElements(),
+            ContentElements(),
+            ContentElementsforStatus(),
+            ContentElements(),
+            ContentElements(),
+          ],
+        ))
       ],
     );
+
+    //   ExpansionTile(
+    //     backgroundColor: Kdblue,
+    //   expandedAlignment: Alignment.center,
+    //     title:  projectNameinprofile(selected: false),
+    //   trailing: GestureDetector(
+    //     onTap: () {},
+    //     child: ImageIcon(
+    //       AssetImage('asset/threedots.png'),
+    //       color: Colors.blue,
+    //     ),
+    //   ),
+    //   children: [
+    //     ContentElements(),
+    //     ContentElements(),
+    //     ContentElementsforStatus(),
+    //     ContentElements(),
+    //     ContentElements(),
+    //   ],
+    // );
   }
 
 }

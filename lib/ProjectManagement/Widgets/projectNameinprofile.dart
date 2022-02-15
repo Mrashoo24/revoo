@@ -17,8 +17,8 @@ class projectNameinprofile extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-        width: Get.width * 0.9,
+
+        // width: Get.width * 0.9,
         height: 60,
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -31,7 +31,7 @@ class projectNameinprofile extends StatelessWidget {
           ),
         ),
 
-        child: Wrap(
+        child: Row(
               children: [
                 Text(
                   '${projectName}',
@@ -56,6 +56,13 @@ class projectNameinprofile extends StatelessWidget {
                 SizedBox(
                   width: Get.width * 0.35,
                 ),
+                // GestureDetector(
+                //   onTap: () {},
+                //   child: ImageIcon(
+                //     AssetImage('asset/threedots.png'),
+                //     color: Colors.blue,
+                //   ),
+                // ),
               ],
             ),
             // children: [
