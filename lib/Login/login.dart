@@ -5,6 +5,9 @@ import 'package:revoo/Login/signup.dart';
 import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
 
+import '../Employee/employee_homepage.dart';
+import '../ProjectManagement/profile/userProjectsProfile.dart';
+
 
  
 class LoginScreen extends StatefulWidget {
@@ -120,18 +123,56 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                               InkWell(
                                 onTap: (){
+                                  Get.to(EmployeeHomePage());
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(child: Text('SIGN IN TO EMPLOYEE',style: TextStyle(
+                                      color: Colors.white,fontSize: 20
+                                    ),)),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20,),
+                              InkWell(
+                                onTap: (){
                                   Get.to(HomePageMain());
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Center(child: Text('SIGN IN',style: TextStyle(
-                                      color: Colors.white,fontSize: 20
+                                    child: Center(child: Text('SIGN IN TO ADMIN',style: TextStyle(
+                                        color: Colors.white,fontSize: 20
                                     ),)),
                                   ),
                                   decoration: BoxDecoration(
-                                    gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
+                                      gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20,),
+
+
+                              InkWell(
+                                onTap: (){
+                                  Get.to(userProjectProfile());
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(child: Text('SIGN IN TO PROJECT',style: TextStyle(
+                                        color: Colors.white,fontSize: 20
+                                    ),)),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
                                   ),
                                 ),
                               ),
@@ -144,6 +185,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                         Get.to(Signup());
                                       },
                                       child: Text('Don\'t have an account?',style: TextStyle(color: Colors.yellow.shade700),))),
+
                               SizedBox(height: 10,),
 
                               Align(

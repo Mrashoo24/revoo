@@ -7,20 +7,21 @@ import 'package:revoo/piechart.dart';
 
 import '../constants/constants.dart';
 
-class EmployeeDashboard extends StatefulWidget {
-  const EmployeeDashboard({Key? key}) : super(key: key);
+class EmployeeDashboard1stpg extends StatefulWidget {
+  const EmployeeDashboard1stpg({Key? key}) : super(key: key);
 
   @override
   _EmployeeDashboardState createState() => _EmployeeDashboardState();
 }
 
-class _EmployeeDashboardState extends State<EmployeeDashboard> {
+class _EmployeeDashboardState extends State<EmployeeDashboard1stpg> {
 
   final cellCalendarPageController = CellCalendarPageController();
 
   var sampleEvents = [
     CalendarEvent(eventName: "Event 1",eventDate: DateTime.now(),eventBackgroundColor: Colors.black),
     CalendarEvent(eventName: "Event 2",eventDate: DateTime.now()),
+
   ];
 
 
@@ -178,57 +179,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
 
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 35.0,top: 35),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ElevatedButton(onPressed: (){
 
-                            },
-
-                                style: ElevatedButton.styleFrom(
-                                    elevation: 0,
-                                    shape:RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(10))
-                                    ),
-                                    side: BorderSide(width: 3.0, color: Colors.white,),
-                                    primary: Kdblue,
-                                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 11),
-                                    textStyle: TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold)),
-                                child: Center(child: Text('Check-in',style: TextStyle(
-                                    color: Colors.white,fontSize: 15
-                                ),))),
-                            SizedBox(width: 25,),
-                            ElevatedButton(onPressed: (){},
-
-                                style: ElevatedButton.styleFrom(
-                                    shape:RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(10))
-                                    ),
-                                    primary: Colors.white,
-                                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 11),
-                                    textStyle: TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold)),
-                                child: Center(child: Text('Check-out',style: TextStyle(
-                                    color: Kdblue,fontSize: 15
-
-                                ),)))
-
-
-
-
-                          ],
-
-
-
-                        ),
-
-
-                      ),
                       Stack(
                         children: [
                           Padding(
@@ -290,29 +241,11 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                                 margin: EdgeInsets.only(right: 25),
                                 child: Image.asset('asset/wrongyellow.png',width: 30,height: 30,)),
                           )
-
                         ],
                       ),
-
-
-
-
-
                     ],
-
-
-
                   ),
-
-
-
-
-
-
                 ),
-
-
-
               ],
             ),
             SizedBox(height: 60,),
@@ -320,7 +253,8 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
             SizedBox(height: 30,),
 
             Container(
-              height: Get.height*0.5,
+              height: 600,
+              margin: EdgeInsets.only(left: 10,right: 10),
               child: CellCalendar(
                 cellCalendarPageController: cellCalendarPageController,
                 events: sampleEvents,
@@ -419,18 +353,65 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
 
               ],
             ),
+
+
             SizedBox(height: 30,),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Container(
+                    child:  Text("Daily Updates",
+                      style: TextStyle(
+                          color: kblue,fontSize: 17
+                      ),
 
-            buildCard('Veiw Employees','40\nEmployees'),
-            buildCard('Veiw Departments','40\nDepartments'),
-            buildCard('Daily Logins','40\nDaily Logins'),
+                    ),),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20.0,top: 15,right: 10,left: 10),
+                child: Card(
+                  elevation: 10,
+                  color: Colors.grey.shade200,
 
-            Container(
-                height: Get.height*0.4,
-                child: HomePage()),
+                  child: Column(
+                    children: [
+
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset('asset/exclamatorybx.png'),
+                                SizedBox(width: 5,),
+                                Text("You have three pending task",
+                                  style: TextStyle(
+                                      color: kblue,fontSize: 15
+                                  ),
+
+                                ),
+                              ],
+                            ),
+
+                            Image.asset('asset/bluearow.png')
+                          ],
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
 
             Padding(
-              padding: const EdgeInsets.only(bottom: 35.0,top: 15,),
+              padding: const EdgeInsets.only(bottom: 35.0,top: 15,left: 10,right: 10),
               child: Card(
                 elevation: 10,
                 color: Colors.grey.shade200,

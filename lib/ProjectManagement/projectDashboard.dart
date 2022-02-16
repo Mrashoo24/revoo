@@ -1,24 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:revoo/Employee/employeedash1stpg.dart';
 
 import '../constants/constants.dart';
+import '../home/admindashboard.dart';
 
-class EmployeeHomePage extends StatefulWidget {
-  const EmployeeHomePage({Key? key}) : super(key: key);
+class ProjectHomePage extends StatefulWidget {
+  const ProjectHomePage({required Key key}) : super(key: key);
 
   @override
-  _EmployeeHomePageState createState() => _EmployeeHomePageState();
+  _ProjectHomePageState createState() => _ProjectHomePageState();
 }
 
-class _EmployeeHomePageState extends State<EmployeeHomePage> {
+class _ProjectHomePageState extends State<ProjectHomePage> {
+
   GlobalKey<ScaffoldState> scafkey = GlobalKey<ScaffoldState>();
   var selectedCard = 'Home'; //for changing name
   var selectedindex = 0; //for changing index of page
 
   var homepages = [
-    EmployeeDashboard1stpg(), //0
+    AdminDashboard(), //0
     Container(), //1
   ];
 
