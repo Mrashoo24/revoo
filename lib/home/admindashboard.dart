@@ -218,17 +218,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                     color: Kdblue,fontSize: 15
 
                                 ),)))
-
-
-
-
                           ],
-
-
-
                         ),
-
-
                       ),
                       Stack(
                         children: [

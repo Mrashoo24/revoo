@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:revoo/Employee/employeedash202.dart';
-import 'package:revoo/Employee/stopwatch.dart';
+
 import 'package:revoo/First/welcomscreen.dart';
 import 'package:revoo/Login/login.dart';
 import 'package:revoo/ProjectManagement/profile/userProfileTeams.dart';
@@ -13,6 +13,8 @@ import 'package:revoo/piechart.dart';
 
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
+import 'Employee/watchdashboard.dart';
+import 'ProjectManagement/projectDashboard.dart';
 import 'dailyupdates.dart';
 
 
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Stopwatch(),
+      home: Watchdashboard(),
       debugShowCheckedModeBanner: false,
     );
   }
