@@ -13,9 +13,10 @@ import 'package:revoo/piechart.dart';
 
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
+import 'Employee/timepass.dart';
 import 'Employee/watchdashboard.dart';
 import 'ProjectManagement/projectDashboard.dart';
-import 'dailyupdates.dart';
+import 'Employee/dailyupdates.dart';
 
 
 
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Watchdashboard(),
+      home: Dailyupdates(),
       debugShowCheckedModeBanner: false,
     );
   }

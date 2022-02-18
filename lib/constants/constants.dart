@@ -10,3 +10,5 @@ var Kdblue = Color(0xFF1B57A7);
 
 var bgGrey = Color(0xFFEAEBED);
 
+var greytxtbx = Color(0xFFEAEBED);
+
