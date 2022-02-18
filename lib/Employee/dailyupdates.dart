@@ -234,7 +234,7 @@ class _DailyupdatesState extends State<Dailyupdates> {
               ),
               Card(
                 elevation: 10,
-                color: Kdblue,
+                color: bgGrey,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0)
                 ),
@@ -256,7 +256,7 @@ class _DailyupdatesState extends State<Dailyupdates> {
                               }
                           ),
                         ),
-                        Text("Lorem ipsum dolor sit adipiscing elit",style: TextStyle(color: Colors.white ,fontSize: 12),)
+                        Text("Lorem ipsum dolor sit adipiscing elit",style: TextStyle(color: kblue ,fontSize: 12),)
                       ],
                     ),
                     Row(
@@ -275,7 +275,7 @@ class _DailyupdatesState extends State<Dailyupdates> {
                               }
                           ),
                         ),
-                        Text("Lorem ipsum dolor sit adipiscing elit",style: TextStyle(color: Colors.white ,fontSize: 12),)
+                        Text("Lorem ipsum dolor sit adipiscing elit",style: TextStyle(color: kblue ,fontSize: 12),)
                       ],
                     ),
                     Row(
@@ -294,7 +294,7 @@ class _DailyupdatesState extends State<Dailyupdates> {
                               }
                           ),
                         ),
-                        Text("Lorem ipsum dolor sit adipiscing elit",style: TextStyle(color: Colors.white ,fontSize: 12),)
+                        Text("Lorem ipsum dolor sit adipiscing elit",style: TextStyle(color: kblue ,fontSize: 12),)
                       ],
                     ),
   ],
