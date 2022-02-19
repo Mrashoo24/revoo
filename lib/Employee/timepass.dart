@@ -18,16 +18,8 @@ class _TimepasState extends State<Timepas> {
       body: Container(
           decoration:
           BoxDecoration(
-            color: const Color(0xff7c94b6),
-            image: new DecorationImage(
-              fit: BoxFit.cover,
-              colorFilter:
-              ColorFilter.mode(Colors.orangeAccent.withOpacity(0),
-                  BlendMode.dstATop),
-              image: new NetworkImage(
-                'http://www.server.com/image.jpg',
-              ),
-            ),
+            color:   Color(0xff7c94b6),
+
           ),
         margin: EdgeInsets.symmetric(vertical: 50.0),
 
