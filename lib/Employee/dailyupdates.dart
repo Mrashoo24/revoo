@@ -236,7 +236,7 @@ class _DailyupdatesState extends State<Dailyupdates> {
                 elevation: 10,
                 color: bgGrey,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0)
+                    borderRadius: BorderRadius.circular(5)
                 ),
                 child: Column(
                   children: [

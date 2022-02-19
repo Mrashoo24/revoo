@@ -15,6 +15,8 @@ import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
 import 'Employee/timepass.dart';
 import 'Employee/watchdashboard.dart';
+import 'Login/signup.dart';
+import 'Login/yourapps.dart';
 import 'ProjectManagement/projectDashboard.dart';
 import 'Employee/dailyupdates.dart';
 
@@ -46,7 +48,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Dailyupdates(),
+      home: Timepas(),
       debugShowCheckedModeBanner: false,
     );
   }
