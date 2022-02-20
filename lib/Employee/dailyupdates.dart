@@ -143,7 +143,7 @@ class _DailyupdatesState extends State<Dailyupdates> {
                     alignment: Alignment.centerLeft,
                     child:  Checkbox(
 
-                    value:  avalue,
+                    value:  avalue,checkColor: Kdblue,
                       onChanged: (value){
 
                       setState(() {

@@ -15,6 +15,7 @@ import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
 import 'Employee/timepass.dart';
 import 'Employee/watchdashboard.dart';
+import 'HRMS_admin_Screen/addbranch.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
 import 'ProjectManagement/projectDashboard.dart';
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Timepas(),
+      home: DBcrud(),
       debugShowCheckedModeBanner: false,
     );
   }
