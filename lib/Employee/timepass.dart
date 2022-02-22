@@ -1,76 +1,54 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart';
 
-class Timepas extends StatefulWidget {
-  const Timepas({Key? key}) : super(key: key);
+
+
+class Test extends StatefulWidget {
+  const Test({Key? key}) : super(key: key);
 
   @override
-  _TimepasState createState() => _TimepasState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _TimepasState extends State<Timepas> {
+class _MyHomePageState extends State<Test> {
+
+  // Initial Selected Value
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      body: Container(
-          decoration:
-          BoxDecoration(
-            color:   Color(0xff7c94b6),
-
-          ),
-        margin: EdgeInsets.symmetric(vertical: 50.0),
-
-
-        height: 100.0,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: <Widget>[
-            Card(
-
-                color: Kdblue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+    return  MaterialApp(
+      home: Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: Container(
+              width: 200,
+              height: 50,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.white,
+                    Colors.blue,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Center(child: Text('')),
-                )
-            ),SizedBox(
-              width : 40,),
-            Card(
+                borderRadius: BorderRadius.circular(40),
 
-                color: Kdblue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Text(
+                  'Press',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-                child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Center(child: Text('')),
-                )
-            ),SizedBox(
-              width : 40,),
-            Card(
-
-                color: Kdblue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Center(child: Text('')),
-                )
+              ),
             ),
-
-          ],
+          ),
         ),
       ),
-
     );
   }
 }

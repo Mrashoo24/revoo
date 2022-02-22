@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: DBcrud2
+
         (),
       debugShowCheckedModeBanner: false,
     );
