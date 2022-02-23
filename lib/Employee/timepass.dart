@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/constants.dart';
+
 
 
 
@@ -20,30 +22,33 @@ class _MyHomePageState extends State<Test> {
       home: Scaffold(
         body: SafeArea(
           child: Center(
-            child: Container(
-              width: 200,
-              height: 50,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.white,
-                    Colors.blue,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(40),
+            child: Flexible(
+              child: Container(
+                width: 400,
 
-              ),
-              child: Center(
-                child: Text(
-                  'Press',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500,
+                decoration: BoxDecoration(
+
+                  gradient: LinearGradient(
+                    colors: [
+                      kblue,
+                      Kdblue,
+                    ],
+
+
                   ),
+
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(45),bottomRight: Radius.circular(45)),
+
+                ),child: Text(
+                'Branchs(s)',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 20,
+
                 ),
+              ),
+
+
               ),
             ),
           ),

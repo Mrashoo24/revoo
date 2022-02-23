@@ -12,3 +12,4 @@ var bgGrey = Color(0xFFEAEBED);
 
 var greytxtbx = Color(0xFFEAEBED);
 
+var bluess = Color(0xFF5BC3EB);

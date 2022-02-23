@@ -14,16 +14,6 @@ class DBcrud2 extends StatefulWidget {
 
 class _DBcrudState extends State<DBcrud2> {
 
-  var _currencies = [
-    "Food",
-    "Transport",
-    "Personal",
-    "Shopping",
-    "Medical",
-    "Rent",
-    "Movie",
-    "Salary"
-  ];
 
 
   @override
@@ -388,16 +378,7 @@ class _DBcrudState extends State<DBcrud2> {
                           borderRadius: BorderRadius.circular(10),
 
                         ),
-                        child: Center(
-                          child: Text(
-                            'Duplicate',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
+
                       ),
                     ],
                   ),
