@@ -3,6 +3,14 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:revoo/Login/login.dart';
 import 'package:revoo/profile/userProfileTeams.dart';
 import 'package:revoo/profile/userProjectsProfile.dart';
+import 'package:revoo/projectDashboard.dart';
+
+import 'Messages/chattingScreen.dart';
+import 'Messages/mssages.dart';
+import 'ModuleSprintScreen/modulesSprintsPage.dart';
+import 'Tasks/TasksScreen.dart';
+import 'Teams/ProjectsTeamList.dart';
+import 'Widgets/popupsPM.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,8 +37,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       //home: LoginScreen(),
-      //home: userProjectProfile(),
-      home: userProfileTeams(),
+     //home: userProjectProfile(),
+      //home: UserProfileTeams(),
+      //home: ProjectHomePage(key: scafkey),
+      //home: ProjectTeamsList(),
+      //home: ModulesSprintsPage(),
+      //home: Messages(),
+     // home: chattingPage(),
+      //home: allTasks(),
+      home: PopUpsPM(),
       debugShowCheckedModeBanner: false,
     );
   }

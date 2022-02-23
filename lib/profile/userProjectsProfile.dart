@@ -1,10 +1,16 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:revoo/Widgets/projectNameinprofile.dart';
+import 'package:revoo/profile/userProfileTeams.dart';
+
+import '../../constants/constants.dart';
+import '../Widgets/projectNameinprofile.dart';
+import '../projectDashboard.dart';
+
 
 
 class userProjectProfile extends StatefulWidget {
@@ -15,6 +21,7 @@ class userProjectProfile extends StatefulWidget {
   }
 }
 
+//GlobalKey<ScaffoldState> homekey = GlobalKey<ScaffoldState>();
 class userprofile extends State<userProjectProfile> {
   final String emplyeeName = "Employee Name";
   final String designationOfEmp = "Designation";
@@ -26,19 +33,19 @@ class userprofile extends State<userProjectProfile> {
     // TODO: implement build
     return SafeArea(
       child: Scaffold(
+        //key: homekey,
           appBar: _buildappBar(),
+          //drawer: ProjectHomePage(key: scafkey,),
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Container(
               width: Get.width,
-              height: Get.height,
-              padding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
-              child: ListView(
+              margin: EdgeInsets.only(left: 10,right: 10,top: 20,bottom: 20),
+              child: Column(
                 children: [
                   Container(
                     width: Get.width,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width / 15, vertical: 10),
+
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -65,51 +72,45 @@ class userprofile extends State<userProjectProfile> {
                       ],
                     ),
                   ),
+                  SizedBox(height: 10,),
                   Container(
-                    // width: Get.width,
-                      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 2),
-                        child: Row(
-                          children: [
-                            Text(
-                              "All projects",
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: Color(0xff1B57A7),
-                                fontWeight: FontWeight.w300,
+                     width: Get.width,
+
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "All projects",
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color(0xff1B57A7),
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: Image.asset(
+                                  'asset/addicon.png',
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: Get.width * 0.3,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Image.asset(
-                                    'asset/addicon.png',
-                                    fit: BoxFit.fitWidth,
-                                  ),
+                              Text(
+                                "create a project..",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontFamily: 'Neue Haas Grotesk Display Pro',
                                 ),
-                                Text(
-                                  "create a project..",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontFamily: 'Neue Haas Grotesk Display Pro',
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                              ),
+                            ],
+                          )
+                        ],
                       )),
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(left: 15.0, right: 200, bottom: 5),
+                  Container(
+                    margin: EdgeInsets.only(right: Get.width/2),
                     child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
                         suffixIcon: Icon(FontAwesomeIcons.search),
@@ -118,15 +119,25 @@ class userprofile extends State<userProjectProfile> {
                         hintStyle: TextStyle(
                           color: Colors.black.withOpacity(0.4),
                         ),
+                        filled: true,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff1B57A7),
+                              color: Kdblue,
                             ),
                             borderRadius: BorderRadius.circular(20.0)),
-                        fillColor: Color(0xffEAEBED),
+                        fillColor: ktextcolor,
                       ),
                       style: TextStyle(color: Colors.black),
                       onChanged: (value) {
@@ -147,22 +158,10 @@ class userprofile extends State<userProjectProfile> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // GestureDetector(
-                      //   onTap: () {},
-                      //   child: projectNameinprofile(selected: true),
-                      // ),
-                      // GestureDetector(
-                      //   onTap: () {},
-                      //   child: projectNameinprofile(selected: selected),
-                      // ),
-                      // GestureDetector(
-                      //   onTap: () {selected = true;},
-                      //   child: projectNameinprofile(selected: selected),
-                      // ),
-                      buildContent(context),
-                      buildContent(context),
-                      buildContent(context),
-                      buildContent(context),
+                      buildContent(context,'Project Name 1'),
+                       buildContent(context,'Project Name 2'),
+                       buildContent(context,'Project Name 3'),
+                      // buildContent(context,3),
                     ],
                   )
                 ],
@@ -193,26 +192,58 @@ class userprofile extends State<userProjectProfile> {
           )),
     );
   }
+  bool expandName = false;
+  Widget buildContent(BuildContext context,name){
+    return
 
-  Widget buildContent(BuildContext context){
-    return ExpansionTile(
-      expandedAlignment: Alignment.center,
-        title:  projectNameinprofile(selected: false),
-      trailing: GestureDetector(
-        onTap: () {},
-        child: ImageIcon(
-          AssetImage('asset/threedots.png'),
-          color: Colors.blue,
+      Padding(
+        padding: const EdgeInsets.only(top: 15.0),
+        child: ClipRRect(
+          borderRadius:    BorderRadius.circular(10),
+          child: ExpansionTile(
+            backgroundColor: Kdblue,
+          collapsedBackgroundColor: Kdblue,
+          expandedAlignment: Alignment.center,
+            title:  projectNameinprofile(selected: false,name:name),
+          trailing: GestureDetector(
+            onTap: () {},
+            child: ImageIcon(
+              AssetImage('asset/threedots.png'),
+              color: Colors.white,
+            ),
+          ),
+          children: [
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  ContentElements('Front-end Development project','Type'),
+                  Divider(color: Colors.black,thickness: 1,),
+                  Wrap(
+                    alignment: WrapAlignment.spaceAround,
+                    children: [
+                      ContentElements('7 memeber ','Team'),
+                      InkWell(
+                        onTap: (){Get.to(UserProfileTeams());},
+                        child: Text('view all',style: TextStyle(color: Colors.blue )),
+                      ),
+                    ],
+                  ),
+                  Divider(color: Colors.black,thickness: 1,),
+                  ContentElementsforStatus(),
+                  Divider(color: Colors.black,thickness: 1,),
+                  ContentElements('Admin/leadname','Lead'),
+                  Divider(color: Colors.black,thickness: 1,),
+
+                  ContentElements('March 07,2022','Deadline',),
+                ],
+              ),
+            )
+
+          ],
+    ),
         ),
-      ),
-      children: [
-        ContentElements(),
-        ContentElements(),
-        ContentElementsforStatus(),
-        ContentElements(),
-        ContentElements(),
-      ],
-    );
+      );
   }
 
 }
@@ -228,7 +259,9 @@ AppBar _buildappBar() {
             onPressed: () {}, icon: Image.asset('asset/userprofileicon.png')),
       ],
       leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+           // Get.to( ProjectHomePage(key: scafkey,));
+            },
           icon: Icon(
             FontAwesomeIcons.bars,
             color: Colors.black,
@@ -259,7 +292,7 @@ Widget _bottomNevigationBar() {
                   AssetImage('asset/twopeopleicon.png'),
                   color: Colors.white,
                 ),
-                label: 'home',
+                label: 'share',
               ),
               BottomNavigationBarItem(
                 icon: ImageIcon(
@@ -307,55 +340,52 @@ Widget _bottomNevigationBar() {
 //   ),
 // ];
 
-Widget ContentElements (){
-  return Container(
-    padding : EdgeInsets.symmetric(horizontal: 20,vertical: 0),
-    color: Colors.grey.withOpacity(0.3),
-    child:
-        Wrap(
-          spacing: 50,
-          runSpacing: 10,
-          alignment: WrapAlignment.spaceBetween,
-          children: [
-            Text(' Type '),
-            Text('Front-end Development project'),
-            SizedBox(width: Get.width,child:Divider(thickness: 1,color: Colors.blueAccent,) ,)
-          ],
-        ),
-    );
+Widget ContentElements (String name,String type){
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+
+      children: [
+        Container(
+            width: 120,
+            child: Text(type)),
+        Expanded(child: Text(name,style: TextStyle(color: kyellow),)),
+      ],
+    ),
+  );
 }
 
 
 Widget ContentElementsforStatus (){
-  return Container(
-    padding : EdgeInsets.symmetric(horizontal: 30,vertical: 0),
-    color: Colors.grey.withOpacity(0.3),
-    child:
-    Wrap(
-      spacing: 80,
-      runSpacing: 10,
-      alignment: WrapAlignment.spaceEvenly,
+  return Padding(
+    padding: const EdgeInsets.only(left: 5.0),
+    child: Row(
       children: [
-        Text(' Status '),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Review'),
-            GestureDetector(
-              onTap: (){Marked(true);},
-              onDoubleTap: (){Marked(false);},
-              child: Wrap(
-                spacing: 20,
-                children: [
-                  Text("Marked complete"),
-                  Marked(false),
-                ],
-              ),
-            ),
-          ],
+        Container(
+            width: 125,
+            child: Text(' Status ')
         ),
-        SizedBox(width: Get.width,
-          child:Divider(thickness: 1,color: Colors.blueAccent,) ,)
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('In Review',style: TextStyle(color: kyellow)),
+              GestureDetector(
+                onTap: (){Marked(true);},
+                onDoubleTap: (){},
+                child: Wrap(
+                  spacing: 20,
+                  children: [
+                    Text("Marked complete",style: TextStyle(color: Kdblue),),
+                    Marked(false),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
       ],
     ),
   );
@@ -363,11 +393,13 @@ Widget ContentElementsforStatus (){
 
 Widget Marked(bool value){
   return Container(
-    height: 10,
-    width: 10,
-    color: value ? Colors.blue : Colors.white,
-    // decoration: BoxDecoration(
-    //   border: Border.all(color: Colors.blue)
-    // ),
+    height: 15,
+    width: 15,
+
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.blue),
+      color: value ? Colors.blue : Colors.white,
+
+    ),
   );
 }
