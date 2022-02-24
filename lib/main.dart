@@ -18,6 +18,8 @@ import 'Employee/watchdashboard.dart';
 import 'HRMS_admin_Screen/adbranchpg2.dart';
 import 'HRMS_admin_Screen/adbranchpg1.dart';
 import 'HRMS_admin_Screen/adbranchpg3.dart';
+import 'HRMS_admin_Screen/adbranchpg4.dart';
+import 'HRMS_admin_Screen/adbranchpg4a.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
 import 'ProjectManagement/projectDashboard.dart';
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: DBcrud3
+      home: EmployeeHomePage
 
         (),
       debugShowCheckedModeBanner: false,
