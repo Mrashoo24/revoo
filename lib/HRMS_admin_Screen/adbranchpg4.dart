@@ -13,8 +13,30 @@ class DBcrud4 extends StatefulWidget {
 }
 
 class _DBcrud3State extends State<DBcrud4> {
+  bool  avalue = false;
+
   @override
   Widget build(BuildContext context) {
+
+    RelativeRect buttonMenuPosition(BuildContext context) {
+
+      final RenderBox bar = context.findRenderObject() as RenderBox;
+      final RenderBox overlay =
+      Overlay.of(context)?.context.findRenderObject() as RenderBox;
+      const Offset offset = Offset.zero;
+      final RelativeRect position = RelativeRect.fromRect(
+        Rect.fromPoints(
+          bar.localToGlobal(bar.size.centerRight(offset),
+              ancestor: overlay),
+          bar.localToGlobal(
+              bar.size.centerRight(offset)
+              ,
+              ancestor: overlay),
+        ),
+        offset & overlay.size,
+      );
+      return position;
+    }
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -72,7 +94,7 @@ class _DBcrud3State extends State<DBcrud4> {
 
                       Container(
                         width: 400,
-                        height: 450,
+                        height: 500,
                         decoration: BoxDecoration(
 
                           color: bgGrey,
@@ -135,7 +157,300 @@ class _DBcrud3State extends State<DBcrud4> {
                                             )
                                           ],
                                         ),
-                                        trailing : Icon(Icons.more_vert,color: Colors.white),
+                                        trailing : InkWell(child: Icon(Icons.more_vert,color: Colors.white),
+                                        onTap: (){
+
+                                          final RelativeRect position =
+                                          buttonMenuPosition(context);
+
+
+                                          showMenu(
+                                            color: Kdblue,
+                                            context: context, position: position, items: [
+
+
+                                            PopupMenuItem<int>(
+                                              value: 0,
+                                              child: Row(
+                                                  children: [
+                                                Text('Action',style: TextStyle(fontSize: 25,color: Colors.white),),
+                                                    Icon(Icons.more_vert,color: Colors.white),
+                                                ],
+                                              ),
+                                          ),
+                                            PopupMenuItem<int>(
+                                              value: 0,
+                                              child:Divider(
+                                                height: 33,
+                                                thickness: 2,color:Colors.white,endIndent: 10, indent: 10,
+                                              ),
+                                            ),
+                                            PopupMenuItem<int>(
+                                              value: 0,
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('asset/actiona.png'),
+                                                  SizedBox(width: 10),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      final RelativeRect position =
+                                                      buttonMenuPosition(context);
+
+                                                      showMenu(
+                                                          color: Colors.white,
+                                                          context: context, position: position, items: [
+
+                                                        PopupMenuItem<int>(
+
+                                                          value: 0,
+
+
+                                                          child:ElevatedButton(
+                                                            onPressed: () {
+                                                              showDialog(
+                                                                  context: context,
+                                                                  builder: (BuildContext context) {
+                                                                    return AlertDialog(
+                                                                      content: Stack(
+                                                                        clipBehavior: Clip.none, children: <Widget>[
+                                                                        Positioned(
+                                                                          right: -20.0,
+                                                                          top: -15.0,
+                                                                          child: InkResponse(
+                                                                            onTap: () {
+                                                                              Navigator.of(context).pop();
+                                                                            },
+                                                                            child: CircleAvatar(
+                                                                              child: Icon(Icons.close),
+                                                                              backgroundColor: Kdblue,
+                                                                            ),
+                                                                          ),
+                                                                        ),SizedBox(height: 15),
+                                                                        Form(
+
+                                                                          child: Column(
+                                                                            mainAxisSize: MainAxisSize.min,
+                                                                            children: <Widget>[
+                                                                              Text(
+                                                                                'Duplicate Branch',
+                                                                                style: TextStyle(
+                                                                                    color: kblue,
+                                                                                    fontSize: 25),),
+                                                                              SizedBox(height: 10),
+                                                                              TextFormField(
+                                                                                decoration: InputDecoration(
+                                                                                  filled: true,
+                                                                                  fillColor: bgGrey,
+                                                                                  contentPadding: EdgeInsets.only(left: 20,top: 10,bottom: 10),
+                                                                                  hintText: 'Choose a Name',
+
+                                                                                  hintStyle: TextStyle(
+                                                                                      color: Colors.grey
+                                                                                  ),
+                                                                                  border: OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  ),
+                                                                                  focusedBorder: OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  ),
+                                                                                  enabledBorder:OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  ),
+
+
+                                                                                ),
+                                                                              ),Text(
+                                                                                'Copy all attributes',
+                                                                                style: TextStyle(
+                                                                                    color: Colors.grey,
+                                                                                    fontSize: 20),),
+
+                                                                              Row(
+                                                                                children: [
+                                                                                  Padding(
+                                                                                    padding:   EdgeInsets.all(5.0),
+                                                                                    child: ElevatedButton(
+                                                                                      child: Text("<       Back"),
+
+                                                                                      onPressed: () {
+
+                                                                                      },
+                                                                                    ),
+                                                                                  ),Padding(
+                                                                                    padding:   EdgeInsets.all(5.0),
+                                                                                    child: ElevatedButton(
+                                                                                      child: Text("Duplicate"),
+
+                                                                                      onPressed: () {
+
+                                                                                      },
+                                                                                    ),
+                                                                                  ),
+
+                                                                                ],
+                                                                              )
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                      ),
+                                                                    );
+                                                                  });
+                                                            },
+                                                            child: Text("Open Popup"),
+                                                          ),
+                                                        ),
+
+                                                      ]);
+                                                    },
+                                                    child: Text('Duplicate',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+
+                                            ), PopupMenuItem<int>(
+                                              value: 1,
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('asset/actionb.png'),
+                                                  SizedBox(width: 10),
+                                                  Text('Rename',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+
+                                            ),
+
+                                            PopupMenuItem<int>(
+                                              value: 2,
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('asset/actionc.png'),
+                                                  SizedBox(width: 10),
+                                                  Text('Download',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+
+                                            ),
+                                            PopupMenuItem<int>(
+                                              value: 3,
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('asset/actiond.png'),
+                                                  SizedBox(width: 10),
+                                                  Text('Add Domain',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+
+                                            ), PopupMenuItem<int>(
+                                              value: 4,
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('asset/actione.png'),
+                                                  SizedBox(width: 10),
+                                                  Text('Tags',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+
+                                            ), PopupMenuItem<int>(
+                                              value: 5,
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('asset/actionf.png'),
+                                                  SizedBox(width: 10),
+                                                  Text('Delete',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+
+                                            ),PopupMenuItem<int>(
+                                              value: 6,
+                                              child:Divider(
+                                                height: 10,
+                                                thickness: 2,color:Colors.white,endIndent: 10, indent: 10,
+                                              ),
+                                            ),PopupMenuItem<int>(
+                                              value: 7,
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('asset/actionh.png'),
+                                                  SizedBox(width: 10),
+                                                  Text('Invite Users',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+
+                                            ), PopupMenuItem<int>(
+                                              value: 8,
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('asset/actionh.png'),
+                                                  SizedBox(width: 10),
+                                                  Text('Remove Users',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+
+                                            ),PopupMenuItem<int>(
+                                              value: 9,
+                                              child:Divider(
+                                                height: 10,
+                                                thickness: 2,color:Colors.white,endIndent: 10, indent: 10,
+                                              ),
+                                            ),PopupMenuItem<int>(
+                                              value: 10,
+                                              child: Row(
+                                                children: [
+                                                  Image.asset('asset/actiong.png'),
+                                                  SizedBox(width: 10),
+                                                  Text('Contact Support',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+
+                                            ),
+
+                                            PopupMenuItem<int>(
+                                              value: 11,
+                                              child:Container(
+                                                width: 400,
+
+                                                decoration: BoxDecoration(
+
+                                                    color: kyellow,
+
+                                                    borderRadius: BorderRadius.all( Radius.circular(10) )
+
+                                                ),
+                                                child: ListTile(
+
+                                                  title: Row(
+
+                                                    children: [
+
+
+                                                      SizedBox(width: 20,height: 50),
+                                                      Text('Upgrade',style: TextStyle(fontSize: 30,color: Kdblue),
+
+                                                      ),SizedBox(width: 15),
+
+                                                      Image.asset('asset/actionj.png',color: Kdblue,),
+
+                                                    ],
+
+                                                  ),
+
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                          );
+                                        },
+                                        ),
                                       ),Divider(
                                         height: 10,
                                         thickness: 4,color:Kdblue,endIndent: 10, indent: 10,
@@ -162,7 +477,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                         ),
                                         trailing : Icon(Icons.more_vert,color: Colors.white),
                                       ),Divider(
-                                        height: 10,
+                                        height: 30,
                                         thickness: 4,color:Kdblue,endIndent: 10, indent: 10,
                                       ),SizedBox(height: 10),
                                       ListTile(
@@ -175,7 +490,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                               height: 14,
                                               decoration: BoxDecoration(
 
-                                                color: bluess,
+                                                color:bluess,
 
                                                 borderRadius: BorderRadius.circular(40),
 
@@ -188,7 +503,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                       ),Divider(
                                         height: 10,
                                         thickness: 4,color:Kdblue,endIndent: 10, indent: 10,
-                                      ),SizedBox(height: 10),
+                                      ),SizedBox(height:30),
                                       ListTile(
                                         title: Row(
                                           children: [
@@ -212,7 +527,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                       ),Divider(
                                         height: 10,
                                         thickness: 4,color:Kdblue,endIndent: 10, indent: 10,
-                                      ),SizedBox(height: 10),
+                                      ),SizedBox(height:20),
                                       ListTile(
                                         title: Row(
                                           children: [
@@ -230,7 +545,7 @@ class _DBcrud3State extends State<DBcrud4> {
 
                                               ),
 
-                                            )
+                                            ),
                                           ],
                                         ),
                                         trailing : Icon(Icons.more_vert,color: Colors.white),

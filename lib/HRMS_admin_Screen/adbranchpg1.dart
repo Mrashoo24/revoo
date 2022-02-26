@@ -13,6 +13,7 @@ class DBcrud1 extends StatefulWidget {
 }
 
 class _DBcrudState extends State<DBcrud1> {
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -85,27 +86,25 @@ class _DBcrudState extends State<DBcrud1> {
 
                                      },
                                      child: Text('Create',style: TextStyle(color: kblue,fontSize: 30),)),
+                                 ListTile(
+                                   title: const Text('Female',
+                                       style:TextStyle(fontSize: 18, letterSpacing: 1.0)
+                                   ),
 
+                                   ),
                                ],
                              ),
                            ),
                          ),
                        ),
                      ),
-
                      Text ('Create your first branch to add your\nemployees and staff, assign\nroles and communicate between\ndepartments',style: TextStyle(color: Colors.grey,fontSize: 20),),
                      SizedBox(height: 15,),
                    ],
                  ),
-
-
-
                ],
              ),
         ),
-
-
-
         bottomNavigationBar: Container(
 
           height: 100,
@@ -118,7 +117,6 @@ class _DBcrudState extends State<DBcrud1> {
                   child: Stack(
                     children: [
                       Align(
-
                         child: Container(
                           height: Get.height*0.08,
                           decoration: BoxDecoration(
