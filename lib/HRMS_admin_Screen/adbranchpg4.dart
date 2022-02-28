@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
@@ -13,7 +14,11 @@ class DBcrud4 extends StatefulWidget {
 }
 
 class _DBcrud3State extends State<DBcrud4> {
-  bool  avalue = false;
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -196,112 +201,137 @@ class _DBcrud3State extends State<DBcrud4> {
                                                       final RelativeRect position =
                                                       buttonMenuPosition(context);
 
-                                                      showMenu(
-                                                          color: Colors.white,
-                                                          context: context, position: position, items: [
 
-                                                        PopupMenuItem<int>(
+                                                       Get.defaultDialog(
+                                                         title: '',
+                                                         content:   Container(
+                                                           width: 400,
+                                                           height: 400,
+                                                           decoration: BoxDecoration(
 
-                                                          value: 0,
+                                                             color: Colors.white,
+
+                                                             borderRadius: BorderRadius.circular(40),
+
+                                                           ),
+                                                           child:Padding(
+                                                             padding: const EdgeInsets.all(8.0),
+                                                             child: Column(
+
+                                                               children: [
+
+                                                                 Positioned(
+                                                                   right: 80.0,
+                                                                   top: 10.0,
+                                                                   child: CircleAvatar(
+                                                                     child: Icon(Icons.close),
+                                                                     backgroundColor: Kdblue,
+                                                                   ),
+                                                                 ),
+                                                                 Text('Duplicate Branch',style: TextStyle(fontSize: 30,color: kblue),
+                                                                 ),TextFormField(
+                                                                   decoration: InputDecoration(
+                                                                       filled: true,
+                                                                       fillColor: bgGrey,
+                                                                       contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                                                                       hintText: 'Choose a Name',
+
+                                                                       hintStyle: TextStyle(
+                                                                           color: Colors.grey
+                                                                       ),
+                                                                       border: OutlineInputBorder(
+                                                                           borderSide: BorderSide(color: Colors.white)
+                                                                       ),
+                                                                       focusedBorder: OutlineInputBorder(
+                                                                           borderSide: BorderSide(color: Colors.white)
+                                                                       ),
+                                                                       enabledBorder:OutlineInputBorder(
+                                                                           borderSide: BorderSide(color: Colors.white)
+                                                                       )
+                                                                   ),
+
+                                                                 ),Text('Copy all attributes',style: TextStyle(fontSize: 28,color: Colors.grey),),
+                                                                 ButtonBar(
+                                                                   alignment: MainAxisAlignment.center,
+                                                                   children: [
+                                                                     Row(
+                                                                       children: [
+                                                                         Radio(
+                                                                           value: 1,
+                                                                           groupValue: 1,
+                                                                           onChanged: (val) {},
+                                                                         ),Text('Yes',style: TextStyle(fontSize: 15,color: Colors.grey),),
+
+                                                                       ],
+                                                                     ),
+                                                                   ],
+                                                                 ),
+                                                                 SizedBox(height: 25),
+                                                                 Row(
+                                                                   mainAxisSize: MainAxisSize.min,
+                                                                   children: [
+                                                                     ElevatedButton(onPressed: (){
+
+                                                                     },
+
+                                                                         style: ElevatedButton.styleFrom(
+                                                                             elevation: 0,
+                                                                             shape:RoundedRectangleBorder(
+                                                                                 borderRadius: BorderRadius.all(Radius.circular(10))
+                                                                             ),
+                                                                             side: BorderSide(width: 3.0, color: kblue ),
+                                                                             primary: Colors.white,
+                                                                             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
+                                                                             textStyle: TextStyle(
+                                                                                 fontSize: 30,
+                                                                                 fontWeight: FontWeight.bold)),
+                                                                         child: Center(child: Text('< Back',style: TextStyle(
+                                                                             color: kblue,fontSize: 15
+                                                                         ),))),
+                                                                     SizedBox(width: 25,),
+                                                                     Container(
+                                                                       width: 110,
+                                                                       height: 41,
+                                                                       decoration: BoxDecoration(
+                                                                         gradient: LinearGradient(
+                                                                           colors: [
+                                                                             Colors.blue.shade900,
+                                                                             Colors.blue,
+                                                                           ],
+                                                                           begin: Alignment.topLeft,
+                                                                           end: Alignment.bottomRight,
+                                                                         ),
+                                                                         borderRadius: BorderRadius.circular(10),
 
 
-                                                          child:ElevatedButton(
-                                                            onPressed: () {
-                                                              showDialog(
-                                                                  context: context,
-                                                                  builder: (BuildContext context) {
-                                                                    return AlertDialog(
-                                                                      content: Stack(
-                                                                        clipBehavior: Clip.none, children: <Widget>[
-                                                                        Positioned(
-                                                                          right: -20.0,
-                                                                          top: -15.0,
-                                                                          child: InkResponse(
-                                                                            onTap: () {
-                                                                              Navigator.of(context).pop();
-                                                                            },
-                                                                            child: CircleAvatar(
-                                                                              child: Icon(Icons.close),
-                                                                              backgroundColor: Kdblue,
-                                                                            ),
-                                                                          ),
-                                                                        ),SizedBox(height: 15),
-                                                                        Form(
+                                                                       ),
+                                                                       child: Padding(
+                                                                         padding: const EdgeInsets.all(8.0),
+                                                                         child: Center(
+                                                                           child: Text('Duplicate',style: TextStyle(
+                                                                               color: Colors.white,fontSize: 15
+                                                                           ),),
+                                                                         ),
+                                                                       ),
 
-                                                                          child: Column(
-                                                                            mainAxisSize: MainAxisSize.min,
-                                                                            children: <Widget>[
-                                                                              Text(
-                                                                                'Duplicate Branch',
-                                                                                style: TextStyle(
-                                                                                    color: kblue,
-                                                                                    fontSize: 25),),
-                                                                              SizedBox(height: 10),
-                                                                              TextFormField(
-                                                                                decoration: InputDecoration(
-                                                                                  filled: true,
-                                                                                  fillColor: bgGrey,
-                                                                                  contentPadding: EdgeInsets.only(left: 20,top: 10,bottom: 10),
-                                                                                  hintText: 'Choose a Name',
-
-                                                                                  hintStyle: TextStyle(
-                                                                                      color: Colors.grey
-                                                                                  ),
-                                                                                  border: OutlineInputBorder(
-                                                                                      borderSide: BorderSide(color: Colors.white)
-                                                                                  ),
-                                                                                  focusedBorder: OutlineInputBorder(
-                                                                                      borderSide: BorderSide(color: Colors.white)
-                                                                                  ),
-                                                                                  enabledBorder:OutlineInputBorder(
-                                                                                      borderSide: BorderSide(color: Colors.white)
-                                                                                  ),
+                                                                     ),
+                                                                   ],
+                                                                 ),
 
 
-                                                                                ),
-                                                                              ),Text(
-                                                                                'Copy all attributes',
-                                                                                style: TextStyle(
-                                                                                    color: Colors.grey,
-                                                                                    fontSize: 20),),
 
-                                                                              Row(
-                                                                                children: [
-                                                                                  Padding(
-                                                                                    padding:   EdgeInsets.all(5.0),
-                                                                                    child: ElevatedButton(
-                                                                                      child: Text("<       Back"),
+                                                               ],
+                                                             ),
 
-                                                                                      onPressed: () {
+                                                           ),
 
-                                                                                      },
-                                                                                    ),
-                                                                                  ),Padding(
-                                                                                    padding:   EdgeInsets.all(5.0),
-                                                                                    child: ElevatedButton(
-                                                                                      child: Text("Duplicate"),
+                                                         ),
 
-                                                                                      onPressed: () {
 
-                                                                                      },
-                                                                                    ),
-                                                                                  ),
 
-                                                                                ],
-                                                                              )
-                                                                            ],
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                      ),
-                                                                    );
-                                                                  });
-                                                            },
-                                                            child: Text("Open Popup"),
-                                                          ),
-                                                        ),
 
-                                                      ]);
+                                                       );
+
                                                     },
                                                     child: Text('Duplicate',style: TextStyle(fontSize: 20,color: Colors.white),
                                                     ),
