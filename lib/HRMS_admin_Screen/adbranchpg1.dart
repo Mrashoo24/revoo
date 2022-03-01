@@ -86,12 +86,7 @@ class _DBcrudState extends State<DBcrud1> {
 
                                      },
                                      child: Text('Create',style: TextStyle(color: kblue,fontSize: 30),)),
-                                 ListTile(
-                                   title: const Text('Female',
-                                       style:TextStyle(fontSize: 18, letterSpacing: 1.0)
-                                   ),
 
-                                   ),
                                ],
                              ),
                            ),

@@ -510,7 +510,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                                     },
                                                     child: Text('Rename',style: TextStyle(fontSize: 20,color: Colors.white),
                                                     ),
-                                                  )
+                                                  ),
                                                 ],
                                               ),
 
@@ -558,10 +558,11 @@ class _DBcrud3State extends State<DBcrud4> {
                                                                         ),
 
                                                                       ),
-                                                                      Image.network('https://icon-library.com/images/animated-icon-gif/animated-icon-gif-8.jpg'),
-
-                                                                       SizedBox(height:10),
-                                                                        Text('Copy all attributes',style: TextStyle(fontSize: 28,color: Colors.grey),),
+                                                                      Image.asset('asset/dldim.png'),
+                                                                  Text('Your download starts in...',style: TextStyle(fontSize: 20,color: Colors.grey)),
+                                                                      Text('5s',style: TextStyle(fontSize: 25,color: kblue)),
+                                                                      SizedBox(height: 50,),
+                                                                      Text('Cancel',style: TextStyle(fontSize: 18,color: kblue,decoration: TextDecoration.underline,)),
 
                                                                     ],
                                                                   ),
@@ -591,7 +592,92 @@ class _DBcrud3State extends State<DBcrud4> {
                                                 children: [
                                                   Image.asset('asset/actiond.png'),
                                                   SizedBox(width: 10),
-                                                  Text('Add Domain',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      print('clickedf');
+
+
+                                                      Get.defaultDialog(
+                                                        title: '',
+
+                                                        content:   StatefulBuilder(
+                                                            builder: (context, setState1) {
+                                                              return Container(
+                                                                width: 400,
+                                                                height: 400,
+                                                                decoration: BoxDecoration(
+
+                                                                  color: Colors.white,
+
+
+
+                                                                ),
+                                                                child:Padding(
+                                                                  padding: const EdgeInsets.all(8.0),
+                                                                  child: Column(
+
+                                                                    children: [
+
+                                                                      Align(
+                                                                        alignment: Alignment.topRight,
+
+
+                                                                        child: CircleAvatar(
+                                                                          child: Icon(Icons.close),
+                                                                          backgroundColor: Kdblue,
+                                                                        ),
+
+                                                                      ),
+                                                                      Text('Duplicate Branch',style: TextStyle(fontSize: 30,color: kblue),
+
+                                                                      ),SizedBox(height:10),
+
+
+                                                                      SizedBox(height: 25),
+                                                                      Row(
+                                                                        mainAxisSize: MainAxisSize.min,
+                                                                        children: [
+                                                                          Container(
+                                                                            width: 230,
+                                                                            height: 50,
+                                                                            decoration: BoxDecoration(
+                                                                              color: greytxtbx,
+                                                                              borderRadius: BorderRadius.circular(0),
+
+
+                                                                            ),
+                                                                            child: Padding(
+                                                                              padding: const EdgeInsets.all(8.0),
+                                                                              child: Center(
+                                                                                child: Text('Duplicate',style: TextStyle(
+                                                                                    color: Colors.white,fontSize: 15
+                                                                                ),),
+                                                                              ),
+                                                                            ),
+
+                                                                          ),
+                                                                        ],
+                                                                      ),
+
+
+
+                                                                    ],
+                                                                  ),
+
+                                                                ),
+
+                                                              );
+                                                            }
+                                                        ),
+
+
+
+
+                                                      );
+
+                                                    },
+                                                    child: Text('Add Domain',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                    ),
                                                   )
                                                 ],
                                               ),
