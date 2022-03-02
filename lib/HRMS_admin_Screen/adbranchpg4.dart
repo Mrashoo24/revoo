@@ -206,164 +206,178 @@ class _DBcrud3State extends State<DBcrud4> {
                                                       print('clickedf');
 
 
-                                                       Get.defaultDialog(
-                                                         title: '',
+                                                       showDialog(context: context, builder: (context){
+                                                         return    StatefulBuilder(
+                                                         builder: (context, setState1) {
+                                                         return AlertDialog(
+                                                           contentPadding : EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                                                           shape: RoundedRectangleBorder(
+                                                             borderRadius: BorderRadius.circular(50)
+                                                           ),
+                                                           content: SingleChildScrollView(
+                                                             child: Column(
+                                                               children: [
+                                                                 Container(
+                                                                 width: 400,
+                                                                 height: 400,
+                                                                 decoration: BoxDecoration(
+                                                                 border: Border.all(
+                                                                 width: 2,
+                                                                 color: kblue
+                                                                 ),
+                                                                 borderRadius: BorderRadius.circular(50)
 
-                                                         content:   StatefulBuilder(
-                                                           builder: (context, setState1) {
-                                                             return Container(
-                                                               width: 400,
-                                                               height: 400,
-                                                               decoration: BoxDecoration(
 
-                                                                 color: Colors.white,
-
-
-
-                                                               ),
-                                                               child:Padding(
-                                                                 padding: const EdgeInsets.all(8.0),
+                                                                 ),
+                                                                 child:Padding(
+                                                                 padding:  EdgeInsets.only(top: 8.0),
                                                                  child: Column(
 
-                                                                   children: [
+                                                                 children: [
 
-                                                                     Align(
-                                                                       alignment: Alignment.topRight,
-
-
-                                                                         child: CircleAvatar(
-                                                                           child: Icon(Icons.close),
-                                                                           backgroundColor: Kdblue,
-                                                                         ),
-
-                                                                     ),
-                                                                     Text('Duplicate Branch',style: TextStyle(fontSize: 30,color: kblue),
-
-                                                                     ),SizedBox(height:10),
-                                                                     TextFormField(
-                                                                       decoration: InputDecoration(
-                                                                           filled: true,
-                                                                           fillColor: bgGrey,
-                                                                           contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                                                                           hintText: 'Choose a Name',
-
-                                                                           hintStyle: TextStyle(
-                                                                               color: Colors.grey
-                                                                           ),
-                                                                           border: OutlineInputBorder(
-                                                                               borderSide: BorderSide(color: Colors.white)
-                                                                           ),
-                                                                           focusedBorder: OutlineInputBorder(
-                                                                               borderSide: BorderSide(color: Colors.white)
-                                                                           ),
-                                                                           enabledBorder:OutlineInputBorder(
-                                                                               borderSide: BorderSide(color: Colors.white)
-                                                                           )
-                                                                       ),
-
-                                                                     ),Text('Copy all attributes',style: TextStyle(fontSize: 28,color: Colors.grey),),
-                                                                     ButtonBar(
-                                                                       alignment: MainAxisAlignment.center,
-                                                                       children: [
-                                                                         Row(
-                                                                           children: [
-                                                                             Radio(
-                                                                               value: yesvslue,
-                                                                               groupValue: groupvalue,
-                                                                               onChanged: (int? value) {
-                                                                                 setState(() {
-                                                                                   groupvalue = value!;
-                                                                                 });
-                                                                                 setState1(() {
-
-                                                                                 });
-                                                                               },
-                                                                             ),Text('Yes',style: TextStyle(fontSize: 15,color: Colors.grey),),
-                                                                             Radio(
-                                                                               value: novalue,
-                                                                               groupValue: groupvalue,
-                                                                               onChanged: (int? value) {
-                                                                                 setState(() {
-                                                                                   groupvalue = value!;
-                                                                                 });
-                                                                                 setState1(() {
-
-                                                                                 });
-                                                                               },
-                                                                             ),Text('No',style: TextStyle(fontSize: 15,color: Colors.grey),),
-
-                                                                           ],
-                                                                         ),
-                                                                       ],
-                                                                     ),
-                                                                     SizedBox(height: 25),
-                                                                     Row(
-                                                                       mainAxisSize: MainAxisSize.min,
-                                                                       children: [
-                                                                         ElevatedButton(onPressed: (){
-
-                                                                         },
-
-                                                                             style: ElevatedButton.styleFrom(
-                                                                                 elevation: 0,
-                                                                                 shape:RoundedRectangleBorder(
-                                                                                     borderRadius: BorderRadius.all(Radius.circular(10))
-                                                                                 ),
-                                                                                 side: BorderSide(width: 3.0, color: kblue ),
-                                                                                 primary: Colors.white,
-                                                                                 padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
-                                                                                 textStyle: TextStyle(
-                                                                                     fontSize: 30,
-                                                                                     fontWeight: FontWeight.bold)),
-                                                                             child: Center(child: Text('< Back',style: TextStyle(
-                                                                                 color: kblue,fontSize: 15
-                                                                             ),))),
-                                                                         SizedBox(width: 25,),
-                                                                         Container(
-                                                                           width: 110,
-                                                                           height: 41,
-                                                                           decoration: BoxDecoration(
-                                                                             gradient: LinearGradient(
-                                                                               colors: [
-                                                                                 Colors.blue.shade900,
-                                                                                 Colors.blue,
-                                                                               ],
-                                                                               begin: Alignment.topLeft,
-                                                                               end: Alignment.bottomRight,
-                                                                             ),
-                                                                             borderRadius: BorderRadius.circular(10),
+                                                                 Align(
+                                                                 alignment: Alignment(1.0, 10.0)    ,
 
 
-                                                                           ),
-                                                                           child: Padding(
-                                                                             padding: const EdgeInsets.all(8.0),
-                                                                             child: Center(
-                                                                               child: Text('Duplicate',style: TextStyle(
-                                                                                   color: Colors.white,fontSize: 15
-                                                                               ),),
-                                                                             ),
-                                                                           ),
-
-                                                                         ),
-                                                                       ],
-                                                                     ),
-
-
-
-                                                                   ],
+                                                                 child: Padding(
+                                                                   padding: const EdgeInsets.all(10.0),
+                                                                   child: CircleAvatar(
+                                                                   child: Icon(Icons.close,),
+                                                                   backgroundColor: Kdblue,radius: 12,
+                                                                   ),
                                                                  ),
 
-                                                               ),
+                                                                 ),
+                                                                 Text('Duplicate Branch',style: TextStyle(fontSize: 30,color: kblue),
 
-                                                             );
-                                                           }
-                                                         ),
+                                                                 ),SizedBox(height:10),
+                                                                 Container(
+                                                                   width: 200,height: 50,
+                                                                   child: TextFormField(
+
+                                                                   decoration: InputDecoration(
+                                                                   filled: true,
+                                                                   fillColor: bgGrey,
+                                                                   contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                                                                   hintText: 'Choose a Name',
+
+                                                                   hintStyle: TextStyle(
+                                                                   color: Colors.grey
+                                                                   ),
+                                                                   border: OutlineInputBorder(
+                                                                   borderSide: BorderSide(color: Colors.white)
+                                                                   ),
+                                                                   focusedBorder: OutlineInputBorder(
+                                                                   borderSide: BorderSide(color: Colors.white)
+                                                                   ),
+                                                                   enabledBorder:OutlineInputBorder(
+                                                                   borderSide: BorderSide(color: Colors.white)
+                                                                   )
+                                                                   ),
+
+                                                                   ),
+                                                                 ),Text('Copy all attributes',style: TextStyle(fontSize: 28,color: Colors.grey),),
+                                                                 ButtonBar(
+                                                                 alignment: MainAxisAlignment.center,
+                                                                 children: [
+                                                                 Row(
+                                                                 children: [
+                                                                 Radio(
+                                                                 value: yesvslue,
+                                                                 groupValue: groupvalue,
+                                                                 onChanged: (int? value) {
+                                                                 setState(() {
+                                                                 groupvalue = value!;
+                                                                 });
+                                                                 setState1(() {
+
+                                                                 });
+                                                                 },
+                                                                 ),Text('Yes',style: TextStyle(fontSize: 15,color: Colors.grey),),
+                                                                 Radio(
+                                                                 value: novalue,
+                                                                 groupValue: groupvalue,
+                                                                 onChanged: (int? value) {
+                                                                 setState(() {
+                                                                 groupvalue = value!;
+                                                                 });
+                                                                 setState1(() {
+
+                                                                 });
+                                                                 },
+                                                                 ),Text('No',style: TextStyle(fontSize: 15,color: Colors.grey),),
+
+                                                                 ],
+                                                                 ),
+                                                                 ],
+                                                                 ),
+                                                                 SizedBox(height: 25),
+                                                                 Row(
+                                                                 mainAxisSize: MainAxisSize.min,
+                                                                 children: [
+                                                                 ElevatedButton(onPressed: (){
+
+                                                                 },
+
+                                                                 style: ElevatedButton.styleFrom(
+                                                                 elevation: 0,
+                                                                 shape:RoundedRectangleBorder(
+                                                                 borderRadius: BorderRadius.all(Radius.circular(10))
+                                                                 ),
+                                                                 side: BorderSide(width: 3.0, color: kblue ),
+                                                                 primary: Colors.white,
+                                                                 padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
+                                                                 textStyle: TextStyle(
+                                                                 fontSize: 30,
+                                                                 fontWeight: FontWeight.bold)),
+                                                                 child: Center(child: Text('< Back',style: TextStyle(
+                                                                 color: kblue,fontSize: 15
+                                                                 ),))),
+                                                                 SizedBox(width: 25,),
+                                                                 Container(
+                                                                 width: 110,
+                                                                 height: 41,
+                                                                 decoration: BoxDecoration(
+                                                                 gradient: LinearGradient(
+                                                                 colors: [
+                                                                 Colors.blue.shade900,
+                                                                 Colors.blue,
+                                                                 ],
+                                                                 begin: Alignment.topLeft,
+                                                                 end: Alignment.bottomRight,
+                                                                 ),
+                                                                 borderRadius: BorderRadius.circular(10),
+
+
+                                                                 ),
+                                                                 child: Padding(
+                                                                 padding: const EdgeInsets.all(8.0),
+                                                                 child: Center(
+                                                                 child: Text('Duplicate',style: TextStyle(
+                                                                 color: Colors.white,fontSize: 15
+                                                                 ),),
+                                                                 ),
+                                                                 ),
+
+                                                                 ),
+                                                                 ],
+                                                                 ),
 
 
 
+                                                                 ],
+                                                                 ),
 
-                                                       );
+                                                                 ),
 
+                                                                 ),
+                                                               ],
+                                                             ),
+                                                           ),
+                                                         );
+                                                         }
+                                                         );
+                                                       });
                                                     },
                                                     child: Text('Duplicate',style: TextStyle(fontSize: 20,color: Colors.white),
                                                     ),

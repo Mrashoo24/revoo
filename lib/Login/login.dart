@@ -102,18 +102,23 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                     fillColor: Colors.white,
                                     contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
                                     hintText: 'Password',
+
                                     hintStyle: TextStyle(
                                       color: Colors.grey
                                     ),
+
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(color: Colors.white)
                                     ),
+
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(color: Colors.white)
                                     ),
+
                                     enabledBorder:OutlineInputBorder(
                                         borderSide: BorderSide(color: Colors.white)
                                     ),
+
                                   suffixIcon: Icon(Icons.remove_red_eye_outlined,color: Colors.yellow.shade700,)
 
 
@@ -194,6 +199,8 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: Text('Forgot Password?',style: TextStyle(color: Colors.yellow.shade700),),
                                   )),
+
+
                             ],
                           ),
                         ),
