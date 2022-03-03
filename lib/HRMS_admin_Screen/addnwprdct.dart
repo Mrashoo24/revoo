@@ -160,7 +160,7 @@ class _AddnwprdctState extends State<Addnwprdct> {
                       Text('Upload a profile picture',style: TextStyle(color: kblue),),
                     ],
                   ),
-                  SizedBox(width: 30),
+                  SizedBox(width: 20),
                   Container(
                     child: Column(
                       children: [
