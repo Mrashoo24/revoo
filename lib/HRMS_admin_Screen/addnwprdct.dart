@@ -56,31 +56,32 @@ class _AddnwprdctState extends State<Addnwprdct> {
                   Row(
                     children: [
                       Container(
-                        width: 180,
-                        height: 40,
+                        width: 175,
+                        height: 36,
                         decoration: BoxDecoration(
                           color: Kdblue,
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Row(
                             children: [
                               Text('Purchased :',style: TextStyle(color: Colors.white,fontSize: 15),),
+                              SizedBox(width: 10,),
                               Container(
-                                width: 85,
-                                height: 20,
+                                width: 65,
+                                height: 22,
                                 decoration: BoxDecoration(color: bgGrey),
-                                child: Center(child: Text("24",style: TextStyle(color: kyellow),)),
+                                child: Center(child: Text("24",style: TextStyle(color: kyellow,fontSize:15),)),
                               ),
 
                             ],
                           ),
                         ),
 
-                      ),
+                      ),SizedBox(width: 19,),
                       Container(
-                        width: 175,
-                        height: 40,
+                        width: 160,
+                        height: 36,
                         margin: EdgeInsets.all(8),
                         decoration: BoxDecoration(border: Border.all(
                             color: Kdblue,width: 2
@@ -89,7 +90,7 @@ class _AddnwprdctState extends State<Addnwprdct> {
                           padding:   EdgeInsets.only(left: 32),
                           child: Row(
                             children: [
-                              Text('Print Label',style: TextStyle(fontSize: 18,color: kblue),),
+                              Text('Print Label',style: TextStyle(fontSize: 17,color: kblue),),
                               SizedBox(width: 10,),
                               Image.asset('asset/dropdwn.png'),
 
@@ -117,25 +118,231 @@ class _AddnwprdctState extends State<Addnwprdct> {
                         ),
 
 
-                      ),SizedBox(width: 30),
-                      Container(
-                        child: Column(
-                          children: [
+                      ),SizedBox(width: 20),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
 
-                            Align(
-                                alignment: Alignment.centerRight,
-                                child: Text('Product name',style: TextStyle(fontSize: 15,color:kblue ),)),
-                            Divider(
-                              height: 5,thickness: 20,
+                          Text('Product name',style: TextStyle(fontSize: 16,color:kblue ),),
+                          Divider(
+                            height: 5,thickness: 15,
+                          ),
+                          Container(
+                            height: 40,
+                            width: 190,
+
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: bgGrey,
+
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.white)
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.white)
+                                  ),
+                                  enabledBorder:OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.white)
+                                  )
+
+                              ),
                             ),
-                            Container(
-                              height: 40,
-                              width: 180,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text('Upload a profile picture',style: TextStyle(color: kblue),),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Container(
+                    child: Column(
+                      children: [
+
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Product type',style: TextStyle(fontSize: 18,color:kblue ),)),
+                        Divider(
+                          height: 5,thickness: 1,color: kblue,
+                        ),
+                        SizedBox(height: 4),
+                        Container(
+                          height: 37,
+
+                          decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
+
+                          child: TextFormField(
+                            decoration: InputDecoration(
+
+                                filled: true,
+                                fillColor: bgGrey,
+
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                ),
+                                enabledBorder:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                )
+
+                            ),
+                          ),
+                        ),
+
+
+                        SizedBox(height: 30),
+
+
+
+                        Container(
+                          height: 110,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: Column(
+                                  children: [
+                                    Text('Price sale',style: TextStyle(fontSize: 18,color:kblue ),),
+                                    Divider(
+                                      height: 5,thickness: 1,color: kblue,
+                                    ),
+                                    SizedBox(height: 4),
+                                    Container(
+                                      height: 40,
+
+                                      decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
+
+
+                                      child: TextFormField(
+                                        decoration: InputDecoration(
+
+                                            filled: true,
+                                            fillColor: bgGrey,
+
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.white),
+                                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.white),
+                                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                                            ),
+                                            enabledBorder:OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.white),
+                                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                                            )
+
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Flexible(
+                                child: Column(
+                                  children: [
+                                    Text('Cost price',style: TextStyle(fontSize: 18,color:kblue ),),
+                                    Divider(
+                                      height: 5,thickness: 1,color: kblue,
+                                    ),
+                                    SizedBox(height: 4),
+                                    Container(
+                                      height: 40,
+                                      decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
+
+
+                                      child: TextFormField(
+                                        decoration: InputDecoration(
+
+                                            filled: true,
+                                            fillColor: bgGrey,
+
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.white),
+                                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.white),
+                                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                                            ),
+                                            enabledBorder:OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.white),
+                                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                                            )
+
+                                        ),
+                                      ),
+                                    ),
+
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child
+                            : Text('Tags',style: TextStyle(fontSize: 18,color:kblue ),)),
+                        Divider(
+                          height: 5,thickness: 1,color: kblue,
+                        ),
+                        Container(
+                          height: 42,
+                          width: 400,
+
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                filled: true,
+                                fillColor: bgGrey,
+
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white)
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white)
+                                ),
+                                enabledBorder:OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white)
+                                )
+
+                            ),
+                          ),
+                        ),
+
+                        Align(alignment: Alignment.centerLeft,
+                            child: Text('Product category',style: TextStyle(fontSize: 18,color:kblue ),)),
+                        Divider(
+                          height: 5,thickness: 1,color: kblue,
+                        ),
+
+
+                           Align(
+                             alignment: Alignment.centerLeft,
+                             child: Container(
+                              height: 42,
+                              width: 400,
 
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     filled: true,
                                     fillColor: bgGrey,
+                                    hintText:"Product category heading " ,
 
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(color: Colors.white)
@@ -149,66 +356,48 @@ class _AddnwprdctState extends State<Addnwprdct> {
 
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('Upload a profile picture',style: TextStyle(color: kblue),),
-                    ],
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    child: Column(
-                      children: [
+                          )
 
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text('Product name',style: TextStyle(fontSize: 20,color:kblue ),)),
-                        Divider(
-                          height: 5,thickness: 1,color: kblue,
-                        ),
+                           ),
+
                         Container(
-                          height: 40,
+                          height: 42,
                           width: 400,
-
-                          decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
 
                           child: TextFormField(
                             decoration: InputDecoration(
-
                                 filled: true,
                                 fillColor: bgGrey,
 
                                 border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    borderSide: BorderSide(color: Colors.white)
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    borderSide: BorderSide(color: Colors.white)
                                 ),
                                 enabledBorder:OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    borderSide: BorderSide(color: Colors.white)
                                 )
 
                             ),
                           ),
                         ),
+
+
+
+
                       ],
                     ),
                   ),
-
-
                 ],
               ),
             ),
           ),
         ),
+
+
+
+
         bottomNavigationBar: Container(
 
           height: 100,
