@@ -19,6 +19,14 @@ class _DBcrud3State extends State<DBcrud4> {
   int yesvslue = 0;
   int novalue = 1;
 
+  String? selectedValue;
+  List<String> items = [
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+  ];
+
 
 
 
@@ -276,7 +284,8 @@ class _DBcrud3State extends State<DBcrud4> {
                                                                    ),
 
                                                                    ),
-                                                                 ),Text('Copy all attributes',style: TextStyle(fontSize: 28,color: Colors.grey),),
+                                                                 ),SizedBox(height: 20),
+                                                                   Text('Copy all attributes',style: TextStyle(fontSize: 28,color: Colors.grey),),
                                                                  ButtonBar(
                                                                  alignment: MainAxisAlignment.center,
                                                                  children: [
@@ -396,131 +405,137 @@ class _DBcrud3State extends State<DBcrud4> {
                                                       print('clickedf');
 
 
-                                                      Get.defaultDialog(
-                                                        title: '',
-
-                                                        content:   StatefulBuilder(
-                                                            builder: (context, setState1) {
-                                                              return Container(
-                                                                width: 400,
-                                                                height: 400,
-                                                                decoration: BoxDecoration(
-
-                                                                  color: Colors.white,
-
-
-
-                                                                ),
-                                                                child:Padding(
-                                                                  padding: const EdgeInsets.all(8.0),
-                                                                  child: Column(
-
-                                                                    children: [
-
-                                                                      Align(
-                                                                        alignment: Alignment.topRight,
-
-
-                                                                        child: CircleAvatar(
-                                                                          child: Icon(Icons.close),
-                                                                          backgroundColor: Kdblue,
-                                                                        ),
-
+                                                      showDialog(context: context, builder: (context){
+                                                      return    StatefulBuilder(
+                                                      builder: (context, setState1) {
+                                                      return AlertDialog(
+                                                      contentPadding : EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                                                      shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(50)
+                                                      ),
+                                                      content: SingleChildScrollView(
+                                                      child:Column(
+                                                                  children: [
+                                                                    Container(
+                                                                    width: 400,
+                                                                    height: 400,
+                                                                    decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                          width: 2,
+                                                                          color: kblue
                                                                       ),
-                                                                      Text('Rename Branch Name',style: TextStyle(fontSize: 30,color: kblue),
+                                                                        borderRadius: BorderRadius.circular(50)
+                                                                    ),
+                                                                    child:Padding(
+                                                                      padding: const EdgeInsets.all(8.0),
+                                                                      child: Column(
 
-                                                                      ),SizedBox(height:10),
-                                                                      TextFormField(
-                                                                        decoration: InputDecoration(
-                                                                            filled: true,
-                                                                            fillColor: bgGrey,
-                                                                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                                                                            hintText: 'Choose a Name',
-
-                                                                            hintStyle: TextStyle(
-                                                                                color: Colors.grey
-                                                                            ),
-                                                                            border: OutlineInputBorder(
-                                                                                borderSide: BorderSide(color: Colors.white)
-                                                                            ),
-                                                                            focusedBorder: OutlineInputBorder(
-                                                                                borderSide: BorderSide(color: Colors.white)
-                                                                            ),
-                                                                            enabledBorder:OutlineInputBorder(
-                                                                                borderSide: BorderSide(color: Colors.white)
-                                                                            )
-                                                                        ),
-
-                                                                      ),
-
-                                                                      SizedBox(height: 100),
-                                                                      Row(
-                                                                        mainAxisSize: MainAxisSize.min,
                                                                         children: [
-                                                                          ElevatedButton(onPressed: (){
 
-                                                                          },
-
-                                                                              style: ElevatedButton.styleFrom(
-                                                                                  elevation: 0,
-                                                                                  shape:RoundedRectangleBorder(
-                                                                                      borderRadius: BorderRadius.all(Radius.circular(10))
-                                                                                  ),
-                                                                                  side: BorderSide(width: 3.0, color: kblue ),
-                                                                                  primary: Colors.white,
-                                                                                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
-                                                                                  textStyle: TextStyle(
-                                                                                      fontSize: 30,
-                                                                                      fontWeight: FontWeight.bold)),
-                                                                              child: Center(child: Text('< Back',style: TextStyle(
-                                                                                  color: kblue,fontSize: 15
-                                                                              ),))),
-                                                                          SizedBox(width: 25,),
-                                                                          Container(
-                                                                            width: 110,
-                                                                            height: 41,
-                                                                            decoration: BoxDecoration(
-                                                                              gradient: LinearGradient(
-                                                                                colors: [
-                                                                                  Colors.blue.shade900,
-                                                                                  Colors.blue,
-                                                                                ],
-                                                                                begin: Alignment.topLeft,
-                                                                                end: Alignment.bottomRight,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.circular(10),
+                                                                          Align(
+                                                                            alignment: Alignment.topRight,
 
 
-                                                                            ),
-                                                                            child: Padding(
-                                                                              padding: const EdgeInsets.all(8.0),
-                                                                              child: Center(
-                                                                                child: Text('Duplicate',style: TextStyle(
-                                                                                    color: Colors.white,fontSize: 15
-                                                                                ),),
-                                                                              ),
+                                                                            child: CircleAvatar(
+                                                                              child: Icon(Icons.close),
+                                                                              backgroundColor: Kdblue,
                                                                             ),
 
                                                                           ),
+                                                                          Text('Rename Branch Name',style: TextStyle(fontSize: 30,color: kblue),
+
+                                                                          ),SizedBox(height:10),
+                                                                          TextFormField(
+                                                                            decoration: InputDecoration(
+                                                                                filled: true,
+                                                                                fillColor: bgGrey,
+                                                                                contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                                                                                hintText: 'Choose a Name',
+
+                                                                                hintStyle: TextStyle(
+                                                                                    color: Colors.grey
+                                                                                ),
+                                                                                border: OutlineInputBorder(
+                                                                                    borderSide: BorderSide(color: Colors.white)
+                                                                                ),
+                                                                                focusedBorder: OutlineInputBorder(
+                                                                                    borderSide: BorderSide(color: Colors.white)
+                                                                                ),
+                                                                                enabledBorder:OutlineInputBorder(
+                                                                                    borderSide: BorderSide(color: Colors.white)
+                                                                                )
+                                                                            ),
+
+                                                                          ),
+
+                                                                          SizedBox(height: 100),
+                                                                          Row(
+                                                                            mainAxisSize: MainAxisSize.min,
+                                                                            children: [
+                                                                              ElevatedButton(onPressed: (){
+
+                                                                              },
+
+                                                                                  style: ElevatedButton.styleFrom(
+                                                                                      elevation: 0,
+                                                                                      shape:RoundedRectangleBorder(
+                                                                                          borderRadius: BorderRadius.all(Radius.circular(10))
+                                                                                      ),
+                                                                                      side: BorderSide(width: 3.0, color: kblue ),
+                                                                                      primary: Colors.white,
+                                                                                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
+                                                                                      textStyle: TextStyle(
+                                                                                          fontSize: 30,
+                                                                                          fontWeight: FontWeight.bold)),
+                                                                                  child: Center(child: Text('< Back',style: TextStyle(
+                                                                                      color: kblue,fontSize: 15
+                                                                                  ),))),
+                                                                              SizedBox(width: 25,),
+                                                                              Container(
+                                                                                width: 110,
+                                                                                height: 41,
+                                                                                decoration: BoxDecoration(
+                                                                                  gradient: LinearGradient(
+                                                                                    colors: [
+                                                                                      Colors.blue.shade900,
+                                                                                      Colors.blue,
+                                                                                    ],
+                                                                                    begin: Alignment.topLeft,
+                                                                                    end: Alignment.bottomRight,
+                                                                                  ),
+                                                                                  borderRadius: BorderRadius.circular(10),
+
+
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.all(8.0),
+                                                                                  child: Center(
+                                                                                    child: Text('Duplicate',style: TextStyle(
+                                                                                        color: Colors.white,fontSize: 15
+                                                                                    ),),
+                                                                                  ),
+                                                                                ),
+
+                                                                              ),
+                                                                            ],
+                                                                          ),
+
+
+
                                                                         ],
                                                                       ),
 
+                                                                    ),
 
 
-                                                                    ],
-                                                                  ),
-
-                                                                ),
-
-                                                              );
-                                                            }
-                                                        ),
-
-
-
-
+                                                                    ),
+                                                                  ],
+                                                      ),
+                                                      ),
                                                       );
-
+                                                      }
+                                                      );
+                                                      });
                                                     },
                                                     child: Text('Rename',style: TextStyle(fontSize: 20,color: Colors.white),
                                                     ),
@@ -540,61 +555,89 @@ class _DBcrud3State extends State<DBcrud4> {
                                                     onTap: (){
                                                       print('clickedf');
 
-
-                                                      Get.defaultDialog(
-                                                        title: '',
-
-                                                        content:   StatefulBuilder(
-                                                            builder: (context, setState1) {
-                                                              return Container(
-                                                                width: 400,
-                                                                height: 400,
-                                                                decoration: BoxDecoration(
-
-                                                                  color: Colors.white,
-
-
-
-                                                                ),
-                                                                child:Padding(
-                                                                  padding: const EdgeInsets.all(8.0),
-                                                                  child: Column(
-
-                                                                    children: [
-
-                                                                      Align(
-                                                                        alignment: Alignment.topRight,
-
-
-                                                                        child: CircleAvatar(
-                                                                          child: Icon(Icons.close),
-                                                                          backgroundColor: Kdblue,
-                                                                        ),
-
-                                                                      ),
-                                                                      Image.asset('asset/dldim.png'),
-                                                                  Text('Your download starts in...',style: TextStyle(fontSize: 20,color: Colors.grey)),
-                                                                      Text('5s',style: TextStyle(fontSize: 25,color: kblue)),
-                                                                      SizedBox(height: 50,),
-                                                                      Text('Cancel',style: TextStyle(fontSize: 18,color: kblue,decoration: TextDecoration.underline,)),
-
-                                                                    ],
+                                                      showDialog(context: context, builder: (context){
+                                                      return    StatefulBuilder(
+                                                      builder: (context, setState1) {
+                                                      return AlertDialog(
+                                                      contentPadding : EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                                                      shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(50)
+                                                      ),
+                                                      content: SingleChildScrollView(
+                                                        child: Column(
+                                                          children: [
+                                                            Container(
+                                                              width: 400,
+                                                              height: 400,
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      width: 2,
+                                                                      color: kblue
                                                                   ),
+                                                                  borderRadius: BorderRadius.circular(50)
 
+
+                                                              ),
+                                                              child:Padding(
+                                                                padding:  EdgeInsets.only(top: 8.0),
+                                                                child: Column(
+
+                                                                  children: [
+
+                                                                    Align(
+                                                                      alignment: Alignment(1.0, 10.0)    ,
+
+
+                                                                      child: Padding(
+                                                                        padding: const EdgeInsets.all(10.0),
+                                                                        child: CircleAvatar(
+                                                                          child: Icon(Icons.close,),
+                                                                          backgroundColor: Kdblue,radius: 12,
+                                                                        ),
+                                                                      ),
+
+                                                                    ),
+
+                                                                    SizedBox(height:10),
+                                                                    Container(
+                                                                      width: 200,height: 50,
+
+                                                                    ),
+                                                                    SizedBox(height: 15),
+
+                                                                    Image.asset('asset/dldim.png'),
+                                                                    Text('Your download starts in...',style: TextStyle(fontSize: 22,color: Colors.grey),),
+                                                                    Text('5s',style: TextStyle(fontSize: 22,color: kblue),),
+                                                                    SizedBox(height: 10),
+                                                                    Text('Cancel',style: TextStyle(fontSize: 22,color: kblue),),
+
+
+
+                                                                    SizedBox(height: 25),
+                                                                    Row(
+                                                                      mainAxisSize: MainAxisSize.min,
+
+                                                                    ),
+
+
+
+                                                                  ],
                                                                 ),
 
-                                                              );
-                                                            }
+                                                              ),
+
+                                                            ),
+                                                          ],
                                                         ),
 
-
-
-
+                                                      ),
                                                       );
 
+                                                      }
+                                                      );
+                                                      });
                                                     },
-                                                    child: Text('Download',style: TextStyle(fontSize: 20,color: Colors.white),
-                                                    ),
+                                                    child: Text('Download',style: TextStyle(fontSize: 20,color: Colors.white),),
                                                   )
                                                 ],
                                               ),
@@ -713,7 +756,124 @@ class _DBcrud3State extends State<DBcrud4> {
                                                 children: [
                                                   Image.asset('asset/actionf.png'),
                                                   SizedBox(width: 10),
-                                                  Text('Delete',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      print('clickedf');
+
+                                                      showDialog(context: context, builder: (context){
+                                                        return    StatefulBuilder(
+                                                            builder: (context, setState1) {
+                                                              return AlertDialog(
+                                                                contentPadding : EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(50)
+                                                                ),
+                                                                content: SingleChildScrollView(
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Container(
+                                                                        width: 400,
+                                                                        height: 400,
+                                                                        decoration: BoxDecoration(
+                                                                            border: Border.all(
+                                                                                width: 2,
+                                                                                color: kblue
+                                                                            ),
+                                                                            borderRadius: BorderRadius.circular(50)
+
+
+                                                                        ),
+                                                                        child:Padding(
+                                                                          padding:  EdgeInsets.only(top: 8.0),
+                                                                          child: Column(
+
+                                                                            children: [
+
+                                                                              Align(
+                                                                                alignment: Alignment(1.0, 10.0)    ,
+
+
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.all(10.0),
+                                                                                  child: CircleAvatar(
+                                                                                    child: Icon(Icons.close,),
+                                                                                    backgroundColor: Kdblue,radius: 12,
+                                                                                  ),
+                                                                                ),
+
+                                                                                 ),
+
+                                                                              SizedBox(height:5),
+                                                                              Image.asset('asset/exclamatory.png'),
+                                                                              Text('Deleting Branch',style: TextStyle(fontSize: 30,color: kblue),),
+                                                                              Text('Lorem ipsum dolor sit amet',style: TextStyle(fontSize: 12,color: Colors.grey),),
+                                                                              SizedBox(height:15),
+                                                                              Text('Backup Branch?',style: TextStyle(fontSize: 22,color: kblue),),
+                                                                              Text('       Click here to create\n a backup for your branch!',style: TextStyle(fontSize: 15,color: kyellow),),
+                                                                              SizedBox(height: 10),
+                                                                              Row(
+                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                children: [
+                                                                                  ElevatedButton(onPressed: (){
+
+                                                                                  },
+
+                                                                                      style: ElevatedButton.styleFrom(
+                                                                                          elevation: 0,
+                                                                                          shape:RoundedRectangleBorder(
+                                                                                              borderRadius: BorderRadius.all(Radius.circular(10))
+                                                                                          ),
+                                                                                          side: BorderSide(width: 3.0, color: kblue ),
+                                                                                          primary: Colors.white,
+                                                                                          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
+                                                                                          textStyle: TextStyle(
+                                                                                              fontSize: 30,
+                                                                                              fontWeight: FontWeight.bold)),
+                                                                                      child: Center(child: Text('< Back',style: TextStyle(
+                                                                                          color: kblue,fontSize: 15
+                                                                                      ),))),
+                                                                                  SizedBox(width: 25,),
+                                                                                  Container(
+                                                                                    width: 110,
+                                                                                    height: 41,
+                                                                                    decoration: BoxDecoration(
+                                                                                       color: reddy,
+                                                                                      borderRadius: BorderRadius.circular(10),
+
+
+                                                                                    ),
+                                                                                    child: Padding(
+                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                      child: Center(
+                                                                                        child: Text('Duplicate',style: TextStyle(
+                                                                                            color: Colors.white,fontSize: 15
+                                                                                        ),),
+                                                                                      ),
+                                                                                    ),
+
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+
+                                                                            ],
+                                                                          ),
+
+                                                                        ),
+
+                                                                      ),
+                                                                    ],
+                                                                  ),
+
+                                                                ),
+                                                              );
+
+                                                            }
+                                                        );
+
+                                                      });
+                                                    },
+                                                    child: Text('Delete',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                    ),
                                                   )
                                                 ],
                                               ),
@@ -726,13 +886,237 @@ class _DBcrud3State extends State<DBcrud4> {
                                               ),
                                             ),PopupMenuItem<int>(
                                               value: 7,
-                                              child: Row(
-                                                children: [
-                                                  Image.asset('asset/actionh.png'),
-                                                  SizedBox(width: 10),
-                                                  Text('Invite Users',style: TextStyle(fontSize: 20,color: Colors.white),
-                                                  )
-                                                ],
+                                              child: InkWell(
+                                                onTap: (){
+                                                  print('clickedf');
+
+
+                                                  showDialog(context: context, builder: (context){
+                                                    return    StatefulBuilder(
+                                                        builder: (context, setState1) {
+                                                          return AlertDialog(
+                                                            contentPadding : EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.circular(50)
+                                                            ),
+                                                            content: SingleChildScrollView(
+                                                              child:Column(
+                                                                children: [
+                                                                  Container(
+                                                                    width: 500,
+                                                                    height: 500,
+                                                                    decoration: BoxDecoration(
+                                                                        border: Border.all(
+                                                                            width: 2,
+                                                                            color: kblue
+                                                                        ),
+                                                                        borderRadius: BorderRadius.circular(50)
+                                                                    ),
+                                                                    child:Padding(
+                                                                      padding: const EdgeInsets.all(8.0),
+                                                                      child: Center(
+                                                                        child: Column(
+
+                                                                          children: [
+
+                                                                            Align(
+                                                                              alignment: Alignment.topRight,
+
+
+                                                                              child: CircleAvatar(
+                                                                                child: Icon(Icons.close),
+                                                                                backgroundColor: Kdblue,
+                                                                              ),
+
+                                                                            ),
+                                                                            Text('Invite Users',style: TextStyle(fontSize: 30,color: kblue),
+
+                                                                            ),SizedBox(height:10),
+                                                                            TextFormField(
+                                                                              decoration: InputDecoration(
+                                                                                  filled: true,
+                                                                                  fillColor: bgGrey,
+                                                                                  contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                                                                                  hintText: 'Enter Name',
+
+                                                                                  hintStyle: TextStyle(
+                                                                                      color: Colors.grey
+                                                                                  ),
+                                                                                  border: OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  ),
+                                                                                  focusedBorder: OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  ),
+                                                                                  enabledBorder:OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  )
+                                                                              ),
+
+                                                                            ),
+                                                                            TextFormField(
+                                                                              decoration: InputDecoration(
+                                                                                  filled: true,
+                                                                                  fillColor: bgGrey,
+                                                                                  contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                                                                                  hintText: 'Enter E-mail',
+
+                                                                                  hintStyle: TextStyle(
+                                                                                      color: Colors.grey
+                                                                                  ),
+                                                                                  border: OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  ),
+                                                                                  focusedBorder: OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  ),
+                                                                                  enabledBorder:OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  )
+                                                                              ),
+
+                                                                            ),
+                                                                            TextFormField(
+                                                                              decoration: InputDecoration(
+                                                                                  filled: true,
+                                                                                  fillColor: bgGrey,
+                                                                                  contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                                                                                  hintText: 'Determine Role',
+
+                                                                                  hintStyle: TextStyle(
+                                                                                      color: Colors.grey
+                                                                                  ),
+                                                                                  border: OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  ),
+                                                                                  focusedBorder: OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  ),
+                                                                                  enabledBorder:OutlineInputBorder(
+                                                                                      borderSide: BorderSide(color: Colors.white)
+                                                                                  )
+                                                                              ),
+
+                                                                            ), DropdownButtonHideUnderline(
+                                                                              child: DropdownButton(
+                                                                                hint: Text(
+                                                                                  'Select Item',
+                                                                                  style: TextStyle(
+                                                                                    fontSize: 14,
+                                                                                    color: Theme
+                                                                                        .of(context)
+                                                                                        .hintColor,
+                                                                                  ),
+                                                                                ),
+                                                                                items: items
+                                                                                    .map((item) =>
+                                                                                    DropdownMenuItem<String>(
+                                                                                      value: item,
+                                                                                      child: Text(
+                                                                                        item,
+                                                                                        style: const TextStyle(
+                                                                                          fontSize: 14,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ))
+                                                                                    .toList(),
+                                                                                value: selectedValue,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    selectedValue = value as String;
+                                                                                  });
+                                                                                },
+
+                                                                              ),
+                                                                            ),
+
+                                                                            SizedBox(width: 50),
+                                                                            Row(
+                                                                              children: [
+                                                                                Image.asset('asset/pluss.png'),
+                                                                                Text('Add more users',style: TextStyle(fontSize: 15,color: kblue),),
+                                                                              ],
+                                                                            ),
+
+
+                                                                            SizedBox(height: 20),
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.min,
+                                                                              children: [
+                                                                                ElevatedButton(onPressed: (){
+
+                                                                                },
+
+                                                                                    style: ElevatedButton.styleFrom(
+                                                                                        elevation: 0,
+                                                                                        shape:RoundedRectangleBorder(
+                                                                                            borderRadius: BorderRadius.all(Radius.circular(10))
+                                                                                        ),
+                                                                                        side: BorderSide(width: 3.0, color: kblue ),
+                                                                                        primary: Colors.white,
+                                                                                        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
+                                                                                        textStyle: TextStyle(
+                                                                                            fontSize: 30,
+                                                                                            fontWeight: FontWeight.bold)),
+                                                                                    child: Center(child: Text('< Back',style: TextStyle(
+                                                                                        color: kblue,fontSize: 15
+                                                                                    ),))),
+                                                                                SizedBox(width: 25,),
+                                                                                Container(
+                                                                                  width: 110,
+                                                                                  height: 41,
+                                                                                  decoration: BoxDecoration(
+                                                                                    gradient: LinearGradient(
+                                                                                      colors: [
+                                                                                        Colors.blue.shade900,
+                                                                                        Colors.blue,
+                                                                                      ],
+                                                                                      begin: Alignment.topLeft,
+                                                                                      end: Alignment.bottomRight,
+                                                                                    ),
+                                                                                    borderRadius: BorderRadius.circular(10),
+
+
+                                                                                  ),
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsets.all(8.0),
+                                                                                    child: Center(
+                                                                                      child: Text('Duplicate',style: TextStyle(
+                                                                                          color: Colors.white,fontSize: 15
+                                                                                      ),),
+                                                                                    ),
+                                                                                  ),
+
+                                                                                ),
+                                                                              ],
+                                                                            ),
+
+
+
+                                                                          ],
+                                                                        ),
+                                                                      ),
+
+                                                                    ),
+
+
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
+                                                    );
+                                                  });
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Image.asset('asset/actionh.png'),
+                                                    SizedBox(width: 10),
+                                                    Text('Invite Users',style: TextStyle(fontSize: 20,color: Colors.white),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
 
                                             ), PopupMenuItem<int>(
