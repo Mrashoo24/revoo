@@ -13,6 +13,22 @@ class Addnwprdct extends StatefulWidget {
 }
 
 class _AddnwprdctState extends State<Addnwprdct> {
+
+
+
+
+
+  String initialValue = 'Product category';
+
+  var itemList = [
+    'Product category',
+    'product category1',
+    'product category2',
+    'product category3',
+    'product category4',
+
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,7 +51,7 @@ class _AddnwprdctState extends State<Addnwprdct> {
                           child: Image.asset('asset/navicon.png',)),
                       Row(
                         children: [
-                          SizedBox(width: 110),
+                          SizedBox(width: 140),
                           Image.asset('asset/bellicon.png'),
                           SizedBox(width: 20),
                           Image.asset('asset/settingsicon.png'),
@@ -56,7 +72,7 @@ class _AddnwprdctState extends State<Addnwprdct> {
                   Row(
                     children: [
                       Container(
-                        width: 175,
+                        width: 150,
                         height: 36,
                         decoration: BoxDecoration(
                           color: Kdblue,
@@ -68,7 +84,7 @@ class _AddnwprdctState extends State<Addnwprdct> {
                               Text('Purchased :',style: TextStyle(color: Colors.white,fontSize: 15),),
                               SizedBox(width: 10,),
                               Container(
-                                width: 65,
+                                width: 50,
                                 height: 22,
                                 decoration: BoxDecoration(color: bgGrey),
                                 child: Center(child: Text("24",style: TextStyle(color: kyellow,fontSize:15),)),
@@ -78,20 +94,20 @@ class _AddnwprdctState extends State<Addnwprdct> {
                           ),
                         ),
 
-                      ),SizedBox(width: 19,),
+                      ),SizedBox(width: 20,),
                       Container(
-                        width: 160,
+                        width: 140,
                         height: 36,
                         margin: EdgeInsets.all(8),
                         decoration: BoxDecoration(border: Border.all(
                             color: Kdblue,width: 2
                         )),
                         child: Padding(
-                          padding:   EdgeInsets.only(left: 32),
+                          padding:   EdgeInsets.only(left: 16),
                           child: Row(
                             children: [
                               Text('Print Label',style: TextStyle(fontSize: 17,color: kblue),),
-                              SizedBox(width: 10,),
+                              SizedBox(width: 9,),
                               Image.asset('asset/dropdwn.png'),
 
                             ],
@@ -118,7 +134,7 @@ class _AddnwprdctState extends State<Addnwprdct> {
                         ),
 
 
-                      ),SizedBox(width: 20),
+                      ),SizedBox(width: 25),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +146,7 @@ class _AddnwprdctState extends State<Addnwprdct> {
                           ),
                           Container(
                             height: 40,
-                            width: 190,
+                            width: 150,
 
                             child: TextFormField(
                               decoration: InputDecoration(
@@ -284,20 +300,17 @@ class _AddnwprdctState extends State<Addnwprdct> {
                                         ),
                                       ),
                                     ),
-
-
-
-
                                   ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-
+                        SizedBox(height: 1),
                         Align(
                             alignment: Alignment.centerLeft,
                             child
+
                             : Text('Tags',style: TextStyle(fontSize: 18,color:kblue ),)),
                         Divider(
                           height: 5,thickness: 1,color: kblue,
@@ -327,64 +340,81 @@ class _AddnwprdctState extends State<Addnwprdct> {
 
                         Align(alignment: Alignment.centerLeft,
                             child: Text('Product category',style: TextStyle(fontSize: 18,color:kblue ),)),
-                        Divider(
-                          height: 5,thickness: 1,color: kblue,
-                        ),
-
-
-                           Align(
-                             alignment: Alignment.centerLeft,
-                             child: Container(
-                              height: 42,
-                              width: 400,
-
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: bgGrey,
-                                    hintText:"Product category heading " ,
-
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white)
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white)
-                                    ),
-                                    enabledBorder:OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white)
-                                    )
-
-                                ),
-                              ),
-                          )
-
-                           ),
 
                         Container(
-                          height: 42,
-                          width: 400,
 
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: bgGrey,
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,borderRadius: new BorderRadius.circular(10.0),
+                          ),
+                          margin: EdgeInsets.symmetric(horizontal: 3),
+                          child: DropdownButton(
+                            isExpanded: true,
+                            iconEnabledColor: Colors.blue ,
+                            style: TextStyle(color: Colors.grey, fontSize: 18),
+                            dropdownColor: Colors.grey.shade200,
+                            focusColor: Colors.black,
+                            value: initialValue,
+                            icon: Icon(Icons.keyboard_arrow_down,color: kblue,),
+                            items: itemList.map((String items) {
+                              return DropdownMenuItem(value: items, child: Text(items));
+                            }).toList(), onChanged: (String? value) {  },
 
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                enabledBorder:OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                )
-
-                            ),
                           ),
                         ),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            InkWell(
+                              child: ElevatedButton(onPressed: (){
+
+                              },
+
+                                  style: ElevatedButton.styleFrom(
+                                      elevation: 0,
+                                      shape:RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(10))
+                                      ),
+                                      side: BorderSide(width: 3.0, color: kblue ),
+                                      primary: Colors.white,
+                                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
+                                      textStyle: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold)),
+                                  child: Center(child: Text('< Back',style: TextStyle(
+                                      color: kblue,fontSize: 15
+                                  ),))),
+                            ),
+                            SizedBox(width: 25,),
+                            Container(
+                              width: 110,
+                              height: 41,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.blue.shade900,
+                                    Colors.blue,
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
 
 
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text('Duplicate',style: TextStyle(
+                                      color: Colors.white,fontSize: 15
+                                  ),),
+                                ),
+                              ),
 
+                            ),
+                          ],
+                        ),
 
                       ],
                     ),
@@ -394,10 +424,6 @@ class _AddnwprdctState extends State<Addnwprdct> {
             ),
           ),
         ),
-
-
-
-
         bottomNavigationBar: Container(
 
           height: 100,
