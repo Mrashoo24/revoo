@@ -13,7 +13,7 @@ import '../projectDashboard.dart';
 
 
 
-class userProjectProfile extends StatefulWidget {
+class AllProjects extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -21,8 +21,8 @@ class userProjectProfile extends StatefulWidget {
   }
 }
 
-//GlobalKey<ScaffoldState> homekey = GlobalKey<ScaffoldState>();
-class userprofile extends State<userProjectProfile> {
+GlobalKey<ScaffoldState> homekey = GlobalKey<ScaffoldState>();
+class userprofile extends State<AllProjects> {
   final String emplyeeName = "Employee Name";
   final String designationOfEmp = "Designation";
   int _index = 0;
@@ -33,9 +33,9 @@ class userprofile extends State<userProjectProfile> {
     // TODO: implement build
     return SafeArea(
       child: Scaffold(
-        //key: homekey,
-          appBar: _buildappBar(),
-          //drawer: ProjectHomePage(key: scafkey,),
+        key: homekey,
+
+          drawer: ProjectHomePage(),
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Container(
@@ -248,25 +248,6 @@ class userprofile extends State<userProjectProfile> {
 
 }
 
-AppBar _buildappBar() {
-  return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      actions: [
-        IconButton(onPressed: () {}, icon: Image.asset('asset/bellicon.png')),
-        IconButton(onPressed: () {}, icon: Image.asset('asset/gareicon.png')),
-        IconButton(
-            onPressed: () {}, icon: Image.asset('asset/userprofileicon.png')),
-      ],
-      leading: IconButton(
-          onPressed: () {
-           // Get.to( ProjectHomePage(key: scafkey,));
-            },
-          icon: Icon(
-            FontAwesomeIcons.bars,
-            color: Colors.black,
-          )));
-}
 
 Widget _bottomNevigationBar() {
   return Container(

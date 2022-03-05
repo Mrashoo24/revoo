@@ -7,12 +7,12 @@ import 'package:revoo/constants/constants.dart';
 
 import '../projectDashboard.dart';
 
-class allTasks extends StatefulWidget {
+class AllTasks extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _showTasks();
 }
 
-class _showTasks extends State<allTasks> {
+class _showTasks extends State<AllTasks> {
   bool value = false;
 
   @override

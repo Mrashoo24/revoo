@@ -5,6 +5,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:revoo/constants/constants.dart';
 
 class projectNameinprofile extends StatelessWidget {
+
   final String name;
   final String unselectedimg = 'asset/rectangleforprofileunselected.png';
   final String selectedimage = 'asset/rectangleforprofileseleccted.png';

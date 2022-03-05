@@ -11,6 +11,7 @@ import 'ModuleSprintScreen/modulesSprintsPage.dart';
 import 'Tasks/TasksScreen.dart';
 import 'Teams/ProjectsTeamList.dart';
 import 'Widgets/popupsPM.dart';
+import 'Widgets/projectNameinprofile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
       //home: Messages(),
      // home: chattingPage(),
       //home: allTasks(),
-      home: PopUpsPM(),
+      home: ProjectHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

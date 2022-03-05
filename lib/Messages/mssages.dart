@@ -15,6 +15,8 @@ import '../../constants/constants.dart';
 
 
 class Messages extends StatefulWidget {
+  const Messages({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
