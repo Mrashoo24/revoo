@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/Employee/dailyupdates.dart';
 import 'package:revoo/Employee/employeedash1stpg.dart';
 
 import '../constants/constants.dart';
@@ -19,7 +20,9 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
 
   var homepages = [
     EmployeeDashboard1stpg(), //0
-    Container(), //1
+    Dailyupdates(), //1
+
+
   ];
 
 
