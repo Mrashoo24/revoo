@@ -13,7 +13,7 @@ import 'package:revoo/piechart.dart';
 
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
-import 'Employee/timepass.dart';
+
 import 'Employee/watchdashboard.dart';
 import 'HRMS_admin_Screen/adbranchpg2.dart';
 import 'HRMS_admin_Screen/adbranchpg1.dart';
@@ -54,11 +54,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:DBcrud4
-
-
-
-        (),
+      home:Addnwprdct(),
       debugShowCheckedModeBanner: false,
     );
   }
