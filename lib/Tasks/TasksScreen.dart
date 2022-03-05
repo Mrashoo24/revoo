@@ -19,26 +19,6 @@ class _showTasks extends State<AllTasks> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: _buildappBar(),
-      bottomNavigationBar: _bottomNevigationBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          onPressed: () {},
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              ImageIcon(
-                AssetImage('asset/addiconforbnb.png'),
-                size: 100,
-              ),
-              ImageIcon(
-                AssetImage('asset/addsymbolforbnb.png'),
-                color: Color(0xff1B57A7),
-              ),
-            ],
-          )),
       body: Container(
         height: Get.height,
         width: Get.width,

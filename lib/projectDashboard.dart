@@ -38,33 +38,35 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          actions: [
-            IconButton(onPressed: () {}, icon: Image.asset('asset/bellicon.png')),
-            IconButton(onPressed: () {}, icon: Image.asset('asset/gareicon.png')),
-            IconButton(
-                onPressed: () {}, icon: Image.asset('asset/userprofileicon.png')),
-          ],
-          leading: IconButton(
-              onPressed: () {
-                // Get.to( ProjectHomePage(key: scafkey,));
-              },
-              icon: Icon(
-                FontAwesomeIcons.bars,
-                color: Colors.black,
-              ))),
-      drawer:   navBar(),
-      body: homepages[selectedindex],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            actions: [
+              IconButton(onPressed: () {}, icon: Image.asset('asset/bellicon.png')),
+              IconButton(onPressed: () {}, icon: Image.asset('asset/gareicon.png')),
+              IconButton(
+                  onPressed: () {}, icon: Image.asset('asset/userprofileicon.png')),
+            ],
+            leading: IconButton(
+                onPressed: () {
+                  // Get.to( ProjectHomePage(key: scafkey,));
+                },
+                icon: Icon(
+                  FontAwesomeIcons.bars,
+                  color: Colors.black,
+                ))),
+        drawer:   navBar(),
+        body: homepages[selectedindex],
+      ),
     );
 
 
       // body: homepages[selectedindex],;
   }
 
-  Card navBar() {
+   navBar() {
     return Card(
       color: Colors.grey.shade200,
       shape: Border(
@@ -72,122 +74,122 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 30.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    backgroundImage: AssetImage('asset/EllipseforuserTeams.png'),
-                    radius: 30,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Container(
-                                child: Text('Name of the person',
-                                    style: TextStyle(
-                                        fontSize: 20, color: kblue),
+        child: Container(
+          height: Get.height,
+          width: 300,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      backgroundImage: AssetImage('asset/EllipseforuserTeams.png'),
+                      radius: 30,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                  child: Text('Name of the person',
+                                      style: TextStyle(
+                                          fontSize: 20, color: kblue),
+                                      textAlign: TextAlign.left)),
+                            ),
+                            Container(
+                                child: Text('Role/Designation',
+                                    style:
+                                    TextStyle(fontSize: 18, color: kblue),
                                     textAlign: TextAlign.left)),
-                          ),
-                          Container(
-                              child: Text('Role/Designation',
-                                  style:
-                                  TextStyle(fontSize: 18, color: kblue),
-                                  textAlign: TextAlign.left)),
-                          InkWell(
-                            onTap: () {},
-                            child: Container(
-                              child: Row(
-                                children: [
-                                  Container(
-                                      child: Text(
-                                        'Veiw Profile',
-                                        style: TextStyle(
-                                            fontSize: 15, color: kyellow),
-                                      )),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Image.asset('asset/rightarrow.png')
-                                ],
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                        child: Text(
+                                          'Veiw Profile',
+                                          style: TextStyle(
+                                              fontSize: 15, color: kyellow),
+                                        )),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Image.asset('asset/rightarrow.png')
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              buildNavCard('asset/homeDrawer.png', 'Home',0),
-              SizedBox(
-                height: 5,
-              ),
-              Divider(
-                height: 0,
-                thickness: 2,
-                endIndent: 50,
-                indent: 25,
-              ),
-              buildNavCard('asset/checkgrp.png', 'YourTeam',1),
-              SizedBox(
-                height: 5,
-              ),
-              Divider(
-                height: 0,
-                thickness: 2,
-                endIndent: 50,
-                indent: 25,
-              ),
-              buildNavCard('asset/checkpad.png', 'Project',2),
-              SizedBox(
-                height: 5,
-              ),
-              Divider(
-                height: 0,
-                thickness: 2,
-                endIndent: 50,
-                indent: 25,
-              ),
-              buildNavCard('asset/lvapproval.png', 'Tasks',3),
-              SizedBox(
-                height: 5,
-              ),
-              Divider(
-                height: 0,
-                thickness: 2,
-                endIndent: 50,
-                indent: 25,
-              ),
-              buildNavCard('asset/modulesprinIcon.png', 'Modules',4),
-              SizedBox(
-                height: 5,
-              ),
-              Divider(
-                height: 0,
-                thickness: 2,
-                endIndent: 50,
-                indent: 25,
-              ),
-              buildNavCard('asset/MessagePrvIconDrawer.png', 'Messages',5),
-            ],
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                buildNavCard('asset/homeDrawer.png', 'Home',0),
+                SizedBox(
+                  height: 5,
+                ),
+                Divider(
+                  height: 0,
+                  thickness: 2,
+                  endIndent: 50,
+                  indent: 25,
+                ),
+                buildNavCard('asset/checkgrp.png', 'YourTeam',1),
+                SizedBox(
+                  height: 5,
+                ),
+                Divider(
+                  height: 0,
+                  thickness: 2,
+                  endIndent: 50,
+                  indent: 25,
+                ),
+                Divider(
+                  height: 0,
+                  thickness: 2,
+                  endIndent: 50,
+                  indent: 25,
+                ),
+                buildNavCard('asset/lvapproval.png', 'Tasks',3),
+                SizedBox(
+                  height: 5,
+                ),
+                Divider(
+                  height: 0,
+                  thickness: 2,
+                  endIndent: 50,
+                  indent: 25,
+                ),
+                buildNavCard('asset/modulesprinIcon.png', 'Modules',4),
+                SizedBox(
+                  height: 5,
+                ),
+                Divider(
+                  height: 0,
+                  thickness: 2,
+                  endIndent: 50,
+                  indent: 25,
+                ),
+                buildNavCard('asset/MessagePrvIconDrawer.png', 'Messages',5),
+              ],
+            ),
           ),
         ),
       ),
@@ -201,6 +203,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
           selectedCard = name;
           selectedindex = pageIndex;
         });
+        Get.back();
       },
       child: Card(
         color: selectedCard == name ? Colors.white : bgGrey,

@@ -33,10 +33,6 @@ class _moduleState extends State<ModulesSprintsPage> {
     // TODO: implement build
     return SafeArea(
       child: Scaffold(
-        //key: homekey,
-          appBar: _buildappBar(),
-          //drawer: ProjectHomePage(key: scafkey,),
-          backgroundColor: Colors.white,
           body: SingleChildScrollView(
               child: Container(
                 width: Get.width,

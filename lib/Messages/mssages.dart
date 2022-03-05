@@ -37,11 +37,6 @@ class _PrivateMessages extends State<Messages> {
     // TODO: implement build
     return SafeArea(
       child: Scaffold(
-        //key: homekey,
-          appBar: _buildappBar(),
-          //drawer: ProjectHomePage(key: scafkey,),
-          backgroundColor: Colors.white,
-          drawer: Drawer(child: ProjectHomePage(),),
           body: SingleChildScrollView(
               child: Container(
                 width: Get.width,

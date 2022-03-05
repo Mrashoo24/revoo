@@ -18,28 +18,6 @@ class _TeamList extends State<ProjectTeamsList> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.white,
-            drawer: ProjectTeamsList(),
-            bottomNavigationBar: _bottomNevigationBar(),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: FloatingActionButton(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                onPressed: () {},
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    ImageIcon(
-                      AssetImage('asset/addiconforbnb.png'),
-                      size: 100,
-                    ),
-                    ImageIcon(
-                      AssetImage('asset/addsymbolforbnb.png'),
-                      color: Color(0xff1B57A7),
-                    ),
-                  ],
-                )),
-            appBar: _buildappBar(),
             body: Container(
               width: Get.width,
               height: Get.height,
@@ -49,7 +27,7 @@ class _TeamList extends State<ProjectTeamsList> {
                 scrollDirection: Axis.vertical,
                 children: [
                   Text(
-                    'Project Name',
+                    'Revoo',
                     style: TextStyle(
                       fontSize: 22,
                       color: kblue,
