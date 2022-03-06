@@ -35,11 +35,12 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
 
   ];
 
-
+  GlobalKey<ScaffoldState> homekey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: homekey,
         appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
@@ -51,7 +52,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
             ],
             leading: IconButton(
                 onPressed: () {
-                  // Get.to( ProjectHomePage(key: scafkey,));
+                  homekey.currentState!.openDrawer();
                 },
                 icon: Icon(
                   FontAwesomeIcons.bars,
@@ -59,6 +60,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
                 ))),
         drawer:   navBar(),
         body: homepages[selectedindex],
+        bottomNavigationBar: _bottomNevigationBar(),
       ),
     );
 
@@ -167,7 +169,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
                   endIndent: 50,
                   indent: 25,
                 ),
-                buildNavCard('asset/lvapproval.png', 'Tasks',3),
+                buildNavCard('asset/lvapproval.png', 'Tasks',2),
                 SizedBox(
                   height: 5,
                 ),
@@ -177,7 +179,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
                   endIndent: 50,
                   indent: 25,
                 ),
-                buildNavCard('asset/modulesprinIcon.png', 'Modules',4),
+                buildNavCard('asset/modulesprinIcon.png', 'Modules',3),
                 SizedBox(
                   height: 5,
                 ),
@@ -187,7 +189,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
                   endIndent: 50,
                   indent: 25,
                 ),
-                buildNavCard('asset/MessagePrvIconDrawer.png', 'Messages',5),
+                buildNavCard('asset/MessagePrvIconDrawer.png', 'Messages',4),
               ],
             ),
           ),
@@ -236,5 +238,56 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
         ),
       ),
     );
+  }
+
+  Widget _bottomNevigationBar() {
+    return Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('asset/Rectangleforbnb.png'),
+              fit: BoxFit.fitWidth,
+            )),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(100),
+            topRight: Radius.circular(100),
+          ),
+          child: BottomNavigationBar(
+              elevation: 0,
+              backgroundColor: Color(0xff1B57A7),
+              type: BottomNavigationBarType.fixed,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              items: [
+                BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage('asset/twopeopleicon.png'),
+                    color: Colors.white,
+                  ),
+                  label: 'share',
+                ),
+                BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage('asset/homeicon.png'),
+                    color: Colors.white,
+                  ),
+                  label: 'home',
+                ),
+                BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage('asset/userprofileicon.png'),
+                    color: Colors.white,
+                  ),
+                  label: 'home',
+                ),
+                BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage('asset/mssage.png'),
+                    color: Colors.white,
+                  ),
+                  label: 'home',
+                ),
+              ]),
+        ));
   }
 }

@@ -21,7 +21,7 @@ class AllProjects extends StatefulWidget {
   }
 }
 
-GlobalKey<ScaffoldState> homekey = GlobalKey<ScaffoldState>();
+
 class userprofile extends State<AllProjects> {
   final String emplyeeName = "Employee Name";
   final String designationOfEmp = "Designation";
@@ -33,9 +33,7 @@ class userprofile extends State<AllProjects> {
     // TODO: implement build
     return SafeArea(
       child: Scaffold(
-        key: homekey,
 
-          drawer: ProjectHomePage(),
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Container(
@@ -168,28 +166,7 @@ class userprofile extends State<AllProjects> {
               ),
             )
           ),
-          bottomNavigationBar: _bottomNevigationBar(),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: FloatingActionButton(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            onPressed: () {},
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-
-                ImageIcon(
-                  AssetImage('asset/addiconforbnb.png'),
-                  size: 1000,
-                ),
-                ImageIcon(
-                  AssetImage('asset/addsymbolforbnb.png'),
-                  color: Color(0xff1B57A7),
-                ),
-              ],
-            )
-          )),
+        ),
     );
   }
   bool expandName = false;
@@ -249,56 +226,7 @@ class userprofile extends State<AllProjects> {
 }
 
 
-Widget _bottomNevigationBar() {
-  return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage('asset/Rectangleforbnb.png'),
-        fit: BoxFit.fitWidth,
-      )),
-      child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(100),
-          topRight: Radius.circular(100),
-        ),
-        child: BottomNavigationBar(
-            elevation: 0,
-            backgroundColor: Color(0xff1B57A7),
-            type: BottomNavigationBarType.fixed,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            items: [
-              BottomNavigationBarItem(
-                icon: ImageIcon(
-                  AssetImage('asset/twopeopleicon.png'),
-                  color: Colors.white,
-                ),
-                label: 'share',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(
-                  AssetImage('asset/homeicon.png'),
-                  color: Colors.white,
-                ),
-                label: 'home',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(
-                  AssetImage('asset/userprofileicon.png'),
-                  color: Colors.white,
-                ),
-                label: 'home',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(
-                  AssetImage('asset/mssage.png'),
-                  color: Colors.white,
-                ),
-                label: 'home',
-              ),
-            ]),
-      ));
-}
+
 //
 // class Contents {
 //   final Widget entry;

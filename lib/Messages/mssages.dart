@@ -169,29 +169,7 @@ class _PrivateMessages extends State<Messages> {
                   ],
                 ),
               )
-          ),
-          bottomNavigationBar: _bottomNevigationBar(),
-          floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: FloatingActionButton(
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              onPressed: () {},
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-
-                  ImageIcon(
-                    AssetImage('asset/addiconforbnb.png'),
-                    size: 1000,
-                  ),
-                  ImageIcon(
-                    AssetImage('asset/addsymbolforbnb.png'),
-                    color: Color(0xff1B57A7),
-                  ),
-                ],
-              )
-          )),
+          ),),
     );
   }
   bool expandName = false;
