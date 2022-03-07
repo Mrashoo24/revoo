@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:revoo/HRMS_admin_Screen/adbranchpg2.dart';
 
 import '../constants/constants.dart';
 
@@ -27,33 +28,6 @@ class _DBcrudState extends State<DBcrud1> {
           child: Column(
 
                children: [
-                 Align(
-                   alignment: Alignment.topCenter,
-                   child: Padding(
-                     padding: const EdgeInsets.all(20.0),
-                     child: Row(
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: [
-                         InkWell(
-                             onTap: (){
-                              print('clicked');
-                             },
-                             child: Image.asset('asset/navicon.png',)),
-                         Row(
-                           children: [
-                             SizedBox(width: 110),
-                             Image.asset('asset/bellicon.png'),
-                             SizedBox(width: 20),
-                             Image.asset('asset/settingsicon.png'),
-                             SizedBox(width: 20),
-                             Image.asset('asset/usericon.png'),
-                           ],
-                         ),
-
-                       ],
-                     ),
-                   ),
-                 ),
                  Column(
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: [
@@ -74,20 +48,21 @@ class _DBcrudState extends State<DBcrud1> {
                            ),
                            child: Padding(
                              padding:   EdgeInsets.only(right: 40,left: 40,top: 30,bottom: 30),
-                             child: Column(
-                               mainAxisSize: MainAxisSize.min,
-                               mainAxisAlignment: MainAxisAlignment.center,
+                             child: InkWell(
+                               onTap: (){
+                                 Get.to(DBcrud2());
+                               },
+                               child: Column(
+                                 mainAxisSize: MainAxisSize.min,
+                                 mainAxisAlignment: MainAxisAlignment.center,
 
-                               children: [
-                                 ClipRect(child: Image.asset('asset/adbrmidimage.png',width: 60,)),
+                                 children: [
+                                   ClipRect(child: Image.asset('asset/adbrmidimage.png',width: 60,)),
 
-                                 InkWell(
-                                     onTap: (){
+                                   Text('Create',style: TextStyle(color: kblue,fontSize: 30),),
 
-                                     },
-                                     child: Text('Create',style: TextStyle(color: kblue,fontSize: 30),)),
-
-                               ],
+                                 ],
+                               ),
                              ),
                            ),
                          ),

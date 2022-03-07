@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 
 import '../constants/constants.dart';
 
@@ -363,22 +364,27 @@ class _DBcrudState extends State<DBcrud2> {
                               color: kblue,fontSize: 15
                           ),))),
                       SizedBox(width: 25,),
-                      Container(
-                        width: 110,
-                        height: 41,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.blue.shade900,
-                              Colors.blue,
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
+                      InkWell(
+                        onTap: (){
+                          Get.to(DBcrud4());
+                        },
+                        child: Container(
+                          width: 110,
+                          height: 41,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.blue.shade900,
+                                Colors.blue,
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+
                           ),
-                          borderRadius: BorderRadius.circular(10),
-
+                    child: Center(child: Text('Add',style: TextStyle(color: Colors.white),)),
                         ),
-
                       ),
                     ],
                   ),
