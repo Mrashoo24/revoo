@@ -418,7 +418,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
             buildCard('Daily Logins','40\nDaily Logins'),
 
             Container(
-              height: Get.height*0.4,
+              height: Get.height*0.25,
                 child: HomePage()),
 
             Padding(

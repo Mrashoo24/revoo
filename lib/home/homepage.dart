@@ -29,6 +29,11 @@ class _HomePageMainState extends State<HomePageMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scafkey,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Image.asset('asset/bnbAdd.png'),
+      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -50,62 +55,7 @@ class _HomePageMainState extends State<HomePageMain> {
           SizedBox(width: 12,),
         ],
       ),
-      bottomNavigationBar: Container(
-
-        height: 100,
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-
-                child: Stack(
-                  children: [
-                    Align(
-
-                      child: Container(
-                        height: Get.height*0.08,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                          color: Kdblue,
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ClipRect(child: Image.asset('asset/share.png')),
-                              ClipRect(child: Image.asset('asset/homedash.png')),
-                              Opacity(
-                                  opacity: 0.01,
-                                  child: ClipRect(child: Image.asset('asset/share.png'))
-                              ),
-                              ClipRect(child: Image.asset('asset/groupdash.png')),
-                              ClipRect(child: Image.asset('asset/pathdash.png')),
-
-                            ],
-                          ),
-                        ),
-                      ),
-                      alignment: Alignment.bottomCenter,
-                    ),
-
-                  ],
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: Image.asset('asset/bnbAdd.png'),
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: commonWidgets.buildBNB(),
       drawer: Drawer(
         child:  Card(
           color: Colors.grey.shade200,

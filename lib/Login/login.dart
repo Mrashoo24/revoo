@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revoo/Login/signup.dart';
+import 'package:revoo/Login/yourapps.dart';
 import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
 
@@ -17,6 +18,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  bool obsecure = true;
+
+  TextEditingController password = TextEditingController();
+
+  TextEditingController email = TextEditingController();
+
+
+
   @override
   Widget build(BuildContext context) {
     print(Get.height);
@@ -73,6 +83,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                 height: 17,
                               ),
                               TextFormField(
+                                controller: email,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
@@ -96,6 +107,8 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                               ),
                               SizedBox(height: 30,),
                               TextFormField(
+                                controller: password,
+                                obscureText: obsecure,
                                 decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
@@ -118,7 +131,14 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                         borderSide: BorderSide(color: Colors.white)
                                     ),
 
-                                  suffixIcon: Icon(Icons.remove_red_eye_outlined,color: Colors.yellow.shade700,)
+                                  suffixIcon: InkWell(onTap:(){
+                                    setState(() {
+                                      obsecure ? obsecure = false : obsecure = true;
+                                    });
+                                  },child: obsecure ?
+                                  Icon(Icons.remove_red_eye_outlined,color: Colors.yellow.shade700,)
+                                      : Container(width:5,height:5,child: ClipRRect(child: Image.asset('asset/eyeclose.png')))
+                                  )
 
 
                                 ),
@@ -127,56 +147,18 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                               InkWell(
                                 onTap: (){
-                                  Get.to(EmployeeHomePage());
+                                  Get.to(Yourapps());
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Center(child: Text('SIGN IN TO EMPLOYEE',style: TextStyle(
+                                    child: Center(child: Text('SIGN IN',style: TextStyle(
                                       color: Colors.white,fontSize: 20
                                     ),)),
                                   ),
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 20,),
-                              InkWell(
-                                onTap: (){
-                                  Get.to(HomePageMain());
-                                },
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(child: Text('SIGN IN TO ADMIN',style: TextStyle(
-                                        color: Colors.white,fontSize: 20
-                                    ),)),
-                                  ),
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 20,),
-
-
-                              InkWell(
-                                onTap: (){
-                                  // Get.to(userProjectProfile());
-                                },
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(child: Text('SIGN IN TO PROJECT',style: TextStyle(
-                                        color: Colors.white,fontSize: 20
-                                    ),)),
-                                  ),
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
                                   ),
                                 ),
                               ),

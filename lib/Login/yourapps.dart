@@ -6,8 +6,10 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg1.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
 import 'package:revoo/Purchasing/addnwprdct.dart';
+import 'package:revoo/piechart.dart';
 
 import '../constants/constants.dart';
+import '../home/homepage.dart';
 
 
 class Yourapps extends StatefulWidget {
@@ -103,6 +105,10 @@ class _YourappsState extends State<Yourapps> {
               runSpacing: 20,
               spacing: 50,
               children: [
+                buildAppCard('ADMIN','asset/addicon.png',(){
+                  Get.to(HomePageMain());
+                }),
+
                 buildAppCard('HRMS','asset/addicon.png',(){
                   Get.to(DBcrud1());
                 }),

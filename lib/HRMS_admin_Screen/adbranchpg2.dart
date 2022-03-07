@@ -21,6 +21,22 @@ class _DBcrudState extends State<DBcrud2> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
+
+        appBar: AppBar(
+          centerTitle: true,
+          title: Column(
+            children: [
+              Text('Create Branch',style: TextStyle(color:kblue,fontSize: 30),),
+
+              Divider(
+                height: 10,
+                thickness: 4,color:Kdblue,endIndent: 90, indent: 90,
+              ),
+            ],
+          ),
+          backgroundColor: Colors.white,elevation: 0,automaticallyImplyLeading: true,iconTheme: IconThemeData(color: Kdblue),
+        ),
         body: Container(
 
           width: Get.width,
@@ -30,54 +46,15 @@ class _DBcrudState extends State<DBcrud2> {
           ),
 
 
-
-
-
-
-
-
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
 
                 children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                              onTap: (){
-                                print('clicked');
-                              },
-                              child: Image.asset('asset/navicon.png',)),
-                          Row(
-                            children: [
-                              SizedBox(width: 110),
-                              Image.asset('asset/bellicon.png'),
-                              SizedBox(width: 20),
-                              Image.asset('asset/settingsicon.png'),
-                              SizedBox(width: 20),
-                              Image.asset('asset/usericon.png'),
-                            ],
-                          ),
-
-                        ],
-                      ),
-                    ),
-                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Create Branch',style: TextStyle(color:kblue,fontSize: 30),),
-
-                      Divider(
-                        height: 10,
-                        thickness: 4,color:Kdblue,endIndent: 90, indent: 90,
-                      ),
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
@@ -394,65 +371,6 @@ class _DBcrudState extends State<DBcrud2> {
                 ],
               ),
             ),
-          ),
-        ),
-
-
-
-        bottomNavigationBar: Container(
-
-          height: 100,
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-
-                  child: Stack(
-                    children: [
-                      Align(
-
-                        child: Container(
-                          height: Get.height*0.08,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                            color: Kdblue,
-
-                          ),
-                          child: Align(
-                            alignment: Alignment.center,
-
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ClipRect(child: Image.asset('asset/share.png')),
-                                ClipRect(child: Image.asset('asset/homedash.png')),
-                                Opacity(
-                                    opacity: 0.01,
-                                    child: ClipRect(child: Image.asset('asset/share.png'))
-                                ),
-                                ClipRect(child: Image.asset('asset/groupdash.png')),
-                                ClipRect(child: Image.asset('asset/pathdash.png')),
-
-                              ],
-                            ),
-                          ),
-                        ),
-                        alignment: Alignment.bottomCenter,
-                      ),
-
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Image.asset('asset/bnbAdd.png'),
-                ),
-              ),
-            ],
           ),
         ),
 

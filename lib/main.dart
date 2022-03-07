@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Yourapps(),
+      home:SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
