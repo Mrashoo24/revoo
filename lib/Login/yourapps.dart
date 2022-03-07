@@ -103,21 +103,31 @@ class _YourappsState extends State<Yourapps> {
               runSpacing: 20,
               spacing: 50,
               children: [
-                buildAppCard('HRMS','asset/addicon.png',(){
+                buildAppCard('HRMS','asset/prjct.png',(){
                   Get.to(DBcrud1());
                 }),
 
-                buildAppCard('PROJECT MANAGEMENT','asset/addicon.png',(){
+                buildAppCard('PROJECT MANAGEMENT','asset/calculator.png',(){
                   Get.to(ProjectHomePage());
                 }),
 
-                buildAppCard('PURCHASE & OPERATIONS','asset/addicon.png',(){
+                buildAppCard('PURCHASE & OPERATIONS','asset/inventory.png',(){
                   Get.to(AddNewProduct());
                 }),
 
-                buildAppCard('SALES','asset/addicon.png',(){
+                buildAppCard('POS','asset/money.png',(){
 
-                  Get.to(DBcrud1());
+
+
+                }),
+                buildAppCard('PROJECT MANAGEMENT','asset/documentAA.png',(){
+
+
+
+                }),
+                buildAppCard('SALES','asset/increaseaaa.png',(){
+
+
 
                 }),
               ],
