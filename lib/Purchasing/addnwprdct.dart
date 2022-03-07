@@ -5,14 +5,14 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
 
-class Addnwprdct extends StatefulWidget {
-  const Addnwprdct({Key? key}) : super(key: key);
+class AddNewProduct extends StatefulWidget {
+  const AddNewProduct({Key? key}) : super(key: key);
 
   @override
-  _AddnwprdctState createState() => _AddnwprdctState();
+  _AddNewProductState createState() => _AddNewProductState();
 }
 
-class _AddnwprdctState extends State<Addnwprdct> {
+class _AddNewProductState extends State<AddNewProduct> {
 
 
 

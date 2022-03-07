@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg1.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
+import 'package:revoo/Purchasing/addnwprdct.dart';
 
 import '../constants/constants.dart';
 
@@ -111,7 +112,7 @@ class _YourappsState extends State<Yourapps> {
                 }),
 
                 buildAppCard('PURCHASE & OPERATIONS','asset/addicon.png',(){
-                  Get.to(DBcrud1());
+                  Get.to(AddNewProduct());
                 }),
 
                 buildAppCard('SALES','asset/addicon.png',(){
