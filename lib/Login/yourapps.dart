@@ -1,8 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg1.dart';
+import 'package:revoo/Project_Management/projectDashboard.dart';
 
 import '../constants/constants.dart';
 
@@ -93,187 +95,33 @@ class _YourappsState extends State<Yourapps> {
         ),
 
         ),
-        SizedBox(
-          height : 30,),
-        Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          SizedBox(height: 30,),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Wrap(
+              runSpacing: 20,
+              spacing: 50,
               children: [
-                InkWell(
-                  onTap: (){
-                    Get.to(DBcrud1());
-                  },
-                  child: Card(
+                buildAppCard('HRMS','asset/addicon.png',(){
+                  Get.to(DBcrud1());
+                }),
 
-                      color: Kdblue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: Center(child: Text('')),
-                      )
-                  ),
-                ),
+                buildAppCard('PROJECT MANAGEMENT','asset/addicon.png',(){
+                  Get.to(ProjectHomePage());
+                }),
 
+                buildAppCard('PURCHASE & OPERATIONS','asset/addicon.png',(){
+                  Get.to(DBcrud1());
+                }),
 
+                buildAppCard('SALES','asset/addicon.png',(){
 
-                SizedBox(
-                  width : 40,),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: (){},
-                      child: Card(
+                  Get.to(DBcrud1());
 
-                          color: Kdblue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Center(child: Text('')),
-                          )),
-                    ),
-                  ],
-                ),
-
+                }),
               ],
             ),
-          ],
-        ),
-        Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("HRMS",style: TextStyle(color: kyellow ,fontSize: 18)),
-              SizedBox(
-                width : 100,),
-              Text("CRM",style: TextStyle(color: kyellow ,fontSize: 18)),
-            ],
-          ),
-        ),SizedBox(
-          height: 25,),
-        Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: (){},
-                  child: Card(
-
-                      color: Kdblue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: Center(child: Text('')),
-                      )),
-                ),
-
-
-
-                SizedBox(
-                  width : 40,),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: (){},
-                      child: Card(
-
-                          color: Kdblue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Center(child: Text('')),
-                          )),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-        Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Inventory",style: TextStyle(color: kyellow ,fontSize: 18)),
-              SizedBox(
-                width : 80,),
-              Text("Finance",style: TextStyle(color: kyellow ,fontSize: 18)),
-            ],
-          ),
-        ), SizedBox(
-          height: 25,),
-        Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: (){},
-                  child: Card(
-
-                      color: Kdblue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: Center(child: Text('')),
-                      )),
-                ),
-
-
-
-                SizedBox(
-                  width : 40,),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: (){},
-                      child: Card(
-
-                          color: Kdblue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Center(child: Text('')),
-                          )),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),Align(
-          child: Container(
-
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Accounting",style: TextStyle(color: kyellow ,fontSize: 15)),
-                SizedBox(
-                  width : 100,),
-                Text("Sales",style: TextStyle(color: kyellow ,fontSize: 15)),
-              ],
-            ),
-          ),
-        ),
+          )
 
       ],
       ),
@@ -282,5 +130,27 @@ class _YourappsState extends State<Yourapps> {
       ),
       ),
     );
+  }
+
+  Column buildAppCard(String title,String img,function) {
+    return Column(
+                children: [
+                  InkWell(
+                    onTap: function,
+                    child: Card(
+
+                        color: Kdblue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Center(child: ClipRRect(child: Image.asset(img,color: Colors.white,),)),
+                        )),
+                  ),
+                  Container(width:100,child: Center(child: AutoSizeText(title,style: TextStyle(color: kyellow ,fontSize: 14),textAlign: TextAlign.center,))),
+                ],
+              );
   }
 }

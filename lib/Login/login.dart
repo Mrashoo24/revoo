@@ -6,7 +6,6 @@ import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
 
 import '../Employee/employee_homepage.dart';
-import '../ProjectManagement/profile/userProjectsProfile.dart';
 
 
  
@@ -166,7 +165,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                               InkWell(
                                 onTap: (){
-                                  Get.to(userProjectProfile());
+                                  // Get.to(userProjectProfile());
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,

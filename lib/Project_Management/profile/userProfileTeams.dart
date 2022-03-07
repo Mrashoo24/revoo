@@ -13,6 +13,7 @@ class UserProfileTeams extends StatefulWidget {
 }
 
 class _teamState extends State<UserProfileTeams> {
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -90,7 +91,11 @@ class _teamState extends State<UserProfileTeams> {
                                             Image.asset(
                                                 'asset/EllipsesmallForuserTeams.png'),
                                             Text('7',
-                                              textAlign: TextAlign.center,)
+                                              textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold
+                                                ))
                                           ],
                                         )
                                       ],
@@ -112,7 +117,7 @@ class _teamState extends State<UserProfileTeams> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'My Tems',
+                                        'My Tasks',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 18,
@@ -128,8 +133,12 @@ class _teamState extends State<UserProfileTeams> {
                                             fit: BoxFit.fitWidth,),
                                           Image.asset(
                                               'asset/EllipsesmallForuserTeams.png'),
-                                          Text('7',
-                                            textAlign: TextAlign.center,)
+                                          Text('30',
+                                            textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold
+                                          ),)
                                         ],
                                       )
                                     ],
@@ -146,13 +155,13 @@ class _teamState extends State<UserProfileTeams> {
                                   Text(
                                     "My Team",
                                     style: TextStyle(
-                                      fontSize: 25,
+                                      fontSize: 23,
                                       color: Color(0xff1B57A7),
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   SizedBox(
-                                    width: Get.width * 0.5,
+                                    width: Get.width * 0.4,
                                   ),
                                   IconButton(
                                     onPressed: () {},
@@ -202,7 +211,7 @@ class _teamState extends State<UserProfileTeams> {
                                   Text(
                                     "Project Management",
                                     style: TextStyle(
-                                      fontSize: 25,
+                                      fontSize: 22,
                                       color: Color(0xff1B57A7),
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -338,7 +347,10 @@ AppBar _buildappBar() {
             onPressed: () {}, icon: Image.asset('asset/userprofileicon.png')),
       ],
       leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            //Get.off(
+                // ProjectHomePage(key: scafkey,));
+            },
           icon: Icon(
             FontAwesomeIcons.bars,
             color: Colors.black,

@@ -4,8 +4,6 @@ import 'package:revoo/Employee/employeedash202.dart';
 
 import 'package:revoo/First/welcomscreen.dart';
 import 'package:revoo/Login/login.dart';
-import 'package:revoo/ProjectManagement/profile/userProfileTeams.dart';
-import 'package:revoo/ProjectManagement/profile/userProjectsProfile.dart';
 import 'package:revoo/WelcomeScreens/SplashScreen.dart';
 import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
@@ -23,7 +21,6 @@ import 'HRMS_admin_Screen/adbranchpg4.dart';
 import 'Purchasing/addnwprdct.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
-import 'ProjectManagement/projectDashboard.dart';
 import 'Employee/dailyupdates.dart';
 
 
