@@ -120,11 +120,6 @@ class _YourappsState extends State<Yourapps> {
 
 
                 }),
-                buildAppCard('PROJECT MANAGEMENT','asset/documentAA.png',(){
-
-
-
-                }),
                 buildAppCard('SALES','asset/increaseaaa.png',(){
 
 

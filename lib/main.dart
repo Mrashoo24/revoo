@@ -18,10 +18,18 @@ import 'HRMS_admin_Screen/adbranchpg1.dart';
 import 'HRMS_admin_Screen/adbranchpg3.dart';
 import 'HRMS_admin_Screen/adbranchpg4.dart';
 
+import 'Project_Management/Messages/chattingScreen.dart';
+import 'Project_Management/Messages/mssages.dart';
+import 'Project_Management/ModuleSprintScreen/modulesSprintsPage.dart';
+import 'Project_Management/Tasks/TasksScreen.dart';
+import 'Project_Management/Teams/ProjectsTeamList.dart';
+import 'Project_Management/projectDashboard.dart';
 import 'Purchasing/addnwprdct.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
 import 'Employee/dailyupdates.dart';
+import 'Purchasing/createRQF.dart';
+import 'Purchasing/request4quotation.dart';
 
 
 
@@ -51,7 +59,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Yourapps(),
+      home:CreatRQF(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -5,88 +5,87 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:revoo/constants/constants.dart';
 
-import '../projectDashboard.dart';
 
-class AllTasks extends StatefulWidget {
+
+class Request4Quotation extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _showTasks();
 }
 
-class _showTasks extends State<AllTasks> {
+class _showTasks extends State<Request4Quotation> {
   bool value = false;
+  bool avalue = false;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: Container(
-        height: Get.height,
-        width: Get.width,
-        padding: EdgeInsets.only(left: 10, right: 10),
-        child: ListView(
-          children: [
-            Text(
-              'Project Name',
-              style: TextStyle(
-                fontSize: 22,
-                color: kblue,
-              ),
-            ),
-            Text(
-              'Your role/Designation',
-              style: TextStyle(
-                fontSize: 16,
-                color: Kdblue,
-              ),
-            ),
-            SizedBox(height: 5),
-            Container(
-              height: 120,
-              width: Get.width,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  _dailCard('To-do', 20),
-                  _dailCard('Completed', 5),
-                  _dailCard('In-Review', 25),
-                ],
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          body: Container(
+            height: Get.height,
+            width: Get.width,
+            
+            padding: EdgeInsets.only(left: 10, right: 10),
+
+            child: ListView(
               children: [
-                Text(
-                  'Today\'s Tasks',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: kblue,
+                Center(
+                  child: Text(
+                    'Request of Quotation',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: kblue,
+                    ),
                   ),
                 ),
-                Divider(
-                  thickness: 2,
+
+                SizedBox(height: 5),
+                Container(
+                  height: 120,
+                  width: Get.width,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      _dailCard('Sent', 20),
+                      _dailCard('Waiting', 5),
+                      _dailCard('Late', 25),
+                    ],
+                  ),
                 ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Past Request',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: kblue,
+                      ),
+                    ),
+                    Divider(
+                      thickness: 2,
+                    ),
+                  ],
+                ),
+                Container(
+                  height: Get.height * 0.5,
+                  //color: Colors.black,
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      _TasksCard('RFQ IOT Device'),
+                      _TasksCard('RFQ Name'),
+                      _TasksCard('RFQ Name'),
+                      _TasksCard('RFQ Name'),
+                      _TasksCard('RFQ Name'),
+                      _TasksCard('RFQ Name'),
+                      _TasksCard('RFQ Name'),
+                    ],
+                  ),
+                )
               ],
             ),
-            Container(
-              height: Get.height * 0.5,
-              //color: Colors.black,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  _TasksCard('Tasks name'),
-                _TasksCard('Taske name 2'),
-                  _TasksCard('Taske name 3'),
-                  _TasksCard('Taske name 5'),
-                  _TasksCard('Taske name 4'),
-                  _TasksCard('Taske name 4'),
-                  _TasksCard('Taske name 4'),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
   Widget _TasksCard(name) {
@@ -103,12 +102,16 @@ class _showTasks extends State<AllTasks> {
         children: [
           Checkbox(
               value: value,
+
               checkColor: Colors.black,
               activeColor: Colors.white,
               side: BorderSide(color: Colors.white),
               onChanged: (changevalue) {
                 setState(() {
                   value = changevalue!;
+                });
+                setState(() {
+
                 });
               }),
           Stack(
@@ -132,6 +135,7 @@ class _showTasks extends State<AllTasks> {
       ),
     );
   }
+
 }
 
 AppBar _buildappBar() {
@@ -239,7 +243,7 @@ Widget _bottomNevigationBar() {
                               opacity: 0.01,
                               child: ClipRect(
                                   child:
-                                      Image.asset('asset/twopeopleicon.png'))),
+                                  Image.asset('asset/twopeopleicon.png'))),
                           ClipRect(child: Image.asset('asset/GroupShare.png')),
                           ClipRect(child: Image.asset('asset/mssage.png')),
                         ],
