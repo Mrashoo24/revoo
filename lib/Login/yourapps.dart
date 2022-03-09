@@ -6,10 +6,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg1.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
 import 'package:revoo/Purchasing/addnwprdct.dart';
-import 'package:revoo/piechart.dart';
 
 import '../constants/constants.dart';
-import '../home/homepage.dart';
 
 
 class Yourapps extends StatefulWidget {
@@ -81,83 +79,84 @@ class _YourappsState extends State<Yourapps> {
             ],
           ),
         ),
-          body: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Padding(
-          padding:  EdgeInsets.all(8.0),
-      child: Column(
-      children: [
-      Container(
-      alignment: Alignment.center,
-      child : Image.asset('asset/logo.png',width: 250,),
-
-      ),
-        SizedBox(
-          height: 25,),
-        Container(
-          child: Text("Your Apps",style: TextStyle(color: kblue ,fontSize: 25),
-        ),
-
-        ),
-          SizedBox(height: 30,),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Wrap(
-              runSpacing: 20,
-              spacing: 50,
+            padding:  EdgeInsets.all(8.0),
+            child: Column(
               children: [
-                buildAppCard('ADMIN','asset/addicon.png',(){
-                  Get.to(HomePageMain());
-                }),
+                Container(
+                  alignment: Alignment.center,
+                  child : Image.asset('asset/logo.png',width: 250,),
 
-                buildAppCard('HRMS','asset/addicon.png',(){
-                  Get.to(DBcrud1());
-                }),
+                ),
+                SizedBox(
+                  height: 25,),
+                Container(
+                  child: Text("Your Apps",style: TextStyle(color: kblue ,fontSize: 25),
+                  ),
 
-                buildAppCard('PROJECT MANAGEMENT','asset/addicon.png',(){
-                  Get.to(ProjectHomePage());
-                }),
+                ),
+                SizedBox(height: 30,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Wrap(
+                    runSpacing: 20,
+                    spacing: 50,
+                    children: [
+                      buildAppCard('HRMS','asset/prjct.png',(){
+                        Get.to(DBcrud1());
+                      }),
 
-                buildAppCard('PURCHASE & OPERATIONS','asset/addicon.png',(){
-                  Get.to(AddNewProduct());
-                }),
+                      buildAppCard('PROJECT MANAGEMENT','asset/calculator.png',(){
+                        Get.to(ProjectHomePage());
+                      }),
 
-                buildAppCard('SALES','asset/addicon.png',(){
+                      buildAppCard('PURCHASE & OPERATIONS','asset/inventory.png',(){
+                        Get.to(AddNewProduct());
+                      }),
 
-                  Get.to(DBcrud1());
+                      buildAppCard('POS','asset/money.png',(){
 
-                }),
+
+
+                      }),
+                      buildAppCard('SALES','asset/increaseaaa.png',(){
+
+
+
+                      }),
+                    ],
+                  ),
+                )
+
               ],
             ),
-          )
-
-      ],
-      ),
 
           ),
-      ),
+        ),
       ),
     );
   }
 
   Column buildAppCard(String title,String img,function) {
     return Column(
-                children: [
-                  InkWell(
-                    onTap: function,
-                    child: Card(
+      children: [
+        InkWell(
+          onTap: function,
+          child: Card(
 
-                        color: Kdblue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: Center(child: ClipRRect(child: Image.asset(img,color: Colors.white,),)),
-                        )),
-                  ),
-                  Container(width:100,child: Center(child: AutoSizeText(title,style: TextStyle(color: kyellow ,fontSize: 14),textAlign: TextAlign.center,))),
-                ],
-              );
+              color: Kdblue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: Center(child: ClipRRect(child: Image.asset(img,color: Colors.white,),)),
+              )),
+        ),
+        Container(width:100,child: Center(child: AutoSizeText(title,style: TextStyle(color: kyellow ,fontSize: 14),textAlign: TextAlign.center,))),
+      ],
+    );
   }
 }
