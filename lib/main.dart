@@ -3,21 +3,29 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:revoo/Employee/employeedash202.dart';
 
 import 'package:revoo/First/welcomscreen.dart';
+import 'package:revoo/HRMS_admin_Screen/HRMSadmin.view21.dart';
 import 'package:revoo/Login/login.dart';
 import 'package:revoo/WelcomeScreens/SplashScreen.dart';
 import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
 import 'package:revoo/piechart.dart';
+import 'package:revoo/testing.dart';
 
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
 
 import 'Employee/watchdashboard.dart';
+import 'HRMS_admin_Screen/HRMSadmincust55.dart';
+import 'HRMS_admin_Screen/HRMSadminvie36.dart';
+import 'HRMS_admin_Screen/HRMSadminview22.dart';
+import 'HRMS_admin_Screen/HRMSadminview28.dart';
+import 'HRMS_admin_Screen/HRMSproduct37.dart';
 import 'HRMS_admin_Screen/adbranchpg2.dart';
 import 'HRMS_admin_Screen/adbranchpg1.dart';
 import 'HRMS_admin_Screen/adbranchpg3.dart';
 import 'HRMS_admin_Screen/adbranchpg4.dart';
 
+import 'HRMS_admin_Screen/practice.dart';
 import 'Purchasing/addnwprdct.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
@@ -51,7 +59,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Yourapps(),
+      home:Quotation(),
       debugShowCheckedModeBanner: false,
     );
   }
