@@ -29,6 +29,9 @@ class _AddNewProductState extends State<AddNewProduct> {
 
   ];
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
