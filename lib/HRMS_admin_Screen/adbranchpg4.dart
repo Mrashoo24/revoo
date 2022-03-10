@@ -13,13 +13,17 @@ class DBcrud4 extends StatefulWidget {
   const DBcrud4({Key? key}) : super(key: key);
 
   @override
-  _DBcrud3State createState() => _DBcrud3State();
+  _DBcrud4State createState() => _DBcrud4State();
 }
 
-class _DBcrud3State extends State<DBcrud4> {
+class _DBcrud4State extends State<DBcrud4> {
   int groupvalue = 0;
   int yesvslue = 0;
   int novalue = 1;
+
+  var selectedCard = 'Home'; //for changing name
+  var selectedindex = 0; //f
+  GlobalKey<ScaffoldState> scafkey = GlobalKey<ScaffoldState>();
 
   String? selectedValue;
   List<String> items = [
@@ -48,6 +52,26 @@ class _DBcrud3State extends State<DBcrud4> {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading: InkWell(
+            onTap: (){print('clicked');
+              scafkey.currentState?.openDrawer();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 12.0),
+
+              child: Image.asset('asset/navicon.png'),
+            ),
+          ),
+          actions: [
+            Image.asset('asset/bellicon.png'),
+            Image.asset('asset/settingsicon.png'),
+            Image.asset('asset/usericon.png'),
+            SizedBox(width: 12,),
+          ],
+        ),
         body: Stack(
           children: [
             Container(
@@ -63,29 +87,6 @@ class _DBcrud3State extends State<DBcrud4> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                            onTap: () {
-                              print('clicked');
-                            },
-                            child: Image.asset(
-                              'asset/navicon.png',
-                            )),
-                        Row(
-                          children: [
-                            SizedBox(width: 110),
-                            Image.asset('asset/bellicon.png'),
-                            SizedBox(width: 20),
-                            Image.asset('asset/settingsicon.png'),
-                            SizedBox(width: 20),
-                            Image.asset('asset/usericon.png'),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 30),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -213,59 +214,12 @@ class _DBcrud3State extends State<DBcrud4> {
             ),
           ],
         ),
-        bottomNavigationBar: Container(
-          height: 100,
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  child: Stack(
-                    children: [
-                      Align(
-                        child: Container(
-                          height: Get.height * 0.08,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20)),
-                            color: Kdblue,
-                          ),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ClipRect(child: Image.asset('asset/share.png')),
-                                ClipRect(
-                                    child: Image.asset('asset/homedash.png')),
-                                Opacity(
-                                    opacity: 0.01,
-                                    child: ClipRect(
-                                        child: Image.asset('asset/share.png'))),
-                                ClipRect(
-                                    child: Image.asset('asset/groupdash.png')),
-                                ClipRect(
-                                    child: Image.asset('asset/pathdash.png')),
-                              ],
-                            ),
-                          ),
-                        ),
-                        alignment: Alignment.bottomCenter,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Image.asset('asset/bnbAdd.png'),
-                ),
-              ),
-            ],
-          ),
+        drawer: buildDrawer(),
+        bottomNavigationBar: commonWidgets.buildBNB(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Image.asset('asset/bnbAdd.png'),
         ),
       ),
     );
@@ -344,22 +298,18 @@ class _DBcrud3State extends State<DBcrud4> {
               ),
               PopupMenuItem<int>(
                 value: 0,
-                child: Row(
-                  children: [
-                    Image.asset('asset/actiona.png'),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        print('clickedf');
+                child: InkWell(
+                  onTap: () {
+                    print('clickedf');
 
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return StatefulBuilder(
-                                  builder: (context, setState1) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return StatefulBuilder(
+                              builder: (context, setState1) {
                                 return AlertDialog(
                                   contentPadding:
-                                      EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                                  EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50)),
                                   content: SingleChildScrollView(
@@ -372,22 +322,22 @@ class _DBcrud3State extends State<DBcrud4> {
                                               border: Border.all(
                                                   width: 2, color: kblue),
                                               borderRadius:
-                                                  BorderRadius.circular(50)),
+                                              BorderRadius.circular(50)),
                                           child: Padding(
                                             padding: EdgeInsets.only(top: 8.0),
                                             child: Column(
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      Alignment(1.0, 10.0),
+                                                  Alignment(1.0, 10.0),
                                                   child: InkWell(
                                                     onTap: () {
                                                       Get.back();
                                                     },
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(
-                                                              10.0),
+                                                      const EdgeInsets.all(
+                                                          10.0),
                                                       child: CircleAvatar(
                                                         child: Icon(
                                                           Icons.close,
@@ -413,29 +363,29 @@ class _DBcrud3State extends State<DBcrud4> {
                                                         filled: true,
                                                         fillColor: bgGrey,
                                                         contentPadding:
-                                                            EdgeInsets.only(
-                                                                left: 20,
-                                                                top: 25,
-                                                                bottom: 25),
+                                                        EdgeInsets.only(
+                                                            left: 20,
+                                                            top: 25,
+                                                            bottom: 25),
                                                         hintText:
-                                                            'Choose a Name',
+                                                        'Choose a Name',
                                                         hintStyle: TextStyle(
                                                             color: Colors.grey),
                                                         border: OutlineInputBorder(
                                                             borderSide:
-                                                                BorderSide(
-                                                                    color: Colors
-                                                                        .white)),
+                                                            BorderSide(
+                                                                color: Colors
+                                                                    .white)),
                                                         focusedBorder:
-                                                            OutlineInputBorder(
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .white)),
+                                                        OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                                color: Colors
+                                                                    .white)),
                                                         enabledBorder:
-                                                            OutlineInputBorder(
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .white))),
+                                                        OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                                color: Colors
+                                                                    .white))),
                                                   ),
                                                 ),
                                                 SizedBox(height: 20),
@@ -447,19 +397,19 @@ class _DBcrud3State extends State<DBcrud4> {
                                                 ),
                                                 ButtonBar(
                                                   alignment:
-                                                      MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                                   children: [
                                                     Row(
                                                       children: [
                                                         Radio(
                                                           value: yesvslue,
                                                           groupValue:
-                                                              groupvalue,
+                                                          groupvalue,
                                                           onChanged:
                                                               (int? value) {
                                                             setState(() {
                                                               groupvalue =
-                                                                  value!;
+                                                              value!;
                                                             });
                                                             setState1(() {});
                                                           },
@@ -469,17 +419,17 @@ class _DBcrud3State extends State<DBcrud4> {
                                                           style: TextStyle(
                                                               fontSize: 15,
                                                               color:
-                                                                  Colors.grey),
+                                                              Colors.grey),
                                                         ),
                                                         Radio(
                                                           value: novalue,
                                                           groupValue:
-                                                              groupvalue,
+                                                          groupvalue,
                                                           onChanged:
                                                               (int? value) {
                                                             setState(() {
                                                               groupvalue =
-                                                                  value!;
+                                                              value!;
                                                             });
                                                             setState1(() {});
                                                           },
@@ -489,7 +439,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                                           style: TextStyle(
                                                               fontSize: 15,
                                                               color:
-                                                                  Colors.grey),
+                                                              Colors.grey),
                                                         ),
                                                       ],
                                                     ),
@@ -498,7 +448,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                                 SizedBox(height: 25),
                                                 Row(
                                                   mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  MainAxisSize.min,
                                                   children: [
                                                     ElevatedButton(
                                                         onPressed: () {
@@ -508,32 +458,32 @@ class _DBcrud3State extends State<DBcrud4> {
                                                             elevation: 0,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius:
-                                                                    BorderRadius.all(
-                                                                        Radius.circular(
-                                                                            10))),
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        10))),
                                                             side: BorderSide(
                                                                 width: 3.0,
                                                                 color: kblue),
                                                             primary:
-                                                                Colors.white,
+                                                            Colors.white,
                                                             padding: EdgeInsets
                                                                 .symmetric(
-                                                                    horizontal:
-                                                                        32,
-                                                                    vertical:
-                                                                        11),
+                                                                horizontal:
+                                                                32,
+                                                                vertical:
+                                                                11),
                                                             textStyle: TextStyle(
                                                                 fontSize: 30,
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
+                                                                FontWeight
+                                                                    .bold)),
                                                         child: Center(
                                                             child: Text(
-                                                          '< Back',
-                                                          style: TextStyle(
-                                                              color: kblue,
-                                                              fontSize: 15),
-                                                        ))),
+                                                              '< Back',
+                                                              style: TextStyle(
+                                                                  color: kblue,
+                                                                  fontSize: 15),
+                                                            ))),
                                                     SizedBox(
                                                       width: 25,
                                                     ),
@@ -545,9 +495,9 @@ class _DBcrud3State extends State<DBcrud4> {
                                                         width: 110,
                                                         height: 41,
                                                         decoration:
-                                                            BoxDecoration(
+                                                        BoxDecoration(
                                                           gradient:
-                                                              LinearGradient(
+                                                          LinearGradient(
                                                             colors: [
                                                               Colors.blue
                                                                   .shade900,
@@ -559,13 +509,13 @@ class _DBcrud3State extends State<DBcrud4> {
                                                                 .bottomRight,
                                                           ),
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
+                                                          BorderRadius
+                                                              .circular(10),
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
+                                                          const EdgeInsets
+                                                              .all(8.0),
                                                           child: Center(
                                                             child: Text(
                                                               'Duplicate',
@@ -589,34 +539,34 @@ class _DBcrud3State extends State<DBcrud4> {
                                   ),
                                 );
                               });
-                            });
-                      },
-                      child: Text(
+                        });
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset('asset/actiona.png'),
+                      SizedBox(width: 10),
+                      Text(
                         'Duplicate',
                         style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
               PopupMenuItem<int>(
                 value: 1,
-                child: Row(
-                  children: [
-                    Image.asset('asset/actionb.png'),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        print('clickedf');
+                child: InkWell(
+                  onTap: () {
+                    print('clickedf');
 
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return StatefulBuilder(
-                                  builder: (context, setState1) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return StatefulBuilder(
+                              builder: (context, setState1) {
                                 return AlertDialog(
                                   contentPadding:
-                                      EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                                  EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50)),
                                   content: SingleChildScrollView(
@@ -629,7 +579,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                               border: Border.all(
                                                   width: 2, color: kblue),
                                               borderRadius:
-                                                  BorderRadius.circular(50)),
+                                              BorderRadius.circular(50)),
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Column(
@@ -658,10 +608,10 @@ class _DBcrud3State extends State<DBcrud4> {
                                                       filled: true,
                                                       fillColor: bgGrey,
                                                       contentPadding:
-                                                          EdgeInsets.only(
-                                                              left: 20,
-                                                              top: 25,
-                                                              bottom: 25),
+                                                      EdgeInsets.only(
+                                                          left: 20,
+                                                          top: 25,
+                                                          bottom: 25),
                                                       hintText: 'Choose a Name',
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
@@ -670,20 +620,20 @@ class _DBcrud3State extends State<DBcrud4> {
                                                               color: Colors
                                                                   .white)),
                                                       focusedBorder:
-                                                          OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                  color: Colors
-                                                                      .white)),
+                                                      OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .white)),
                                                       enabledBorder:
-                                                          OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                  color: Colors
-                                                                      .white))),
+                                                      OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .white))),
                                                 ),
                                                 SizedBox(height: 100),
                                                 Row(
                                                   mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  MainAxisSize.min,
                                                   children: [
                                                     ElevatedButton(
                                                         onPressed: () {
@@ -693,32 +643,32 @@ class _DBcrud3State extends State<DBcrud4> {
                                                             elevation: 0,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius:
-                                                                    BorderRadius.all(
-                                                                        Radius.circular(
-                                                                            10))),
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        10))),
                                                             side: BorderSide(
                                                                 width: 3.0,
                                                                 color: kblue),
                                                             primary:
-                                                                Colors.white,
+                                                            Colors.white,
                                                             padding: EdgeInsets
                                                                 .symmetric(
-                                                                    horizontal:
-                                                                        32,
-                                                                    vertical:
-                                                                        11),
+                                                                horizontal:
+                                                                32,
+                                                                vertical:
+                                                                11),
                                                             textStyle: TextStyle(
                                                                 fontSize: 30,
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
+                                                                FontWeight
+                                                                    .bold)),
                                                         child: Center(
                                                             child: Text(
-                                                          '< Back',
-                                                          style: TextStyle(
-                                                              color: kblue,
-                                                              fontSize: 15),
-                                                        ))),
+                                                              '< Back',
+                                                              style: TextStyle(
+                                                                  color: kblue,
+                                                                  fontSize: 15),
+                                                            ))),
                                                     SizedBox(
                                                       width: 25,
                                                     ),
@@ -727,25 +677,25 @@ class _DBcrud3State extends State<DBcrud4> {
                                                       height: 41,
                                                       decoration: BoxDecoration(
                                                         gradient:
-                                                            LinearGradient(
+                                                        LinearGradient(
                                                           colors: [
                                                             Colors
                                                                 .blue.shade900,
                                                             Colors.blue,
                                                           ],
                                                           begin:
-                                                              Alignment.topLeft,
+                                                          Alignment.topLeft,
                                                           end: Alignment
                                                               .bottomRight,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
+                                                        BorderRadius
+                                                            .circular(10),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
+                                                        const EdgeInsets
+                                                            .all(8.0),
                                                         child: Center(
                                                           child: Text(
                                                             'Duplicate',
@@ -768,34 +718,34 @@ class _DBcrud3State extends State<DBcrud4> {
                                   ),
                                 );
                               });
-                            });
-                      },
-                      child: Text(
+                        });
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset('asset/actionb.png'),
+                      SizedBox(width: 10),
+                      Text(
                         'Rename',
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               PopupMenuItem<int>(
                 value: 2,
-                child: Row(
-                  children: [
-                    Image.asset('asset/actionc.png'),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        print('clickedf');
+                child: InkWell(
+                  onTap: () {
+                    print('clickedf');
 
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return StatefulBuilder(
-                                  builder: (context, setState1) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return StatefulBuilder(
+                              builder: (context, setState1) {
                                 return AlertDialog(
                                   contentPadding:
-                                      EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                                  EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50)),
                                   content: SingleChildScrollView(
@@ -808,18 +758,18 @@ class _DBcrud3State extends State<DBcrud4> {
                                               border: Border.all(
                                                   width: 2, color: kblue),
                                               borderRadius:
-                                                  BorderRadius.circular(50)),
+                                              BorderRadius.circular(50)),
                                           child: Padding(
                                             padding: EdgeInsets.only(top: 8.0),
                                             child: Column(
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      Alignment(1.0, 10.0),
+                                                  Alignment(1.0, 10.0),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
+                                                    const EdgeInsets.all(
+                                                        10.0),
                                                     child: CircleAvatar(
                                                       child: Icon(
                                                         Icons.close,
@@ -858,7 +808,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                                 SizedBox(height: 25),
                                                 Row(
                                                   mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  MainAxisSize.min,
                                                 ),
                                               ],
                                             ),
@@ -869,125 +819,127 @@ class _DBcrud3State extends State<DBcrud4> {
                                   ),
                                 );
                               });
-                            });
-                      },
-                      child: Text(
+                        });
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset('asset/actionc.png'),
+                      SizedBox(width: 10),
+                      Text(
                         'Download',
                         style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
               PopupMenuItem<int>(
                 value: 3,
-                child: Row(
-                  children: [
-                    Image.asset('asset/actiond.png'),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        print('clickedf');
+                child: InkWell(
+                  onTap: () {
+                    print('clickedf');
 
-                        Get.defaultDialog(
-                          title: '',
-                          content:
-                              StatefulBuilder(builder: (context, setState1) {
-                            return Container(
-                              width: 400,
-                              height: 400,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
+                    Get.defaultDialog(
+                      title: '',
+                      content:
+                      StatefulBuilder(builder: (context, setState1) {
+                        return Container(
+                          width: 400,
+                          height: 400,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: CircleAvatar(
+                                    child: Icon(Icons.close),
+                                    backgroundColor: Kdblue,
+                                  ),
+                                ),
+                                Text(
+                                  'Duplicate Branch',
+                                  style:
+                                  TextStyle(fontSize: 30, color: kblue),
+                                ),
+                                SizedBox(height: 10),
+                                SizedBox(height: 25),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Align(
-                                      alignment: Alignment.topRight,
-                                      child: CircleAvatar(
-                                        child: Icon(Icons.close),
-                                        backgroundColor: Kdblue,
+                                    Container(
+                                      width: 230,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: greytxtbx,
+                                        borderRadius:
+                                        BorderRadius.circular(0),
                                       ),
-                                    ),
-                                    Text(
-                                      'Duplicate Branch',
-                                      style:
-                                          TextStyle(fontSize: 30, color: kblue),
-                                    ),
-                                    SizedBox(height: 10),
-                                    SizedBox(height: 25),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          width: 230,
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                            color: greytxtbx,
-                                            borderRadius:
-                                                BorderRadius.circular(0),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Center(
-                                              child: Text(
-                                                'Duplicate',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15),
-                                              ),
-                                            ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Center(
+                                          child: Text(
+                                            'Duplicate',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15),
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
-                            );
-                          }),
+                              ],
+                            ),
+                          ),
                         );
-                      },
-                      child: Text(
+                      }),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset('asset/actiond.png'),
+                      SizedBox(width: 10),
+                      Text(
                         'Add Domain',
                         style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-              PopupMenuItem<int>(
-                value: 4,
-                child: Row(
-                  children: [
-                    Image.asset('asset/actione.png'),
-                    SizedBox(width: 10),
-                    Text(
-                      'Tags',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
+              // PopupMenuItem<int>(
+              //   value: 4,
+              //   child: InkWell(
+              //     child: Row(
+              //       children: [
+              //         Image.asset('asset/actione.png'),
+              //         SizedBox(width: 10),
+              //         Text(
+              //           'Tags',
+              //           style: TextStyle(fontSize: 20, color: Colors.white),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
               PopupMenuItem<int>(
                 value: 5,
-                child: Row(
-                  children: [
-                    Image.asset('asset/actionf.png'),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        print('clickedf');
+                child: InkWell(
+                  onTap: () {
+                    print('clickedf');
 
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return StatefulBuilder(
-                                  builder: (context, setState1) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return StatefulBuilder(
+                              builder: (context, setState1) {
                                 return AlertDialog(
                                   contentPadding:
-                                      EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                                  EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50)),
                                   content: SingleChildScrollView(
@@ -1000,18 +952,18 @@ class _DBcrud3State extends State<DBcrud4> {
                                               border: Border.all(
                                                   width: 2, color: kblue),
                                               borderRadius:
-                                                  BorderRadius.circular(50)),
+                                              BorderRadius.circular(50)),
                                           child: Padding(
                                             padding: EdgeInsets.only(top: 8.0),
                                             child: Column(
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      Alignment(1.0, 10.0),
+                                                  Alignment(1.0, 10.0),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
+                                                    const EdgeInsets.all(
+                                                        10.0),
                                                     child: CircleAvatar(
                                                       child: Icon(
                                                         Icons.close,
@@ -1052,7 +1004,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                                 SizedBox(height: 10),
                                                 Row(
                                                   mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  MainAxisSize.min,
                                                   children: [
                                                     ElevatedButton(
                                                         onPressed: () {
@@ -1062,32 +1014,32 @@ class _DBcrud3State extends State<DBcrud4> {
                                                             elevation: 0,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius:
-                                                                    BorderRadius.all(
-                                                                        Radius.circular(
-                                                                            10))),
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        10))),
                                                             side: BorderSide(
                                                                 width: 3.0,
                                                                 color: kblue),
                                                             primary:
-                                                                Colors.white,
+                                                            Colors.white,
                                                             padding: EdgeInsets
                                                                 .symmetric(
-                                                                    horizontal:
-                                                                        32,
-                                                                    vertical:
-                                                                        11),
+                                                                horizontal:
+                                                                32,
+                                                                vertical:
+                                                                11),
                                                             textStyle: TextStyle(
                                                                 fontSize: 30,
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
+                                                                FontWeight
+                                                                    .bold)),
                                                         child: Center(
                                                             child: Text(
-                                                          '< Back',
-                                                          style: TextStyle(
-                                                              color: kblue,
-                                                              fontSize: 15),
-                                                        ))),
+                                                              '< Back',
+                                                              style: TextStyle(
+                                                                  color: kblue,
+                                                                  fontSize: 15),
+                                                            ))),
                                                     SizedBox(
                                                       width: 25,
                                                     ),
@@ -1097,13 +1049,13 @@ class _DBcrud3State extends State<DBcrud4> {
                                                       decoration: BoxDecoration(
                                                         color: reddy,
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
+                                                        BorderRadius
+                                                            .circular(10),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
+                                                        const EdgeInsets
+                                                            .all(8.0),
                                                         child: Center(
                                                           child: Text(
                                                             'Duplicate',
@@ -1126,14 +1078,18 @@ class _DBcrud3State extends State<DBcrud4> {
                                   ),
                                 );
                               });
-                            });
-                      },
-                      child: Text(
+                        });
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset('asset/actionf.png'),
+                      SizedBox(width: 10),
+                      Text(
                         'Delete',
                         style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
               PopupMenuItem<int>(
@@ -1485,4 +1441,158 @@ class _DBcrud3State extends State<DBcrud4> {
       ),
     );
   }
+
+
+  buildDrawer(){
+   return  Drawer(
+      child:  Card(
+        color: Colors.grey.shade200,
+        shape: Border(
+          right: BorderSide(style: BorderStyle.none),
+
+
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 30.0),
+          child: SingleChildScrollView(
+            child: Column(
+
+              children: [
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+                    CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      backgroundImage: AssetImage('asset/profile.jfif'),
+                      radius: 30,
+                    ),
+                    SizedBox(width: 20,),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                  child: Text('Name of the person',style: TextStyle(fontSize: 20,color: kblue),
+                                      textAlign: TextAlign.left
+                                  )),
+                            ),
+                            Container(
+
+
+                                child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
+                                    textAlign: TextAlign.left
+                                )),
+                            InkWell(
+                              onTap: (){
+
+                              },
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                        child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
+                                        )),
+                                    SizedBox(width: 15,),
+                                    Image.asset('asset/rightarrow.png')
+                                  ],
+
+                                ),
+
+                              ),
+
+                            ),
+
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 30,),
+                buildNavCard('asset/home.png','My Account',0),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/checkgrp.png','My Plan',1),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/checkpad.png','My Branches',2),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/lvapproval.png','My Departments',3),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/lvapproval.png','My Employees',3),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/lvapproval.png','Shifts Management',3),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
+                buildNavCard('asset/lvapproval.png','Help',3),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+
+                buildNavCard('asset/logoff.png','Logout',4),
+                SizedBox(height: 5,),
+
+
+              ],
+            ),
+          ),
+
+        ),
+
+      ),
+    );
+  }
+
+
+  buildNavCard(String image,String name,index) {
+
+    return InkWell(
+      onTap: (){
+        setState(() {
+          selectedCard = name;
+          selectedindex = index;
+        });
+        Get.back();
+      },
+      child: Card(
+        color: selectedCard == name ?  Colors.white : bgGrey,
+        elevation: selectedCard == name ? 2 : 0,
+        child: Container(
+          height: 70,
+          child: Padding(
+
+            padding: const EdgeInsets.only(left: 15.0,top: 10,bottom: 10,right: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+
+                Image.asset(image,color: Kdblue,width: 20,height: 20,),
+
+                SizedBox(width: 10,),
+
+                Text(name,style: TextStyle(color: Colors.grey,fontSize: 20),),
+
+              ],
+            ),
+          ),
+        ),
+
+      ),
+    );
+  }
+
 }

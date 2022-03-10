@@ -38,7 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             )),
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 10),
+                        margin: EdgeInsets.only(right: 20),
                           child: Text('The Platform that will help you run your business smoothly with a variety of friendly apps made simple with compatible features',style: TextStyle(fontSize: 18,color: Colors.white),
                           )),
                       SizedBox(height: 20,),

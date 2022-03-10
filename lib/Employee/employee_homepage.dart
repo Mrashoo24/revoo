@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revoo/Employee/dailyupdates.dart';
 import 'package:revoo/Employee/employeedash1stpg.dart';
+import 'package:revoo/Employee/leaveRequest.dart';
+import 'package:revoo/Employee/watchdashboard.dart';
 
 import '../constants/constants.dart';
+import 'employeedash202.dart';
 
 class EmployeeHomePage extends StatefulWidget {
   const EmployeeHomePage({Key? key}) : super(key: key);
@@ -19,10 +22,10 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
   var selectedindex = 0; //for changing index of page
 
   var homepages = [
-    EmployeeDashboard1stpg(), //0
+    EmployeeDashboard1(), //0
+    Watchdashboard(),
     Dailyupdates(), //1
-
-
+    LeaveRequestEmployee()
   ];
 
 
@@ -51,61 +54,11 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
           SizedBox(width: 12,),
         ],
       ),
-      bottomNavigationBar: Container(
-
-        height: 100,
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-
-                child: Stack(
-                  children: [
-                    Align(
-
-                      child: Container(
-                        height: Get.height*0.08,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                          color: Kdblue,
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ClipRect(child: Image.asset('asset/share.png')),
-                              ClipRect(child: Image.asset('asset/homedash.png')),
-                              Opacity(
-                                  opacity: 0.01,
-                                  child: ClipRect(child: Image.asset('asset/share.png'))
-                              ),
-                              ClipRect(child: Image.asset('asset/groupdash.png')),
-                              ClipRect(child: Image.asset('asset/pathdash.png')),
-
-                            ],
-                          ),
-                        ),
-                      ),
-                      alignment: Alignment.bottomCenter,
-                    ),
-
-                  ],
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: Image.asset('asset/bnbAdd.png'),
-              ),
-            ),
-          ],
-        ),
+      bottomNavigationBar: commonWidgets.buildBNB(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Image.asset('asset/bnbAdd.png'),
       ),
       drawer: Drawer(
         child:  Card(
@@ -184,19 +137,19 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
                   ),
 
                   SizedBox(height: 30,),
-                  buildNavCard('asset/home.png','Home'),
+                  buildNavCard('asset/home.png','Home',0),
                   SizedBox(height: 5,),
                   Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/checkgrp.png','Daily Logins'),
+                  buildNavCard('asset/checkgrp.png','Daily Logins',1),
                   SizedBox(height: 5,),
                   Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/checkpad.png','Daily Updates'),
+                  buildNavCard('asset/checkpad.png','Daily Updates',2),
                   SizedBox(height: 5,),
                   Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/lvapproval.png','Leave Request/\nApprovals'),
+                  buildNavCard('asset/lvapproval.png','Leave Request/\nApprovals',3),
                   SizedBox(height: 5,),
                   Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/logoff.png','Logout'),
+                  buildNavCard('asset/logoff.png','Logout',4),
                   SizedBox(height: 5,),
 
 
@@ -212,14 +165,15 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
     );
   }
 
-  buildNavCard(String image,String name) {
+  buildNavCard(String image,String name,index) {
 
     return InkWell(
       onTap: (){
         setState(() {
           selectedCard = name;
-          selectedCard == 'Home' ? selectedindex = 0 :selectedindex = 1;
+          selectedindex = index;
         });
+        Get.back();
       },
       child: Card(
         color: selectedCard == name ?  Colors.white : bgGrey,

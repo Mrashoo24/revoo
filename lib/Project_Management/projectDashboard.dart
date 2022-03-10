@@ -40,6 +40,11 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Image.asset('asset/bnbAdd.png'),
+        ),
         key: homekey,
         appBar: AppBar(
             backgroundColor: Colors.white,
@@ -60,7 +65,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
                 ))),
         drawer:   navBar(),
         body: homepages[selectedindex],
-        bottomNavigationBar: _bottomNevigationBar(),
+        bottomNavigationBar: commonWidgets.buildBNB(),
       ),
     );
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:revoo/Employee/employeedash202.dart';
 
 import 'package:revoo/First/welcomscreen.dart';
@@ -22,6 +23,7 @@ import 'Purchasing/addnwprdct.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
 import 'Employee/dailyupdates.dart';
+import 'graph/linegraph.dart';
 
 
 
@@ -32,11 +34,14 @@ void main() {
 
 class MyApp extends StatelessWidget {
 
+
+
   const MyApp({Key key= const Key('MyApp')}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -50,9 +55,13 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+
       ),
-      home:SplashScreen(),
+
+      home:DateTimeComboLinePointChart.withSampleData(),
+
       debugShowCheckedModeBanner: false,
+
     );
   }
 }
