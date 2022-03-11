@@ -157,6 +157,7 @@ SizedBox(width: 25),
                   Text("Scheduled",style: TextStyle(color: Colors.grey,fontSize: 18),),
                 ],
               ),
+              SizedBox(height: 30,),
               Container(
                 width: 500,
                 height: 90,
