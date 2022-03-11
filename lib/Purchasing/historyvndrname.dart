@@ -17,65 +17,372 @@ class _HostoryvndrnameState extends State<Hostoryvndrname> {
   Widget build(BuildContext context) {
     return SafeArea(
 child: Scaffold(
-  body: Container(
-    height: Get.height,
-    width: Get.width,
+  body: SingleChildScrollView(
+    child: Container(
+      height: Get.height,
+      width: Get.width,
 
-    padding: EdgeInsets.only(left: 10, right: 10),
+      padding: EdgeInsets.only(left: 10, right: 10),
 
-    child: ListView(
-      children: [
-        Center(
-          child: Text(
-            'Request of Quotation',
-            style: TextStyle(
-              fontSize: 30,
-              color: kblue,
+      child: ListView(
+        children: [
+          Align(
+              alignment: Alignment(-0.8,0),
+              child: Column(
+                children: [
+                  Text("History",style: TextStyle(color: kblue,fontSize: 32,)),
+                  Text("Vendore Name",style: TextStyle(color: kblue,fontSize: 15,)),
+                ],
+              )),
+          Container(
+            height: 120,
+            width: Get.width,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                _dailCard('Total', 20),
+                _dailCard('Pending', 5),
+
+              ],
             ),
-          ),
-        ),
-
-        SizedBox(height: 5),
-        Container(
-          height: 120,
-          width: Get.width,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
+          ),SizedBox(height: 20),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _dailCard('Total', 20),
-              _dailCard('Pending', 5),
+              Text(
+                'Past Request',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: kblue,
+                ),
+              ),
+              SizedBox(height: 8,),
+              Container(
+
+                width: Get.width,
+                height: 100,
+
+
+                decoration: BoxDecoration(
+                  color: Kdblue,
+                    borderRadius: BorderRadius.circular(10), ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0,top: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("Data Created: Feb 17,22",style: TextStyle(color: Colors.white,fontSize: 19),
+
+                              ),
+                              SizedBox(width: 130,),
+                              CircleAvatar(radius: 8,backgroundColor: Colors.green,),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("RFQ IOT Device",style: TextStyle(color: kyellow,fontSize: 25),),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("BioMetric, Sensors, Chip Connector, \nRasberry device  ",style: TextStyle(color: Colors.white,fontSize: 10,),),
+                              SizedBox(width: 130,),
+                              Text("2000",style: TextStyle(color:  kyellow,fontSize: 25,),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+
+              ),
+
+              SizedBox(height: 8,),
+              Container(
+
+                width: Get.width,
+                height: 100,
+
+
+                decoration: BoxDecoration(
+                  color: Kdblue,
+                  borderRadius: BorderRadius.circular(10), ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0,top: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("Data Created: Feb 17,22",style: TextStyle(color: Colors.white,fontSize: 19),
+
+                              ),
+                              SizedBox(width: 130,),
+                              CircleAvatar(radius: 8,backgroundColor: Colors.green,),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("RFQ IOT Device",style: TextStyle(color: kyellow,fontSize: 25),),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("BioMetric, Sensors, Chip Connector, \nRasberry device  ",style: TextStyle(color: Colors.white,fontSize: 10,),),
+                              SizedBox(width: 130,),
+                              Text("2000",style: TextStyle(color:  kyellow,fontSize: 25,),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+
+              ),
+
+              SizedBox(height: 8,),
+              Container(
+
+                width: Get.width,
+                height: 100,
+
+
+                decoration: BoxDecoration(
+                  color: Kdblue,
+                  borderRadius: BorderRadius.circular(10), ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0,top: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("Data Created: Feb 17,22",style: TextStyle(color: Colors.white,fontSize: 19),
+
+                              ),
+                              SizedBox(width: 130,),
+                              CircleAvatar(radius: 8,backgroundColor: Colors.red,),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("RFQ IOT Device",style: TextStyle(color: kyellow,fontSize: 25),),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("BioMetric, Sensors, Chip Connector, \nRasberry device  ",style: TextStyle(color: Colors.white,fontSize: 10,),),
+                              SizedBox(width: 130,),
+                              Text("2000",style: TextStyle(color:  kyellow,fontSize: 25,),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+
+              ),
+
+              SizedBox(height: 8,),
+              Container(
+
+                width: Get.width,
+                height: 100,
+
+
+                decoration: BoxDecoration(
+                  color: Kdblue,
+                  borderRadius: BorderRadius.circular(10), ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0,top: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("Data Created: Feb 17,22",style: TextStyle(color: Colors.white,fontSize: 19),
+
+                              ),
+                              SizedBox(width: 130,),
+                              CircleAvatar(radius: 8,backgroundColor: Colors.green,),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("RFQ IOT Device",style: TextStyle(color: kyellow,fontSize: 25),),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("BioMetric, Sensors, Chip Connector, \nRasberry device  ",style: TextStyle(color: Colors.white,fontSize: 10,),),
+                              SizedBox(width: 130,),
+                              Text("2000",style: TextStyle(color:  kyellow,fontSize: 25,),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+
+              ),
+
+              SizedBox(height: 8,),
+              Container(
+
+                width: Get.width,
+                height: 100,
+
+
+                decoration: BoxDecoration(
+                  color: Kdblue,
+                  borderRadius: BorderRadius.circular(10), ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0,top: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("Data Created: Feb 17,22",style: TextStyle(color: Colors.white,fontSize: 19),
+
+                              ),
+                              SizedBox(width: 130,),
+                              CircleAvatar(radius: 8,backgroundColor: Colors.red,),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("RFQ IOT Device",style: TextStyle(color: kyellow,fontSize: 25),),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("BioMetric, Sensors, Chip Connector, \nRasberry device  ",style: TextStyle(color: Colors.white,fontSize: 10,),),
+                              SizedBox(width: 130,),
+                              Text("2000",style: TextStyle(color:  kyellow,fontSize: 25,),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+
+              ),
+
+              SizedBox(height: 8,),
+              Container(
+
+                width: Get.width,
+                height: 100,
+
+
+                decoration: BoxDecoration(
+                  color: Kdblue,
+                  borderRadius: BorderRadius.circular(10), ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0,top: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("Data Created: Feb 17,22",style: TextStyle(color: Colors.white,fontSize: 19),
+
+                              ),
+                              SizedBox(width: 130,),
+                              CircleAvatar(radius: 8,backgroundColor: Colors.green,),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("RFQ IOT Device",style: TextStyle(color: kyellow,fontSize: 25),),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("BioMetric, Sensors, Chip Connector, \nRasberry device  ",style: TextStyle(color: Colors.white,fontSize: 10,),),
+                              SizedBox(width: 130,),
+                              Text("2000",style: TextStyle(color:  kyellow,fontSize: 25,),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+
+              ),
+
+              SizedBox(height: 8,),
+              Container(
+
+                width: Get.width,
+                height: 100,
+
+
+                decoration: BoxDecoration(
+                  color: Kdblue,
+                  borderRadius: BorderRadius.circular(10), ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0,top: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("Data Created: Feb 17,22",style: TextStyle(color: Colors.white,fontSize: 19),
+
+                              ),
+                              SizedBox(width: 130,),
+                              CircleAvatar(radius: 8,backgroundColor: Colors.red,),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("RFQ IOT Device",style: TextStyle(color: kyellow,fontSize: 25),),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("BioMetric, Sensors, Chip Connector, \nRasberry device  ",style: TextStyle(color: Colors.white,fontSize: 10,),),
+                              SizedBox(width: 130,),
+                              Text("2000",style: TextStyle(color:  kyellow,fontSize: 25,),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+
+              ),
+
 
             ],
           ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Past Request',
-              style: TextStyle(
-                fontSize: 22,
-                color: kblue,
-              ),
-            ),
-
-            Container(
-
-              width: Get.width,
-              height: 100,
-
-              child: Column(
-                children: [
-                  Align(
-                      child: Text("Data Created Feb 17,22",style: TextStyle(color: Colors.white,fontSize: 20),)),
-                ],
-              ),
-
-              color: Kdblue,
-            )
-          ],
-        ),
-      ],
+        ],
+      ),
     ),
   ),
 )

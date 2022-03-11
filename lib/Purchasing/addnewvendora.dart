@@ -5,14 +5,14 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
 
-class Addnewvendor extends StatefulWidget {
-  const Addnewvendor({Key? key}) : super(key: key);
+class Addnewvendora extends StatefulWidget {
+  const Addnewvendora({Key? key}) : super(key: key);
 
   @override
   _AddnewvendorState createState() => _AddnewvendorState();
 }
 
-class _AddnewvendorState extends State<Addnewvendor> {
+class _AddnewvendorState extends State<Addnewvendora> {
 
 
   var itemList = [
@@ -152,17 +152,33 @@ class _AddnewvendorState extends State<Addnewvendor> {
                                 height: 5,thickness: 1,color: kblue,
                               ),
                               Container(
-                                height: 40,
+                                height: 37,
                                 width: 180,
-                                color: bgGrey,
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding:   EdgeInsets.all(8.0),
-                                      child: Text("Softonic India",style: TextStyle(color: kblue),),
-                                    )),
 
+                                decoration: BoxDecoration(borderRadius:BorderRadius.circular(0)),
 
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+
+                                      filled: true,
+                                      fillColor: bgGrey,
+                                      hintText: "Vendor Name",
+
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.white),
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.white),
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                                      ),
+                                      enabledBorder:OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.white),
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                                      )
+
+                                  ),
+                                ),
                               ),
                             ],
                           ),

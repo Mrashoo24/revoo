@@ -24,16 +24,20 @@ import 'Project_Management/ModuleSprintScreen/modulesSprintsPage.dart';
 import 'Project_Management/Tasks/TasksScreen.dart';
 import 'Project_Management/Teams/ProjectsTeamList.dart';
 import 'Project_Management/projectDashboard.dart';
-import 'Purchasing/addnewvendor.dart';
+import 'Purchasing/addcategory.dart';
+import 'Purchasing/addnewvendora.dart';
 import 'Purchasing/addnwprdct.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
 import 'Employee/dailyupdates.dart';
+import 'Purchasing/calendarss.dart';
+import 'Purchasing/categories.dart';
 import 'Purchasing/createRQF.dart';
 import 'Purchasing/historyvndrname.dart';
 import 'Purchasing/request4quotation.dart';
-import 'Purchasing/rfqstatus.dart';
-import 'Purchasing/timepass.dart';
+import 'Purchasing/rfqstatusa.dart';
+import 'Purchasing/products.dart';
+import 'Purchasing/rfqstatusb.dart';
 import 'Purchasing/vendors.dart';
 
 
@@ -64,7 +68,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Hostoryvndrname(),
+      home: PRCalender(),
+
       debugShowCheckedModeBanner: false,
     );
   }

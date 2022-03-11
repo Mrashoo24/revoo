@@ -201,6 +201,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                                 filled: true,
                                 fillColor: bgGrey,
 
+
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -212,17 +213,11 @@ class _AddNewProductState extends State<AddNewProduct> {
                                 enabledBorder:OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.all(Radius.circular(10)),
-                                )
 
+                                )
                             ),
                           ),
-                        ),
-
-
-                        SizedBox(height: 30),
-
-
-
+                        ), SizedBox(height: 30),
                         Container(
                           height: 110,
                           child: Row(
@@ -328,13 +323,17 @@ class _AddNewProductState extends State<AddNewProduct> {
                                 fillColor: bgGrey,
 
                                 border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
+                                    borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
+                                    borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
                                 ),
                                 enabledBorder:OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
+                                    borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
                                 )
 
                             ),

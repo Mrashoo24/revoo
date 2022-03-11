@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 
 import '../constants/constants.dart';
 
-class RFQsStatus extends StatefulWidget {
-  const RFQsStatus({Key? key}) : super(key: key);
+class RFQsStatusa extends StatefulWidget {
+  const RFQsStatusa({Key? key}) : super(key: key);
 
   @override
   _RFQsStatusState createState() => _RFQsStatusState();
 }
 
-class _RFQsStatusState extends State<RFQsStatus> {
+class _RFQsStatusState extends State<RFQsStatusa> {
 
   String initialValue = '';
 
