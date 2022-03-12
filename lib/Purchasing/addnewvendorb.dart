@@ -5,14 +5,14 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
 
-class Addnewvendora extends StatefulWidget {
-  const Addnewvendora({Key? key}) : super(key: key);
+class Addnewvendorb extends StatefulWidget {
+  const Addnewvendorb({Key? key}) : super(key: key);
 
   @override
   _AddnewvendorState createState() => _AddnewvendorState();
 }
 
-class _AddnewvendorState extends State<Addnewvendora> {
+class _AddnewvendorState extends State<Addnewvendorb> {
 
 
   var itemList = [
@@ -71,7 +71,7 @@ class _AddnewvendorState extends State<Addnewvendora> {
                         height: 36,
                         margin: EdgeInsets.all(8),
                         decoration: BoxDecoration(border: Border.all(
-                            color: Kdblue,
+                          color: Kdblue,
                         )),
                         child: Padding(
                           padding:   EdgeInsets.all (8),
@@ -88,115 +88,10 @@ class _AddnewvendorState extends State<Addnewvendora> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      Container(
-                        height: 100,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-
-
-                        ),
-                        child: Icon(
-                          Icons.person,
-                          size: 50,
-                          color:  Colors.grey,
-                        ),
-
-
-                      ),SizedBox(width: 10),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child:  Checkbox(
-
-                                    value: dvalue,
-                                    onChanged: (value){
-
-                                      setState(() {
-
-                                      });
-                                      this.dvalue = value!;
-                                    }
-                                ),
-                              ),
-                              Text("Individual",style: TextStyle(color: kblue ,fontSize: 12),),
-              Checkbox(
-
-                  value: bvalue,
-
-                  onChanged: (value){
-
-                    setState(() {
-
-                    });
-                    this.bvalue = value!;
-                  }
-              ),
-
-            Text("Company",style: TextStyle(color: kblue ,fontSize: 12),),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-
-                              Text('Vendor name',style: TextStyle(fontSize: 16,color:kblue ),),
-                              Divider(
-                                height: 5,thickness: 1,color: kblue,
-                              ),
-                              Container(
-                                height: 37,
-                                width: 180,
-
-                                decoration: BoxDecoration(borderRadius:BorderRadius.circular(0)),
-
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-
-                                      filled: true,
-                                      fillColor: bgGrey,
-                                      hintText: "Vendor Name",
-
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
-                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
-                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                      ),
-                                      enabledBorder:OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
-                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                      )
-
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('Upload a profile picture',style: TextStyle(color: kblue),),
-
-                    ],
-                  ),
                   SizedBox(height: 20),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('E-mail',style: TextStyle(fontSize: 18,color:kblue ),)),
+                      child: Text('Sales Person',style: TextStyle(fontSize: 18,color:kblue ),)),
                   Divider(
                     height: 5,thickness: 1,color: kblue,
                   ),
@@ -232,7 +127,7 @@ class _AddnewvendorState extends State<Addnewvendora> {
                   SizedBox(height: 15),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Phone/Mobile',style: TextStyle(fontSize: 18,color:kblue ),)),
+                      child: Text('Payment Terms',style: TextStyle(fontSize: 18,color:kblue ),)),
                   Divider(
                     height: 5,thickness: 1,color: kblue,
                   ),
@@ -268,7 +163,7 @@ class _AddnewvendorState extends State<Addnewvendora> {
                   SizedBox(height: 15),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Website',style: TextStyle(fontSize: 18,color:kblue ),)),
+                      child: Text('Payment Method',style: TextStyle(fontSize: 18,color:kblue ),)),
                   Divider(
                     height: 5,thickness: 1,color: kblue,
                   ),
@@ -304,7 +199,7 @@ class _AddnewvendorState extends State<Addnewvendora> {
                   SizedBox(height: 15),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Address',style: TextStyle(fontSize: 18,color:kblue ),)),
+                      child: Text('Bank Accounts',style: TextStyle(fontSize: 18,color:kblue ),)),
                   Divider(
                     height: 5,thickness: 1,color: kblue,
                   ),
@@ -337,7 +232,7 @@ class _AddnewvendorState extends State<Addnewvendora> {
                     ),
                   ),
 
-                  SizedBox(height: 4),
+                  SizedBox(height: 10),
                   Container(
                     height: 37,
 
@@ -348,6 +243,7 @@ class _AddnewvendorState extends State<Addnewvendora> {
 
                           filled: true,
                           fillColor: bgGrey,
+                          hintText: "Account Number",
 
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
@@ -366,7 +262,37 @@ class _AddnewvendorState extends State<Addnewvendora> {
                     ),
                   ),
 
-                  SizedBox(height: 4),
+                  SizedBox(height: 10),
+                  Container(
+                    height: 37,
+
+                    decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
+
+                    child: TextFormField(
+                      decoration: InputDecoration(
+
+                          filled: true,
+                          fillColor: bgGrey,
+                          hintText: "Acc Type",
+
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          enabledBorder:OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          )
+
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 10),
                   Row(
                     children: [
                       Container(
@@ -381,7 +307,7 @@ class _AddnewvendorState extends State<Addnewvendora> {
 
                               filled: true,
                               fillColor: bgGrey,
-                              hintText: "Country",
+                              hintText: "IFSC Code",
 
 
                               border: OutlineInputBorder(
@@ -410,89 +336,23 @@ class _AddnewvendorState extends State<Addnewvendora> {
                         child: TextFormField(
                           decoration: InputDecoration(
 
-                              filled: true,
-                              fillColor: bgGrey,
-                              hintText: "State",
+                            filled: true,
+                            fillColor: bgGrey,
+                            hintText: "MMID",
 
 
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
-                  SizedBox(height: 4),
-                  Row(
-                    children: [
-                      Container(
-                        height: 37,
-                        width: 180,
-
-                        decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
-
-                        child: TextFormField(
-                          decoration: InputDecoration(
-
-                              filled: true,
-                              fillColor: bgGrey,
-                              hintText: "Zip Code",
-
-
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              )
-
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Container(
-                        height: 37,
-                        width: 180,
-
-                        decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
-
-                        child: TextFormField(
-                          decoration: InputDecoration(
-
-                              filled: true,
-                              fillColor: bgGrey,
-                              hintText: "Country",
-
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              )
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
+                            enabledBorder:OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
 
                           ),
                         ),
@@ -500,8 +360,68 @@ class _AddnewvendorState extends State<Addnewvendora> {
 
                     ],
                   ),
+                  SizedBox(height: 10),
+                  Container(
+                    height: 37,
 
-                  SizedBox(height: 15),
+                    decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
+
+                    child: TextFormField(
+                      decoration: InputDecoration(
+
+                          filled: true,
+                          fillColor: bgGrey,
+                          hintText: "City",
+
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          enabledBorder:OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          )
+
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 10),
+                  Container(
+                    height: 37,
+
+                    decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
+
+                    child: TextFormField(
+                      decoration: InputDecoration(
+
+                          filled: true,
+                          fillColor: bgGrey,
+                          hintText: "Branch",
+
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          enabledBorder:OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          )
+
+                      ),
+                    ),
+                  ),
+
+
+                  SizedBox(height: 30),
                   Row(
                     children: [
                       Container(
@@ -554,6 +474,8 @@ class _AddnewvendorState extends State<Addnewvendora> {
                       ),
                     ],
                   ),
+
+
                 ],
               ),
             ),
