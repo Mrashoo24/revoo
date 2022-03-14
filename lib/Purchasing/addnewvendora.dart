@@ -16,17 +16,29 @@ class _AddnewvendorState extends State<Addnewvendora> {
 
 
   var itemList = [
-    'Product category',
-    'product category1',
-    'product category2',
-    'product category3',
-    'product category4',
+
+    'Colombia',
+    'Vegas',
+    'Ciaro',
+    'Ciao',
+    'Legasis',
 
   ];
 
-  bool  avalue = false;
+  var itemLista = [
+
+    'Colombiab',
+    'Vegasb',
+    'Ciarob',
+    'Ciaob',
+    'Legasis',
+
+  ];
+
+  int _value = 1;
+  int _valuea = 1;
   bool  bvalue = false;
-  bool  cvalue = false;
+
   bool  dvalue = false;
 
 
@@ -393,7 +405,7 @@ class _AddnewvendorState extends State<Addnewvendora> {
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                               ),
                               enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide: BorderSide(color: bgGrey),
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                               )
 
@@ -402,34 +414,39 @@ class _AddnewvendorState extends State<Addnewvendora> {
                       ),
                       SizedBox(width: 10),
                       Container(
+
                         height: 37,
                         width: 180,
-
-                        decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
-
-                        child: TextFormField(
-                          decoration: InputDecoration(
-
-                              filled: true,
-                              fillColor: bgGrey,
-                              hintText: "State",
-
-
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-
-                          ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),color: bgGrey
                         ),
+                        padding: EdgeInsets.only(left: 60),
+                        child: DropdownButton(
+
+                            value: _valuea,
+                            items: [
+                              DropdownMenuItem(
+                                child: Text("State",style: TextStyle(color: Colors.grey.shade600),),
+                                value: 1,
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Second Item"),
+                                value: 2,
+                              ),
+                              DropdownMenuItem(
+                                  child: Text("Third Item"),
+                                  value: 3
+                              ),
+                              DropdownMenuItem(
+                                  child: Text("Fourth Item"),
+                                  value: 4
+                              )
+                            ],
+                            onChanged: (int? value) {
+                              setState(() {
+                                _valuea = value!;
+                              });
+                            }),
                       ),
 
                     ],
@@ -460,7 +477,7 @@ class _AddnewvendorState extends State<Addnewvendora> {
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                               ),
                               enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide: BorderSide(color: bgGrey),
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                               )
 
@@ -469,33 +486,39 @@ class _AddnewvendorState extends State<Addnewvendora> {
                       ),
                       SizedBox(width: 10),
                       Container(
+
                         height: 37,
                         width: 180,
-
-                        decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
-
-                        child: TextFormField(
-                          decoration: InputDecoration(
-
-                              filled: true,
-                              fillColor: bgGrey,
-                              hintText: "Country",
-
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              )
-
-                          ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),color: bgGrey
                         ),
+                        padding: EdgeInsets.only(left: 60),
+                        child: DropdownButton(
+
+                            value: _value,
+                            items: [
+                              DropdownMenuItem(
+                                child: Text("Country",style: TextStyle(color: Colors.grey.shade600),),
+                                value: 1,
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Second Item"),
+                                value: 2,
+                              ),
+                              DropdownMenuItem(
+                                  child: Text("Third Item"),
+                                  value: 3
+                              ),
+                              DropdownMenuItem(
+                                  child: Text("Fourth Item"),
+                                  value: 4
+                              )
+                            ],
+                            onChanged: (int? value) {
+                              setState(() {
+                                _value = value!;
+                              });
+                            }),
                       ),
 
                     ],

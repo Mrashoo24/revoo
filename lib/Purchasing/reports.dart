@@ -11,6 +11,9 @@ class Reports extends StatefulWidget {
 }
 
 class _ReportsState extends State<Reports> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,9 +23,15 @@ class _ReportsState extends State<Reports> {
             Row(
               children: [
                 Text("Reports",style: TextStyle(color: kblue,fontSize: 35),),
-                Image.asset("asset/clockline.png")
+                SizedBox(width: 50),
+                Image.asset("asset/clockline.png"),
+                SizedBox(width: 50),
+                Image.asset("asset/graphhh.png")
               ],
-            )
+            ),
+            Column(
+
+            ),
           ],
         ),
       ),

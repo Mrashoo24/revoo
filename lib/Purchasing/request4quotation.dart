@@ -94,7 +94,7 @@ class _showTasks extends State<Request4Quotation> {
       margin: EdgeInsets.all(5),
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderRadius: BorderRadius.all(Radius.circular(15),),
         color: kblue,
       ),
       child: Row(
