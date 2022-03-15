@@ -16,3 +16,6 @@ var bluess = Color(0xFF5BC3EB);
 
 var reddy = Color(0xFFDE3939);
 
+var sblue = Color(0xFF649AE3);
+
+

@@ -23,7 +23,7 @@ class _RFQsStatusState extends State<RFQsStatusa> {
     '4',
     '5',
     '6',
-    '7'
+    '7',
   ];
 
 
@@ -38,15 +38,13 @@ class _RFQsStatusState extends State<RFQsStatusa> {
             children: [
               Row(
                 children: [
-SizedBox(width: 12),
+              SizedBox(width: 12),
                   Text('RFQs Status',style: TextStyle(color: kblue,fontSize: 30),),
                   Container(
                     width: 200,height: 50,
                     decoration: BoxDecoration(
                       color:  bgGrey,
                       borderRadius: BorderRadius.circular(20),
-
-
                     ),
                     child: Align(
                         alignment: Alignment.centerLeft,
@@ -68,14 +66,9 @@ SizedBox(width: 12),
 
                               }).toList(), onChanged: (String? value) {  },
                             ),
-
-
                           ],
                         ),
                     ),
-
-
-
                   ),
                 ],
               ),
@@ -96,7 +89,7 @@ SizedBox(height: 20),
                ),
               SizedBox(height: 15),
               Container(
-                                                height: Get.height,
+  height: Get.height,
                 width: Get.width,
 
                 child: Center(
@@ -127,9 +120,6 @@ SizedBox(height: 20),
                                 fontWeight: FontWeight.w400,
                                 color: Colors.red
                             ),),),
-
-
-
                           ],
                           rows: [
                             DataRow(cells: [

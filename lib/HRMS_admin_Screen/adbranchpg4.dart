@@ -523,8 +523,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                                        );
                                                      });
                                                   },
-                                                  child: Text('Duplicate',style: TextStyle(fontSize: 20,color: Colors.white),
-                                                  ),
+                                                  child: Text('Duplicate',style: TextStyle(fontSize: 20,color: Colors.white),),
                                                 )
                                               ],
                                             ),
