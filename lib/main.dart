@@ -19,6 +19,9 @@ import 'HRMS_admin_Screen/adbranchpg3.dart';
 import 'HRMS_admin_Screen/adbranchpg4.dart';
 
 import 'HRMS_admin_Screen/hrmsHome.dart';
+import 'Pos/calc.dart';
+
+import 'Pos/cashinout.dart';
 import 'Pos/yoursessionsa.dart';
 import 'Pos/yoursessionsb.dart';
 import 'Project_Management/Messages/chattingScreen.dart';
@@ -77,8 +80,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Yoursessions(),
-
+      home: Cashinout(),
       debugShowCheckedModeBanner: false,
     );
   }
