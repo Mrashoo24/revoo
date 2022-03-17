@@ -5,14 +5,14 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
 
-class Cashinout extends StatefulWidget {
-  const Cashinout({Key? key}) : super(key: key);
+class Cashinouta extends StatefulWidget {
+  const Cashinouta({Key? key}) : super(key: key);
 
   @override
   _CashinoutState createState() => _CashinoutState();
 }
 
-class _CashinoutState extends State<Cashinout> {
+class _CashinoutState extends State<Cashinouta> {
 
   int _counter = 0;
   increment(){
@@ -54,7 +54,9 @@ child: Scaffold(
                 ],
               ),
             ),
-          ),SizedBox(height: 20),
+          ),
+
+          SizedBox(height: 20),
           Padding(
             padding:   EdgeInsets.only(top: 10,bottom: 10,left: 30,right: 30),
             child: Container(
@@ -93,7 +95,6 @@ child: Scaffold(
               ),
             ),
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
