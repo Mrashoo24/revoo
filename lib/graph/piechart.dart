@@ -4,38 +4,18 @@ import 'package:pie_chart/pie_chart.dart';
 
 
 
-class Graph extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-
-    return MaterialApp(
-
-      debugShowCheckedModeBanner: false,
-      title: 'Pie Chart Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
-      darkTheme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        brightness: Brightness.dark,
-      ),
-      home: HomePage(),
-    );
-  }
-}
 
 enum LegendShape { Circle, Rectangle }
 
-class HomePage extends StatefulWidget {
+class PieChartMine extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _PieChartMineState createState() => _PieChartMineState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PieChartMineState extends State<PieChartMine> {
   final dataMap = <String, double>{
     "% of employee working": 5,
     "% of employee on leave": 10,
-    "% of overall bonus": 2,
 
   };
   final colorList = <Color>[
@@ -71,8 +51,8 @@ class _HomePageState extends State<HomePage> {
 
   bool _showChartValueBackground = true;
   bool _showChartValues = true;
-  bool _showChartValuesInPercentage = false;
-  bool _showChartValuesOutside = false;
+  bool _showChartValuesInPercentage = true;
+  bool _showChartValuesOutside = true;
 
   bool _showGradientColors = false;
 
@@ -111,7 +91,7 @@ class _HomePageState extends State<HomePage> {
       chartValuesOptions: ChartValuesOptions(
         showChartValueBackground: _showChartValueBackground,
 
-        showChartValues: false,
+        showChartValues: true,
         showChartValuesInPercentage: _showChartValuesInPercentage,
         showChartValuesOutside: _showChartValuesOutside,
       ),

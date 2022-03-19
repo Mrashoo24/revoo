@@ -6,7 +6,7 @@ import 'package:revoo/constants/constants.dart';
 import 'package:cell_calendar/cell_calendar.dart';
 
 
-import '../piechart.dart';
+import '../graph/piechart.dart';
 
 class AdminDashboard extends StatefulWidget {
   const AdminDashboard({Key key= const Key('AdminDashboard')}) : super(key: key);
@@ -418,8 +418,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
             buildCard('Daily Logins','40\nDaily Logins'),
 
             Container(
-              height: Get.height*0.25,
-                child: HomePage()),
+              height: Get.height*0.35,
+                child: PieChartMine()),
 
             Padding(
                 padding: const EdgeInsets.only(bottom: 35.0,top: 15,),

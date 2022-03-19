@@ -8,7 +8,7 @@ import 'package:revoo/Login/login.dart';
 import 'package:revoo/WelcomeScreens/SplashScreen.dart';
 import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
-import 'package:revoo/piechart.dart';
+import 'package:revoo/graph/piechart.dart';
 
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
@@ -19,6 +19,8 @@ import 'HRMS_admin_Screen/adbranchpg1.dart';
 import 'HRMS_admin_Screen/adbranchpg3.dart';
 import 'HRMS_admin_Screen/adbranchpg4.dart';
 
+import 'HRMS_admin_Screen/employeecheckin.dart';
+import 'HRMS_admin_Screen/hrmsHome.dart';
 import 'Purchasing/addnwprdct.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
@@ -58,9 +60,14 @@ class MyApp extends StatelessWidget {
 
       ),
 
-      home:DateTimeComboLinePointChart.withSampleData(),
 
-      debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: SplashScreen()
+
+        // DateTimeComboLinePointChart.withSampleData(),
+      )
+
 
     );
   }

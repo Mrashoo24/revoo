@@ -16,7 +16,7 @@ class DateTimeComboLinePointChart extends StatelessWidget {
 
   /// Creates a [TimeSeriesChart] with sample data and no transition.
   factory DateTimeComboLinePointChart.withSampleData() {
-    return new DateTimeComboLinePointChart(
+    return  DateTimeComboLinePointChart(
       _createSampleData(),
       // Disable animations for image tests.
       animate: false,
@@ -50,24 +50,24 @@ class DateTimeComboLinePointChart extends StatelessWidget {
   /// Create one series with sample hard coded data.
   static List<charts.Series<TimeSeriesSales, DateTime>> _createSampleData() {
     final desktopSalesData = [
-      new TimeSeriesSales(new DateTime(2017, 9, 19), 5),
-      new TimeSeriesSales(new DateTime(2017, 9, 26), 25),
-      new TimeSeriesSales(new DateTime(2017, 10, 3), 100),
-      new TimeSeriesSales(new DateTime(2017, 10, 10), 75),
+      new TimeSeriesSales(new DateTime(2022, 9, 19), 5),
+      new TimeSeriesSales(new DateTime(2022, 9, 26), 25),
+      new TimeSeriesSales(new DateTime(2022, 10, 3), 100),
+      new TimeSeriesSales(new DateTime(2022, 10, 10), 75),
     ];
 
     final tableSalesData = [
-      new TimeSeriesSales(new DateTime(2017, 9, 19), 10),
-      new TimeSeriesSales(new DateTime(2017, 9, 26), 50),
-      new TimeSeriesSales(new DateTime(2017, 10, 3), 200),
-      new TimeSeriesSales(new DateTime(2017, 10, 10), 150),
+      new TimeSeriesSales(new DateTime(2022, 9, 19), 10),
+      new TimeSeriesSales(new DateTime(2022, 9, 26), 50),
+      new TimeSeriesSales(new DateTime(2022, 10, 3), 200),
+      new TimeSeriesSales(new DateTime(2022, 10, 10), 150),
     ];
 
     final mobileSalesData = [
-      new TimeSeriesSales(new DateTime(2017, 9, 19), 10),
-      new TimeSeriesSales(new DateTime(2017, 9, 26), 50),
-      new TimeSeriesSales(new DateTime(2017, 10, 3), 200),
-      new TimeSeriesSales(new DateTime(2017, 10, 10), 150),
+      new TimeSeriesSales(new DateTime(2022, 9, 19), 10),
+      new TimeSeriesSales(new DateTime(2022, 9, 26), 50),
+      new TimeSeriesSales(new DateTime(2022, 10, 3), 200),
+      new TimeSeriesSales(new DateTime(2022, 10, 10), 150),
     ];
 
     return [

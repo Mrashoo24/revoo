@@ -52,26 +52,6 @@ class _DBcrud4State extends State<DBcrud4> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: InkWell(
-            onTap: (){print('clicked');
-              scafkey.currentState?.openDrawer();
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-
-              child: Image.asset('asset/navicon.png'),
-            ),
-          ),
-          actions: [
-            Image.asset('asset/bellicon.png'),
-            Image.asset('asset/settingsicon.png'),
-            Image.asset('asset/usericon.png'),
-            SizedBox(width: 12,),
-          ],
-        ),
         body: Stack(
           children: [
             Container(
@@ -214,13 +194,8 @@ class _DBcrud4State extends State<DBcrud4> {
             ),
           ],
         ),
-        drawer: buildDrawer(),
-        bottomNavigationBar: commonWidgets.buildBNB(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Image.asset('asset/bnbAdd.png'),
-        ),
+
+
       ),
     );
   }

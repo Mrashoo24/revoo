@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:revoo/Project_Management/Components/addProject.dart';
 import 'package:revoo/Project_Management/profile/userProfileTeams.dart';
 
 import '../../constants/constants.dart';
@@ -85,24 +86,33 @@ class userprofile extends State<AllProjects> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: Image.asset(
-                                  'asset/addicon.png',
-                                  fit: BoxFit.fitWidth,
+                          InkWell(
+                            onTap: (){
+                              Get.defaultDialog(
+                                titleStyle: TextStyle(color: Kdblue),
+                                backgroundColor: bgGrey,
+                                title: 'Create Project',
+                                content: AddProject()
+                              );
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+
+                                 Image.asset(
+                                    'asset/addicon.png',
+                                    fit: BoxFit.fitWidth,
+                                  ),
+                                SizedBox(height: 10,),
+                                Text(
+                                  "create a project..",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontFamily: 'Neue Haas Grotesk Display Pro',
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "create a project..",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontFamily: 'Neue Haas Grotesk Display Pro',
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           )
                         ],
                       )),

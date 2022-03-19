@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:revoo/piechart.dart';
+import 'package:revoo/graph/piechart.dart';
 
 import '../constants/constants.dart';
 

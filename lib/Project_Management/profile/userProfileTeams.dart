@@ -74,7 +74,7 @@ class _teamState extends State<UserProfileTeams> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'My Tems',
+                                          'My Teams',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 18,
@@ -233,7 +233,9 @@ class _teamState extends State<UserProfileTeams> {
                                 ],
                               ),
                             ),
-                        Expanded(child: Row(
+                        Container(
+                            height: 200,
+                            child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Center(
@@ -277,55 +279,50 @@ class _teamState extends State<UserProfileTeams> {
                             )
                           ],
                         )),
-                        SizedBox(height: 10,),
-                        Text("My Calendar",style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
-                        ),),
-                        Container(
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.all(5),
-                          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('asset/RectangleforSendMessages.png'),
-                              fit: BoxFit.fitWidth
-                            )
-                          ),
-                          child: Column(
-                            children: [
-                              Wrap(
-                                children: [
-                                  Text("Send message to "),
-                                  Text("Employeee's name")
-                                ],
-                              ),
-                              SizedBox(height: 10,),
-                              Wrap(
-                                children: [
-                                  Container(
-                                    height: 25,
-                                    width: Get.width*0.7,
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                          hintText: 'Type your messages',
-                                          focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.blueAccent,
-                                              )
-                                          ),
-                                          hintStyle: TextStyle(
-                                              color: Colors.grey
-                                          )
-                                      ),
-                                    ),
-                                  ),
-                                  Image.asset('asset/messageSendicon.png')
-                                ],
-                              )
-                            ],
-                          ),
-                        )
+                        // Container(
+                        //   alignment: Alignment.center,
+                        //   margin: EdgeInsets.all(5),
+                        //   padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                        //   decoration: BoxDecoration(
+                        //     image: DecorationImage(
+                        //       image: AssetImage('asset/RectangleforSendMessages.png'),
+                        //       fit: BoxFit.fitWidth
+                        //     )
+                        //   ),
+                        //   child: Column(
+                        //     children: [
+                        //       Wrap(
+                        //         children: [
+                        //           Text("Send message to "),
+                        //           Text("Employeee's name")
+                        //         ],
+                        //       ),
+                        //       SizedBox(height: 10,),
+                        //       Wrap(
+                        //         children: [
+                        //           Container(
+                        //             height: 25,
+                        //             width: Get.width*0.7,
+                        //             child: TextFormField(
+                        //               decoration: InputDecoration(
+                        //                   hintText: 'Type your messages',
+                        //                   focusedBorder: OutlineInputBorder(
+                        //                       borderSide: BorderSide(
+                        //                         color: Colors.blueAccent,
+                        //                       )
+                        //                   ),
+                        //                   hintStyle: TextStyle(
+                        //                       color: Colors.grey
+                        //                   )
+                        //               ),
+                        //             ),
+                        //           ),
+                        //           Image.asset('asset/messageSendicon.png')
+                        //         ],
+                        //       )
+                        //     ],
+                        //   ),
+                        // )
                       ],
                     ),
                   ),

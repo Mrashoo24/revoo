@@ -4,18 +4,17 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 
-import '../constants/constants.dart';
-import '../home/homepage.dart';
+import '../../constants/constants.dart';
 
-class DBcrud2 extends StatefulWidget {
-  const DBcrud2({Key? key}) : super(key: key);
+
+class AddDepartments extends StatefulWidget {
+  const AddDepartments({Key? key}) : super(key: key);
 
   @override
-  _DBcrudState createState() => _DBcrudState();
+  _AddDepartmentsState createState() => _AddDepartmentsState();
 }
 
-class _DBcrudState extends State<DBcrud2> {
-
+class _AddDepartmentsState extends State<AddDepartments> {
 
 
   @override
@@ -28,7 +27,7 @@ class _DBcrudState extends State<DBcrud2> {
           centerTitle: true,
           title: Column(
             children: [
-              Text('Create Branch',style: TextStyle(color:kblue,fontSize: 30),),
+              Text('Create Department',style: TextStyle(color:kblue,fontSize: 30),),
 
               Divider(
                 height: 10,
@@ -42,7 +41,7 @@ class _DBcrudState extends State<DBcrud2> {
 
           width: Get.width,
           decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage('asset/dpbrCRUD.png')),
+            image: DecorationImage(image: AssetImage('asset/dpbrCRUD.png')),
 
           ),
 
@@ -61,7 +60,7 @@ class _DBcrudState extends State<DBcrud2> {
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Branch Name',
+                            hintText: 'Dept. Name',
 
                             hintStyle: TextStyle(
                                 color: Colors.grey
@@ -80,17 +79,12 @@ class _DBcrudState extends State<DBcrud2> {
                         ),
                       ),
 
-                      Align
-                        (
-                          alignment: Alignment.centerRight,
-                          child: Text('*optional',style: TextStyle(color:Colors.grey,fontSize: 10),)),
-
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Address',
+                            hintText: 'Select Branch',
 
                             hintStyle: TextStyle(
                                 color: Colors.grey
@@ -114,7 +108,7 @@ class _DBcrudState extends State<DBcrud2> {
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Location',
+                            hintText: 'Select Manager',
                             enabled: false,
                             hintStyle: TextStyle(
                                 color: Colors.grey
@@ -135,40 +129,40 @@ class _DBcrudState extends State<DBcrud2> {
 
 
 
-                     ],
+                    ],
                   ),                      Text('By clicking continue, you agree to the',style: TextStyle(color:kblue,fontSize: 12),),
 
                   Container(
                     child: RichText(
-    text: TextSpan(
-    text: ' Terms & Continue ',
-    style: TextStyle(
-    color: kyellow,
-      fontSize: 12,
-    ),children: [
-      TextSpan(
-        text: 'and',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 12,
-        ),
-      ),
-      TextSpan(
-        text: ' Privacy Policy ',
-        style: TextStyle(
-          color: kyellow,
-          fontSize: 12,
-        ),
-      ),
-      TextSpan(
-        text: 'of Revoo',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 12,
-        ),
-      ),
-    ],
-    ),
+                      text: TextSpan(
+                        text: ' Terms & Continue ',
+                        style: TextStyle(
+                          color: kyellow,
+                          fontSize: 12,
+                        ),children: [
+                        TextSpan(
+                          text: 'and',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' Privacy Policy ',
+                          style: TextStyle(
+                            color: kyellow,
+                            fontSize: 12,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'of Revoo',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                      ),
                     ),
 
                   ),
@@ -197,7 +191,7 @@ class _DBcrudState extends State<DBcrud2> {
                       SizedBox(width: 25,),
                       InkWell(
                         onTap: (){
-                          Get.to(HomePageMain());
+                          Get.to(DBcrud4());
                         },
                         child: Container(
                           width: 110,
@@ -214,7 +208,7 @@ class _DBcrudState extends State<DBcrud2> {
                             borderRadius: BorderRadius.circular(10),
 
                           ),
-                    child: Center(child: Text('Add',style: TextStyle(color: Colors.white),)),
+                          child: Center(child: Text('Add',style: TextStyle(color: Colors.white),)),
                         ),
                       ),
                     ],
@@ -232,6 +226,3 @@ class _DBcrudState extends State<DBcrud2> {
     );
   }
 }
-
-
-

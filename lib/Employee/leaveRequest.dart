@@ -33,17 +33,10 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
             child: ListView(
               children: [
                 Text(
-                  'Project Name',
+                  'Your Leaves Request',
                   style: TextStyle(
                     fontSize: 22,
                     color: kblue,
-                  ),
-                ),
-                Text(
-                  'Your role/Designation',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Kdblue,
                   ),
                 ),
                 SizedBox(height: 5),
@@ -53,9 +46,9 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      _dailCard('To-do', 20),
-                      _dailCard('Completed', 5),
-                      _dailCard('In-Review', 25),
+                      _dailCard('Pending', 20),
+                      _dailCard('Taken', 5),
+                      _dailCard('Remaining', 25),
                     ],
                   ),
                 ),
@@ -108,86 +101,75 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                       ),
                     ),
                     SizedBox(height: 10,),
-                    Container(
-                      width: Get.width,
-                      color: Colors.white,
-                      child: DropdownButton(
-                      hint: Text('SELECT DEPARTMENT'),
-                        icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
-                          value: selectedDepart,
-                         alignment :AlignmentDirectional.center,
-                        items: itemList.map((String items) {
+                    InkWell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Container(
 
-                          return DropdownMenuItem(value: items, child: Text(items,style: TextStyle(color: kblue),));
-
-                        }).toList(), onChanged: (String? value) {
-                          setState(() {
-                                selectedDepart = value!;
-                          });
-                      },
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: bgGrey,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('From'),
+                                Icon(Icons.calendar_today)
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 10,),
-                    Container(
-                      width: Get.width,
-                      color: Colors.white,
-                      child: DropdownButton(
-                        hint: Text('SELECT DEPARTMENT'),
-                        icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
-                        value: selectedDepart,
-                        alignment :AlignmentDirectional.center,
-                        items: itemList.map((String items) {
+                    InkWell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Container(
 
-                          return DropdownMenuItem(value: items, child: Text(items,style: TextStyle(color: kblue),));
-
-                        }).toList(), onChanged: (String? value) {
-                        setState(() {
-                          selectedDepart = value!;
-                        });
-                      },
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: bgGrey,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('To'),
+                                Icon(Icons.calendar_today)
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 10,),
-                    Container(
-                      width: Get.width,
-                      color: Colors.white,
-                      child: DropdownButton(
-                        hint: Text('SELECT DEPARTMENT'),
-                        icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
-                        value: selectedDepart,
-                        alignment :AlignmentDirectional.center,
-                        items: itemList.map((String items) {
+                    TextFormField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: bgGrey,
+                          contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                          hintText: 'Enter Reason',
 
-                          return DropdownMenuItem(value: items, child: Text(items,style: TextStyle(color: kblue),));
+                          hintStyle: TextStyle(
+                              color: Colors.grey
+                          ),
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)
+                          ),
+                          enabledBorder:OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)
+                          )
 
-                        }).toList(), onChanged: (String? value) {
-                        setState(() {
-                          selectedDepart = value!;
-                        });
-                      },
+
                       ),
                     ),
-                    SizedBox(height: 10,),
-                    Container(
-                      width: Get.width,
-                      color: Colors.white,
-                      child: DropdownButton(
-                        hint: Text('SELECT DEPARTMENT'),
-                        icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
-                        value: selectedDepart,
-                        alignment :AlignmentDirectional.center,
-                        items: itemList.map((String items) {
-
-                          return DropdownMenuItem(value: items, child: Text(items,style: TextStyle(color: kblue),));
-
-                        }).toList(), onChanged: (String? value) {
-                        setState(() {
-                          selectedDepart = value!;
-                        });
-                      },
-                      ),
-                    ),
-                    SizedBox(height: 50,)
 
                   ],
                 ),

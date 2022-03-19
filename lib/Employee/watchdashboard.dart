@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:revoo/piechart.dart';
+import 'package:revoo/graph/piechart.dart';
 
 import '../constants/constants.dart';
 import 'employeedash1stpg.dart';
@@ -399,7 +399,7 @@ class _EmployeeDashboardState extends State<Watchdashboard> {
                             ),
                             textAlign: TextAlign.left,
                           ),
-                          Text("Late",
+                          Text("30",
                             style: TextStyle(
                                 color: Colors.yellow.shade700,fontSize:  20
                             ),
@@ -423,7 +423,7 @@ class _EmployeeDashboardState extends State<Watchdashboard> {
                         children: [
                           SizedBox(height: 12,),
                           Text('Total Absents',style: TextStyle(color: Colors.white,fontSize: 10),),
-                          Text("Late",
+                          Text("1",
                             style: TextStyle(
                                 color: Colors.yellow.shade700,fontSize:  20
                             ),
@@ -445,7 +445,7 @@ class _EmployeeDashboardState extends State<Watchdashboard> {
                         children: [
                           SizedBox(height: 12,),
                           Text('Late Logins',style: TextStyle(color: Colors.white,fontSize: 10),),
-                          Text("Late",
+                          Text("2",
                             style: TextStyle(
                                 color: Colors.yellow.shade700,fontSize:  20
                             ),
@@ -467,7 +467,7 @@ class _EmployeeDashboardState extends State<Watchdashboard> {
                         children: [
                           SizedBox(height: 12,),
                           Text('Early Exits',style: TextStyle(color: Colors.white,fontSize: 10),),
-                          Text("Late",
+                          Text("1",
                             style: TextStyle(
                                 color: Colors.yellow.shade700,fontSize: 20
                             ),

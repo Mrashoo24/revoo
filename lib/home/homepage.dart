@@ -1,8 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
+import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
+import 'package:revoo/HRMS_admin_Screen/employeecheckin.dart';
 import 'package:revoo/home/admindashboard.dart';
 
+import '../HRMS_admin_Screen/Shifts.dart';
+import '../HRMS_admin_Screen/acceptleaverequest.dart';
+import '../HRMS_admin_Screen/allEmployee.dart';
+import '../HRMS_admin_Screen/allemployeeupdates.dart';
+import '../HRMS_admin_Screen/checkinhistory.dart';
+import '../HRMS_admin_Screen/plans/myplan.dart';
 import '../constants/constants.dart';
 
 
@@ -20,7 +29,16 @@ class _HomePageMainState extends State<HomePageMain> {
   var selectedindex = 0; //for changing index of page
 
   var homepages = [
-    AdminDashboard(), //0
+    AdminDashboard(),
+    MyPlan(),
+    DBcrud4(),
+    Departments(key: Key('department'),),
+    AllEmployeePage(),
+    ShiftsManagement(),
+    CheckinHistory(),
+    EmployeeCheckin(),
+    AcceptLeave(),
+    AllEmployeeUpdates(), //0
     Container(), //1
   ];
 
@@ -28,19 +46,12 @@ class _HomePageMainState extends State<HomePageMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scafkey,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: Image.asset('asset/bnbAdd.png'),
-      ),
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: InkWell(
-          onTap: (){
-            scafkey.currentState?.openDrawer();
+          onTap: (){print('clicked');
+          scafkey.currentState?.openDrawer();
           },
           child: Padding(
             padding: const EdgeInsets.only(left: 12.0),
@@ -50,125 +61,226 @@ class _HomePageMainState extends State<HomePageMain> {
         ),
         actions: [
           Image.asset('asset/bellicon.png'),
+
           Image.asset('asset/settingsicon.png'),
+
           Image.asset('asset/usericon.png'),
+
           SizedBox(width: 12,),
         ],
       ),
+      drawer: buildDrawer(),
       bottomNavigationBar: commonWidgets.buildBNB(),
-      drawer: Drawer(
-        child:  Card(
-          color: Colors.grey.shade200,
-          shape: Border(
-            right: BorderSide(style: BorderStyle.none),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Image.asset('asset/bnbAdd.png'),
+      ),
+      key: scafkey,
+      backgroundColor: Colors.white,
+      body: homepages[selectedindex],
+    );
+  }
 
 
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: SingleChildScrollView(
-              child: Column(
-
-                children: [
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-
-                      CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        backgroundImage: AssetImage('asset/profile.jfif'),
-                        radius: 30,
-                      ),
-                      SizedBox(width: 20,),
-                      Align(
-                        alignment: Alignment.bottomLeft,
-
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                    child: Text('Name of the person',style: TextStyle(fontSize: 20,color: kblue),
-                                        textAlign: TextAlign.left
-                                    )),
-                              ),
-                              Container(
+  buildDrawer(){
+    return  Drawer(
+      child:  Card(
+        color: Colors.grey.shade200,
+        shape: Border(
+          right: BorderSide(style: BorderStyle.none),
 
 
-                                  child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 30.0),
+          child: SingleChildScrollView(
+            child: Column(
+
+              children: [
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      backgroundImage: AssetImage('asset/profile.jfif'),
+                      radius: 30,
+                    ),
+
+                    SizedBox(width: 20,),
+
+                    Align(
+
+                      alignment: Alignment.bottomLeft,
+
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                  child: Text('Name of the person',style: TextStyle(fontSize: 20,color: kblue),
                                       textAlign: TextAlign.left
                                   )),
-                              InkWell(
-                                onTap: (){
+                            ),
+                            Container(
 
-                                },
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                          child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
-                                          )),
-                                      SizedBox(width: 15,),
-                                      Image.asset('asset/rightarrow.png')
-                                    ],
 
-                                  ),
+                                child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
+                                    textAlign: TextAlign.left
+                                )),
+                            InkWell(
+                              onTap: (){
+
+                              },
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                        child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
+                                        )),
+                                    SizedBox(width: 15,),
+                                    Image.asset('asset/rightarrow.png')
+                                  ],
 
                                 ),
 
                               ),
 
+                            ),
 
-                            ],
-                          ),
+
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
 
-                  SizedBox(height: 30,),
-                  buildNavCard('asset/home.png','Home'),
-                  SizedBox(height: 5,),
-                  Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/checkgrp.png','Daily Logins'),
-                  SizedBox(height: 5,),
-                  Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/checkpad.png','Daily Updates'),
-                  SizedBox(height: 5,),
-                  Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/lvapproval.png','Leave Request/\nApprovals'),
-                  SizedBox(height: 5,),
-                  Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/logoff.png','Logout'),
-                  SizedBox(height: 5,),
+                SizedBox(height: 30,),
+                buildNavCard('asset/home.png','My Account',0),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/checkgrp.png','My Plan',1),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/checkpad.png','My Branches',2),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/lvapproval.png','My Departments',3),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/lvapproval.png','My Employees',4),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/lvapproval.png','Shifts Management',5),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
+                buildNavCard('asset/lvapproval.png','Checkin History',6),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
+                buildNavCard('asset/lvapproval.png','Emp. Checkin',7),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
+                buildNavCard('asset/lvapproval.png','Accept Leave',8),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
+                buildNavCard('asset/lvapproval.png','Daily Updates',9),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+
+                buildNavCard('asset/logoff.png','Logout',10),
+                SizedBox(height: 5,),
 
 
-                ],
-              ),
+              ],
             ),
-
           ),
 
         ),
+
       ),
-      body: homepages[selectedindex],
     );
   }
 
-  buildNavCard(String image,String name) {
+
+  buildNavCard(String image,String name,index) {
 
     return InkWell(
       onTap: (){
-        setState(() {
-          selectedCard = name;
-          selectedCard == 'Home' ? selectedindex = 0 :selectedindex = 1;
-        });
+        if(index == 10){
+          Get.back();
+          Get.defaultDialog(title: '',content: Column(
+            children: [
+              Container(
+                  height: 50,
+                  width: 50,
+                  child: ClipRRect(child: Image.asset('asset/exclamatorybx.png',fit: BoxFit.cover,))),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap:(){
+
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: Container(
+                          child: Center(child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Text('Deny',style: TextStyle(color: Kdblue),),
+                          )),
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Kdblue,width: 3)
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: (){
+
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: Container(
+                          child: Center(child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12.0),
+                            child: Text('Accept',style: TextStyle(color: Colors.white),),
+                          )),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              Kdblue,
+                              bluess
+                            ]),
+                            borderRadius: BorderRadius.circular(10),
+                            // border: Border.all(color: Kdblue,width: 3)
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ));
+
+        }else{
+          setState(() {
+            selectedCard = name;
+            selectedindex = index;
+          });
+          Get.back();
+        }
+
       },
       child: Card(
         color: selectedCard == name ?  Colors.white : bgGrey,
