@@ -94,8 +94,41 @@ SizedBox(height: 20),
                       ),
                     ),
                   ),
-                )
+                ),
 
+                SizedBox(height: 10),
+                Padding(
+                  padding:   EdgeInsets.only(left: 20,right:20 ),
+                  child: InkWell(
+                    child: Container(
+                      height: 41,
+                      width: Get.width,
+                      color: Kdblue,
+                      child:Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.perm_identity_outlined,
+                            color:Colors.white
+                          ),
+                          Text("Customer",style: TextStyle(color: Colors.white,fontSize: 20,),),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Padding(
+                  padding:   EdgeInsets.only(left: 20,right:20 ),
+                  child: InkWell(
+                    child: Container(
+                      height: 41,
+                      width: Get.width,
+                      color: Kdblue,
+                      child:Center(child: Text("Generate Invoice",style: TextStyle(color: Colors.white,fontSize: 20,),)),
+                    ),
+                  ),
+                ),
 
 
 
