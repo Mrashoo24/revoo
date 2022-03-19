@@ -96,12 +96,9 @@ class _HomePageMainState extends State<HomePageMain> {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: Image.asset('asset/bnbAdd.png'),
-              ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: Image.asset('asset/bnbAdd.png'),
             ),
           ],
         ),
@@ -134,49 +131,46 @@ class _HomePageMainState extends State<HomePageMain> {
                       Align(
                         alignment: Alignment.bottomLeft,
 
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                    child: Text('Name of the person',style: TextStyle(fontSize: 20,color: kblue),
-                                        textAlign: TextAlign.left
-                                    )),
-                              ),
-                              Container(
-
-
-                                  child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                  child: Text('Name of the person',style: TextStyle(fontSize: 20,color: kblue),
                                       textAlign: TextAlign.left
                                   )),
-                              InkWell(
-                                onTap: (){
+                            ),
+                            Container(
 
-                                },
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                          child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
-                                          )),
-                                      SizedBox(width: 15,),
-                                      Image.asset('asset/rightarrow.png')
-                                    ],
 
-                                  ),
+                                child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
+                                    textAlign: TextAlign.left
+                                )),
+                            InkWell(
+                              onTap: (){
+
+                              },
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                        child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
+                                        )),
+                                    SizedBox(width: 15,),
+                                    Image.asset('asset/rightarrow.png')
+                                  ],
 
                                 ),
 
                               ),
 
+                            ),
 
-                            ],
-                          ),
+
+                          ],
                         ),
                       ),
                     ],

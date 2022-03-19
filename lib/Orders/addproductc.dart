@@ -72,7 +72,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                   Row(
                     children: [
                       Container(
-                        width: 150,
+                        width: 145,
                         height: 36,
                         decoration: BoxDecoration(
                           color: Kdblue,
@@ -82,9 +82,9 @@ class _AddNewProductState extends State<AddNewProduct> {
                           child: Row(
                             children: [
                               Text('Purchased :',style: TextStyle(color: Colors.white,fontSize: 15),),
-                              SizedBox(width: 10,),
+                              SizedBox(width: 8,),
                               Container(
-                                width: 50,
+                                width: 45,
                                 height: 22,
                                 decoration: BoxDecoration(color: bgGrey),
                                 child: Center(child: Text("24",style: TextStyle(color: kyellow,fontSize:15),)),
@@ -96,7 +96,7 @@ class _AddNewProductState extends State<AddNewProduct> {
 
                       ),SizedBox(width: 20,),
                       Container(
-                        width: 140,
+                        width: 130,
                         height: 36,
                         margin: EdgeInsets.all(8),
                         decoration: BoxDecoration(border: Border.all(
@@ -134,7 +134,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                         ),
 
 
-                      ),SizedBox(width: 25),
+                      ),SizedBox(width: 20),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -337,9 +337,14 @@ class _AddNewProductState extends State<AddNewProduct> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 30),
 
                         Align(alignment: Alignment.centerLeft,
                             child: Text('Product category',style: TextStyle(fontSize: 18,color:kblue ),)),
+                        SizedBox(height: 1),
+                        Divider(
+                          height: 5,thickness: 1,color: kblue,
+                        ),
 
                         Container(
 

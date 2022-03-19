@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
-import 'adbranchpg2.dart';
+import '../HRMS_admin_Screen/adbranchpg2.dart';
 
 class HRMSadmincust extends StatefulWidget {
   const HRMSadmincust({Key? key}) : super(key: key);

@@ -406,6 +406,7 @@ class _DBcrud3State extends State<DBcrud4> {
                                                                  borderSide: BorderSide(color: Colors.white)
                                                                  ),
                                                                  focusedBorder: OutlineInputBorder(
+
                                                                  borderSide: BorderSide(color: Colors.white)
                                                                  ),
                                                                  enabledBorder:OutlineInputBorder(

@@ -3,33 +3,58 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:revoo/Employee/employeedash202.dart';
 
 import 'package:revoo/First/welcomscreen.dart';
-import 'package:revoo/HRMS_admin_Screen/HRMSadmin.view21.dart';
+import 'package:revoo/Orders/ordersa.dart';
+
 import 'package:revoo/Login/login.dart';
 import 'package:revoo/WelcomeScreens/SplashScreen.dart';
 import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
 import 'package:revoo/piechart.dart';
+import 'package:revoo/pos/pos.dart';
+import 'package:revoo/pos/pos.next.dart';
 import 'package:revoo/testing.dart';
 
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
 
 import 'Employee/watchdashboard.dart';
-import 'HRMS_admin_Screen/HRMSadmincust55.dart';
-import 'HRMS_admin_Screen/HRMSadminvie36.dart';
-import 'HRMS_admin_Screen/HRMSadminview22.dart';
-import 'HRMS_admin_Screen/HRMSadminview28.dart';
-import 'HRMS_admin_Screen/HRMSproduct37.dart';
-import 'HRMS_admin_Screen/adbranchpg2.dart';
-import 'HRMS_admin_Screen/adbranchpg1.dart';
-import 'HRMS_admin_Screen/adbranchpg3.dart';
-import 'HRMS_admin_Screen/adbranchpg4.dart';
+import 'Orders/addproductb.dart';
+import 'Orders/ordersb.dart';
+import 'Orders/customersa.dart';
+import 'Orders/servicecallsa.dart';
+import 'Orders/quotation.dart';
+import 'Orders/productsa.dart';
+import 'Orders/servicecallsb.dart';
 
-import 'HRMS_admin_Screen/practice.dart';
-import 'Purchasing/addnwprdct.dart';
+import 'Orders/addcustomer56.dart';
+import 'Orders/addcustomerb.dart';
+import 'Orders/addcustomera.dart';
+import 'Orders/addproducta.dart';
+
+import 'Orders/createquatationa.dart';
+ import 'HRMS_admin_Screen/practice.dart';
+import 'Purchasing/addnwprdct29.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
 import 'Employee/dailyupdates.dart';
+import 'Vendorproduct mangment/Batchmangment51.dart';
+import 'Vendorproduct mangment/batchmangment50.dart';
+import 'Vendorproduct mangment/dialouge40.dart';
+import 'Vendorproduct mangment/goodissue42.dart';
+import 'Vendorproduct mangment/goodsissue43.dart';
+import 'Vendorproduct mangment/inventory reports52.dart';
+import 'Vendorproduct mangment/pos.62.dart';
+import 'Vendorproduct mangment/practice.dart';
+
+
+import 'Vendorproduct mangment/serialnumber48.dart';
+import 'Vendorproduct mangment/tansfer47.dart';
+import 'Vendorproduct mangment/transaction44.dart';
+import 'Vendorproduct mangment/transfer45.dart';
+import 'Vendorproduct mangment/transferadd46.dart';
+import 'Vendorproduct mangment/vendoraddproduct39.dart';
+import 'Vendorproduct mangment/vendorproduct38.dart';
+import 'Vendorproduct mangment/vengoods41.dart';
 
 
 
@@ -59,7 +84,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Quotation(),
+      home:Addcustomer56(),
       debugShowCheckedModeBanner: false,
     );
   }

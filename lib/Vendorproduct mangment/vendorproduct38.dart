@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../HRMS_admin_Screen/adbranchpg2.dart';
 import '../constants/constants.dart';
-import 'adbranchpg2.dart';
 
-class Ordera extends StatefulWidget {
-  const Ordera({Key? key}) : super(key: key);
+class Addproduct38 extends StatefulWidget {
+  const Addproduct38({Key? key}) : super(key: key);
 
   @override
-  _HRMSadmincustState createState() => _HRMSadmincustState();
+  _Addproduct38State createState() => _Addproduct38State();
 }
 
-class _HRMSadmincustState extends State<Ordera> {
+class _Addproduct38State extends State<Addproduct38> {
   String initialValue = '';
 
   var itemList = [
@@ -70,7 +70,7 @@ class _HRMSadmincustState extends State<Ordera> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Order',style: TextStyle(color:kblue,fontSize: 35),
+                            child: Text('Product',style: TextStyle(color:kblue,fontSize: 35),
                             ),
 
                           ),
@@ -133,6 +133,7 @@ class _HRMSadmincustState extends State<Ordera> {
 
                       ),
 
+
                       SizedBox( height: 20),
                       Container(
                         width: 500,
@@ -156,7 +157,7 @@ class _HRMSadmincustState extends State<Ordera> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Order Name 1',
+                                      'Project name 1',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
@@ -213,7 +214,7 @@ class _HRMSadmincustState extends State<Ordera> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Order Name 2',
+                                      'Project name 2',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
@@ -270,7 +271,7 @@ class _HRMSadmincustState extends State<Ordera> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Order Name 3',
+                                      'Project name 3',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
@@ -327,7 +328,7 @@ class _HRMSadmincustState extends State<Ordera> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Order Name 4',
+                                      'Project name 4',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
@@ -384,7 +385,7 @@ class _HRMSadmincustState extends State<Ordera> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Order Name 5',
+                                      'Project name 5',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
@@ -435,6 +436,4 @@ class _HRMSadmincustState extends State<Ordera> {
       ),
     );
   }
-
-
 }

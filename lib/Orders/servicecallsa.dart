@@ -6,7 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../constants/constants.dart';
 import '../constants/constants.dart';
 import '../constants/constants.dart';
-import 'adbranchpg2.dart';
+import '../HRMS_admin_Screen/adbranchpg2.dart';
 
 class Serviescall extends StatefulWidget {
   const Serviescall({Key? key}) : super(key: key);

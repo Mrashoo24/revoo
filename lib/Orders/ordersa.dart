@@ -4,16 +4,16 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
-import 'adbranchpg2.dart';
+import '../HRMS_admin_Screen/adbranchpg2.dart';
 
-class Quotation extends StatefulWidget {
-  const Quotation({Key? key}) : super(key: key);
+class Ordera extends StatefulWidget {
+  const Ordera({Key? key}) : super(key: key);
 
   @override
   _HRMSadmincustState createState() => _HRMSadmincustState();
 }
 
-class _HRMSadmincustState extends State<Quotation> {
+class _HRMSadmincustState extends State<Ordera> {
   String initialValue = '';
 
   var itemList = [
@@ -26,8 +26,6 @@ class _HRMSadmincustState extends State<Quotation> {
     'Std6',
     'Std7'
   ];
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,7 +70,7 @@ class _HRMSadmincustState extends State<Quotation> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Quotation',style: TextStyle(color:kblue,fontSize: 35),
+                            child: Text('Orders',style: TextStyle(color:kblue,fontSize: 35),
                             ),
 
                           ),
@@ -131,7 +129,7 @@ class _HRMSadmincustState extends State<Quotation> {
 
                           ),
 
-                            ],
+                        ],
 
                       ),
 
@@ -165,7 +163,7 @@ class _HRMSadmincustState extends State<Quotation> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Quotation Name 1',
+                                      'Order Name 1',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
@@ -222,7 +220,7 @@ class _HRMSadmincustState extends State<Quotation> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Quotation Name 2',
+                                      'Order Name 2',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
@@ -279,7 +277,7 @@ class _HRMSadmincustState extends State<Quotation> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Quotation Name 3',
+                                      'Order Name 3',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
@@ -336,7 +334,7 @@ class _HRMSadmincustState extends State<Quotation> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Quotation Name 4',
+                                      'Order Name 4',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
@@ -393,7 +391,7 @@ class _HRMSadmincustState extends State<Quotation> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Quotation Name 5',
+                                      'Order Name 5',
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,

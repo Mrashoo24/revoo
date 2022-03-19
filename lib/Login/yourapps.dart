@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg1.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
-import 'package:revoo/Purchasing/addnwprdct.dart';
+import 'package:revoo/Purchasing/addnwprdct29.dart';
 
 import '../constants/constants.dart';
 

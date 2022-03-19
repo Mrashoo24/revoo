@@ -5,7 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
 import '../constants/constants.dart';
-import 'adbranchpg2.dart';
+import '../HRMS_admin_Screen/adbranchpg2.dart';
 
 class Product37 extends StatefulWidget {
   const Product37({Key? key}) : super(key: key);
@@ -71,7 +71,7 @@ class _Product37State extends State<Product37> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Create Branch',style: TextStyle(color:kblue,fontSize: 35),
+                            child: Text('Service Calls',style: TextStyle(color:kblue,fontSize: 35),
                             ),
 
                           ),

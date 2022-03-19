@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
-import 'adbranchpg2.dart';
+import '../HRMS_admin_Screen/adbranchpg2.dart';
 
 class Product extends StatefulWidget {
   const Product({Key? key}) : super(key: key);
@@ -46,16 +46,12 @@ class _HRMSadmincustState extends State<Product> {
                             print('clicked');
                           },
                           child: Image.asset('asset/navicon.png',)),
-                      Row(
-                        children: [
-                          SizedBox(width: 110),
-                          Image.asset('asset/bellicon.png'),
-                          SizedBox(width: 20),
-                          Image.asset('asset/settingsicon.png'),
-                          SizedBox(width: 20),
-                          Image.asset('asset/usericon.png'),
-                        ],
-                      ),
+                      SizedBox(width: 110),
+                      Image.asset('asset/bellicon.png'),
+                      SizedBox(width: 20),
+                      Image.asset('asset/settingsicon.png'),
+                      SizedBox(width: 20),
+                      Image.asset('asset/usericon.png'),
 
 
                     ],
