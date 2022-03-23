@@ -14,6 +14,7 @@ import 'package:revoo/pos/pos.dart';
 import 'package:revoo/pos/pos.next.dart';
 import 'package:revoo/testing.dart';
 
+import 'APPS/selectplans.dart';
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
 
@@ -84,7 +85,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Addcustomer56(),
+      home: SelectPlans (),
       debugShowCheckedModeBanner: false,
     );
   }

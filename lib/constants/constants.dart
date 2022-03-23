@@ -16,3 +16,5 @@ var bluess = Color(0xFF5BC3EB);
 
 var reddy = Color(0xFFDE3939);
 var mannu = Color(0xFF1B57A7);
+
+var clo = Color(0xFFF5DF9F);
