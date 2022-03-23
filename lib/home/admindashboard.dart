@@ -419,7 +419,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
             Container(
               height: Get.height*0.35,
-                child: PieChartMine()),
+                child: PieChartMine(dataMap: {
+                  "% of employee working": 5,
+                  "% of employee on leave": 10,
+
+                },)),
 
             Padding(
                 padding: const EdgeInsets.only(bottom: 35.0,top: 15,),

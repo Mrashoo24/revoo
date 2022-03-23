@@ -18,6 +18,7 @@ class _CreatRQFState extends State<CreatRQF> {
     return SafeArea(
       child: Scaffold(
         body:  Container(
+          padding: EdgeInsets.only(top: 15,bottom: 10,left: 15,right: 15),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -149,7 +150,7 @@ class _CreatRQFState extends State<CreatRQF> {
                   child: Row(
                     children: [
                       Container(
-                        height: 35,width: 100,
+
                         child: ElevatedButton(onPressed: (){
                           // Get.back();
                         },
@@ -171,8 +172,7 @@ class _CreatRQFState extends State<CreatRQF> {
                       ),
                       SizedBox(width: 15),
                       Container(
-                        width: 110,
-                        height: 35,
+
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
@@ -187,7 +187,7 @@ class _CreatRQFState extends State<CreatRQF> {
 
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 10),
                           child: Center(
                             child: Text('ADD',style: TextStyle(
                                 color: Colors.white,fontSize: 15
@@ -199,6 +199,7 @@ class _CreatRQFState extends State<CreatRQF> {
                     ],
                   ),
                 ),
+                SizedBox(height: 30,)
               ],
             ),
           ),

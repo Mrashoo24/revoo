@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg1.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
 import 'package:revoo/Purchasing/addnwprdct.dart';
+import 'package:revoo/Purchasing/purchasing_dashboard.dart';
 
 import '../Employee/employee_homepage.dart';
 import '../constants/constants.dart';
@@ -65,7 +66,7 @@ class _YourappsState extends State<Yourapps> {
                       }),
 
                       buildAppCard('PURCHASE & OPERATIONS','asset/inventory.png',(){
-                        Get.to(AddNewProduct());
+                        Get.to(PurchasingDashboard());
                       }),
 
                       buildAppCard('POS','asset/money.png',(){
@@ -106,7 +107,8 @@ class _YourappsState extends State<Yourapps> {
                 width: 100,
                 height: 100,
                 child: Center(child: ClipRRect(child: Image.asset(img,color: Colors.white,),)),
-              )),
+              )
+          ),
         ),
         Container(width:100,child: Center(child: AutoSizeText(title,style: TextStyle(color: kyellow ,fontSize: 14),textAlign: TextAlign.center,))),
       ],

@@ -1,8 +1,10 @@
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:revoo/Purchasing/addnewvendora.dart';
 
 import '../constants/constants.dart';
 
@@ -26,8 +28,31 @@ class _HRMSadmincustState extends State<Vendorsa> {
     'Std6',
     'Std7'
   ];
+
+
+  RelativeRect buttonMenuPosition(BuildContext context1) {
+    final RenderBox bar = context.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+    Overlay.of(context)?.context.findRenderObject() as RenderBox;
+    const Offset offset = Offset(20, 20);
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        bar.localToGlobal(bar.size.center(offset), ancestor: overlay),
+        bar.localToGlobal(bar.size.centerRight(offset), ancestor: overlay),
+      ),
+      offset & overlay.size,
+    );
+    return position;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
+
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -55,6 +80,7 @@ class _HRMSadmincustState extends State<Vendorsa> {
                           ),
                           InkWell(onTap: (){
 
+                            Get.to(Addnewvendora());
                           },child: Image.asset('asset/addnew.png')),
 
                         ],
@@ -113,350 +139,37 @@ class _HRMSadmincustState extends State<Vendorsa> {
                       ),
 
                       SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return
 
-                        decoration: BoxDecoration(
+                            Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Container(
 
-                          color: Kdblue,
+                                padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(
 
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Order Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
+                                color: Kdblue,
 
 
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 190.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
+                                borderRadius: BorderRadius.circular(15),
 
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
+                              ),
+                              child:
+                              buildListTile(
+                                  buttonMenuPosition, context,
+                                  title: 'Vendor Name 1',
+                                  tagcolor: kyellow),
 
-                              ],
                             ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Order Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 190.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
+                          );
+                        }
                       ),
 
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Order Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 190.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Order Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 190.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Order Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 190.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Order Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 190.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
 
 
 
@@ -472,7 +185,83 @@ class _HRMSadmincustState extends State<Vendorsa> {
       ),
     );
   }
+  ListTile buildListTile(RelativeRect buttonMenuPosition(BuildContext context),
+      BuildContext context,
+      {required String title, required Color tagcolor}) {
+    return ListTile(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
 
+          Container(
+            width: Get.width * 0.31,
+            child: Text(
+              title,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          Row(
+            children: [
+              CircleAvatar(
+                child: Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: tagcolor,
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: Center(
+                    child: AutoSizeText(
+                      '1',
+                      style: TextStyle(color: Colors.white, fontSize: 2),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                'RFQ',
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              )
+            ],
+          ),
+
+        ],
+      ),
+      subtitle: Text(
+        'Sector 20 US',
+        style: TextStyle(color: Colors.white, fontSize: 10),
+      ),
+      trailing: InkWell(
+        child: Icon(Icons.more_vert, color: Colors.white),
+        onTap: () {
+          final RelativeRect position = buttonMenuPosition(context);
+
+          showMenu(
+            color: Kdblue,
+            context: context,
+            position: position,
+            items: [
+              PopupMenuItem<int>(
+                value: 0,
+                child: Row(
+                  children: [
+                    Text(
+                      'Edit',
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+
+            ],
+          );
+        },
+      ),
+    );
+  }
 
 }
 

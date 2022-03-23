@@ -36,41 +36,48 @@ class _RFQsStatusState extends State<RFQsStatusa> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                children: [
-              SizedBox(width: 12),
-                  Text('RFQs Status',style: TextStyle(color: kblue,fontSize: 30),),
-                  Container(
-                    width: 200,height: 50,
-                    decoration: BoxDecoration(
-                      color:  bgGrey,
-                      borderRadius: BorderRadius.circular(20),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('RFQs Status',style: TextStyle(color: kblue,fontSize: 30),),
+                    Container(
+
+                      decoration: BoxDecoration(
+                        color:  bgGrey,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(width: 8),
+                              Row(
+                                children: [
+                                  Image.asset('asset/filterimg.png',color: kyellow,),
+                                  Text('Filter',style: TextStyle(color: kblue),),
+                                ],
+                              ),
+
+                              DropdownButton(
+
+                                icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
+
+                                items: itemList.map((String items) {
+
+                                  return DropdownMenuItem(value: items, child: Text(items));
+
+                                }).toList(), onChanged: (String? value) {  },
+                              ),
+                            ],
+                          ),
+                      ),
                     ),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            SizedBox(width: 8),
-                            Image.asset('asset/filterimg.png',color: kyellow,),
-                            SizedBox(width: 10),
-                            Text('Filter',style: TextStyle(color: kblue,fontSize: 25),),
-                            SizedBox(width: 50),
-
-                            DropdownButton(
-
-                              icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
-
-                              items: itemList.map((String items) {
-
-                                return DropdownMenuItem(value: items, child: Text(items));
-
-                              }).toList(), onChanged: (String? value) {  },
-                            ),
-                          ],
-                        ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
 SizedBox(height: 20),
                Row(

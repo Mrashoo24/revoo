@@ -8,16 +8,15 @@ import 'package:pie_chart/pie_chart.dart';
 enum LegendShape { Circle, Rectangle }
 
 class PieChartMine extends StatefulWidget {
+  final Map<String, double> dataMap ;
+
+  const PieChartMine({Key? key, required this.dataMap}) : super(key: key);
   @override
   _PieChartMineState createState() => _PieChartMineState();
 }
 
 class _PieChartMineState extends State<PieChartMine> {
-  final dataMap = <String, double>{
-    "% of employee working": 5,
-    "% of employee on leave": 10,
-
-  };
+ late var dataMap;
   final colorList = <Color>[
     Color(0xfffdcb6e),
     Color(0xff0984e3),
@@ -60,6 +59,12 @@ class _PieChartMineState extends State<PieChartMine> {
   LegendPosition? _legendPosition = LegendPosition.right;
 
   int key = 0;
+
+  @override
+  void initState() {
+     dataMap = widget.dataMap;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

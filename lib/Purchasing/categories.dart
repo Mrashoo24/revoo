@@ -112,347 +112,65 @@ class _HRMSadmincustState extends State<Categories> {
 
 
                       SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
+                      ListView.builder(
+                        itemCount: 10,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(
 
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
+                                color: Kdblue,
 
 
-                          borderRadius: BorderRadius.circular(15),
+                                borderRadius: BorderRadius.circular(15),
 
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
+                              ),
+                              child: Align(
+                                alignment: Alignment.topLeft,
 
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
+                                child: Column(
                                   children: [
-                                    Text(
-                                      'Quotations Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Quotations Name 1',
+                                          style: TextStyle(
+                                            color: Colors.yellow.shade600,
+                                            fontSize: 19,
 
 
-                                      ),
+                                          ),
+                                        ),
+                                        Icon(Icons.more_vert,color: Colors.white),
+
+                                      ],
                                     ),
                                     Padding(
-                                      padding:   EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
+                                      padding:   EdgeInsets.only(right: 120),
+                                      child: Center(
+                                        child: Text(
+                                          "Adrees sec 14 kherghr shelter park opp littel world mall  ",
+                                          style: TextStyle(
+                                            color: Colors.white,fontSize: 12,
+                                          ),
+                                        ),
+                                      ),
+                                    )
 
                                   ],
                                 ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
+                              ),
 
-                              ],
                             ),
-
-                          ),
-                        ),
-
+                          );
+                        }
                       ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
 
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Quotations Name 2',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Quotations Name 3',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Quotations Name 4',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Quotations Name 5',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Quotations Name 6',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
 
                     ],
                   ),

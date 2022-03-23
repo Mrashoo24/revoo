@@ -113,8 +113,7 @@ class _BillsinvoiceState extends State<Billsinvoice> {
 
                       SizedBox( height: 20),
                       Container(
-                        width: 500,
-                        height: 90,
+                        padding: EdgeInsets.all(8),
 
                         decoration: BoxDecoration(
 
@@ -128,10 +127,11 @@ class _BillsinvoiceState extends State<Billsinvoice> {
                           alignment: Alignment.topLeft,
 
                           child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
+                            padding:   EdgeInsets.all(13),
                             child: Column(
                               children: [
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Invoice Name 1',
@@ -142,10 +142,7 @@ class _BillsinvoiceState extends State<Billsinvoice> {
 
                                       ),
                                     ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 160.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
+                                    Icon(Icons.more_vert,color: Colors.white),
 
                                   ],
                                 ),
@@ -168,292 +165,7 @@ class _BillsinvoiceState extends State<Billsinvoice> {
                         ),
 
                       ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
 
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Invoice Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 160.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Invoice Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 160.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Invoice Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 160.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Invoice Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 160.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: Kdblue,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding:   EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Invoice Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:   EdgeInsets.only(left: 160.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding:   EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 18),
 
 
 

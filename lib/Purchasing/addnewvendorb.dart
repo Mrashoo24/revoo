@@ -50,36 +50,27 @@ class _AddnewvendorState extends State<Addnewvendorb> {
                   ),
                   Row(
                     children: [
-                      Container(
-                        width: 150,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: Kdblue,
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(border: Border.all(
+                            color: Kdblue,
+                          )),
+                          child: Center(child: Text('Contact Info',style: TextStyle(fontSize: 15,color: kblue),)),
                         ),
-                        child: Padding(
-                          padding:   EdgeInsets.all(5.0),
-                          child: Center(child: Text('Contact Info',style: TextStyle(color: Colors.white,fontSize: 15),)),
-                        ),
+                      ),
+                      SizedBox(width: 20,),
 
-                      ),SizedBox(width: 20,),
-                      Container(
-                        width: 140,
-                        height: 36,
-                        margin: EdgeInsets.all(8),
-                        decoration: BoxDecoration(border: Border.all(
-                          color: Kdblue,
-                        )),
-                        child: Padding(
-                          padding:   EdgeInsets.all (8),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text('Sales & Purchase',style: TextStyle(fontSize: 15,color: kblue),),
-                                ],
-                              ),
-                            ],
+                      Expanded(
+
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          decoration: BoxDecoration(
+                            color: Kdblue,
                           ),
+                          child: Center(child: Text('Sales & Purchase',style: TextStyle(color: Colors.white,fontSize: 15),)),
+
                         ),
                       ),
                     ],
@@ -123,7 +114,8 @@ class _AddnewvendorState extends State<Addnewvendorb> {
                   SizedBox(height: 15),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Payment Terms',style: TextStyle(fontSize: 18,color:kblue ),)),
+                      child: Text('Payment Terms',style: TextStyle(fontSize: 18,color:kblue ),)
+                  ),
                   Divider(
                     height: 5,thickness: 1,color: kblue,
                   ),
@@ -134,33 +126,36 @@ class _AddnewvendorState extends State<Addnewvendorb> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),color: bgGrey
                     ),
-                    padding: EdgeInsets.only(left: 250),
-                    child: DropdownButton(
-                      icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
-                        value: _value,
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("select",style: TextStyle(color: Colors.grey),),
-                            value: 1,
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Second Item"),
-                            value: 2,
-                          ),
-                          DropdownMenuItem(
-                              child: Text("Third Item"),
-                              value: 3
-                          ),
-                          DropdownMenuItem(
-                              child: Text("Fourth Item"),
-                              value: 4
-                          )
-                        ],
-                        onChanged: (int? value) {
-                          setState(() {
-                            _value = value!;
-                          });
-                        }),
+
+                    child: Center(
+                      child: DropdownButton(
+
+                        icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
+                          value: _value,
+                          items: [
+                            DropdownMenuItem(
+                              child: Text("select",style: TextStyle(color: Colors.grey),),
+                              value: 1,
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Second Item"),
+                              value: 2,
+                            ),
+                            DropdownMenuItem(
+                                child: Text("Third Item"),
+                                value: 3
+                            ),
+                            DropdownMenuItem(
+                                child: Text("Fourth Item"),
+                                value: 4
+                            )
+                          ],
+                          onChanged: (int? value) {
+                            setState(() {
+                              _value = value!;
+                            });
+                          }),
+                    ),
                   ),
 
                   SizedBox(height: 15),
@@ -177,33 +172,35 @@ class _AddnewvendorState extends State<Addnewvendorb> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),color: bgGrey
                     ),
-                    padding: EdgeInsets.only(left: 250),
-                    child: DropdownButton(
-                        icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
-                        value: _valuea,
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("select",style: TextStyle(color: Colors.grey),),
-                            value: 1,
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Second Item"),
-                            value: 2,
-                          ),
-                          DropdownMenuItem(
-                              child: Text("Third Item"),
-                              value: 3
-                          ),
-                          DropdownMenuItem(
-                              child: Text("Fourth Item"),
-                              value: 4
-                          )
-                        ],
-                        onChanged: (int? value) {
-                          setState(() {
-                            _valuea = value!;
-                          });
-                        }),
+
+                    child: Center(
+                      child: DropdownButton(
+                          icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
+                          value: _valuea,
+                          items: [
+                            DropdownMenuItem(
+                              child: Text("select",style: TextStyle(color: Colors.grey),),
+                              value: 1,
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Second Item"),
+                              value: 2,
+                            ),
+                            DropdownMenuItem(
+                                child: Text("Third Item"),
+                                value: 3
+                            ),
+                            DropdownMenuItem(
+                                child: Text("Fourth Item"),
+                                value: 4
+                            )
+                          ],
+                          onChanged: (int? value) {
+                            setState(() {
+                              _valuea = value!;
+                            });
+                          }),
+                    ),
                   ),
 
                   SizedBox(height: 15),
@@ -220,44 +217,44 @@ class _AddnewvendorState extends State<Addnewvendorb> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),color: bgGrey
                     ),
-                    padding: EdgeInsets.only(left: 130),
-                    child: DropdownButton(
-                        icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
-                        value: _valueb,
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("Bank Name",style: TextStyle(color: Colors.grey),),
-                            value: 1,
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Second Item"),
-                            value: 2,
-                          ),
-                          DropdownMenuItem(
-                              child: Text("Third  Item"),
-                              value: 3
-                          ),
-                          DropdownMenuItem(
-                              child: Text("Fourth Item"),
-                              value: 4
-                          )
-                        ],
-                        onChanged: (int? value) {
-                          setState(() {
-                            _valueb = value!;
-                          });
-                        }),
+                    child: Center(
+                      child: DropdownButton(
+                          icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
+                          value: _valueb,
+                          items: [
+                            DropdownMenuItem(
+                              child: Text("Bank Name",style: TextStyle(color: Colors.grey),),
+                              value: 1,
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Second Item"),
+                              value: 2,
+                            ),
+                            DropdownMenuItem(
+                                child: Text("Third  Item"),
+                                value: 3
+                            ),
+                            DropdownMenuItem(
+                                child: Text("Fourth Item"),
+                                value: 4
+                            )
+                          ],
+                          onChanged: (int? value) {
+                            setState(() {
+                              _valueb = value!;
+                            });
+                          }),
+                    ),
                   ),
 
                   SizedBox(height: 10),
                    Container(
-                    height: 37,
 
                     decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
 
                     child: TextFormField(
                       decoration: InputDecoration(
-
+                        contentPadding: EdgeInsets.symmetric(vertical: 1,horizontal: 10),
                           filled: true,
                           fillColor: bgGrey,
                           hintText: "Acc Type",
@@ -281,121 +278,123 @@ class _AddnewvendorState extends State<Addnewvendorb> {
 
                   SizedBox(height: 10),
                   Container(
-                    height: 37,
                     width: Get.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),color: bgGrey
                     ),
-                    padding: EdgeInsets.only(left: 122),
-                    child: DropdownButton(
-                        icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
-                        value: _valuec,
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("Account Type",style: TextStyle(color: Colors.grey.shade500),),
-                            value: 1,
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Account Type"),
-                            value: 2,
-                          ),
-                          DropdownMenuItem(
-                              child: Text("Third Item"),
-                              value: 3
-                          ),
-                          DropdownMenuItem(
-                              child: Text("Fourth Item"),
-                              value: 4
-                          )
-                        ],
-                        onChanged: (int? value) {
-                          setState(() {
-                            _valuec = value!;
-                          });
-                        }),
+                    child: Center(
+                      child: DropdownButton(
+                          icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
+                          value: _valuec,
+                          items: [
+                            DropdownMenuItem(
+                              child: Text("Account Type",style: TextStyle(color: Colors.grey.shade500),),
+                              value: 1,
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Account Type"),
+                              value: 2,
+                            ),
+                            DropdownMenuItem(
+                                child: Text("Third Item"),
+                                value: 3
+                            ),
+                            DropdownMenuItem(
+                                child: Text("Fourth Item"),
+                                value: 4
+                            )
+                          ],
+                          onChanged: (int? value) {
+                            setState(() {
+                              _valuec = value!;
+                            });
+                          }),
+                    ),
                   ),
 
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      Container(
-                        height: 37,
-                        width: 180,
+                      Expanded(
+                        child: Container(
 
 
-                        decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
+                          decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
 
-                        child: TextFormField(
-                          decoration: InputDecoration(
+                          child: TextFormField(
 
-                              filled: true,
-                              fillColor: bgGrey,
-                              hintText: "IFSC Code",
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(vertical: 1,horizontal: 10),
+                                filled: true,
+                                fillColor: bgGrey,
+                                hintText: "IFSC Code",
 
 
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              )
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                ),
+                                enabledBorder:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                )
 
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: 10),
-                      Container(
-                        height: 37,
-                        width: 180,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),color: bgGrey
+                      Expanded(
+                        child: Container(
+                          height: 45,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),color: bgGrey
+                          ),
+                          child: Center(
+                            child: DropdownButton(
+                                icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
+                                value: _valued,
+                                items: [
+                                  DropdownMenuItem(
+                                    child: Text("MMID",style: TextStyle(color: Colors.grey.shade500),),
+                                    value: 1,
+                                  ),
+                                  DropdownMenuItem(
+                                    child: Text("Account Type"),
+                                    value: 2,
+                                  ),
+                                  DropdownMenuItem(
+                                      child: Text("Third Item"),
+                                      value: 3
+                                  ),
+                                  DropdownMenuItem(
+                                      child: Text("Fourth Item"),
+                                      value: 5
+                                  )
+                                ],
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    _valued = value!;
+                                  });
+                                }),
+                          ),
                         ),
-                        padding: EdgeInsets.only(left: 30),
-                        child: DropdownButton(
-                            icon: Icon(Icons.keyboard_arrow_down,color: Kdblue),
-                            value: _valued,
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("MMID",style: TextStyle(color: Colors.grey.shade500),),
-                                value: 1,
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Account Type"),
-                                value: 2,
-                              ),
-                              DropdownMenuItem(
-                                  child: Text("Third Item"),
-                                  value: 3
-                              ),
-                              DropdownMenuItem(
-                                  child: Text("Fourth Item"),
-                                  value: 5
-                              )
-                            ],
-                            onChanged: (int? value) {
-                              setState(() {
-                                _valued = value!;
-                              });
-                            }),
                       ),
 
                     ],
                   ),
                   SizedBox(height: 10),
                   Container(
-                    height: 37,
 
                     decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
 
                     child: TextFormField(
                       decoration: InputDecoration(
-
+                          contentPadding: EdgeInsets.symmetric(vertical: 1,horizontal: 10),
                           filled: true,
                           fillColor: bgGrey,
                           hintText: "City",
@@ -419,13 +418,12 @@ class _AddnewvendorState extends State<Addnewvendorb> {
 
                   SizedBox(height: 10),
                   Container(
-                    height: 37,
 
                     decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
 
                     child: TextFormField(
                       decoration: InputDecoration(
-
+                          contentPadding: EdgeInsets.symmetric(vertical: 1,horizontal: 10),
                           filled: true,
                           fillColor: bgGrey,
                           hintText: "Branch",
