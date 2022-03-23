@@ -528,7 +528,8 @@ class _DBcrud3State extends State<DBcrud4> {
                                               ],
                                             ),
 
-                                          ), PopupMenuItem<int>(
+                                          ),
+                                          PopupMenuItem<int>(
                                             value: 1,
                                             child: Row(
                                               children: [

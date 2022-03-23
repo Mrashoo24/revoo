@@ -9,6 +9,21 @@ import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
 import 'package:revoo/piechart.dart';
 
+import 'Accounting/addnewbnk.dart';
+import 'Accounting/addnewjlentry.dart';
+import 'Accounting/addnewjlentryb.dart';
+import 'Accounting/banksync.dart';
+import 'Accounting/budgetmanagement.dart';
+import 'Accounting/chartsb.dart';
+import 'Accounting/costmanagement.dart';
+import 'Accounting/financialreports.dart';
+import 'Accounting/journalentries.dart';
+import 'Accounting/paymenmethodb.dart';
+import 'Accounting/recurringpayments.dart';
+import 'Accounting/searchbank.dart';
+import 'Accounting/syncbnkstatement.dart';
+import 'Accounting/syncbnkstatementb.dart';
+import 'Accounting/taxmanagement.dart';
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
 
@@ -53,6 +68,7 @@ import 'Purchasing/products.dart';
 import 'Purchasing/rfqstatusb.dart';
 import 'Purchasing/timepass.dart';
 import 'Purchasing/vendors.dart';
+import 'Accounting/accounting.dart';
 
 
 
@@ -82,7 +98,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Cashinoutc(),
+      home: SyncBnkStatemntB(),
       debugShowCheckedModeBanner: false,
     );
   }
