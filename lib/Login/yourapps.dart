@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg1.dart';
+import 'package:revoo/Pos/PosDashboard.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
-import 'package:revoo/Purchasing/addnwprdct.dart';
 import 'package:revoo/Purchasing/purchasing_dashboard.dart';
+import 'package:revoo/Vendorproduct%20mangment/inventoryDashboard.dart';
 
 import '../Employee/employee_homepage.dart';
 import '../constants/constants.dart';
@@ -69,8 +70,12 @@ class _YourappsState extends State<Yourapps> {
                         Get.to(PurchasingDashboard());
                       }),
 
-                      buildAppCard('POS','asset/money.png',(){
+                      buildAppCard('Inventory Management','asset/inventory.png',(){
+                        Get.to(InventoryDashboard());
+                      }),
 
+                      buildAppCard('POS','asset/money.png',(){
+                          Get.to(PosDashboard());
 
 
                       }),

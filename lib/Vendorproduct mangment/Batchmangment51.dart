@@ -53,7 +53,7 @@ class _BatchmangmentState extends State<Batchmangment> {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Batch Number\nMangment',
+                              'Serial Number\nMangment',
                               style: TextStyle(color: kblue, fontSize: 25),
 
                             ),

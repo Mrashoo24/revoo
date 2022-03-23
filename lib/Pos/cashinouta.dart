@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
+import 'cashinoutb.dart';
 
 class Cashinouta extends StatefulWidget {
   const Cashinouta({Key? key}) : super(key: key);
@@ -49,8 +50,10 @@ child: Scaffold(
                   Image.asset("asset/dollar.png"),
                   SizedBox(width: 15,),
                   Text("Cash In/Out",style: TextStyle(color: Colors.white,fontSize: 20,),),
-                  SizedBox(width: 210),
-                  Image.asset("asset/arows .png")
+                  SizedBox(width: 20,),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: Image.asset("asset/arows .png"))
                 ],
               ),
             ),
@@ -95,82 +98,133 @@ child: Scaffold(
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Wrap(
+
             children: [
               Container(
-                height: 110,width: 120,color: bgGrey,
+                width: 120,color: bgGrey,
                 child:  Column(
                   children: [
+                    SizedBox(height: 10,),
                     Text("Rs 120 /-",style: TextStyle(color: kblue),),
                     Image.asset("asset/prflpic.png"),
                     Text("Product Name",style: TextStyle(color: kblue),),
+                    SizedBox(height: 10,),
                     Container(
-                      height: 20, width: 100,
+                      height: 30, width: 100,
                       decoration: BoxDecoration(borderRadius:BorderRadius.circular(5),color: Colors.white,),
 
                       child: Row(
                         children: [
                           InkWell(
                             onTap: increment,
-                            child: Icon(Icons.add,color: kblue,size: 10,),
+                            child: Icon(Icons.add,color: kblue,size: 20,),
                           ),
 
                           VerticalDivider(indent: 1,endIndent: 1,color: kblue,),
                           InkWell(
                             onTap :decrement ,
 
-                            child: Icon(Icons.remove,color: kblue,size: 10,),
+                            child: Icon(Icons.remove,color: kblue,size: 20,),
                           ),
 
                           SizedBox(width: 5),
-                          Text("$_counter",style: TextStyle(fontSize: 8,color: kyellow),),
+                          Text("$_counter",style: TextStyle(fontSize: 14,color: kyellow),),
 
                         ],
                       ),
+
                     ),
+                    SizedBox(height: 10,),
                   ],
                 ),
               ),
               SizedBox(width: 30),
               Container(
-                height: 100,width: 120,color: bgGrey,
-              )
+                width: 120,color: bgGrey,
+                child:  Column(
+                  children: [
+                    SizedBox(height: 10,),
+                    Text("Rs 120 /-",style: TextStyle(color: kblue),),
+                    Image.asset("asset/prflpic.png"),
+                    Text("Product Name",style: TextStyle(color: kblue),),
+                    SizedBox(height: 10,),
+                    Container(
+                      height: 30, width: 100,
+                      decoration: BoxDecoration(borderRadius:BorderRadius.circular(5),color: Colors.white,),
+
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: increment,
+                            child: Icon(Icons.add,color: kblue,size: 20,),
+                          ),
+
+                          VerticalDivider(indent: 1,endIndent: 1,color: kblue,),
+                          InkWell(
+                            onTap :decrement ,
+
+                            child: Icon(Icons.remove,color: kblue,size: 20,),
+                          ),
+
+                          SizedBox(width: 5),
+                          Text("$_counter",style: TextStyle(fontSize: 14,color: kyellow),),
+
+                        ],
+                      ),
+
+                    ),
+                    SizedBox(height: 10,),
+                  ],
+                ),
+              ),
             ],
 
           ),
           SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 100,width: 160,color: Kdblue,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding:   EdgeInsets.only(top: 15),
-                      child: Center(child: Text("Pay",style: TextStyle(color: Colors.white,fontSize: 35),)),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 100,color: Kdblue,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding:   EdgeInsets.only(top: 15),
+                          child: Center(child: Text("Pay",style: TextStyle(color: Colors.white,fontSize: 35),)),
+                        ),
+                        SizedBox(height: 10),
+                        Text("Rs 246",style: TextStyle(color:kyellow,fontSize: 20),),
+                      ],
                     ),
-                    SizedBox(height: 10),
-                    Text("Rs 246",style: TextStyle(color:kyellow,fontSize: 20),),
-                  ],
+                  ),
                 ),
-              ),
-              SizedBox(width: 40),
-              Container(
-                height: 100,width: 160,color: greytxtbx,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding:   EdgeInsets.only(top: 15),
-                      child: Center(child: Text("Pay",style: TextStyle(color:Kdblue,fontSize: 35),)),
+                SizedBox(width: 40),
+                Expanded(
+                  child: InkWell(
+                    onTap:(){
+                      Get.to(Cashinoutb());
+                    },
+                    child: Container(
+                      height: 100,color: greytxtbx,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding:   EdgeInsets.only(top: 15),
+                            child: Center(child: Text("View",style: TextStyle(color:Kdblue,fontSize: 35),)),
+                          ),
+                          SizedBox(height: 10),
+                          Text("2 Items",style: TextStyle(color:kyellow,fontSize: 20),),
+                        ],
+                      ),
                     ),
-                    SizedBox(height: 10),
-                    Text("2 Items",style: TextStyle(color:kyellow,fontSize: 20),),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )
         ],
       ),

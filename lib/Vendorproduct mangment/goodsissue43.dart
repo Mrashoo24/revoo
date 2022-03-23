@@ -39,28 +39,6 @@ class _Goodsissue43State extends State<Goodsissue43> {
               padding: const EdgeInsets.all(20.0),
               child:  Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                          onTap: (){
-                            print('clicked');
-                          },
-                          child: Image.asset('asset/navicon.png',)),
-                      Row(
-                        children: [
-                          SizedBox(width: 110),
-                          Image.asset('asset/bellicon.png'),
-                          SizedBox(width: 20),
-                          Image.asset('asset/settingsicon.png'),
-                          SizedBox(width: 20),
-                          Image.asset('asset/usericon.png'),
-                        ],
-                      ),
-
-
-                    ],
-                  ),
                   SizedBox(height: 30),
 
                   Column(

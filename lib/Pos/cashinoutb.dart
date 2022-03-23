@@ -33,7 +33,7 @@ class _CashinoutbState extends State<Cashinoutb> {
                         Image.asset("asset/dollar.png"),
                         SizedBox(width: 15,),
                         Text("Cash In/Out",style: TextStyle(color: Colors.white,fontSize: 20,),),
-                        SizedBox(width: 210),
+                        SizedBox(width: 30),
                         Padding(
                           padding:   EdgeInsets.only(right: 8.0),
                           child: Image.asset("asset/arows .png"),
@@ -151,7 +151,7 @@ class _CashinoutbState extends State<Cashinoutb> {
                 Padding(
                   padding:   EdgeInsets.only(left: 20,right: 20),
                   child: Container(
-                    height: 1000,
+
                     width: Get.width,
                     color: bgGrey,
                     child: Column(
@@ -372,7 +372,7 @@ class _CashinoutbState extends State<Cashinoutb> {
                   ),
                 ),
                 Padding(
-                  padding:   EdgeInsets.only(left: 20,right:20 ),
+                  padding:   EdgeInsets.only(left: 20,right:20 ,top: 30,bottom: 30),
                   child: InkWell(
                     child: Container(
                       height: 41,

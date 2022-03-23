@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:revoo/Vendorproduct%20mangment/vendoraddproduct39.dart';
 
 import '../HRMS_admin_Screen/adbranchpg2.dart';
 import '../constants/constants.dart';
@@ -26,6 +27,7 @@ class _Addproduct38State extends State<Addproduct38> {
     'Std6',
     'Std7'
   ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,30 +40,6 @@ class _Addproduct38State extends State<Addproduct38> {
               padding: const EdgeInsets.all(20.0),
               child:  Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                          onTap: (){
-                            print('clicked');
-                          },
-                          child: Image.asset('asset/navicon.png',)),
-                      Row(
-                        children: [
-                          SizedBox(width: 110),
-                          Image.asset('asset/bellicon.png'),
-                          SizedBox(width: 20),
-                          Image.asset('asset/settingsicon.png'),
-                          SizedBox(width: 20),
-                          Image.asset('asset/usericon.png'),
-                        ],
-                      ),
-
-
-                    ],
-                  ),
-                  SizedBox(height: 30),
-
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -75,7 +53,7 @@ class _Addproduct38State extends State<Addproduct38> {
 
                           ),
                           InkWell(onTap: (){
-                            Get.to(DBcrud2());
+                            Get.to(Addproduct39());
                           },child: Image.asset('asset/addnew.png')),
 
                         ],

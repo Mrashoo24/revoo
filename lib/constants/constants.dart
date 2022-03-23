@@ -22,3 +22,5 @@ var reddy = Color(0xFFDE3939);
 var commonWidgets = CommonWidgets();
 
 var sblue = Color(0xFF649AE3);
+
+var mannu = Color(0xFF1B57A7);
