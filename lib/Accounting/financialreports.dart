@@ -36,10 +36,10 @@ child: Scaffold(
                         children: [
                           Text('Finalcial Reports',style: TextStyle(color:kblue,fontSize: 30),),
 
-                          SizedBox(width: 10,),
+                          SizedBox(width: 5,),
                           Container(
-                            width: 120,
-                            height: 36,
+                            width: 90,
+                            height: 30,
                             margin: EdgeInsets.all(8),
                             decoration: BoxDecoration(border: Border.all(
                                 color: Kdblue,width: 2
@@ -48,9 +48,9 @@ child: Scaffold(
                               padding:   EdgeInsets.only(left: 12),
                               child: Row(
                                 children: [
-                                  Text('Print Label',style: TextStyle(fontSize: 15,color: kblue),),
-                                  SizedBox(width: 9,),
-                                  Image.asset('asset/dropdwn.png'),
+                                  Text('Print PDF',style: TextStyle(fontSize: 10,color: kblue),),
+                                  SizedBox(width: 4,),
+                                  Image.asset('asset/dropdwn.png',height: 8,),
 
                                 ],
                               ),

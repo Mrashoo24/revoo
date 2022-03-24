@@ -13,6 +13,9 @@ class TaskManagement extends StatefulWidget {
 }
 
 class _TaskManagementState extends State<TaskManagement> {
+
+  DateTime date = DateTime(2022, 12, 24);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,41 +50,45 @@ class _TaskManagementState extends State<TaskManagement> {
 
                             Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('Vendor Name',style: TextStyle(fontSize: 25,color:kblue ),)),
+                                child: Text('Select Accounting Year',style: TextStyle(fontSize: 20,color:kblue ),)),
                             Divider(
                               height: 5,thickness: 1,color: kblue,
                             ),
                             SizedBox(height: 4),
                             Container(
                               height: 37,
+                              width: Get.width,
 
 
-                              decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
 
-                              child: TextFormField(
-                                decoration: InputDecoration(
+                              decoration: BoxDecoration(borderRadius:BorderRadius.circular(5),color: bgGrey,),
 
-                                    filled: true,
-                                    fillColor: bgGrey,
-                                  icon: Icon(Icons.calendar_today_outlined,),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("${date.day}/${date.month}/${date.year}",
+                                    style: TextStyle(fontSize: 20,color: kblue),
 
+                                  ),
+                                  InkWell
+                                    (
+                                      onTap: () async {
+                                        DateTime? newDate = await showDatePicker(
+                                            context: context, initialDate: date,
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime(2100),
 
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.white),
-                                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.white),
-                                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    enabledBorder:OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.white),
-                                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                                    ),
+                                        );
 
+                                        if (newDate == null) return;
 
-                                ),
+                                        setState(() => date = newDate );
+                                      },
+                                      child: Icon(Icons.calendar_today_outlined,color: kblue,))
+                                ],
+
                               ),
+
                             ),
 
                             SizedBox(height: 40),
@@ -92,29 +99,29 @@ class _TaskManagementState extends State<TaskManagement> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Total Income",style: TextStyle(color: kblue,fontSize: 25),),
-                                      Text("\$15,50800",style: TextStyle(color: kyellow,fontSize: 25),),
+                                      Text("Total Income",style: TextStyle(color: kblue,fontSize: 20),),
+                                      Text("\$15,50800",style: TextStyle(color: kyellow,fontSize: 20),),
                                     ],
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Total Income",style: TextStyle(color: kblue,fontSize: 25),),
-                                      Text("\$15,50800",style: TextStyle(color: kyellow,fontSize: 25),),
+                                      Text("Total Income",style: TextStyle(color: kblue,fontSize: 20),),
+                                      Text("\$15,50800",style: TextStyle(color: kyellow,fontSize: 20),),
                                     ],
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Province",style: TextStyle(color: kblue,fontSize: 25),),
-                                      Text("Toronto",style: TextStyle(color: kyellow,fontSize: 25),),
+                                      Text("Province",style: TextStyle(color: kblue,fontSize: 20),),
+                                      Text("Toronto",style: TextStyle(color: kyellow,fontSize: 20),),
                                     ],
                                   ),
                                 ],
                               ),
                             ),
                             SizedBox(height: 20,),
-                            Container(height: 160,width: Get.width,
+                            Container(height: 140,width: Get.width,
                               decoration: BoxDecoration(borderRadius:BorderRadius.circular(15),color: bgGrey,),
                               child: Padding(
                                 padding:   EdgeInsets.only(top: 20, left: 10),
@@ -123,22 +130,22 @@ class _TaskManagementState extends State<TaskManagement> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text("Revoo",style: TextStyle(color: kblue,fontSize: 25),),
+                                        Text("Revoo",style: TextStyle(color: kblue,fontSize: 20),),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        Text("536/20, Mumbai",style: TextStyle(color: kblue,fontSize: 25),),
+                                        Text("536/20, Mumbai",style: TextStyle(color: kblue,fontSize: 20),),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        Text("India",style: TextStyle(color: kblue,fontSize: 25),),
+                                        Text("India",style: TextStyle(color: kblue,fontSize: 20),),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        Text("14380",style: TextStyle(color: kblue,fontSize: 25),),
+                                        Text("14380",style: TextStyle(color: kblue,fontSize: 20),),
                                       ],
                                     ),
                                   ],

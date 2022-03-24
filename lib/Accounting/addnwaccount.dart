@@ -3,23 +3,48 @@ import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
 
-class Addnewjlentryb extends StatefulWidget {
-  const Addnewjlentryb({Key? key}) : super(key: key);
+class Addnwaccount extends StatefulWidget {
+  const Addnwaccount({Key? key}) : super(key: key);
 
   @override
-  _AddnewjlentrybState createState() => _AddnewjlentrybState();
+  _AddnwaccountState createState() => _AddnwaccountState();
 }
 
-class _AddnewjlentrybState extends State<Addnewjlentryb> {
+class _AddnwaccountState extends State<Addnwaccount> {
+
+  String initialValue = 'SBI';
+
+  var itemList  = [
+    'SBI',
+    'CANARA',
+    'AXIS',
+    'CBI',
+    'Aud',
+
+  ];
+
+  String initialValuea = 'Savings';
+
+  var itemLista  = [
+    'Savings',
+    'Current',
+    'Recurring Deposit',
+    'Fixed Deposit',
+    'NRI',
+
+  ];
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          child: Padding(
-            padding:   EdgeInsets.all(20.0),
-            child:  SingleChildScrollView(
-              child: Column(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding:   EdgeInsets.all(20.0),
+              child:  Column(
                 children: [
 
 
@@ -32,7 +57,7 @@ class _AddnewjlentrybState extends State<Addnewjlentryb> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Add New Journal Entry',style: TextStyle(color:kblue,fontSize: 30),
+                            child: Text('Add New Account',style: TextStyle(color:kblue,fontSize: 35),
                             ),
                           ),
 
@@ -42,42 +67,37 @@ class _AddnewjlentrybState extends State<Addnewjlentryb> {
                   ),
 
                   SizedBox(height: 40),
+
                   Container(
                     child: Column(
                       children: [
 
                         Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Vendor Name',style: TextStyle(fontSize: 18,color:kblue ),)),
+                            child: Text('Select Bank',style: TextStyle(fontSize: 18,color:kblue ),)),
                         Divider(
                           height: 5,thickness: 1,color: kblue,
                         ),
                         SizedBox(height: 4),
                         Container(
-                          height: 37,
 
-                          decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,borderRadius: new BorderRadius.circular(10.0),
+                          ),
+                          margin: EdgeInsets.symmetric(horizontal: 3),
+                          child: DropdownButton(
+                            isExpanded: true,
+                            iconEnabledColor: Colors.blue ,
+                            style: TextStyle(color: Colors.grey, fontSize: 18),
+                            dropdownColor: Colors.grey.shade200,
+                            focusColor: Colors.black,
+                            value: initialValue,
+                            icon: Icon(Icons.keyboard_arrow_down,color: kblue,),
+                            items: itemList.map((String items) {
+                              return DropdownMenuItem(value: items, child: Text(items));
+                            }).toList(), onChanged: (String? value) {  },
 
-                          child: TextFormField(
-                            decoration: InputDecoration(
-
-                                filled: true,
-                                fillColor: bgGrey,
-
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                ),
-                                enabledBorder:OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                )
-
-                            ),
                           ),
                         ),
 
@@ -87,62 +107,14 @@ class _AddnewjlentrybState extends State<Addnewjlentryb> {
                       ],
                     ),
                   ),
-
-                  SizedBox(height: 20),
+                  SizedBox(height: 15),
                   Container(
                     child: Column(
                       children: [
 
                         Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Payment Dept.',style: TextStyle(fontSize: 18,color:kblue ),)),
-                        Divider(
-                          height: 5,thickness: 1,color: kblue,
-                        ),
-                        SizedBox(height: 4),
-                        Container(
-                          height: 37,
-
-                          decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
-
-                          child: TextFormField(
-                            decoration: InputDecoration(
-
-                                filled: true,
-                                fillColor: bgGrey,
-
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                ),
-                                enabledBorder:OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                )
-
-                            ),
-                          ),
-                        ),
-
-
-
-
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(height: 20),
-                  Container(
-                    child: Column(
-                      children: [
-
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text('Total Amount',style: TextStyle(fontSize: 18,color:kblue ),)),
+                            child: Text('Office',style: TextStyle(fontSize: 18,color:kblue ),)),
                         Divider(
                           height: 5,thickness: 1,color: kblue,
                         ),
@@ -183,14 +155,14 @@ class _AddnewjlentrybState extends State<Addnewjlentryb> {
                   ),
 
 
-                  SizedBox(height: 20),
+                  SizedBox(height: 15),
                   Container(
                     child: Column(
                       children: [
 
                         Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Due Date',style: TextStyle(fontSize: 18,color:kblue ),)),
+                            child: Text('Account Number',style: TextStyle(fontSize: 18,color:kblue ),)),
                         Divider(
                           height: 5,thickness: 1,color: kblue,
                         ),
@@ -230,14 +202,14 @@ class _AddnewjlentrybState extends State<Addnewjlentryb> {
                     ),
                   ),
 
-                  SizedBox(height: 20),
+                  SizedBox(height: 15),
                   Container(
                     child: Column(
                       children: [
 
                         Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Total number of payments',style: TextStyle(fontSize: 18,color:kblue ),)),
+                            child: Text('IFSC Code',style: TextStyle(fontSize: 18,color:kblue ),)),
                         Divider(
                           height: 5,thickness: 1,color: kblue,
                         ),
@@ -277,6 +249,88 @@ class _AddnewjlentrybState extends State<Addnewjlentryb> {
                     ),
                   ),
 
+                  SizedBox(height: 15),
+                  Container(
+                    child: Column(
+                      children: [
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Text('Acc Types',style: TextStyle(fontSize: 18,color:kblue ),),
+                                Divider(
+                                  height: 5,thickness: 1,color: kblue,
+                                ),
+                                SizedBox(height: 4),
+                                Container(
+                                  height: 30,width: 150,
+
+                                  padding: EdgeInsets.symmetric(horizontal: 8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,borderRadius:   BorderRadius.circular(10.0),
+                                  ),
+                                  margin: EdgeInsets.symmetric(horizontal: 3),
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    iconEnabledColor: Colors.blue ,
+                                    style: TextStyle(color: Colors.grey, fontSize: 18),
+                                    dropdownColor: Colors.grey.shade200,
+                                    focusColor: Colors.black,
+                                    value: initialValuea,
+                                    icon: Icon(Icons.keyboard_arrow_down,color: kblue,),
+                                    items: itemLista.map((String items) {
+                                      return DropdownMenuItem(value: items, child: Text(items));
+                                    }).toList(), onChanged: (String? value) {  },
+
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Text('Acc Code',style: TextStyle(fontSize: 18,color:kblue ),),
+                                Divider(
+                                  height: 5,thickness: 1,color: kblue,
+                                ),
+                                SizedBox(height: 4),
+                                Container(
+                                  height: 37,
+                                  width: 160,
+                                  decoration: BoxDecoration(borderRadius:BorderRadius.circular(10)),
+
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+
+                                        filled: true,
+                                        fillColor: bgGrey,
+
+                                        border: OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.white),
+                                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.white),
+                                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                                        ),
+                                        enabledBorder:OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.white),
+                                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                                        )
+
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
 
                   SizedBox(height: 25),
                   Align(
@@ -336,6 +390,7 @@ class _AddnewjlentrybState extends State<Addnewjlentryb> {
                       ],
                     ),
                   ),
+
                 ],
               ),
             ),
@@ -343,6 +398,7 @@ class _AddnewjlentrybState extends State<Addnewjlentryb> {
 
         ),
       ),
+
 
     );
   }

@@ -66,7 +66,7 @@ class _AddnjlentryState extends State<Addnjlentry> {
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Add New Journal Entry',style: TextStyle(color:kblue,fontSize: 35),
+                          child: Text('Add New Journal Entry',style: TextStyle(color:kblue,fontSize: 30),
                           ),
                         ),
 
