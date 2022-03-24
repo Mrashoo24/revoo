@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../Purchasing/addnwprdct29.dart';
 import '../constants/constants.dart';
 import '../HRMS_admin_Screen/adbranchpg2.dart';
+import 'addproductb.dart';
 
 class Product extends StatefulWidget {
   const Product({Key? key}) : super(key: key);
@@ -38,25 +40,8 @@ class _HRMSadmincustState extends State<Product> {
               padding: const EdgeInsets.all(20.0),
               child:  Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                          onTap: (){
-                            print('clicked');
-                          },
-                          child: Image.asset('asset/navicon.png',)),
-                      SizedBox(width: 110),
-                      Image.asset('asset/bellicon.png'),
-                      SizedBox(width: 20),
-                      Image.asset('asset/settingsicon.png'),
-                      SizedBox(width: 20),
-                      Image.asset('asset/usericon.png'),
 
-
-                    ],
-                  ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 10),
 
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +56,7 @@ class _HRMSadmincustState extends State<Product> {
 
                           ),
                           InkWell(onTap: (){
-                            Get.to(DBcrud2());
+                            Get.to(AddNewProduct());
                           },child: Image.asset('asset/addnew.png')),
 
                         ],
@@ -134,290 +119,66 @@ class _HRMSadmincustState extends State<Product> {
 
 
                       SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
+                      ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Container(
 
-                        decoration: BoxDecoration(
+                                decoration: BoxDecoration(
 
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Product Name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
+                                  color: mannu,
 
 
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
+                                  borderRadius: BorderRadius.circular(15),
 
-                                  ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(13),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Product Name 1',
+                                              style: TextStyle(
+                                                color: Colors.yellow.shade600,
+                                                fontSize: 19,
+
+
+                                              ),
+                                            ),
+                                            Icon(Icons.more_vert,color: Colors.white),
+
+                                          ],
+                                        ),
+                                        Text(
+                                          "Quantity: 10",
+                                          style: TextStyle(
+                                            color: Colors.white,fontSize: 12,
+                                          ),
+                                        )
+
+                                      ],
                                     ),
+
                                   ),
-                                )
+                                ),
 
-                              ],
-                            ),
-
-                          ),
-                        ),
-
+                              ),
+                            );
+                          }
                       ),
                       SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
 
-                        decoration: BoxDecoration(
-
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Product Name 2',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Product Name 3',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Product Name 4',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Product Name 5',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
 
 
 

@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
 import '../HRMS_admin_Screen/adbranchpg2.dart';
+import 'addcustomera.dart';
 
 class HRMSadmincust extends StatefulWidget {
   const HRMSadmincust({Key? key}) : super(key: key);
@@ -38,29 +39,8 @@ class _HRMSadmincustState extends State<HRMSadmincust> {
             padding: const EdgeInsets.all(20.0),
             child:  Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                        onTap: (){
-                          print('clicked');
-                        },
-                        child: Image.asset('asset/navicon.png',)),
-                    Row(
-                      children: [
-                        SizedBox(width: 110),
-                        Image.asset('asset/bellicon.png'),
-                        SizedBox(width: 20),
-                        Image.asset('asset/settingsicon.png'),
-                        SizedBox(width: 20),
-                        Image.asset('asset/usericon.png'),
-                      ],
-                    ),
 
-
-                  ],
-                ),
-                SizedBox(height: 30),
+                SizedBox(height: 10),
 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +55,7 @@ class _HRMSadmincustState extends State<HRMSadmincust> {
 
                         ),
                         InkWell(onTap: (){
-                          Get.to(DBcrud2());
+                          Get.to(Addnewprodct56());
                         },child: Image.asset('asset/addnew.png')),
 
                       ],

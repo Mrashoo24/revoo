@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg1.dart';
+import 'package:revoo/Orders/salesdashboard.dart';
 import 'package:revoo/Pos/PosDashboard.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
 import 'package:revoo/Purchasing/purchasing_dashboard.dart';
@@ -70,18 +71,41 @@ class _YourappsState extends State<Yourapps> {
                         Get.to(PurchasingDashboard());
                       }),
 
-                      buildAppCard('Inventory Management','asset/inventory.png',(){
-                        Get.to(InventoryDashboard());
-                      }),
+
+                    Column(
+                      children: [
+                        InkWell(
+                          onTap: (){
+                            Get.to(InventoryDashboard());
+                          },
+                          child: Card(
+
+                              color: Kdblue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: Center(child: ClipRRect(child: Image.asset('asset/inventory_1.png',),)),
+                              )
+
+                          ),
+                        ),
+                        
+                        Container(width:100,child: Center(child: AutoSizeText('Inventory',style: TextStyle(color: kyellow ,fontSize: 14),textAlign: TextAlign.center,))),
+                      ],
+                    ),
 
                       buildAppCard('POS','asset/money.png',(){
+
                           Get.to(PosDashboard());
 
 
                       }),
                       buildAppCard('SALES','asset/increaseaaa.png',(){
 
-
+                        Get.to(SalesDashboard());
 
                       }),
                     ],

@@ -1,21 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:revoo/Pos/yoursessionsa.dart';
+import 'package:revoo/Orders/duning.dart';
+import 'package:revoo/Orders/productsa.dart';
+import 'package:revoo/Orders/profit_calculation.dart';
+import 'package:revoo/Orders/quotation.dart';
+import 'package:revoo/Orders/servicecallsa.dart';
 
 import '../constants/constants.dart';
-import '../pos/pos.dart';
-import '../pos/pos.next.dart';
-import 'cashinouta.dart';
+import 'customersa.dart';
+import 'ordersa.dart';
 
-class PosDashboard extends StatefulWidget {
-  const PosDashboard({Key? key}) : super(key: key);
+class SalesDashboard extends StatefulWidget {
+
+  const SalesDashboard({Key? key}) : super(key: key);
 
   @override
-  _PosDashboardState createState() => _PosDashboardState();
+  _SalesDashboardState createState() => _SalesDashboardState();
+
 }
 
-class _PosDashboardState extends State<PosDashboard> {
+class _SalesDashboardState extends State<SalesDashboard> {
   GlobalKey<ScaffoldState> scafkey = GlobalKey<ScaffoldState>();
   var selectedCard = 'Home'; //for changing name
   var selectedindex = 0; //for changing index of page
@@ -26,11 +31,13 @@ class _PosDashboardState extends State<PosDashboard> {
   @override
   Widget build(BuildContext context) {
     var homepages = [
-      Cashinouta(),
-      Yoursessions(),
-      Pos(),
-
-      PosNext(),
+      Ordera(),
+      Product(),
+      HRMSadmincust(),
+      Quotation(),
+      Serviescall(),
+      ProfitCalculation(),
+      DuningMangement(),
 
 
 
@@ -156,18 +163,34 @@ class _PosDashboardState extends State<PosDashboard> {
                 SizedBox(height: 5,),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
 
-                buildNavCard('asset/checkpad.png','Home',0),
+                buildNavCard('asset/checkpad.png','Orders',0),
                 SizedBox(height: 5,),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
 
-                buildNavCard('asset/lvapproval.png','Open Session',1),
+                buildNavCard('asset/lvapproval.png','Products',1),
                 SizedBox(height: 5,),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
 
-                buildNavCard('asset/lvapproval.png','Refunds',2),
+                buildNavCard('asset/lvapproval.png','Customers',2),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
 
+                buildNavCard('asset/lvapproval.png','Quotation',3),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
+
+                buildNavCard('asset/lvapproval.png','Refunds',4),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
+
+                buildNavCard('asset/lvapproval.png','Profit Calc.',5),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
+
+
+                buildNavCard('asset/lvapproval.png','Duning Management',6),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
                 // buildNavCard('asset/lvapproval.png','Bills & Invoice',3),
                 // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 // SizedBox(height: 5,),

@@ -23,29 +23,6 @@ class _Addproduct24State extends State<Addproduct24> {
                     padding: const EdgeInsets.all(18.0),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  print('clicked');
-                                },
-                                child: Image.asset(
-                                  'asset/navicon.png',
-                                )),
-                            SizedBox(width: 120),
-                            Image.asset('asset/bellicon.png'),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Image.asset('asset/settingsicon.png'),
-                            SizedBox(
-                              width: 6,
-                            ),
-                            Image.asset('asset/usericon.png'),
-                            SizedBox(width: 10),
-                          ],
-                        ),
                         Align(alignment: Alignment.centerLeft,
                           child: Text(
                             "Add Product",
