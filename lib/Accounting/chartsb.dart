@@ -44,7 +44,8 @@ class _ChartsState extends State<Charts> {
 
                   SizedBox(width: 80,),
                   Container(
-                    width: 200,height: 50,
+
+                    height: 50,
                     decoration: BoxDecoration(
                       color:  bgGrey,
                       borderRadius: BorderRadius.circular(20),
@@ -59,8 +60,7 @@ class _ChartsState extends State<Charts> {
                           Image.asset('asset/filterimg.png',color: kyellow,),
                           SizedBox(width: 10),
                           Text('Filter',style: TextStyle(color: kblue,fontSize: 25),),
-                          SizedBox(width: 50),
-
+                          SizedBox(width: 10),   SizedBox(width: 10),
                           DropdownButton(
 
                             icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),

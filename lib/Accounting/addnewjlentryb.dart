@@ -32,7 +32,7 @@ class _AddnewjlentrybState extends State<Addnewjlentryb> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Add New Journal Entry',style: TextStyle(color:kblue,fontSize: 30),
+                            child: Text('Add Payment',style: TextStyle(color:kblue,fontSize: 30),
                             ),
                           ),
 

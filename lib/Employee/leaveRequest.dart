@@ -19,7 +19,7 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
     'IT',
     'CIVIL'
   ];
-
+  DateTime date = DateTime(2022, 12, 24);
   var selectedDepart = 'IT';
 
   @override
@@ -102,6 +102,18 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                     ),
                     SizedBox(height: 10,),
                     InkWell(
+                      onTap: () async {
+                        DateTime? newDate = await showDatePicker(
+                          context: context, initialDate: date,
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
+
+                        );
+
+                        if (newDate == null) return;
+
+                        setState(() => date = newDate );
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: Container(
@@ -125,6 +137,24 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                     ),
                     SizedBox(height: 10,),
                     InkWell(
+                      onTap: () async {
+
+                        DateTime? newDate = await showDatePicker(
+                          context: context, initialDate: date,
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
+
+                        );
+
+                        if (newDate == null) return;
+
+                        setState(
+
+                                () => date = newDate
+
+                        );
+
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: Container(

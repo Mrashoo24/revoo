@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
+import 'addnewjlentryb.dart';
 
 class Recurringpayments extends StatefulWidget {
   const Recurringpayments({Key? key}) : super(key: key);
@@ -95,11 +96,16 @@ class _RecurringpaymentsState extends State<Recurringpayments> {
                   ],
                 ),
               ),
-              Padding(
-                padding:   EdgeInsets.all(8.0),
-                child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Image.asset('asset/addnew.png')),
+              InkWell(
+                onTap: (){
+                  Get.to(Addnewjlentryb());
+                },
+                child: Padding(
+                  padding:   EdgeInsets.all(8.0),
+                  child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Image.asset('asset/addnew.png')),
+                ),
               ),
               SizedBox(height: 15),
               Container(

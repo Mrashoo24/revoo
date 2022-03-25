@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:revoo/Accounting/accountingdashboard.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg1.dart';
 import 'package:revoo/Orders/salesdashboard.dart';
 import 'package:revoo/Pos/PosDashboard.dart';
@@ -106,6 +107,12 @@ class _YourappsState extends State<Yourapps> {
                       buildAppCard('SALES','asset/increaseaaa.png',(){
 
                         Get.to(SalesDashboard());
+
+                      }),
+
+                      buildAppCard('Accounting','asset/accounting_icon.png',(){
+
+                        Get.to(AccountingDashboard());
 
                       }),
                     ],

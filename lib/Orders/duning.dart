@@ -33,7 +33,9 @@ class _DuningMangementState extends State<DuningMangement> {
                 ),
               SizedBox(height: 10,),
               Row(
+
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                
                 children: [
 
                   Text('Net Revenue',style:TextStyle(color:kblue,fontSize: 20),),

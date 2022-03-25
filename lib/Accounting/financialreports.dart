@@ -33,8 +33,9 @@ child: Scaffold(
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Finalcial Reports',style: TextStyle(color:kblue,fontSize: 30),),
+                          Text('Finalcial Reports',style: TextStyle(color:kblue,fontSize: 24),),
 
                           SizedBox(width: 5,),
                           Container(

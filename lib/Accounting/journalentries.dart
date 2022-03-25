@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:revoo/Accounting/addnewjlentry.dart';
 
 import '../constants/constants.dart';
 
@@ -41,11 +42,11 @@ class _JournalEntriesState extends State<JournalEntries> {
                 child: Row(
                   children: [
                     SizedBox(width: 12),
-                    Text('Journal Entries',style: TextStyle(color: kblue,fontSize: 28),),
+                    Text('Journal Entries',style: TextStyle(color: kblue,fontSize: 22),),
 
                     SizedBox(width: 30,),
                     Container(
-                      width: 160,height: 40,
+                      height: 40,
                       decoration: BoxDecoration(
                         color:  bgGrey,
                         borderRadius: BorderRadius.circular(20),
@@ -59,7 +60,7 @@ class _JournalEntriesState extends State<JournalEntries> {
                             SizedBox(width: 8),
                             Image.asset('asset/filterimg.png',color: kyellow,),
                             SizedBox(width: 10),
-                            Text('Filter',style: TextStyle(color: kblue,fontSize: 25),),
+                            Text('Filter',style: TextStyle(color: kblue,fontSize: 16),),
                             SizedBox(width: 10),
 
                             DropdownButton(
@@ -84,11 +85,17 @@ class _JournalEntriesState extends State<JournalEntries> {
                   ],
                 ),
               ),
-              Padding(
-                padding:   EdgeInsets.all(8.0),
-                child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Image.asset('asset/addnew.png')),
+              InkWell(
+                onTap: (){
+                  Get.to(Addnjlentry());
+                }
+                ,
+                child: Padding(
+                  padding:   EdgeInsets.all(8.0),
+                  child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Image.asset('asset/addnew.png')),
+                ),
               ),
               SizedBox(height: 15),
               Container(

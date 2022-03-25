@@ -5,6 +5,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../constants/constants.dart';
+import '../graph/linegraph.dart';
+import '../graph/piechart.dart';
 
 class Accountinga extends StatefulWidget {
   const Accountinga({Key? key}) : super(key: key);
@@ -65,6 +67,7 @@ class _AccountingaState extends State<Accountinga> {
                   child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Invoices",
                             style: TextStyle(
@@ -72,7 +75,7 @@ class _AccountingaState extends State<Accountinga> {
                             ),
                             textAlign: TextAlign.center,
                           ),
-SizedBox(width: 120,),
+
                           Text("Past Month",
                             style: TextStyle(
                                 color: kblue,fontSize: 25
@@ -86,6 +89,7 @@ SizedBox(width: 120,),
                       SizedBox(height: Get.height*0.06,),
                       SizedBox(height: 12,),
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
@@ -107,7 +111,6 @@ SizedBox(width: 120,),
                                 ],
                               ),
 
-                              SizedBox(width: 200,),
                               Column(
                                 children: [
                                   Text("Rs 1525",
@@ -150,6 +153,7 @@ SizedBox(width: 120,),
                       Column(
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
                                 children: [
@@ -169,7 +173,6 @@ SizedBox(width: 120,),
                                 ],
                               ),
 
-                              SizedBox(width: 160,),
                               Column(
                                 children: [
                                   Text("Rs 1525",
@@ -227,6 +230,7 @@ SizedBox(width: 120,),
                   child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             children: [
@@ -244,7 +248,7 @@ SizedBox(width: 120,),
                               ),
                             ],
                           ),
-                          SizedBox(width: 100,),
+
                           Text("Past Month",
                             style: TextStyle(
                                 color: kblue,fontSize: 20
@@ -257,7 +261,17 @@ SizedBox(width: 120,),
                       ),
 
 
+                  Container(
+                    color: Colors.grey.shade200,
+                    height: 200,
+                    child: PieChartMine(dataMap: {
+                      'Finances' : 2837,
+                      'Cheque' :7876,
+                      'Sales' : 2379,
+                      'Produce': 876
 
+                    },),
+                  )
 
 
 
@@ -277,6 +291,7 @@ SizedBox(width: 120,),
                   child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             children: [
@@ -289,7 +304,7 @@ SizedBox(width: 120,),
 
                             ],
                           ),
-                          SizedBox(width: 40,),
+
                           Text("Past Month",
                             style: TextStyle(
                                 color: kblue,fontSize: 20
@@ -304,6 +319,11 @@ SizedBox(width: 120,),
 
 
 
+
+                      Container(
+                          height: 200,
+                          child: DateTimeComboLinePointChart.withSampleData()
+                      )
 
 
 
