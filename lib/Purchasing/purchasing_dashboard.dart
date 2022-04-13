@@ -8,6 +8,7 @@ import 'package:revoo/Purchasing/rfqstatusa.dart';
 import 'package:revoo/Purchasing/rfqstatusb.dart';
 import 'package:revoo/Purchasing/vendors.dart';
 
+import '../Controllers/authcontroller.dart';
 import '../constants/constants.dart';
 import 'billsninvoice.dart';
 import 'calendarss.dart';
@@ -215,6 +216,10 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
     return InkWell(
       onTap: (){
         if(index == 11){
+
+          name == "Logout" ?
+          AuthController.instance.logout()
+              : print('');
           Get.back();
           Get.defaultDialog(title: '',content: Column(
             children: [

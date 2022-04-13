@@ -52,7 +52,7 @@ class _DBcrudState extends State<DBcrud1> {
                          padding:   EdgeInsets.only(right: 40,left: 40,top: 30,bottom: 30),
                          child: InkWell(
                            onTap: (){
-                             Get.to(DBcrud2());
+                             Get.to(AddBranches());
                            },
                            child: Column(
                              mainAxisSize: MainAxisSize.min,

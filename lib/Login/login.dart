@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/Controllers/authcontroller.dart';
 import 'package:revoo/Login/signup.dart';
 import 'package:revoo/Login/yourapps.dart';
 import 'package:revoo/home/admindashboard.dart';
@@ -26,7 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController email = TextEditingController();
 
-
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +86,8 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                 height: 17,
                               ),
                               TextFormField(
-                                controller: email,
+
+                                controller: emailController,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
@@ -108,7 +111,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                               ),
                               SizedBox(height: 30,),
                               TextFormField(
-                                controller: password,
+                                controller: passwordController,
                                 obscureText: obsecure,
                                 decoration: InputDecoration(
                                     filled: true,
@@ -146,9 +149,9 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                               ),
                               SizedBox(height: 20,),
 
-                              InkWell(
-                                onTap: (){
-                                  Get.to(Yourapps());
+                              GestureDetector(
+                                onTap: () {
+                                  AuthController.instance.login(emailController.text.trim(), passwordController.text.trim());
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,

@@ -54,7 +54,7 @@ class _Goodsissue43State extends State<Goodsissue43> {
 
                           ),
                           InkWell(onTap: (){
-                            Get.to(DBcrud2());
+                            Get.to(AddBranches());
                           },child: Image.asset('asset/addnew.png')),
 
                         ],

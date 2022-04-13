@@ -76,7 +76,7 @@ class _Product37State extends State<Product37> {
 
                           ),
                           InkWell(onTap: (){
-                            Get.to(DBcrud2());
+                            Get.to(AddBranches());
                           },child: Image.asset('asset/addnew.png')),
 
                         ],

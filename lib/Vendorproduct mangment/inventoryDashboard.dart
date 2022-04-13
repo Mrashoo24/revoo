@@ -7,6 +7,7 @@ import 'package:revoo/Vendorproduct%20mangment/transaction44.dart';
 import 'package:revoo/Vendorproduct%20mangment/transferadd46.dart';
 import 'package:revoo/Vendorproduct%20mangment/vendorproduct38.dart';
 
+import '../Controllers/authcontroller.dart';
 import '../constants/constants.dart';
 import 'Batchmangment51.dart';
 import 'goodissue42.dart';
@@ -219,6 +220,10 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
     return InkWell(
       onTap: (){
         if(index == 8){
+
+          name == "Logout" ?
+          AuthController.instance.logout()
+              : print('');
           Get.back();
           Get.defaultDialog(title: '',content: Column(
             children: [

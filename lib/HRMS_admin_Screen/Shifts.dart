@@ -176,7 +176,7 @@ class _ShiftsManagementState extends State<ShiftsManagement> {
                   InkWell(
                       onTap: () {
 
-                        Get.to(DBcrud2());
+                        Get.to(AddBranches());
 
                       },
                       child: Image.asset('asset/addnew.png')),

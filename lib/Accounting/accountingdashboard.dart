@@ -7,6 +7,7 @@ import 'package:revoo/Accounting/recurringpayments.dart';
 import 'package:revoo/Accounting/syncbnkstatement.dart';
 import 'package:revoo/Accounting/taxmanagement.dart';
 
+import '../Controllers/authcontroller.dart';
 import '../constants/constants.dart';
 import 'accounting.dart';
 import 'banksync.dart';
@@ -251,6 +252,9 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
     return InkWell(
       onTap: (){
         if(index == 10){
+          name == "Logout" ?
+          AuthController.instance.logout()
+              : print('');
           Get.back();
           Get.defaultDialog(title: '',content: Column(
             children: [

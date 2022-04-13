@@ -67,7 +67,7 @@ class _Transfer45State extends State<Transfer45> {
                     InkWell(
                       child: Image.asset('asset/addnew.png'),
                       onTap: (){
-                      Get.to(DBcrud2());
+                      Get.to(AddBranches());
                     },),
 
                   ],
