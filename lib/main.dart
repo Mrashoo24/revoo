@@ -23,13 +23,18 @@ import 'HRMS_admin_Screen/employeecheckin.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
 import 'Employee/dailyupdates.dart';
+import 'Pos/testhomepagea.dart';
 import 'graph/linegraph.dart';
 
 
 
 
 void main() {
+
+
   runApp(const MyApp());
+
+
 }
 
 class MyApp extends StatelessWidget {

@@ -13,6 +13,9 @@ class Cashinoutc extends StatefulWidget {
 }
 
 class _CashinoutcState extends State<Cashinoutc> {
+
+  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

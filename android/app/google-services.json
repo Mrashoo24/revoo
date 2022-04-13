@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "702579453139",
+    "project_id": "revoo-57e23",
+    "storage_bucket": "revoo-57e23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702579453139:android:123225bed767246dac3826",
+        "android_client_info": {
+          "package_name": "com.an.revooapp.revoo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "702579453139-aic2iaalf4s9muh6qj66bjr2vk4ja1h2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiX_N6BFFF1IDbmvoQGFtCEVosC_V0M8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "702579453139-aic2iaalf4s9muh6qj66bjr2vk4ja1h2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
