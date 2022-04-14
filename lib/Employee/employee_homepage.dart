@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/Controllers/authcontroller.dart';
 import 'package:revoo/Employee/dailyupdates.dart';
 import 'package:revoo/Employee/employeedash1stpg.dart';
 import 'package:revoo/Employee/leaveRequest.dart';
@@ -21,11 +22,14 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
   var selectedCard = 'Home'; //for changing name
   var selectedindex = 0; //for changing index of page
 
+  late String email;
+
   var homepages = [
     EmployeeDashboard1(), //0
     Watchdashboard(),
     Dailyupdates(), //1
-    LeaveRequestEmployee()
+    LeaveRequestEmployee(),
+
   ];
 
 
@@ -173,6 +177,11 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
           selectedCard = name;
           selectedindex = index;
         });
+
+        name == "Logout" ?
+            AuthController.instance.logout()
+            : print('');
+
         Get.back();
       },
       child: Card(

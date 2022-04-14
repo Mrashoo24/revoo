@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/Controllers/authcontroller.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key key = const Key('Signup')}) : super(key: key);
@@ -11,9 +12,11 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
 
-
   bool obsecure = true;
   bool obsecure1 = true;
+
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +93,7 @@ class _SignupState extends State<Signup> {
                           ),
                           SizedBox(height: 20,),
                           TextFormField(
+                            controller: emailController,
                             decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
@@ -113,6 +117,7 @@ class _SignupState extends State<Signup> {
                           ),
                           SizedBox(height: 20,),
                           TextFormField(
+                            controller: passwordController,
                             obscureText: obsecure,
                             decoration: InputDecoration(
                                 filled: true,
@@ -145,6 +150,7 @@ class _SignupState extends State<Signup> {
                           ),
                           SizedBox(height: 20,),
                           TextFormField(
+                            controller: passwordController,
                             obscureText: obsecure1,
                             decoration: InputDecoration(
                                 filled: true,
@@ -176,16 +182,21 @@ class _SignupState extends State<Signup> {
                           ),
                           SizedBox(height: 20,),
 
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(child: Text('SIGN UP',style: TextStyle(
-                                  color: Colors.white,fontSize: 20
-                              ),)),
-                            ),
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
+                          GestureDetector(
+                            onTap: (){
+                              AuthController.instance.register(emailController.text.trim(), passwordController.text.trim());
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(child: Text('SIGN UP',style: TextStyle(
+                                    color: Colors.white,fontSize: 20
+                                ),)),
+                              ),
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
+                              ),
                             ),
                           ),
                           SizedBox(height: 10,),
