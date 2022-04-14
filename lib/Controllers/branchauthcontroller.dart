@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
+import '../HRMS_admin_Screen/adbranchpg1.dart';
+import '../HRMS_admin_Screen/adbranchpg2.dart';
 import '../Login/login.dart';
 import '../Login/yourapps.dart';
 
-class AuthController extends GetxController{
+class BRAuthController extends GetxController{
   //AuthController.instance
-  static AuthController instance =  Get.find();
+  static BRAuthController instance =  Get.find();
   //email,password,name
   late Rx<User?> _user;
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -26,21 +28,21 @@ class AuthController extends GetxController{
   _initialScreen(User? user){
     if(user==null){
       print("Login Page");
-      Get.offAll(()=>LoginScreen());
+      Get.offAll(()=>DBcrud1());
     }else{
-      Get.offAll(()=>Yourapps());
+      Get.offAll(()=>AddBranches());
     }
   }
 
 
-  void register (String email, password)async {
+  void register (String email, password, location)async {
     try{
-     await auth.createUserWithEmailAndPassword(email: email, password: password);
+      await auth.createUserWithEmailAndPassword(email: email, password: password);
     }catch(e){
       Get.snackbar("About User", "User Message",
-      backgroundColor: Colors.grey,
-      snackPosition: SnackPosition.BOTTOM,
-          titleText: Text("Account Creation Failed"),
+        backgroundColor: Colors.grey,
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text("Account Creation Failed"),
         messageText: Text(e.toString(),style: TextStyle(color: Colors.grey),
         ),
       );
@@ -60,6 +62,6 @@ class AuthController extends GetxController{
     }
   }
   void logout () async{
-   await auth.signOut();
+    await auth.signOut();
   }
 }

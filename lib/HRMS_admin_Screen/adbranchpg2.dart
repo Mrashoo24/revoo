@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:revoo/Controllers/branchauthcontroller.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 
 import '../constants/constants.dart';
@@ -27,7 +28,9 @@ class _DBcrudState extends State<AddBranches> {
   Widget build(BuildContext context) {
 
     var firestore =  FirebaseFirestore.instance;
-
+    var textControllera = TextEditingController();
+    var textControllerb = TextEditingController();
+    var textControllerc = TextEditingController();
 
 
 
@@ -70,9 +73,7 @@ class _DBcrudState extends State<AddBranches> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextFormField(
-
-
-                        controller: name,
+                        controller: textControllera,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -211,7 +212,7 @@ class _DBcrudState extends State<AddBranches> {
                         });
                      var docSnap =  await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc('qOhsmhAMWFKFBcP6EtPx').get();
                      print(docSnap.data());
-                          Get.to(HomePageMain());
+                        BRAuthController.instance.register(textControllera.text.trim(), textControllerb.text.trim(),textControllerc.text.trim());
                         },
                         child: Container(
                           width: 110,
