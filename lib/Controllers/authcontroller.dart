@@ -32,7 +32,6 @@ class AuthController extends GetxController{
     }
   }
 
-
   void register (String email, password)async {
     try{
      await auth.createUserWithEmailAndPassword(email: email, password: password);

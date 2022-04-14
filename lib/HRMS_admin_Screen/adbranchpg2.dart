@@ -73,7 +73,7 @@ class _DBcrudState extends State<AddBranches> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextFormField(
-                        controller: textControllera,
+                        controller: name,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
