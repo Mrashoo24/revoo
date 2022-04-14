@@ -20,7 +20,8 @@ class AddBranches extends StatefulWidget {
 class _DBcrudState extends State<AddBranches> {
 
   TextEditingController name = TextEditingController();
-
+  TextEditingController address = TextEditingController();
+  TextEditingController location = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +70,8 @@ class _DBcrudState extends State<AddBranches> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextFormField(
+
+
                         controller: name,
                         decoration: InputDecoration(
                             filled: true,
@@ -91,6 +94,8 @@ class _DBcrudState extends State<AddBranches> {
                             style: TextStyle(color: Colors.grey, fontSize: 10),
                           )),
                       TextFormField(
+                        controller: address,
+
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -109,13 +114,14 @@ class _DBcrudState extends State<AddBranches> {
                         height: 12,
                       ),
                       TextFormField(
+                        controller: location,
+
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding:
-                                EdgeInsets.only(left: 20, top: 25, bottom: 25),
+                            EdgeInsets.only(left: 20, top: 25, bottom: 25),
                             hintText: 'Location',
-                            enabled: false,
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
@@ -193,41 +199,19 @@ class _DBcrudState extends State<AddBranches> {
                       ),
                       InkWell(
                         onTap: () async {
-
-                        // await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').add(
-                        //    {
-                        //      'address':'Mumbra',
-                        //      'bid':'',
-                        //      'cid' : widget.uid,
-                        //      'location' : '13123',
-                        //      'mid' : '',
-                        //      'name':name.text
-                        //    }
-                        //
-                        //  ).then((value) async {
-                        //
-                        //   await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc(value.id).update({
-                        //     'bid' : value.id
-                        //   });
-                        //
-                        //
-                        //
-                        //
-                        // });
-
-
+                        await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').add(
+                           {
+                             'Branch Name':name.text,
+                             'Address':address.text,
+                             'Location' : location.text,
+                           }
+                         ).then((value) async {
+                          await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc(value.id).update({
+                          });
+                        });
                      var docSnap =  await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc('qOhsmhAMWFKFBcP6EtPx').get();
-
                      print(docSnap.data());
-
-
-
-
-
                           Get.to(HomePageMain());
-
-
-
                         },
                         child: Container(
                           width: 110,

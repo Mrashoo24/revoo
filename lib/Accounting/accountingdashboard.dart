@@ -342,12 +342,10 @@ class _AccountingDashboardState extends State<AccountingDashboard> {
                 SizedBox(width: 10,),
 
                 Text(name,style: TextStyle(color: Colors.grey,fontSize: 16),),
-
               ],
             ),
           ),
         ),
-
       ),
     );
   }
