@@ -169,7 +169,9 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                 alignment: Alignment.centerLeft,
                                   child: InkWell(
                                       onTap: (){
-                                        Get.to(Signup());
+
+                                        // Get.to(SelectPlans());
+
                                       },
                                       child: Text('Don\'t have an account?',style: TextStyle(color: Colors.yellow.shade700),))),
 

@@ -19,6 +19,7 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
     'IT',
     'CIVIL'
   ];
+
   DateTime date = DateTime(2022, 12, 24);
   var selectedDepart = 'IT';
 

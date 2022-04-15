@@ -45,7 +45,7 @@ dependencies:
   percent_indicator: ^3.4.0
   font_awesome_flutter: ^9.1.0
   auto_size_text: ^3.0.0
-horizontal_data_table: ^3.6.1+1
+  horizontal_data_table: ^3.6.1+1
 
 
 
