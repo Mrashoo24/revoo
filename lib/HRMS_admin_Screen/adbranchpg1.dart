@@ -15,7 +15,6 @@ class DBcrud1 extends StatefulWidget {
 }
 
 class _DBcrudState extends State<DBcrud1> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -77,11 +76,12 @@ class _DBcrudState extends State<DBcrud1> {
                            onTap: (){
                              Get.to(HomePageMain());
                            },
-                           child: Text("Already created branch?", style: TextStyle(color: Colors.yellow.shade700,fontSize: 15),))
+                           child: Text("Already created branch?",style: TextStyle(color: Colors.yellow.shade700,fontSize: 15),))
                      ],
                    ),
                  ),
                  SizedBox(height: 10,),
+
 
                  Text ('Create your first branch to add your\nemployees and staff, assign\nroles and communicate between\ndepartments',style: TextStyle(color: Colors.grey,fontSize: 20),),
                  SizedBox(height: 15,),

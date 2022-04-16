@@ -1,32 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 
 import '../constants/constants.dart';
 import '../home/homepage.dart';
 
-class AddBranches extends StatefulWidget {
 
-
-  const AddBranches({Key? key,}) : super(key: key);
+class AlreadyHvBrnch extends StatefulWidget {
+  const AlreadyHvBrnch({Key? key}) : super(key: key);
 
   @override
-  _DBcrudState createState() => _DBcrudState();
+  _AlreadyHvBrnchState createState() => _AlreadyHvBrnchState();
 }
 
-class _DBcrudState extends State<AddBranches> {
-
+class _AlreadyHvBrnchState extends State<AlreadyHvBrnch> {
   TextEditingController name = TextEditingController();
-  TextEditingController address = TextEditingController();
-  TextEditingController location = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-
     var firestore =  FirebaseFirestore.instance;
 
 
@@ -74,7 +68,7 @@ class _DBcrudState extends State<AddBranches> {
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding:
-                                EdgeInsets.only(left: 20, top: 25, bottom: 25),
+                            EdgeInsets.only(left: 20, top: 25, bottom: 25),
                             hintText: 'Branch Name',
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
@@ -91,13 +85,13 @@ class _DBcrudState extends State<AddBranches> {
                             style: TextStyle(color: Colors.grey, fontSize: 10),
                           )),
                       TextFormField(
-                        controller: address,
+
 
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding:
-                                EdgeInsets.only(left: 20, top: 25, bottom: 25),
+                            EdgeInsets.only(left: 20, top: 25, bottom: 25),
                             hintText: 'Address',
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
@@ -111,7 +105,7 @@ class _DBcrudState extends State<AddBranches> {
                         height: 12,
                       ),
                       TextFormField(
-                        controller: location,
+
 
                         decoration: InputDecoration(
                             filled: true,
@@ -179,7 +173,7 @@ class _DBcrudState extends State<AddBranches> {
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
+                                  BorderRadius.all(Radius.circular(10))),
                               side: BorderSide(width: 3.0, color: kblue),
                               primary: Colors.white,
                               padding: EdgeInsets.symmetric(
@@ -188,28 +182,25 @@ class _DBcrudState extends State<AddBranches> {
                                   fontSize: 30, fontWeight: FontWeight.bold)),
                           child: Center(
                               child: Text(
-                            '< Back',
-                            style: TextStyle(color: kblue, fontSize: 15),
-                          ))),
+                                '< Back',
+                                style: TextStyle(color: kblue, fontSize: 15),
+                              ))),
                       SizedBox(
                         width: 25,
                       ),
                       InkWell(
                         onTap: () async {
-                        await firestore.collection('Company').doc('tJSho8ikxpECfdJxYF7j').collection('Branch').add(
-                           {
-                             'branch_name':name.text,
-                             'address':address.text,
-                             'location' : location.text,
-                           }
-                         ).then((value) async {
-                          await firestore.collection('Company').doc('tJSho8ikxpECfdJxYF7j').collection('Branch').doc(value.id).update({
-                            'bid' :value.id
+                          await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').add(
+                              {
+                                'Branch Name':name.text,
+
+                              }
+                          ).then((value) async {
+                            await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc(value.id).update({
+                            });
                           });
-                        });
-                     var docSnap =  await firestore.collection('Company').doc('tJSho8ikxpECfdJxYF7j').collection('Branch').doc('xdlnN5VPetLfHLrx5yLo').get();
-                     print(docSnap.data());
-                        Get.to(HomePageMain());
+                          var docSnap =  await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc('qOhsmhAMWFKFBcP6EtPx').get();
+                          print(docSnap.data());
                         },
                         child: Container(
                           width: 110,
@@ -227,9 +218,9 @@ class _DBcrudState extends State<AddBranches> {
                           ),
                           child: Center(
                               child: Text(
-                            'Add',
-                            style: TextStyle(color: Colors.white),
-                          )),
+                                'Add',
+                                style: TextStyle(color: Colors.white),
+                              )),
                         ),
                       ),
                     ],

@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/Controllers/branchController.dart';
+import 'package:revoo/Controllers/departmentController.dart';
 import 'package:revoo/HRMS_admin_Screen/departments/adddepartment.dart';
+import 'package:revoo/models/branchModel.dart';
 
 import '../constants/constants.dart';
 import 'adbranchpg2.dart';
@@ -15,12 +19,17 @@ class Departments extends StatefulWidget {
 }
 
 class _DepartmentsState extends State<Departments> {
-  var selectedValue = 0;
+  var selectedValue = '';
+  TextEditingController deptName = TextEditingController();
+  TextEditingController head = TextEditingController();
+  TextEditingController noEmployee = TextEditingController();
 
 
 
   @override
   Widget build(BuildContext context) {
+    Get.put<DepartmentController>(DepartmentController());
+    var firestore =  FirebaseFirestore.instance;
 
     List<TableRow> tableRow = [
       TableRow(
@@ -145,37 +154,54 @@ class _DepartmentsState extends State<Departments> {
                     style: TextStyle(color: kblue, fontSize: 14),
                   ),
                   SizedBox(width: 8,),
-                  Container(
-                    height: 30,
-                    width: Get.width*0.33,
-                    decoration: BoxDecoration(
-                        color:bgGrey,
-                        borderRadius: BorderRadius.circular(100)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: DropdownButton(
-                        underline: Text(''),
+                  GetX(
+                    init: Get.put<BranchController>(BranchController()),
+                    builder: (BranchController branchController) {
 
-                        borderRadius: BorderRadius.circular(10),
-                        value: selectedValue,
-                        onChanged: (int? value){
+
+                      print('list = ${branchController.branchList}');
+
+                      var firstValue = branchController.branchList.value.first.bid!;
 
 
 
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                        },
-                        items: [
+                      return  Container(
+                        height: 30,
+                        width: Get.width*0.33,
+                        decoration: BoxDecoration(
+                            color:bgGrey,
+                            borderRadius: BorderRadius.circular(100)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: DropdownButton(
 
-                          DropdownMenuItem(child: Text('By branch'),value: 0,),
-                          DropdownMenuItem(child: Text('By branch'),value: 1,),
-                          DropdownMenuItem(child: Text('By branch'),value: 2,)
 
-                        ],
-                      ),
-                    ),
+                            underline: Text(''),
+
+                            borderRadius: BorderRadius.circular(10),
+                            value: selectedValue == '' ? firstValue : selectedValue,
+                            onChanged: (String? value){
+
+
+
+                              setState(() {
+                                selectedValue = value!;
+                                branchController.departmentController.branchId.value = value;
+                              });
+                              print('d =$selectedValue');
+                            },
+
+                            items: branchController.branchList.value.map((e){
+
+                             return DropdownMenuItem(child: Text(e.branchName!),value: e.bid!,);
+
+                            }).toList()
+
+                          ),
+                        ),
+                      );
+                    }
                   ),
                   SizedBox(width: 30,),
                   InkWell(
