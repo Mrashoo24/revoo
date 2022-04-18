@@ -12,7 +12,6 @@ import 'package:revoo/Purchasing/purchasing_dashboard.dart';
 import 'package:revoo/Vendorproduct%20mangment/inventoryDashboard.dart';
 
 import '../Controllers/authcontroller.dart';
-import '../Controllers/branchauthcontroller.dart';
 import '../Employee/employee_homepage.dart';
 import '../constants/constants.dart';
 
@@ -25,6 +24,8 @@ class Yourapps extends StatefulWidget {
 }
 
 class _YourappsState extends State<Yourapps> {
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -44,14 +45,33 @@ class _YourappsState extends State<Yourapps> {
                   alignment: Alignment.center,
                   child : Image.asset('asset/logo.png',width: 250,),
 
+                ),SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () {
+                    AuthController.instance.logout();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                          Icon(Icons.logout,color: kyellow,),
+                          Text("Logout",style: TextStyle(color: kyellow ,fontSize: 15),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
+
                 SizedBox(
-                  height: 25,),
+                  height: 15,),
                 Container(
                   child: Text("Your Apps",style: TextStyle(color: kblue ,fontSize: 25),
                   ),
 
                 ),
+
                 SizedBox(height: 30,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),

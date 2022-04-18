@@ -208,8 +208,10 @@ class _DBcrudState extends State<AddBranches> {
                          ).then((value) async {
                           await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc(value.id).update({
                             'bid' : value.id
-                          });
-                        });
+                          }
+                          );
+                        }
+                        );
                      var docSnap =  await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc('qOhsmhAMWFKFBcP6EtPx').get();
                      print(docSnap.data());
                           Get.to(HomePageMain());

@@ -6,6 +6,7 @@ import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
 import 'package:revoo/HRMS_admin_Screen/employeecheckin.dart';
 import 'package:revoo/home/admindashboard.dart';
 
+import '../Controllers/authcontroller.dart';
 import '../HRMS_admin_Screen/Shifts.dart';
 import '../HRMS_admin_Screen/acceptleaverequest.dart';
 import '../HRMS_admin_Screen/allEmployee.dart';
@@ -226,6 +227,8 @@ class _HomePageMainState extends State<HomePageMain> {
                   Expanded(
                     child: InkWell(
                       onTap:(){
+                        
+                        Get.back();
 
                       },
                       child: Padding(
@@ -247,6 +250,9 @@ class _HomePageMainState extends State<HomePageMain> {
                   Expanded(
                     child: InkWell(
                       onTap: (){
+                        name == "Logout" ?
+                        AuthController.instance.logout()
+                            : print('');
 
                       },
                       child: Padding(

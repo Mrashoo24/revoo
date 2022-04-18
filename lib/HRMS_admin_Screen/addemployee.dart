@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +15,12 @@ class AddEmployee extends StatefulWidget {
 }
 
 class _AddEmployeeState extends State<AddEmployee> {
+  var selectedValue = 0;
+  var selectedValuea = 1;
+  var selectedValueb = 2;
+  var selectedValuec = 3;
+  var selectedValued = 4;
+  var selectedValuee = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +60,16 @@ class _AddEmployeeState extends State<AddEmployee> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Row(
+                        children: [
+                          Text("Employee name"),
+                        ],
+                      ),
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
                             hintText: 'Emp. Name',
 
                             hintStyle: TextStyle(
@@ -75,38 +88,112 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                         ),
                       ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("Branch name"),
+                        ],
+                      ),
+                      Container(
+                        color: bgGrey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:   EdgeInsets.only(left: 20.0),
+                              child: DropdownButton(
+                                value: selectedValue,
+                                onChanged: (int? value){
+                                  setState(() {
+                                    selectedValue = value!;
+                                  });
+                                },
+                                items: [
 
-                      TextFormField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Select Branch',
+                                  DropdownMenuItem(child: Text('Branch A'),value: 0,),
+                                  DropdownMenuItem(child: Text('Branch B'),value: 1,),
+                                  DropdownMenuItem(child: Text('Branch C'),value: 2,)
 
-                            hintStyle: TextStyle(
-                                color: Colors.grey
+                                ],
+                              ),
                             ),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            )
-
-
+                          ],
                         ),
-                      ),                       SizedBox(height: 12,),
+                      ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("Manager name"),
+                        ],
+                      ),
+                      Container(
+                        color: bgGrey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:   EdgeInsets.only(left: 20.0),
+                              child: DropdownButton(
+                                value: selectedValuea,
+                                onChanged: (int? value){
+                                  setState(() {
+                                    selectedValuea = value!;
+                                  });
+                                },
+                                items: [
 
+                                  DropdownMenuItem(child: Text('Manager A'),value: 0,),
+                                  DropdownMenuItem(child: Text('Manager B'),value: 1,),
+                                  DropdownMenuItem(child: Text('Manager C'),value: 2,)
+
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("HR name"),
+                        ],
+                      ),
+                      Container(
+                        color: bgGrey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:   EdgeInsets.only(left: 20.0),
+                              child: DropdownButton(
+                                value: selectedValueb,
+                                onChanged: (int? value){
+                                  setState(() {
+                                    selectedValueb = value!;
+                                  });
+                                },
+                                items: [
+
+                                  DropdownMenuItem(child: Text('HR A'),value: 0,),
+                                  DropdownMenuItem(child: Text('HR B'),value: 1,),
+                                  DropdownMenuItem(child: Text('HR C'),value: 2,)
+
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("Full Address"),
+                        ],
+                      ),
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Select Manager',
-                            enabled: false,
+                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
+                            hintText: 'Full Address',
+                            enabled: true,
                             hintStyle: TextStyle(
                                 color: Colors.grey
                             ),
@@ -124,34 +211,16 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ),
                       ),
                       SizedBox(height: 12,),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Select HR',
-                            enabled: false,
-                            hintStyle: TextStyle(
-                                color: Colors.grey
-                            ),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            )
-
-
-                        ),
+                      Row(
+                        children: [
+                          Text("Full Address"),
+                        ],
                       ),
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
                             hintText: 'Full Address',
                             enabled: true,
                             hintStyle: TextStyle(
@@ -170,34 +239,17 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                         ),
                       ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Full Address',
-                            enabled: true,
-                            hintStyle: TextStyle(
-                                color: Colors.grey
-                            ),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            )
-
-
-                        ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("Designation"),
+                        ],
                       ),
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
                             hintText: 'Designation',
                             enabled: true,
                             hintStyle: TextStyle(
@@ -216,11 +268,17 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                         ),
                       ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("DOB"),
+                        ],
+                      ),
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
                             hintText: 'DOB',
                             enabled: true,
                             hintStyle: TextStyle(
@@ -239,11 +297,17 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                         ),
                       ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("Email"),
+                        ],
+                      ),
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
                             hintText: 'Email',
                             enabled: true,
                             hintStyle: TextStyle(
@@ -262,12 +326,17 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                         ),
                       ),
-
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("Password"),
+                        ],
+                      ),
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
                             hintText: 'Password',
                             enabled: false,
                             hintStyle: TextStyle(
@@ -286,12 +355,17 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                         ),
                       ),
-
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("Phone Number"),
+                        ],
+                      ),
                       TextFormField(
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
                             hintText: 'Phone Number',
                             enabled: true,
                             hintStyle: TextStyle(
@@ -310,60 +384,75 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                         ),
                       ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("Select Shift"),
+                        ],
+                      ),
+                      Container(
+                        color: bgGrey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:   EdgeInsets.only(left: 20.0),
+                              child: DropdownButton(
+                                hint: Text("Select Role"),
+                                value: selectedValued,
+                                onChanged: (int? value){
+                                  setState(() {
+                                    selectedValued = value!;
+                                  });
+                                },
+                                items: [
 
-                      TextFormField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Select Shift',
-                            enabled: false,
-                            hintStyle: TextStyle(
-                                color: Colors.grey
-                            ),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            )
+                                  DropdownMenuItem(child: Text('Day Shift'),value: 0,),
+                                  DropdownMenuItem(child: Text('Night Shift'),value: 1,),
 
 
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text("Select Role"),
+                        ],
+                      ),
+                      Container(
+                        color: bgGrey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:   EdgeInsets.only(left: 20.0),
+                              child: DropdownButton(
+                                hint: Text("Select Role"),
+                                value: selectedValuee,
+                                onChanged: (int? value){
+                                  setState(() {
+                                    selectedValuee = value!;
+                                  });
+                                },
+                                items: [
 
-                      TextFormField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Select Roles',
-                            enabled: false,
-                            hintStyle: TextStyle(
-                                color: Colors.grey
-                            ),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            )
+                                  DropdownMenuItem(child: Text('Role A'),value: 0,),
+                                  DropdownMenuItem(child: Text('Role B'),value: 1,),
+                                  DropdownMenuItem(child: Text('Role C'),value: 2,)
 
-
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-
 
 
                     ],
-                  ),                      Text('By clicking continue, you agree to the',style: TextStyle(color:kblue,fontSize: 12),),
-
+                  ),
+                  Text('By clicking continue, you agree to the',style: TextStyle(color:kblue,fontSize: 12),),
                   Container(
                     child: RichText(
                       text: TextSpan(
@@ -458,3 +547,5 @@ class _AddEmployeeState extends State<AddEmployee> {
     );
   }
 }
+
+

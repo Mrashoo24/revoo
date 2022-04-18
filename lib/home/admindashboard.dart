@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,10 @@ class AdminDashboard extends StatefulWidget {
 class _AdminDashboardState extends State<AdminDashboard> {
 
   final cellCalendarPageController = CellCalendarPageController();
+  TextEditingController hourin = TextEditingController();
+  TextEditingController minutein = TextEditingController();
+  TextEditingController hourout = TextEditingController();
+  TextEditingController minuteout = TextEditingController();
 
   var sampleEvents = [
     CalendarEvent(eventName: "Event 1",eventDate: DateTime.now(),eventBackgroundColor: Colors.black),
@@ -27,6 +32,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    var firestore =  FirebaseFirestore.instance;
+
     return Scaffold(
 
       body: SingleChildScrollView(
@@ -66,6 +73,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
+
                                   Text('In-Time',style: TextStyle(color: ktextcolor,fontSize: 18),),
                                   SizedBox(width: 15),
                                   Container(
@@ -98,14 +106,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 15,),
-                                  Image.asset('asset/pencilicon.png'),
                                 ],
-
-
-
-
-
                               ),
                             ),
                           ),
@@ -146,14 +147,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text('--',style: TextStyle(color: kblue,fontSize: 18),),
-                                      SizedBox(width: 10,),
-                                      Image.asset('asset/smallarrowdown.png'),
                                     ],
                                   ),
                                 ),
                               ),
                               SizedBox(width: 16,),
-                              Image.asset('asset/pencilicon.png'),
+
 
                             ],
                           ),
@@ -266,12 +265,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
-
                                     ],
                                   ),
                                   Image.asset('asset/rightarrow.png',width: 30,),
                                   SizedBox(height: 20,),
-
                                 ],
                               ),
                             ),
@@ -281,30 +278,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             child: Container(
                                 margin: EdgeInsets.only(right: 25),
                                 child: Image.asset('asset/wrongyellow.png',width: 30,height: 30,)),
-                          )
-
+                          ),
                         ],
                       ),
-
-
-
-
-
                     ],
-
-
-
                   ),
-
-
-
-
-
-
                 ),
-
-
-
               ],
             ),
             SizedBox(height: 60,),

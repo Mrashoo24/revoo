@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revoo/Controllers/authcontroller.dart';
 
+import 'login.dart';
+
 class Signup extends StatefulWidget {
   const Signup({Key key = const Key('Signup')}) : super(key: key);
 
@@ -205,7 +207,7 @@ class _SignupState extends State<Signup> {
                               alignment: Alignment.centerLeft,
                               child: InkWell(
                                   onTap: (){
-                                    Get.to(Signup());
+                                    Get.to(LoginScreen());
                                   },
                                   child: Text('Already hav an account?',style: TextStyle(color: Colors.yellow.shade700),))),
 
