@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revoo/Controllers/branchController.dart';
 import 'package:revoo/Controllers/departmentController.dart';
+import 'package:revoo/Controllers/departmentControllerTableRow.dart';
 import 'package:revoo/HRMS_admin_Screen/departments/adddepartment.dart';
 import 'package:revoo/models/branchModel.dart';
 
@@ -30,6 +31,8 @@ class _DepartmentsState extends State<Departments> {
   Widget build(BuildContext context) {
     Get.put<DepartmentController>(DepartmentController());
     var firestore =  FirebaseFirestore.instance;
+
+
 
     List<TableRow> tableRow = [
       TableRow(
@@ -63,6 +66,7 @@ class _DepartmentsState extends State<Departments> {
           ),
         ],
       ),
+
       TableRow(
         children: [
           Container(
@@ -161,10 +165,13 @@ class _DepartmentsState extends State<Departments> {
 
                       print('list = ${branchController.branchList}');
 
+
+                      if(branchController.branchList.value.isEmpty){
+                        return Text('No Data');
+
+                      }
+
                       var firstValue = branchController.branchList.value.first.bid!;
-
-
-
                       return  Container(
                         height: 30,
                         width: Get.width*0.33,
@@ -214,16 +221,104 @@ class _DepartmentsState extends State<Departments> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                width: Get.width,
-                height: 300,
-                child: Table(
-                  border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
-                  children: tableRow,
-                ),
-              ),
+            GetX(
+              init: Get.put<DepartmentControllerTable>(DepartmentControllerTable()),
+              builder: (DepartmentControllerTable departmentControllerTable) {
+
+
+
+
+                return Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    width: Get.width,
+                    height: 300,
+
+                    child: Column(
+                      children: [
+                        Table(
+                          border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
+
+                          children: [
+
+                            TableRow(
+                              children: [
+                                Container(
+                                  height: 30,
+                                  child: Center(
+                                    child: Text(
+                                      'Dept Name',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 30,
+                                  child: Center(
+                                    child: Text(
+                                      'Head',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 30,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                      'No.Employee',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ]
+
+                        ),
+                        Table(
+                          border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
+
+                          children: departmentControllerTable.departmentList.value.map((e) {
+
+                            return TableRow(
+                              children: [
+                                Container(
+                                  height: 30,
+                                  child: Center(
+                                    child: Text(
+                                      e.deptName!,
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 30,
+                                  child: Center(
+                                    child: Text(
+                                     e.head!,
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 30,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                      e.noEmployee!,
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
             )
           ],
         ),

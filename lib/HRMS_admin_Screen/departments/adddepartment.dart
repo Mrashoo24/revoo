@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
-
+import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../constants/constants.dart';
 
 
@@ -16,6 +17,10 @@ class AddDepartments extends StatefulWidget {
 
 class _AddDepartmentsState extends State<AddDepartments> {
 
+  var firestore =  FirebaseFirestore.instance;
+  TextEditingController deptName = TextEditingController();
+  TextEditingController head = TextEditingController();
+  TextEditingController noEmployee = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -190,8 +195,15 @@ class _AddDepartmentsState extends State<AddDepartments> {
                           ),))),
                       SizedBox(width: 25,),
                       InkWell(
-                        onTap: (){
-                          Get.to(DBcrud4());
+                        onTap: () async {
+                        await  firestore.collection('Department').add({
+
+                          "Dept Name" : deptName.text,
+                          "Head" : head.text,
+                          "No.Employee" : noEmployee.text,
+
+                        });
+                          Get.back();
                         },
                         child: Container(
                           width: 110,
