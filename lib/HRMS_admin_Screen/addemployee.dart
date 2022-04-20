@@ -1,5 +1,6 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,14 +17,29 @@ class AddEmployee extends StatefulWidget {
 
 class _AddEmployeeState extends State<AddEmployee> {
   var selectedValue = 0;
-  var selectedValuea = 1;
-  var selectedValueb = 2;
-  var selectedValuec = 3;
-  var selectedValued = 4;
-  var selectedValuee = 5;
+  var selectedValuea = 0;
+  var selectedValueb = 0;
+  var selectedValuec = 0;
+  var selectedValuee = 0;
+
+  TextEditingController empname = TextEditingController();
+  TextEditingController selectBranch = TextEditingController();
+  TextEditingController selectManager = TextEditingController();
+  TextEditingController selectHr = TextEditingController();
+  TextEditingController fullAdsress = TextEditingController();
+  TextEditingController designation = TextEditingController();
+  TextEditingController dob = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController();
+  TextEditingController selectShift = TextEditingController();
+  TextEditingController selectRoles = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -210,35 +226,7 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                         ),
                       ),
-                      SizedBox(height: 12,),
-                      Row(
-                        children: [
-                          Text("Full Address"),
-                        ],
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
-                            hintText: 'Full Address',
-                            enabled: true,
-                            hintStyle: TextStyle(
-                                color: Colors.grey
-                            ),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            )
 
-
-                        ),
-                      ),
                       SizedBox(height: 12,),
                       Row(
                         children: [
@@ -398,20 +386,21 @@ class _AddEmployeeState extends State<AddEmployee> {
                               padding:   EdgeInsets.only(left: 20.0),
                               child: DropdownButton(
                                 hint: Text("Select Role"),
-                                value: selectedValued,
+                                value: selectedValuec,
                                 onChanged: (int? value){
                                   setState(() {
-                                    selectedValued = value!;
+                                    selectedValuec = value!;
                                   });
                                 },
                                 items: [
 
-                                  DropdownMenuItem(child: Text('Day Shift'),value: 0,),
-                                  DropdownMenuItem(child: Text('Night Shift'),value: 1,),
-
+                                  DropdownMenuItem(child: Text('Role A'),value: 0,),
+                                  DropdownMenuItem(child: Text('Role B'),value: 1,),
+                                  DropdownMenuItem(child: Text('Role C'),value: 2,)
 
                                 ],
                               ),
+
                             ),
                           ],
                         ),
@@ -438,10 +427,9 @@ class _AddEmployeeState extends State<AddEmployee> {
                                 },
                                 items: [
 
-                                  DropdownMenuItem(child: Text('Role A'),value: 0,),
-                                  DropdownMenuItem(child: Text('Role B'),value: 1,),
-                                  DropdownMenuItem(child: Text('Role C'),value: 2,)
-
+                                  DropdownMenuItem(child: Text('Day'),value: 0,),
+                                  DropdownMenuItem(child: Text('Night'),value: 1,),
+                                  DropdownMenuItem(child: Text('Mid-Day'),value: 2,),
                                 ],
                               ),
                             ),
@@ -492,9 +480,8 @@ class _AddEmployeeState extends State<AddEmployee> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ElevatedButton(onPressed: (){
-
+                        Get.back();
                       },
-
                           style: ElevatedButton.styleFrom(
                               elevation: 0,
                               shape:RoundedRectangleBorder(
@@ -511,9 +498,16 @@ class _AddEmployeeState extends State<AddEmployee> {
                           ),))),
                       SizedBox(width: 25,),
                       InkWell(
-                        onTap: (){
+                        onTap: () async {
+                          await firestore.collection("CreateEmploye").doc("a5zLTXkrjSnYxWeUQBnZ").get();
+                          {
+
+
+                          }
+
                           Get.to(DBcrud4());
                         },
+                        
                         child: Container(
                           width: 110,
                           height: 41,
@@ -534,15 +528,11 @@ class _AddEmployeeState extends State<AddEmployee> {
                       ),
                     ],
                   ),
-
-
-
                 ],
               ),
             ),
           ),
         ),
-
       ),
     );
   }

@@ -205,11 +205,12 @@ class _DBcrudState extends State<AddBranches> {
                              'Address':address.text,
                              'Location' : location.text,
                            }
-                         ).then((value) async {
-                          await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc(value.id).update({
+                         ).then(
+                                (value) async {
+                          await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc(value.id).update
+                            ({
                             'bid' : value.id
-                          }
-                          );
+                          });
                         }
                         );
                      var docSnap =  await firestore.collection('Company').doc('jdeN29JAU0tlAscbbdFx').collection('Branch').doc('qOhsmhAMWFKFBcP6EtPx').get();

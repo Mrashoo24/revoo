@@ -215,7 +215,7 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                       borderRadius: BorderRadius.circular(100)
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding:   EdgeInsets.symmetric(horizontal: 8.0),
                       child: DropdownButton(
                         underline: Text(''),
                         
