@@ -16,11 +16,53 @@ class AddEmployee extends StatefulWidget {
 }
 
 class _AddEmployeeState extends State<AddEmployee> {
-  var selectedValue = 0;
-  var selectedValuea = 0;
-  var selectedValueb = 0;
-  var selectedValuec = 0;
-  var selectedValuee = 0;
+  var selectedValue = 'Branch A';
+  var selectedValuea = 'Manager A';
+  var selectedValueb = 'HR A';
+  var selectedValuec = "Day";
+  var selectedValuee = 'Role A';
+
+  var branchname = [
+
+    DropdownMenuItem(child: Text('Branch A'),value: 'Branch A',),
+    DropdownMenuItem(child: Text('Branch B'),value: 'Branch B',),
+    DropdownMenuItem(child: Text('Branch C'),value:'Branch C',)
+
+  ];
+
+  var manager  = [
+
+    DropdownMenuItem(child: Text('Manager A'),value: 'Manager A',),
+    DropdownMenuItem(child: Text('Manager B'),value: 'Manager B',),
+    DropdownMenuItem(child: Text('Manager C'),value: 'Manager C',)
+
+  ];
+
+  var selecthr = [
+
+    DropdownMenuItem(child: Text('HR A'),value: 'HR A',),
+    DropdownMenuItem(child: Text('HR B'),value: 'HR B',),
+    DropdownMenuItem(child: Text('HR C'),value: 'HR C',)
+
+  ];
+
+  var selectshift =[
+
+    DropdownMenuItem(child: Text('Day'),value: 'Day',),
+    DropdownMenuItem(child: Text('Night'),value: 'Night',),
+    DropdownMenuItem(child: Text('Mid-Day'),value: 'Mid-Day',),
+
+  ];
+
+  var selectrole = [
+
+    DropdownMenuItem(child: Text('Role A'),value: 'Role A',),
+    DropdownMenuItem(child: Text('Role B'),value: 'Role B',),
+    DropdownMenuItem(child: Text('Role C'),value: 'Role C',)
+
+  ];
+
+
 
   TextEditingController empname = TextEditingController();
   TextEditingController selectBranch = TextEditingController();
@@ -82,6 +124,8 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ],
                       ),
                       TextFormField(
+
+                        controller: empname,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -111,25 +155,20 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ],
                       ),
                       Container(
+
                         color: bgGrey,
                         child: Row(
                           children: [
                             Padding(
                               padding:   EdgeInsets.only(left: 20.0),
-                              child: DropdownButton(
+                              child: DropdownButton<String?>(
                                 value: selectedValue,
-                                onChanged: (int? value){
+                                onChanged: (String? value){
                                   setState(() {
                                     selectedValue = value!;
                                   });
                                 },
-                                items: [
-
-                                  DropdownMenuItem(child: Text('Branch A'),value: 0,),
-                                  DropdownMenuItem(child: Text('Branch B'),value: 1,),
-                                  DropdownMenuItem(child: Text('Branch C'),value: 2,)
-
-                                ],
+                                items:branchname ,
                               ),
                             ),
                           ],
@@ -147,20 +186,14 @@ class _AddEmployeeState extends State<AddEmployee> {
                           children: [
                             Padding(
                               padding:   EdgeInsets.only(left: 20.0),
-                              child: DropdownButton(
+                              child: DropdownButton<String?>(
                                 value: selectedValuea,
-                                onChanged: (int? value){
+                                onChanged: (String? value){
                                   setState(() {
                                     selectedValuea = value!;
                                   });
                                 },
-                                items: [
-
-                                  DropdownMenuItem(child: Text('Manager A'),value: 0,),
-                                  DropdownMenuItem(child: Text('Manager B'),value: 1,),
-                                  DropdownMenuItem(child: Text('Manager C'),value: 2,)
-
-                                ],
+                                items: manager,
                               ),
                             ),
                           ],
@@ -178,20 +211,14 @@ class _AddEmployeeState extends State<AddEmployee> {
                           children: [
                             Padding(
                               padding:   EdgeInsets.only(left: 20.0),
-                              child: DropdownButton(
+                              child: DropdownButton<String?>(
                                 value: selectedValueb,
-                                onChanged: (int? value){
+                                onChanged: (String? value){
                                   setState(() {
                                     selectedValueb = value!;
                                   });
                                 },
-                                items: [
-
-                                  DropdownMenuItem(child: Text('HR A'),value: 0,),
-                                  DropdownMenuItem(child: Text('HR B'),value: 1,),
-                                  DropdownMenuItem(child: Text('HR C'),value: 2,)
-
-                                ],
+                                items: selecthr,
                               ),
                             ),
                           ],
@@ -204,6 +231,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ],
                       ),
                       TextFormField(
+                        controller: fullAdsress,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -234,6 +262,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ],
                       ),
                       TextFormField(
+                        controller: designation,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -263,6 +292,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ],
                       ),
                       TextFormField(
+                        controller: dob,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -292,6 +322,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ],
                       ),
                       TextFormField(
+                        controller: email,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -321,12 +352,15 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ],
                       ),
                       TextFormField(
+                        controller: password,
+                        obscureText: true,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
                             hintText: 'Password',
-                            enabled: false,
+
+
                             hintStyle: TextStyle(
                                 color: Colors.grey
                             ),
@@ -350,6 +384,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ],
                       ),
                       TextFormField(
+                        controller: phoneNumber,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -367,9 +402,35 @@ class _AddEmployeeState extends State<AddEmployee> {
                             ),
                             enabledBorder:OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)
-                            )
+                            ),
+                        ),
+                      ),
+                      SizedBox(height: 12,),
+                      Row(
+                        children: [
+                          Text(
+                              "Select Role"),
+                        ],
+                      ),
+                      Container(
+                        color: bgGrey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:   EdgeInsets.only(left: 20.0),
+                              child: DropdownButton<String?>(
+                                hint: Text("Select Role"),
+                                value: selectedValuec,
+                                onChanged: (String? value){
+                                  setState(() {
+                                    selectedValuec = value!;
+                                  });
+                                },
+                                items:selectrole ,
+                              ),
 
-
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(height: 12,),
@@ -384,53 +445,15 @@ class _AddEmployeeState extends State<AddEmployee> {
                           children: [
                             Padding(
                               padding:   EdgeInsets.only(left: 20.0),
-                              child: DropdownButton(
-                                hint: Text("Select Role"),
-                                value: selectedValuec,
-                                onChanged: (int? value){
-                                  setState(() {
-                                    selectedValuec = value!;
-                                  });
-                                },
-                                items: [
-
-                                  DropdownMenuItem(child: Text('Role A'),value: 0,),
-                                  DropdownMenuItem(child: Text('Role B'),value: 1,),
-                                  DropdownMenuItem(child: Text('Role C'),value: 2,)
-
-                                ],
-                              ),
-
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 12,),
-                      Row(
-                        children: [
-                          Text("Select Role"),
-                        ],
-                      ),
-                      Container(
-                        color: bgGrey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:   EdgeInsets.only(left: 20.0),
-                              child: DropdownButton(
-                                hint: Text("Select Role"),
+                              child: DropdownButton<String?>(
+                                hint: Text("Select Shift"),
                                 value: selectedValuee,
-                                onChanged: (int? value){
+                                onChanged: (String? value){
                                   setState(() {
                                     selectedValuee = value!;
                                   });
                                 },
-                                items: [
-
-                                  DropdownMenuItem(child: Text('Day'),value: 0,),
-                                  DropdownMenuItem(child: Text('Night'),value: 1,),
-                                  DropdownMenuItem(child: Text('Mid-Day'),value: 2,),
-                                ],
+                                items: selectshift,
                               ),
                             ),
                           ],
@@ -473,9 +496,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                       ],
                       ),
                     ),
-
                   ),
-
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -499,15 +520,40 @@ class _AddEmployeeState extends State<AddEmployee> {
                       SizedBox(width: 25,),
                       InkWell(
                         onTap: () async {
-                          await firestore.collection("CreateEmploye").doc("a5zLTXkrjSnYxWeUQBnZ").get();
-                          {
+                          print('branchnsme = ${selectedValue}');
 
 
-                          }
+                          await firestore.collection("Employee").add(
+                              {
+                                'Branch Name':empname.text,
+                                "selectBranch" : selectedValue,
+                                "selectManager" : selectedValuea,
+                                "selectHr" : selectedValueb,
+                                'Address':fullAdsress.text,
+                                'Designation' : designation.text,
+                                "dob" : dob.text,
+                                "email" : email.text,
+                                "password" : password.text,
+                                "phoneNumber" : phoneNumber.text,
+                                "selectShift" : selectedValuec,
+                                "selectRoles" : selectedValuee
+                              }
+                          ).then(
+                              (value) async {
+                                await firestore.collection('Employee')
+                                    .doc(value.id)
+                                    .update
+                                  ({
+                                  'bid': value.id
+                                });
+                              }
+                          );
+                                var docSnap =  await firestore.collection('Employee').doc('QOebgqfRn7wqKCpyrRtw').get();
+                                print(docSnap.data());
+                                Get.to(DBcrud4());
+                                },
 
-                          Get.to(DBcrud4());
-                        },
-                        
+
                         child: Container(
                           width: 110,
                           height: 41,

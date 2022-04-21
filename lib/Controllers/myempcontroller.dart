@@ -17,7 +17,7 @@ class MyEmpController extends GetxController{
 
   @override
   void onInit() {
-    myepmlist.bindStream(firestore.collection('Company').doc('').collection('Branch').snapshots().map((event) {
+    myepmlist.bindStream(firestore.collection('Employee').snapshots().map((event) {
       List<CreatEmpModel> myepmname = [];
 
       event.docs.forEach((element) {
