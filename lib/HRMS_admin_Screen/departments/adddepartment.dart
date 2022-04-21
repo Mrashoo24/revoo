@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../Controllers/branchController.dart';
 import '../../constants/constants.dart';
 
 
@@ -21,7 +22,7 @@ class _AddDepartmentsState extends State<AddDepartments> {
   TextEditingController deptName = TextEditingController();
   TextEditingController head = TextEditingController();
   TextEditingController noEmployee = TextEditingController();
-
+  var selectedValue = '';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -61,6 +62,7 @@ class _AddDepartmentsState extends State<AddDepartments> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextFormField(
+                        controller: deptName,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -83,32 +85,71 @@ class _AddDepartmentsState extends State<AddDepartments> {
 
                         ),
                       ),
+                      SizedBox(height: 10,),
+                      InkWell(
 
-                      TextFormField(
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: bgGrey,
-                            contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                            hintText: 'Select Branch',
+                        onTap: (){
 
-                            hintStyle: TextStyle(
-                                color: Colors.grey
-                            ),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            ),
-                            enabledBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white)
-                            )
+                        },
+                        child: GetX(
+
+                            init: Get.put<BranchController>(BranchController()),
+                            builder: (BranchController branchController) {
 
 
-                        ),
+                              print('list = ${branchController.branchList}');
+
+
+                              if(branchController.branchList.value.isEmpty){
+                                return Text('No Data');
+
+                              }
+
+                              var firstValue = branchController.branchList.value.first.bid!;
+                              return  Container(
+                                width: Get.width,
+                                height: 65,
+
+                                decoration: BoxDecoration(
+                                    color:bgGrey,
+                                    borderRadius: BorderRadius.circular(0)
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: DropdownButton(
+                                      iconSize: 0,
+                                      dropdownColor: Colors.grey[200],
+
+
+
+                                      borderRadius: BorderRadius.circular(10),
+                                      value: selectedValue == '' ? firstValue : selectedValue,
+                                      onChanged: (String? value){
+
+
+
+                                        setState(() {
+                                          selectedValue = value!;
+                                          branchController.departmentController.branchId.value = value;
+                                        });
+                                        print('d =$selectedValue');
+                                      },
+
+                                      items: branchController.branchList.value.map((e){
+
+                                        return DropdownMenuItem(child: Text(e.branchName!),value: e.bid!,);
+
+                                      }).toList()
+
+                                  ),
+                                ),
+                              );
+                            }
+                        ) ,
                       ),                       SizedBox(height: 12,),
 
                       TextFormField(
+                        enabled: false,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -196,13 +237,13 @@ class _AddDepartmentsState extends State<AddDepartments> {
                       SizedBox(width: 25,),
                       InkWell(
                         onTap: () async {
-                        await  firestore.collection('Department').add({
+                          await  firestore.collection('Department').add({
 
-                          "Dept Name" : deptName.text,
-                          "Head" : head.text,
-                          "No.Employee" : noEmployee.text,
-
-                        });
+                            "Dept Name" : deptName.text,
+                            "Head" : head.text,
+                            "No.Employee" : noEmployee.text,
+                            "bid" : "bid"
+                          });
                           Get.back();
                         },
                         child: Container(

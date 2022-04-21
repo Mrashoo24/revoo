@@ -1,24 +1,27 @@
 class BranchModel {
-  String? branchName;
-  String? address;
-  String? location;
-  String? bid;
+String? branchName;
+String? location;
+String? address;
+String? bid;
+String? cid;
 
-  BranchModel({this.branchName, this.address, this.location, this.bid});
+BranchModel({this.branchName, this.location, this.address, this.bid, this.cid});
 
-  BranchModel.fromJson(Map<String, dynamic> json) {
-    branchName = json['branch_name'];
-    address = json['address'];
-    location = json['location'];
-    bid = json['bid'];
-  }
+BranchModel.fromJson(Map<String, dynamic> json) {
+branchName = json['branch_name'];
+location = json['loaction'];
+address = json['address'];
+bid = json['bid'];
+cid = json['cid'];
+}
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['branch_name'] = this.branchName;
-    data['address'] = this.address;
-    data['location'] = this.location;
-    data['bid'] = this.bid;
-    return data;
-  }
+Map<String, dynamic> toJson() {
+  final Map<String, dynamic> data = new Map<String, dynamic>();
+  data['branch_name'] = this.branchName;
+  data['loaction'] = this.location;
+  data['address'] = this.address;
+  data['bid'] = this.bid;
+  data['cid'] = this.cid;
+  return data;
+}
 }

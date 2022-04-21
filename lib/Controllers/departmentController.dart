@@ -12,7 +12,9 @@ class DepartmentController extends GetxController{
 
 
   @override
-  void onInit() {
+  void onInit()
+  {
+    print('bid' + branchId.value);
     branchList.bindStream(firestore.collection('Company').doc('tJSho8ikxpECfdJxYF7j').collection('Branch').where('bid' ,isEqualTo: branchId.value).snapshots().map((event) {
       List<BranchModel> branchName = [];
 

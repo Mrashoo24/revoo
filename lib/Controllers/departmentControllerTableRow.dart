@@ -5,11 +5,12 @@ import 'package:revoo/models/departmentModel.dart';
 class DepartmentControllerTable extends GetxController{
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Rx<List<DepartmentModel>> departmentList = Rx<List<DepartmentModel>>([]);
-
+  Rx<String> bid = Rx<String>('');
 
   @override
   void onInit() {
-    departmentList.bindStream(firestore.collection('Department').snapshots().map((event)
+
+    departmentList.bindStream(firestore.collection('Department').where('bid',isEqualTo: bid.value).snapshots().map((event)
     {
       List<DepartmentModel> departmentName = [];
 

@@ -7,11 +7,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class BranchController extends GetxController{
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 Rx<List<BranchModel>> branchList = Rx<List<BranchModel>>([]);
- DepartmentController departmentController = Get.find<DepartmentController>();
+ DepartmentController departmentController = DepartmentController();
+
 
 @override
   void onInit() {
-  branchList.bindStream(firestore.collection('Company').doc('tJSho8ikxpECfdJxYF7j').collection('Branch').snapshots().map((event) {
+  branchList.bindStream(firestore.collection('Branch').where('cid',isEqualTo: "jdeN29JAU0tlAscbbdFx" ).snapshots().map((event) {
     List<BranchModel> branchName = [];
 
     event.docs.forEach((element) {

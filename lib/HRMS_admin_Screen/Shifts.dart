@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Controllers/branchController.dart';
 import '../constants/constants.dart';
 import 'adbranchpg2.dart';
 
@@ -14,7 +15,7 @@ class ShiftsManagement extends StatefulWidget {
 }
 
 class _ShiftsManagementState extends State<ShiftsManagement> {
-  var selectedValue = 0;
+  var selectedValue = "";
 
 
 
@@ -97,7 +98,9 @@ class _ShiftsManagementState extends State<ShiftsManagement> {
             child: Center(
               child: ElevatedButton(
                 onPressed: (){
-
+                  Get.defaultDialog(
+                    title: ("E Raju")
+                  );
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Kdblue)
@@ -149,26 +152,57 @@ class _ShiftsManagementState extends State<ShiftsManagement> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: DropdownButton(
-                        underline: Text(''),
-
-                        borderRadius: BorderRadius.circular(10),
-                        value: selectedValue,
-                        onChanged: (int? value){
+                      child:  GetX(
+                          init: Get.put<BranchController>(BranchController()),
+                          builder: (BranchController branchController) {
 
 
+                            print('list = ${branchController.branchList}');
 
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                        },
-                        items: [
 
-                          DropdownMenuItem(child: Text('By branch'),value: 0,),
-                          DropdownMenuItem(child: Text('By branch'),value: 1,),
-                          DropdownMenuItem(child: Text('By branch'),value: 2,)
+                            if(branchController.branchList.value.isEmpty){
+                              return Text('No Data');
 
-                        ],
+                            }
+
+                            var firstValue = branchController.branchList.value.first.bid!;
+                            return  Container(
+                              height: 30,
+                              width: Get.width*0.33,
+                              decoration: BoxDecoration(
+                                  color:bgGrey,
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: DropdownButton(
+
+
+                                    underline: Text(''),
+
+                                    borderRadius: BorderRadius.circular(10),
+                                    value: selectedValue == '' ? firstValue : selectedValue,
+                                    onChanged: (String? value){
+
+
+
+                                      setState(() {
+                                        selectedValue = value!;
+                                        branchController.departmentController.branchId.value = value;
+                                      });
+                                      print('d =$selectedValue');
+                                    },
+
+                                    items: branchController.branchList.value.map((e){
+
+                                      return DropdownMenuItem(child: Text(e.branchName!),value: e.bid!,);
+
+                                    }).toList()
+
+                                ),
+                              ),
+                            );
+                          }
                       ),
                     ),
                   ),

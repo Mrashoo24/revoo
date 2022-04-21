@@ -196,18 +196,19 @@ class _DBcrudState extends State<AddBranches> {
                       ),
                       InkWell(
                         onTap: () async {
-                        await firestore.collection('Company').doc('tJSho8ikxpECfdJxYF7j').collection('Branch').add(
+                        await firestore.collection('Branch').add(
                            {
                              'branch_name':name.text,
                              'address':address.text,
                              'location' : location.text,
+                             'cid' : ""
                            }
                          ).then((value) async {
-                          await firestore.collection('Company').doc('tJSho8ikxpECfdJxYF7j').collection('Branch').doc(value.id).update({
+                          await firestore.collection('Branch').doc(value.id).update({
                             'bid' :value.id
                           });
                         });
-                     var docSnap =  await firestore.collection('Company').doc('tJSho8ikxpECfdJxYF7j').collection('Branch').doc('xdlnN5VPetLfHLrx5yLo').get();
+                     var docSnap =  await firestore.collection('Branch').doc('etsPUmBE29lqbbhR4G2C').get();
                      print(docSnap.data());
                         Get.to(HomePageMain());
                         },
