@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg2.dart';
+import 'package:revoo/home/homepage.dart';
 
 import '../constants/constants.dart';
 
@@ -63,13 +64,20 @@ class _DBcrudState extends State<DBcrud1> {
 
                                Text('Create',style: TextStyle(color: kblue,fontSize: 30),),
 
+
                              ],
                            ),
                          ),
                        ),
+
                      ),
                    ),
                  ),
+                 InkWell(
+                   onTap: (){
+                     Get.to(HomePageMain());
+                   },
+                   child: Text('add another branch'),),
                  Text ('Create your first branch to add your\nemployees and staff, assign\nroles and communicate between\ndepartments',style: TextStyle(color: Colors.grey,fontSize: 20),),
                  SizedBox(height: 15,),
                ],
