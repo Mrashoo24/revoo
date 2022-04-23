@@ -108,13 +108,9 @@ class _HomePageMainState extends State<HomePageMain> {
                       backgroundImage: AssetImage('asset/profile.jfif'),
                       radius: 30,
                     ),
-
                     SizedBox(width: 20,),
-
                     Align(
-
                       alignment: Alignment.bottomLeft,
-
                       child: Padding(
                         padding: const EdgeInsets.only(right: 20.0),
                         child: Column(
@@ -130,8 +126,6 @@ class _HomePageMainState extends State<HomePageMain> {
                                   )),
                             ),
                             Container(
-
-
                                 child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
                                     textAlign: TextAlign.left
                                 )),

@@ -19,8 +19,8 @@ class _AddEmployeeState extends State<AddEmployee> {
   var selectedValue = 'Branch A';
   var selectedValuea = 'Manager A';
   var selectedValueb = 'HR A';
-  var selectedValuec = "Day";
-  var selectedValuee = 'Role A';
+  var selectedValuec = 'Role A';
+  var selectedValuee = 'Day';
 
   var branchname = [
 
@@ -459,8 +459,6 @@ class _AddEmployeeState extends State<AddEmployee> {
                           ],
                         ),
                       ),
-
-
                     ],
                   ),
                   Text('By clicking continue, you agree to the',style: TextStyle(color:kblue,fontSize: 12),),

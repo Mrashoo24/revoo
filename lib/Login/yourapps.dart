@@ -63,15 +63,12 @@ class _YourappsState extends State<Yourapps> {
                     ],
                   ),
                 ),
-
                 SizedBox(
                   height: 15,),
                 Container(
                   child: Text("Your Apps",style: TextStyle(color: kblue ,fontSize: 25),
                   ),
-
                 ),
-
                 SizedBox(height: 30,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -93,8 +90,6 @@ class _YourappsState extends State<Yourapps> {
                       buildAppCard('PURCHASE & OPERATIONS','asset/inventory.png',(){
                         Get.to(PurchasingDashboard());
                       }),
-
-
                     Column(
                       children: [
                         InkWell(
@@ -102,7 +97,6 @@ class _YourappsState extends State<Yourapps> {
                             Get.to(InventoryDashboard());
                           },
                           child: Card(
-
                               color: Kdblue,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -112,38 +106,25 @@ class _YourappsState extends State<Yourapps> {
                                 height: 100,
                                 child: Center(child: ClipRRect(child: Image.asset('asset/inventory_1.png',),)),
                               )
-
                           ),
                         ),
-                        
                         Container(width:100,child: Center(child: AutoSizeText('Inventory',style: TextStyle(color: kyellow ,fontSize: 14),textAlign: TextAlign.center,))),
                       ],
                     ),
-
                       buildAppCard('POS','asset/money.png',(){
-
                           Get.to(PosDashboard());
-
-
                       }),
                       buildAppCard('SALES','asset/increaseaaa.png',(){
-
                         Get.to(SalesDashboard());
-
                       }),
-
                       buildAppCard('Accounting','asset/accounting_icon.png',(){
-
                         Get.to(AccountingDashboard());
-
                       }),
                     ],
                   ),
                 )
-
               ],
             ),
-
           ),
         ),
       ),
