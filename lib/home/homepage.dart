@@ -6,6 +6,7 @@ import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
 import 'package:revoo/HRMS_admin_Screen/employeecheckin.dart';
 import 'package:revoo/home/admindashboard.dart';
 
+import '../Employee/Certificate/certificate.dart';
 import '../HRMS_admin_Screen/Shifts.dart';
 import '../HRMS_admin_Screen/acceptleaverequest.dart';
 import '../HRMS_admin_Screen/allEmployee.dart';
@@ -39,7 +40,9 @@ class _HomePageMainState extends State<HomePageMain> {
     EmployeeCheckin(),
     AcceptLeave(),
     AllEmployeeUpdates(), //0
+
     Container(), //1
+    Certificate(),
   ];
 
 
@@ -195,6 +198,10 @@ class _HomePageMainState extends State<HomePageMain> {
 
                 buildNavCard('asset/logoff.png','Logout',10),
                 SizedBox(height: 5,),
+
+                buildNavCard('asset/lvapproval.png','Certificate',11),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+
 
 
               ],

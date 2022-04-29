@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:revoo/constants/constants.dart';
 import '../Controllers/dailyUpdatesController.dart';
 import '../home/homepage.dart';
@@ -16,24 +17,68 @@ class AllEmployeeUpdates extends StatefulWidget {
 }
 
 class _AllEmployeeUpdatesState extends State<AllEmployeeUpdates> {
+  DateTimeRange daterange = DateTimeRange(start: DateTime(1998,05,07), end: DateTime(2100,05,09));
   var selectedValue = 0;
+  Future pickDate() async{
+    DateTimeRange? newDateRange = await showDateRangePicker(context: context,initialDateRange: daterange, firstDate: DateTime(1900), lastDate: DateTime(2100));
+    if(newDateRange == null) return;
+    setState(() {
+      daterange = newDateRange;
+    });
+    var ndate = await newDateRange.toString();
+    print(ndate);
+  }
 
 
 
 
   @override
   Widget build(BuildContext context) {
+
+    final start = daterange.start;
+    final end = daterange.end;
+    var startd = "${(start.year).toString()}/${(start.month).toString()}/${(start.day).toString()}";
+    var endd = "${(end.year).toString()}/${(end.month).toString()}/${(end.day).toString()}";
+
     FirebaseFirestore firebase = FirebaseFirestore.instance;
+
+    var array1 = [
+      {'name':'Arsalan','date':'2022/03/01'},
+      {'name':'Sachin','date':'2022/04/02'}
+    ];
+   //
+    var array2 = array1.where((element) => DateFormat('yyyy/MM/dd').parse(element['date']!).isAfter(DateFormat('yyyy/MM/dd').parse('2022/04/03')));
+   //
+    print('array2 ffffff = $array2');
 
     return Container(
       child: SingleChildScrollView(
           child: GetX(
+
             init: Get.put<UpdatesController >(UpdatesController()),
+
             builder: (UpdatesController updateController){
 
               if(updateController.dailyupdate.value.isEmpty){
                 return Text("No data");
               }
+
+
+              var newListofUpdates = updateController.dUpdate.where(
+
+                      (element) {
+                        print(element.date);
+
+                    return DateFormat('yyyy/MM/dd')
+                        .parse(element.date!)
+                        .isAfter(DateFormat('yyyy/MM/dd').parse(startd)) && DateFormat('yyyy/MM/dd')
+                        .parse(element.date!)
+                        .isBefore(DateFormat('yyyy/MM/dd').parse(endd));
+                  }).toList();
+
+              print(newListofUpdates.length);
+              // array1.where((element) => DateFormat('yyyy/MM/dd').parse(element['date']!).isAfter(DateFormat('yyyy/MM/dd').parse('2022/04/03')));
+
               return Column(
                 children: [
                   Align(
@@ -49,13 +94,32 @@ class _AllEmployeeUpdatesState extends State<AllEmployeeUpdates> {
                                 'Daily Updates',
                                 style: TextStyle(color: kblue, fontSize: 25),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 15.0),
-                                child: Text(
-                                  '<Feb 07, 22>',
-                                  style: TextStyle(color: kblue, fontSize: 14),
-                                ),
-                              ),
+                              SizedBox(height: 13,),
+                              Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child:ElevatedButton(
+                                      onPressed: pickDate,
+                                      child:Text('${start.day}/${start.month}/${start.year}'),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: ElevatedButton(
+                                     onPressed: pickDate,
+                                      child:Text('${end.day}/${end.month}/${end.year}'),
+                                    ),
+                                  ),
+                                ],
+                              )
+                              // Padding(
+                              //   padding: const EdgeInsets.only(left: 15.0),
+                              //   child: Text(
+                              //     '<Feb 07, 22>',
+                              //     style: TextStyle(color: kblue, fontSize: 14),
+                              //   ),
+                              // ),
                             ],
                           ),
                           InkWell(
@@ -85,7 +149,7 @@ class _AllEmployeeUpdatesState extends State<AllEmployeeUpdates> {
                     ),
                   ),
                   ListView.builder(
-                      itemCount:updateController.dailyupdate.value.length,
+                      itemCount:newListofUpdates.length,
 
                       shrinkWrap: true,
                       itemBuilder:(context,index){
@@ -99,11 +163,11 @@ class _AllEmployeeUpdatesState extends State<AllEmployeeUpdates> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      updateController.dailyupdate.value[index].name! + updateController.dailyupdate.value[index].designation!,
+                                      newListofUpdates[index].name! + newListofUpdates[index].designation!,
                                       style: TextStyle(color: kblue, fontSize: 12),
                                     ),
                                     Text(
-                                      updateController.dailyupdate.value[index].date!,
+                                      newListofUpdates[index].date!,
                                       style: TextStyle(color: kblue, fontSize: 12),
                                     ),
                                   ],
@@ -122,7 +186,7 @@ class _AllEmployeeUpdatesState extends State<AllEmployeeUpdates> {
                                             color: kblue,
                                           ),
                                           Text(
-                                            updateController.dailyupdate.value[index].update!,
+                                            newListofUpdates[index].update!,
                                             style: TextStyle(color: kblue, fontSize: 12),
                                           ),
                                         ],
