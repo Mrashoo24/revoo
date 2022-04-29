@@ -33,7 +33,7 @@ class _HomePageMainState extends State<HomePageMain> {
     AdminDashboard(),
     MyPlan(),
     DBcrud4(),
-    Departments(key: Key('department'),),
+    Departments(key : Key('department'),),
     AllEmployeePage(),
     ShiftsManagement(),
     CheckinHistory(),
