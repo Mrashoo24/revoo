@@ -23,6 +23,7 @@ import 'HRMS_admin_Screen/adbranchpg1.dart';
 import 'HRMS_admin_Screen/adbranchpg3.dart';
 import 'HRMS_admin_Screen/adbranchpg4.dart';
 
+import 'HRMS_admin_Screen/alreadyhavebranch.dart';
 import 'HRMS_admin_Screen/employeecheckin.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
 
         debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: SplashScreen()
+        body: AlreadyHaveBranch()
 
         // DateTimeComboLinePointChart.withSampleData(),
       )

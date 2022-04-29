@@ -49,6 +49,10 @@ dependencies:
   firebase_core: ^1.14.0
   firebase_auth: ^3.3.12
   cloud_firestore: ^3.1.11
+  syncfusion_flutter_datepicker: ^20.1.48
+  table_calendar: ^3.0.5
+  intl: ^0.17.0
+  date_ranger: ^0.0.1
 
 
 
