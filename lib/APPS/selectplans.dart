@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../Login/signup.dart';
 import '../constants/constants.dart';
 import '../constants/constants.dart';
 import '../constants/constants.dart';
@@ -37,6 +38,13 @@ var selectedApps = [];
 
 @override
   Widget build(BuildContext context) {
+
+var price = 0.0 ;
+
+  selectedApps.forEach((element) {
+    price += double.parse(element['price']);
+  });
+
     return SafeArea(
         child:Scaffold(
           body:Container(
@@ -52,21 +60,14 @@ var selectedApps = [];
                      children: [
                        Image.asset('asset/newimg.png'),
                        Padding(
-                         padding:  EdgeInsets.only(top: 95.0),
+                         padding:  EdgeInsets.only(top: 95.0,left: 12),
                          child: Column(
                            mainAxisAlignment: MainAxisAlignment.start,
+                           crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
-                             Row(
-                               children: [
-                                 Text('Try it with a\n 14-day trial',style:  TextStyle(fontSize: 25,color: Colors.grey),),
-                               ],
-                             ),
+                             Text('Try it with a\n14-day trial',style:  TextStyle(fontSize: 25,color: Colors.grey),),
                              SizedBox(height: 10,),
-                             Row(
-                               children: [
-                                 Center(child: Text('Any tagline like "Choose your plan/\n Choose your app now',style: TextStyle(fontSize:15,color:Colors.grey),)),
-                               ],
-                             ),
+                             Text('Any tagline like "Choose your plan/\nChoose your app now',style: TextStyle(fontSize:15,color:Colors.grey),),
                            ],
                          ),
                        ),
@@ -129,7 +130,7 @@ var selectedApps = [];
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 children: [
-                                  Text('Select ypur Apps',style:TextStyle(fontSize: 22,)),
+                                  Text('Select your Apps',style:TextStyle(fontSize: 22,)),
 
 
                                 ],
@@ -138,113 +139,106 @@ var selectedApps = [];
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
+                                height: Get.height*0.4,
                                 child: Row(
                                   children: [
-                                    Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Container(decoration: BoxDecoration(borderRadius:BorderRadius.circular(6),color: Kdblue, ),
-                                              height: 33,
-                                              width: 33,
+                                    Expanded(
+                                      child
+                                          : ListView.builder(
 
-                                            ),SizedBox(width: 20),
-                                            Text('App',style:TextStyle(fontSize: 22,)),
+                                            itemCount: selectedApps.length,
+                                            itemBuilder: (context, index) {
 
-                                          ],
-
-                                        ),
-                                        SizedBox(height:15),
-                                        Row(
-                                          children: [
-                                            Container(decoration: BoxDecoration(borderRadius:BorderRadius.circular(6),color: Kdblue, ),
-                                              height: 33,
-                                              width:33,
-
-                                            ),SizedBox(width: 20),
-                                            Text('App',style:TextStyle(fontSize: 22,)),
-
-                                          ],
-                                        ),
-                                        SizedBox(height:15),
-                                        Row(
-                                          children: [
-                                            Container(decoration: BoxDecoration(borderRadius:BorderRadius.circular(6),color: Kdblue, ),
-                                              height: 33,
-                                              width:33,
-
-                                            ),SizedBox(width: 20),
-                                            Text('App',style:TextStyle(fontSize: 22,)),
-
-                                          ],
-                                        ),
-                                        SizedBox(height:15),
-                                        Row(
-                                          children: [
-                                            Container(decoration: BoxDecoration(borderRadius:BorderRadius.circular(6),color: Kdblue, ),
-                                              height: 33,
-                                              width:33,
-
-
-                                            ),
-                                            SizedBox(width: 20),
-                                            Text('App',style:TextStyle(fontSize: 22,)),
-
-
-                                          ],
-                                        ),
-                                      ],
+                                              return Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: buildSelectedAppRow(selectedApps[index]['title']
+                                                ,selectedApps[index]['image']
+                                                ),
+                                              );
+                                            }
+                                          ),
                                     ),
-                                    SizedBox(width: 110,),
-                                    Column(
-                                      children: [
-                                        Container(
-                                          height: 100,width: 80,color: clo,
-                                          child:Column(
-                                            children: [
-                                              Padding(
-                                                padding:  EdgeInsets.only(top: 10.0),
-                                                child: Text('15',style:TextStyle(fontSize: 30, color:Kdblue),),
 
-                                              ),
-                                              Text('  Apps selected \nContinue without\n    credit card',style:TextStyle(fontSize:10,),
-                                              ),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 100,width: 80,color: clo,
+                                            child:Column(
+                                              children: [
+                                                Padding(
+                                                  padding:  EdgeInsets.only(top: 10.0),
+                                                  child: Text(selectedApps.length.toString(),style:TextStyle(fontSize: 30, color:Kdblue),),
+
+                                                ),
+                                                Text('  Apps selected \nContinue without\n    credit card',style:TextStyle(fontSize:10,),
+                                                ),
 
 
-                                            ],
+                                              ],
 
-                                          ),
-
-                                        ),
-                                        SizedBox(height:20),
-                                        InkWell(
-
-                                          child
-                                              : Container(decoration: BoxDecoration(borderRadius:BorderRadius.circular(10),gradient: LinearGradient(
-                                            colors: [
-                                              Colors.blue.shade900,
-                                              Colors.blue,
-                                            ],
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                          ),
-                                          ),
-
-                                            child:Padding(
-                                              padding:  EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text('Continue',style:TextStyle(color:Colors.white)),
-                                                  Icon(Icons.chevron_right_sharp,color: Colors.white,)
-                                                ],
-                                              ),
                                             ),
 
                                           ),
-                                        ),
+                                          SizedBox(height:20),
+                                          InkWell(
+                                            onTap: (){
 
-                                      ],
+                                              Get.to(Signup());
+                                            },
+                                            child
+                                                : Container(decoration: BoxDecoration(borderRadius:BorderRadius.circular(10),gradient: LinearGradient(
+                                              colors: [
+                                                Colors.blue.shade900,
+                                                Colors.blue,
+                                              ],
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                            ),
+                                            ),
+
+                                              child:Padding(
+                                                padding:  EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text('Continue',style:TextStyle(color:Colors.white)),
+                                                    Icon(Icons.chevron_right_sharp,color: Colors.white,)
+                                                  ],
+                                                ),
+                                              ),
+
+                                            ),
+                                          ),
+                                          SizedBox(height: 10,),
+                                          Text('\$ ${price}',style: TextStyle(color: kblue,fontSize: 24),),
+                                          SizedBox(height: 10,),
+                                          InkWell(
+                                            onTap: (){
+
+                                              setState(() {
+                                                selectedApps.clear();
+                                              });
+                                            },
+                                            child
+                                                : Container(
+
+
+                                              child:Padding(
+                                                padding:  EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text('CLEAR ALL',style:TextStyle(color:kyellow)),
+                                                    Icon(Icons.restore_from_trash,color: kyellow,)
+                                                  ],
+                                                ),
+                                              ),
+
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
 
 
@@ -274,11 +268,11 @@ var selectedApps = [];
 
                        buildExpansionPanel('Administration',selected,
                        [
-                         buildStack('asset/newone.png','Create Branches'),
-                         buildStack('asset/imga.png', 'Create Departments'),
-                         buildStack('asset/imgb.png', 'Audio/Video Meetings'),
-                         buildStack('asset/imgc.png', 'Report'),
-                         buildStack('asset/name1.png', 'Name'),
+                         buildStack('asset/newone.png','Create Branches','Administration'),
+                         buildStack('asset/imga.png', 'Create Departments','Administration'),
+                         buildStack('asset/imgb.png', 'Audio/Video Meetings','Administration'),
+                         buildStack('asset/imgc.png', 'Report','Administration'),
+                         buildStack('asset/name1.png', 'Name','Administration'),
 
 
 
@@ -435,23 +429,23 @@ var selectedApps = [];
                      },
                      children: [
 
-                       buildExpansionPanel('HMRS',selecteda,
+                       buildExpansionPanel('HRMS',selecteda,
                            [
-                     buildStack('asset/emp.png','Create Employees'),
-                     buildStack('asset/slot.png', 'Create Shift Slot'),
-                     buildStack('asset/loc.png', 'Location Based Attendance'),
-                     buildStack('asset/bio.png', 'Connection And Bio Metric'),
-                     buildStack('asset/leave.png', 'leave Management'),
-                     buildStack('asset/meet.png', 'Live Meetings'),
-                     buildStack('asset/loca.png', 'location Tracking For field Staff'),
-                     buildStack('asset/rep.png', 'Reports'),
-                             buildStack('asset/hr.png', 'HR PayRolls'),
-                             buildStack('asset/face.png', 'Face Attendance'),
-                             buildStack('asset/cert.png', 'Certificates Management'),
-                             buildStack('asset/noti.png','personalized Notifications'),
-                             buildStack('asset/projectmeeting.png', 'Birthday Alerts'),
-                             buildStack('asset/bdae.png', 'Project Meetings'),
-                             buildStack('asset/holiday.png', 'Alert On Excess Holidays'),
+                     buildStack('asset/emp.png','Create Employees','HRMS'),
+                     buildStack('asset/slot.png', 'Create Shift Slot','HRMS'),
+                     buildStack('asset/loc.png', 'Location Based Attendance','HRMS'),
+                     buildStack('asset/bio.png', 'Connection And Bio Metric','HRMS'),
+                     buildStack('asset/leave.png', 'leave Management','HRMS'),
+                     buildStack('asset/meet.png', 'Live Meetings','HRMS'),
+                     buildStack('asset/loca.png', 'location Tracking For field Staff','HRMS'),
+                     buildStack('asset/rep.png', 'Reports','HRMS'),
+                             buildStack('asset/hr.png', 'HR PayRolls','HRMS'),
+                             buildStack('asset/face.png', 'Face Attendance','HRMS'),
+                             buildStack('asset/cert.png', 'Certificates Management','HRMS'),
+                             buildStack('asset/noti.png','personalized Notifications','HRMS'),
+                             buildStack('asset/projectmeeting.png', 'Birthday Alerts','HRMS'),
+                             buildStack('asset/bdae.png', 'Project Meetings','HRMS'),
+                             buildStack('asset/holiday.png', 'Alert On Excess Holidays','HRMS'),
 
 
 
@@ -821,11 +815,11 @@ var selectedApps = [];
                      },
                      children: [ buildExpansionPanel('Accounting And Finance',selectedaccounting,
                          [
-                           buildStack('asset/achart.png', 'Account And Chart '),
-                           buildStack('asset/auto.png','Auto Journal Entries management'),
-                           buildStack('asset/pay.png', 'Templates For Recurring payments '),
-                           buildStack('asset/finance.png', 'Financial Report'),
-                           buildStack('asset/bill.png', 'Bills Managements'),
+                           buildStack('asset/achart.png', 'Account And Chart ','Accounting And Finance'),
+                           buildStack('asset/auto.png','Auto Journal Entries management','Accounting And Finance'),
+                           buildStack('asset/pay.png', 'Templates For Recurring payments ','Accounting And Finance'),
+                           buildStack('asset/finance.png', 'Financial Report','Accounting And Finance'),
+                           buildStack('asset/bill.png', 'Bills Managements','Accounting And Finance'),
 
 
 
@@ -989,15 +983,15 @@ var selectedApps = [];
                      children: [
                        buildExpansionPanel('Purchasing & Operations',selectedpurchasing,
                    [
-                     buildStack('asset/web.png', 'Web Based RFQ '),
-                     buildStack('asset/po.png', 'PO Management'),
-                     buildStack('asset/cred.png', 'Credit Memos'),
-                     buildStack('asset/rfq.png', 'RFQ Status'),
-                     buildStack('asset/hist.png', 'Purchase History'),
-                     buildStack('asset/compo.png', 'Components Managements'),
-                     buildStack('asset/report.png', 'Reports'),
-                     buildStack('asset/invoice.png', 'Bill & Invoice'),
-                     buildStack('asset/vendor.png', 'Vendors Management'),
+                     buildStack('asset/web.png', 'Web Based RFQ ','Purchasing & Operations'),
+                     buildStack('asset/po.png', 'PO Management','Purchasing & Operations'),
+                     buildStack('asset/cred.png', 'Credit Memos','Purchasing & Operations'),
+                     buildStack('asset/rfq.png', 'RFQ Status','Purchasing & Operations'),
+                     buildStack('asset/hist.png', 'Purchase History','Purchasing & Operations'),
+                     buildStack('asset/compo.png', 'Components Managements','Purchasing & Operations'),
+                     buildStack('asset/report.png', 'Reports','Purchasing & Operations'),
+                     buildStack('asset/invoice.png', 'Bill & Invoice','Purchasing & Operations'),
+                     buildStack('asset/vendor.png', 'Vendors Management','Purchasing & Operations'),
 
 
 
@@ -1255,15 +1249,15 @@ var selectedApps = [];
                      children: [
                        buildExpansionPanel('Sales',selectedsales,
                            [
-                             buildStack('asset/quotation.png', 'Quotation Management '),
-                             buildStack('asset/order.png', 'Orders Management'),
-                             buildStack('asset/custom.png', 'Customer Management'),
-                             buildStack('asset/product.png', 'products management'),
-                             buildStack('asset/sales.png', 'Sales record'),
-                             buildStack('asset/pipeline.png', 'Opportunity & Pipeline'),
-                             buildStack('asset/campagin.png', 'Sales Campaign'),
-                             buildStack('asset/return.png', 'Return Management'),
-                             buildStack('asset/profit.png', 'Profit Calculation'),
+                             buildStack('asset/quotation.png', 'Quotation Management ','Sales'),
+                             buildStack('asset/order.png', 'Orders Management','Sales'),
+                             buildStack('asset/custom.png', 'Customer Management','Sales'),
+                             buildStack('asset/product.png', 'products management','Sales'),
+                             buildStack('asset/sales.png', 'Sales record','Sales'),
+                             buildStack('asset/pipeline.png', 'Opportunity & Pipeline','Sales'),
+                             buildStack('asset/campagin.png', 'Sales Campaign','Sales'),
+                             buildStack('asset/return.png', 'Return Management','Sales'),
+                             buildStack('asset/profit.png', 'Profit Calculation','Sales'),
 
                            ]
                        ),
@@ -1518,15 +1512,15 @@ var selectedApps = [];
 
                        buildExpansionPanel('Inventory Managemant',selectedinventory,
                            [
-                         buildStack('asset/productmgnt.png', 'Product Mngt '),
-                         buildStack('asset/price.png', 'Price Management'),
-                         buildStack('asset/goods.png', 'Goods Receipts'),
-                             buildStack('asset/issues.png', 'Goods Issues '),
-                             buildStack('asset/transaction.png', 'Transactions'),
-                             buildStack('asset/transfer.png','Transfer'),
-                             buildStack('asset/inventoryreport.png', 'Inventory Report'),
-                             buildStack('asset/number.png','Serial Number Mngt'),
-                             buildStack('asset/inventcount.png', 'Inventory Counting'),
+                         buildStack('asset/productmgnt.png', 'Product Mngt ','Inventory Management'),
+                         buildStack('asset/price.png', 'Price Management','Inventory Management'),
+                         buildStack('asset/goods.png', 'Goods Receipts','Inventory Management'),
+                             buildStack('asset/issues.png', 'Goods Issues ','Inventory Management'),
+                             buildStack('asset/transaction.png', 'Transactions','Inventory Management'),
+                             buildStack('asset/transfer.png','Transfer','Inventory Management'),
+                             buildStack('asset/inventoryreport.png', 'Inventory Report','Inventory Management'),
+                             buildStack('asset/number.png','Serial Number Mngt','Inventory Management'),
+                             buildStack('asset/inventcount.png', 'Inventory Counting','Inventory Management'),
                        ]
                        ),
 
@@ -1778,14 +1772,14 @@ var selectedApps = [];
                      },
                      children: [
                         buildExpansionPanel('Project & Resource Management',selectedproject,[
-                          buildStack('asset/projectstage.png', 'Project Stage '),
-                          buildStack('asset/task.png', 'Task Management'),
-                          buildStack('asset/teammgnt.png', 'Team Management'),
-                          buildStack('asset/gantt.png', 'Gantt Chart '),
-                          buildStack('asset/modules.png', 'Modules/Sprints'),
-                          buildStack('asset/resourceplan.png', 'Resource Planning'),
-                          buildStack('asset/time.png', 'Time Sheet'),
-                          buildStack('asset/projectmeeting.png', 'Project Meetings'),
+                          buildStack('asset/projectstage.png', 'Project Stage ','Project & Resource Management'),
+                          buildStack('asset/task.png', 'Task Management','Project & Resource Management'),
+                          buildStack('asset/teammgnt.png', 'Team Management','Project & Resource Management'),
+                          buildStack('asset/gantt.png', 'Gantt Chart ','Project & Resource Management'),
+                          buildStack('asset/modules.png', 'Modules/Sprints','Project & Resource Management'),
+                          buildStack('asset/resourceplan.png', 'Resource Planning','Project & Resource Management'),
+                          buildStack('asset/time.png', 'Time Sheet','Project & Resource Management'),
+                          buildStack('asset/projectmeeting.png', 'Project Meetings','Project & Resource Management'),
 
 
 
@@ -2021,7 +2015,7 @@ var selectedApps = [];
                      children: [
 
                        buildExpansionPanel('POS',selectedpos,[
-                         buildStack('asset/pos.png', 'POS'),
+                         buildStack('asset/pos.png', 'POS','POS'),
 
                        ]),
 
@@ -2047,6 +2041,24 @@ var selectedApps = [];
     );
   }
 
+Row buildSelectedAppRow(title,image) {
+  return Row(
+                                        children: [
+                                          Container(decoration: BoxDecoration(borderRadius:BorderRadius.circular(6),color: Kdblue, ),
+                                            height: 33,
+                                            width: 33,
+                                            child: ClipRRect(child: Image.asset(image,fit: BoxFit.fill,)),
+
+                                          ),SizedBox(width: 20),
+                                          Container(
+                                              width: 100,
+                                              child: Text(title,style:TextStyle(fontSize: 22,))),
+
+                                        ],
+
+                                      );
+}
+
 ExpansionPanel buildExpansionPanel(String title,selection,children) {
   return ExpansionPanel(
                        headerBuilder: (BuildContext context, bool isExpanded) {
@@ -2069,7 +2081,9 @@ ExpansionPanel buildExpansionPanel(String title,selection,children) {
                      );
 }
 
-Widget buildStack(icon, String title) {
+Widget buildStack(icon, String title,String parent) {
+  var indexoFSeleceted = selectedApps.indexWhere((element) => element['title'] == title);
+
   return Padding(
     padding: const EdgeInsets.only(bottom: 8.0),
     child: Stack(
@@ -2089,10 +2103,16 @@ Widget buildStack(icon, String title) {
                                                  width:Get.width * 0.5,
                                                    child: Text(title,style:TextStyle(fontSize: 14,color: Kdblue) )),
                                                Checkbox(
-                                                 value: selectedApps.contains(title),
+                                                 value: indexoFSeleceted != -1,
                                                  onChanged: (bool? value) {
                                                    setState(() {
-                                                   value! ?  selectedApps.add(title) : selectedApps.remove(title);
+                                                   value! ?  selectedApps.add(
+                                                       {'title':title , 'image' : icon,
+                                                       'price': title == 'POS' ? '10.99' :
+                                                       '2.99'
+                                                       }) :
+                                                   selectedApps.removeAt(indexoFSeleceted);
+
                                                    });
                                                    print(selectedApps);
                                                  },

@@ -8,6 +8,7 @@ import 'package:revoo/First/welcomscreen.dart';
 
 import '../Login/login.dart';
 import '../Login/yourapps.dart';
+import '../constants/constants.dart';
 
 class AuthController extends GetxController{
   //AuthController.instance
@@ -16,11 +17,13 @@ class AuthController extends GetxController{
   static AuthController instance =  Get.find();
   //email,password,name
   late Rx<User?> _user;
+
   FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   void onReady() {
     super.onReady();
+
     _user = Rx<User?>(auth.currentUser);
     //our user would be notified
     _user.bindStream(auth.userChanges());
@@ -49,14 +52,15 @@ class AuthController extends GetxController{
   }
   void login (String email, password)async {
     try{
+
       await auth.signInWithEmailAndPassword(email: email, password: password);
+
     }catch(e){
       Get.snackbar("About Login", "Login Message",
-        backgroundColor: Colors.grey,
+        backgroundColor: kblue.withOpacity(0.4),
         snackPosition: SnackPosition.BOTTOM,
-        titleText: Text("Login Failed"),
-        messageText: Text(e.toString(),style: TextStyle(color: Colors.grey),
-        ),
+        titleText: Text(e.toString().replaceAll('[firebase_auth/user-not-found] ','')),
+
       );
     }
   }

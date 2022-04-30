@@ -69,7 +69,31 @@ class _SignupState extends State<Signup> {
                           SizedBox(
                             height: 20,
                           ),
+                          TextFormField(
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                                hintText: 'Your Company Name',
 
+                                hintStyle: TextStyle(
+                                    color: Colors.grey
+                                ),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white)
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white)
+                                ),
+                                enabledBorder:OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white)
+                                )
+
+
+                            ),
+                          ),
+                          SizedBox(height: 20,),
                           TextFormField(
                             decoration: InputDecoration(
                                 filled: true,
@@ -117,82 +141,83 @@ class _SignupState extends State<Signup> {
 
                             ),
                           ),
-                          SizedBox(height: 20,),
-                          TextFormField(
-                            controller: passwordController,
-                            obscureText: obsecure,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                                hintText: 'Set Password',
-                                hintStyle: TextStyle(
-                                    color: Colors.grey
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                enabledBorder:OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                suffixIcon: InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          obsecure == true ? obsecure = false : obsecure = true;
-                                        });
-                                      },
-                                    child:Icon(CupertinoIcons.eye_slash_fill,color: Colors.yellow.shade700,)
-                                )
-
-
-                            ),
-                          ),
-                          SizedBox(height: 20,),
-                          TextFormField(
-                            controller: passwordController,
-                            obscureText: obsecure1,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                                hintText: 'Confirm Password',
-                                hintStyle: TextStyle(
-                                    color: Colors.grey
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                enabledBorder:OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                suffixIcon: InkWell(
-                                    onTap: (){
-                                      setState(() {
-                                        obsecure1 == true ? obsecure1 = false : obsecure1 = true;
-                                      });
-                                    },
-                                    child: Icon(CupertinoIcons.eye_slash_fill,color: Colors.yellow.shade700,))
-
-
-                            ),
-                          ),
+                          // SizedBox(height: 20,),
+                          // TextFormField(
+                          //   controller: passwordController,
+                          //   obscureText: obsecure,
+                          //   decoration: InputDecoration(
+                          //       filled: true,
+                          //       fillColor: Colors.white,
+                          //       contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                          //       hintText: 'Set Password',
+                          //       hintStyle: TextStyle(
+                          //           color: Colors.grey
+                          //       ),
+                          //       border: OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       focusedBorder: OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       enabledBorder:OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       suffixIcon: InkWell(
+                          //             onTap: (){
+                          //               setState(() {
+                          //                 obsecure == true ? obsecure = false : obsecure = true;
+                          //               });
+                          //             },
+                          //           child:Icon(CupertinoIcons.eye_slash_fill,color: Colors.yellow.shade700,)
+                          //       )
+                          //
+                          //
+                          //   ),
+                          // ),
+                          // SizedBox(height: 20,),
+                          // TextFormField(
+                          //   controller: passwordController,
+                          //   obscureText: obsecure1,
+                          //   decoration: InputDecoration(
+                          //       filled: true,
+                          //       fillColor: Colors.white,
+                          //       contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                          //       hintText: 'Confirm Password',
+                          //       hintStyle: TextStyle(
+                          //           color: Colors.grey
+                          //       ),
+                          //       border: OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       focusedBorder: OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       enabledBorder:OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       suffixIcon: InkWell(
+                          //           onTap: (){
+                          //             setState(() {
+                          //               obsecure1 == true ? obsecure1 = false : obsecure1 = true;
+                          //             });
+                          //           },
+                          //           child: Icon(CupertinoIcons.eye_slash_fill,color: Colors.yellow.shade700,))
+                          //
+                          //
+                          //   ),
+                          // ),
                           SizedBox(height: 20,),
 
                           GestureDetector(
                             onTap: (){
-                              AuthController.instance.register(emailController.text.trim(), passwordController.text.trim());
+                              // AuthController.instance.register(emailController.text.trim(), passwordController.text.trim());
+
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Center(child: Text('SIGN UP',style: TextStyle(
+                                child: Center(child: Text('Submit',style: TextStyle(
                                     color: Colors.white,fontSize: 20
                                 ),)),
                               ),
