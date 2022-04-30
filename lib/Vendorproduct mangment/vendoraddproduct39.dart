@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,14 @@ class _Addproduct39State extends State<Addproduct39> {
     'product category3',
     'product category4',
 
+  ];
+  String initialValue1 = 'Product Component';
+  var componentlist =[
+    'Product Component',
+    'product Component1',
+    'product Component2',
+    'product Component3',
+    'product Component4',
   ];
   @override
   Widget build(BuildContext context) {
@@ -121,10 +130,19 @@ class _Addproduct39State extends State<Addproduct39> {
 
 
                         ),
-                        child: Icon(
-                          Icons.person,
-                          size: 50,
-                          color:  Colors.grey,
+                        child: InkWell(
+                          // onTap: ()async{
+                          //   final result = await  FilePicker.platform.pickFiles(
+                          //   allowMultiple: false,
+                          //   type: Filrtype.custom,
+                          //   allowedExtentions['png','jpg'],
+                          //   );
+                          //   },
+                          child: Icon(
+                            Icons.person,
+                            size: 50,
+                            color:  Colors.grey,
+                          ),
                         ),
 
 
@@ -356,6 +374,35 @@ class _Addproduct39State extends State<Addproduct39> {
                             value: initialValue,
                             icon: Icon(Icons.keyboard_arrow_down,color: kblue,),
                             items: itemList.map((String items) {
+                              return DropdownMenuItem(value: items, child: Text(items));
+                            }).toList(), onChanged: (String? value) {  },
+
+                          ),
+                        ),
+                        SizedBox(height: 20,),
+                        Align(alignment: Alignment.centerLeft,
+                            child: Text('Product Components',style: TextStyle(fontSize: 18,color:kblue ),)),
+                        SizedBox(height: 1),
+                        Divider(
+                          height: 5,thickness: 1,color: kblue,
+                        ),
+
+                        Container(
+
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,borderRadius: new BorderRadius.circular(10.0),
+                          ),
+                          margin: EdgeInsets.symmetric(horizontal: 3),
+                          child: DropdownButton(
+                            isExpanded: true,
+                            iconEnabledColor: Colors.blue ,
+                            style: TextStyle(color: Colors.grey, fontSize: 18),
+                            dropdownColor: Colors.grey.shade200,
+                            focusColor: Colors.black,
+                            value: initialValue1,
+                            icon: Icon(Icons.keyboard_arrow_down,color: kblue,),
+                            items: componentlist.map((String items) {
                               return DropdownMenuItem(value: items, child: Text(items));
                             }).toList(), onChanged: (String? value) {  },
 
