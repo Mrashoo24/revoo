@@ -8,12 +8,14 @@ import 'package:revoo/Controllers/authcontroller.dart';
 import 'package:revoo/Employee/employeedash202.dart';
 
 import 'package:revoo/First/welcomscreen.dart';
+import 'package:revoo/HRMS_admin_Screen/already_hv_brnch.dart';
 import 'package:revoo/Login/login.dart';
 import 'package:revoo/WelcomeScreens/SplashScreen.dart';
 import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
 import 'package:revoo/graph/piechart.dart';
 
+import 'Controllers/branchController.dart';
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
 
@@ -36,6 +38,7 @@ import 'graph/linegraph.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp().then((value) => Get.put(AuthController()));
+  Get.create<BranchController>(()=>BranchController());
   runApp(const MyApp());
 }
 
@@ -44,6 +47,7 @@ class MyApp extends StatelessWidget {
 
 
   const MyApp({Key key= const Key('MyApp')}) : super(key: key);
+
 
   // This widget is the root of your application.
   @override
@@ -68,7 +72,7 @@ class MyApp extends StatelessWidget {
 
         debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: SplashScreen()
+        body: AlreadyHvBrnch()
 
         // DateTimeComboLinePointChart.withSampleData(),
       )

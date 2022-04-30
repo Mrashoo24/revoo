@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/Controllers/branchController.dart';
+import 'package:revoo/Controllers/departmentController.dart';
+import 'package:revoo/Controllers/departmentControllerTableRow.dart';
 import 'package:revoo/HRMS_admin_Screen/departments/adddepartment.dart';
-
+import 'package:revoo/models/branchModel.dart';
 import '../constants/constants.dart';
 import 'adbranchpg2.dart';
 
@@ -15,12 +19,20 @@ class Departments extends StatefulWidget {
 }
 
 class _DepartmentsState extends State<Departments> {
-  var selectedValue = 0;
+  var selectedValue = '';
+  TextEditingController deptName = TextEditingController();
+  TextEditingController head = TextEditingController();
+  TextEditingController noEmployee = TextEditingController();
 
 
 
   @override
   Widget build(BuildContext context) {
+    Get.put<DepartmentController>(DepartmentController());
+    Get.put<DepartmentControllerTable>(DepartmentControllerTable());
+    var firestore =  FirebaseFirestore.instance;
+
+    DepartmentControllerTable departmentControllerTable = Get.find<DepartmentControllerTable>();
 
     List<TableRow> tableRow = [
       TableRow(
@@ -54,6 +66,7 @@ class _DepartmentsState extends State<Departments> {
           ),
         ],
       ),
+
       TableRow(
         children: [
           Container(
@@ -145,37 +158,59 @@ class _DepartmentsState extends State<Departments> {
                     style: TextStyle(color: kblue, fontSize: 14),
                   ),
                   SizedBox(width: 8,),
-                  Container(
-                    height: 30,
-                    width: Get.width*0.33,
-                    decoration: BoxDecoration(
-                        color:bgGrey,
-                        borderRadius: BorderRadius.circular(100)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: DropdownButton(
-                        underline: Text(''),
-
-                        borderRadius: BorderRadius.circular(10),
-                        value: selectedValue,
-                        onChanged: (int? value){
+                  GetX(
+                      init: Get.put<BranchController>(BranchController()),
+                      builder: (BranchController branchController) {
 
 
+                        print('list = ${branchController.branchList}');
 
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                        },
-                        items: [
 
-                          DropdownMenuItem(child: Text('By branch'),value: 0,),
-                          DropdownMenuItem(child: Text('By branch'),value: 1,),
-                          DropdownMenuItem(child: Text('By branch'),value: 2,)
+                        if(branchController.branchList.value.isEmpty){
+                          return Text('No Data');
 
-                        ],
-                      ),
-                    ),
+                        }
+
+                        var firstValue = branchController.branchList.value.first.bid!;
+                        return  Container(
+                          height: 30,
+                          width: Get.width*0.33,
+                          decoration: BoxDecoration(
+                              color:bgGrey,
+                              borderRadius: BorderRadius.circular(100)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: DropdownButton(
+
+
+                                underline: Text(''),
+
+                                borderRadius: BorderRadius.circular(10),
+                                value: selectedValue == '' ? firstValue : selectedValue,
+                                onChanged: (String? value){
+
+
+
+                                  setState(() {
+                                    selectedValue = value!;
+                                    branchController.departmentController.branchId.value = value;
+
+                                  });
+
+                                  print('d =$selectedValue');
+                                },
+
+                                items: branchController.branchList.value.map((e){
+
+                                  return DropdownMenuItem(child: Text(e.branchName!),value: e.bid!,);
+
+                                }).toList()
+
+                            ),
+                          ),
+                        );
+                      }
                   ),
                   SizedBox(width: 30,),
                   InkWell(
@@ -188,16 +223,106 @@ class _DepartmentsState extends State<Departments> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                width: Get.width,
-                height: 300,
-                child: Table(
-                  border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
-                  children: tableRow,
-                ),
-              ),
+            GetX(
+                init: Get.put<DepartmentControllerTable>(DepartmentControllerTable()),
+                builder: (DepartmentControllerTable departmentControllerTable) {
+
+
+                  if(departmentControllerTable.departmentList.value.isEmpty){
+                    return Text('No Data Found');
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Container(
+                      width: Get.width,
+                      height: 300,
+
+                      child: Column(
+                        children: [
+                          Table(
+                              border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
+
+                              children: [
+
+                                TableRow(
+                                  children: [
+                                    Container(
+                                      height: 30,
+                                      child: Center(
+                                        child: Text(
+                                          'Dept Name',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      child: Center(
+                                        child: Text(
+                                          'Head',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      child: Center(
+                                        child: AutoSizeText(
+                                          'No.Employee',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ]
+
+                          ),
+                          Table(
+                            border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
+
+                            children: departmentControllerTable.departmentList.value.map((e) {
+
+                              return TableRow(
+                                children: [
+                                  Container(
+                                    height: 30,
+                                    child: Center(
+                                      child: Text(
+                                        e.deptName!,
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 30,
+                                    child: Center(
+                                      child: Text(
+                                        e.head!,
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 30,
+                                    child: Center(
+                                      child: AutoSizeText(
+                                        e.noEmployee!,
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+
+                            }).toList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
             )
           ],
         ),

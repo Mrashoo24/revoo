@@ -6,7 +6,7 @@ import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
 import 'package:revoo/HRMS_admin_Screen/employeecheckin.dart';
 import 'package:revoo/home/admindashboard.dart';
 
-import '../Controllers/authcontroller.dart';
+import '../Employee/Certificate/certificate.dart';
 import '../HRMS_admin_Screen/Shifts.dart';
 import '../HRMS_admin_Screen/acceptleaverequest.dart';
 import '../HRMS_admin_Screen/allEmployee.dart';
@@ -33,14 +33,16 @@ class _HomePageMainState extends State<HomePageMain> {
     AdminDashboard(),
     MyPlan(),
     DBcrud4(),
-    Departments(key : Key('department'),),
+    Departments(key: Key('department'),),
     AllEmployeePage(),
     ShiftsManagement(),
     CheckinHistory(),
     EmployeeCheckin(),
     AcceptLeave(),
     AllEmployeeUpdates(), //0
+
     Container(), //1
+    Certificate(),
   ];
 
 
@@ -108,9 +110,13 @@ class _HomePageMainState extends State<HomePageMain> {
                       backgroundImage: AssetImage('asset/profile.jfif'),
                       radius: 30,
                     ),
+
                     SizedBox(width: 20,),
+
                     Align(
+
                       alignment: Alignment.bottomLeft,
+
                       child: Padding(
                         padding: const EdgeInsets.only(right: 20.0),
                         child: Column(
@@ -126,6 +132,8 @@ class _HomePageMainState extends State<HomePageMain> {
                                   )),
                             ),
                             Container(
+
+
                                 child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
                                     textAlign: TextAlign.left
                                 )),
@@ -191,6 +199,10 @@ class _HomePageMainState extends State<HomePageMain> {
                 buildNavCard('asset/logoff.png','Logout',10),
                 SizedBox(height: 5,),
 
+                buildNavCard('asset/lvapproval.png','Certificate',11),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+
+
 
               ],
             ),
@@ -221,8 +233,6 @@ class _HomePageMainState extends State<HomePageMain> {
                   Expanded(
                     child: InkWell(
                       onTap:(){
-                        
-                        Get.back();
 
                       },
                       child: Padding(
@@ -244,9 +254,6 @@ class _HomePageMainState extends State<HomePageMain> {
                   Expanded(
                     child: InkWell(
                       onTap: (){
-                        name == "Logout" ?
-                        AuthController.instance.logout()
-                            : print('');
 
                       },
                       child: Padding(
