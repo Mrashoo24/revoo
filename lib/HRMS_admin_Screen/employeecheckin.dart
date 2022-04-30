@@ -61,16 +61,7 @@ class _EmployeeCheckinState extends State<EmployeeCheckin> {
               ),
             ),
           ),
-          Container(
-            width: 30,
-            height: 30,
-            child: Center(
-              child: AutoSizeText(
-                ' ',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
+
         ],
       ),
       TableRow(
@@ -113,13 +104,7 @@ class _EmployeeCheckinState extends State<EmployeeCheckin> {
               ),
             ),
           ),
-          Container(
-            width: 30,
-            height: 60,
-            child: Center(
-              child: Image.asset('asset/bluepencil.png')
-            ),
-          ),
+
 
         ],
       ),
@@ -161,16 +146,17 @@ class _EmployeeCheckinState extends State<EmployeeCheckin> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child: Container(
-                            child: Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 8),
-                              child: Text('Your\nLogin',textAlign: TextAlign.center,style: TextStyle(color: Colors.white),),
+                        child: InkWell(
+                          child: Container(
+                              child: Padding(
+                                padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: 8),
+                                child: Text('Your\nLogin',textAlign: TextAlign.center,style: TextStyle(color: Colors.white),),
+                              ),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [Kdblue,bluess]),
+                              borderRadius: BorderRadius.circular(10)
                             ),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [Kdblue,bluess]),
-                            borderRadius: BorderRadius.circular(10)
                           ),
-
                         ),
                       ),
                     )
