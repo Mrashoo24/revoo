@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:revoo/First/welcomscreen.dart';
 
 import '../Login/login.dart';
 import '../Login/yourapps.dart';
@@ -28,7 +29,7 @@ class AuthController extends GetxController{
   _initialScreen(User? user){
     if(user==null){
       print("Login Page");
-      Get.offAll(()=>LoginScreen());
+      Get.offAll(()=>WelcomeScreen());
     }else{
       Get.offAll(()=>Yourapps());
     }
