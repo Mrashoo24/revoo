@@ -6,7 +6,9 @@ import 'package:revoo/Controllers/authcontroller.dart';
 import 'package:revoo/Login/signup.dart';
 import 'package:revoo/Login/yourapps.dart';
 import 'package:revoo/constants/constants.dart';
+
 import 'package:revoo/home/admindashboard.dart';
+
 import 'package:revoo/home/homepage.dart';
 
 import '../Employee/employee_homepage.dart';
@@ -183,9 +185,10 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                 alignment: Alignment.centerLeft,
                                   child: InkWell(
                                       onTap: (){
-                                        Get.to(SelectPlans());
+                                        Get.to(Signup());
                                       },
-                                      child: Text('Don\'t have an account?',style: TextStyle(color: Colors.yellow.shade700),))),
+                                      child: Text('Don\'t have an account?',style: TextStyle(color: Colors.yellow.shade700),)
+                                  )),
 
                               SizedBox(height: 10,),
 

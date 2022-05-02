@@ -9,7 +9,8 @@ import '../../constants/constants.dart';
 import '../../home/homepage.dart';
 
 class MyPlan extends StatefulWidget {
-  const MyPlan({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const MyPlan({Key? key, required this.userDoc,}) : super(key: key);
 
   @override
   _MyPlanState createState() => _MyPlanState();

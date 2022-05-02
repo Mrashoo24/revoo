@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,8 @@ import 'package:revoo/HRMS_admin_Screen/addemployee.dart';
 import '../constants/constants.dart';
 
 class AllEmployeePage extends StatefulWidget {
-  const AllEmployeePage({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const AllEmployeePage({Key? key, required this.userDoc}) : super(key: key);
 
   @override
   _AllEmployeePageState createState() => _AllEmployeePageState();
@@ -66,120 +68,7 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
           ),
         ],
       ),
-      TableRow(
-        children: [
-          Container(
-            height: 60,
-            child: CircleAvatar(
-              child: Image.asset(
-                'asset/livephoto.png'
-              ),
-            ),
-          ),
-          Container(
-            height: 60,
 
-            child: Center(
-              child: Text(
-                'Arsalan',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
-          Container(
-            height: 60,
-            child: Center(
-              child: Text(
-                'Software En.',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
-          Container(
-            height: 60,
-            child: Center(
-              child: AutoSizeText(
-                'IT',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
-          Container(
-            height: 60,
-            child: Center(
-              child: ElevatedButton(
-                onPressed: (){
-
-                },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Kdblue)
-                ),
-                child: Text(
-                  'EDIT',
-                  style: TextStyle(fontSize: 12),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      TableRow(
-        children: [
-          Container(
-            height: 60,
-            child: CircleAvatar(
-              child: Image.asset(
-                  'asset/livephoto.png'
-              ),
-            ),
-          ),
-          Container(
-            height: 60,
-
-            child: Center(
-              child: Text(
-                'Arsalan',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
-          Container(
-            height: 60,
-            child: Center(
-              child: Text(
-                'Software En.',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
-          Container(
-            height: 60,
-            child: Center(
-              child: AutoSizeText(
-                'IT',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
-          Container(
-            height: 60,
-            child: Center(
-              child: ElevatedButton(
-                onPressed: (){
-
-                },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Kdblue)
-                ),
-                child: Text(
-                  'EDIT',
-                  style: TextStyle(fontSize: 12),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
     ];
 
     return Container(
@@ -209,7 +98,7 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                   SizedBox(width: 8,),
                   Container(
                     height: 30,
-                    width: Get.width*0.33,
+                    width: Get.width*0.35,
                     decoration: BoxDecoration(
                       color:bgGrey,
                       borderRadius: BorderRadius.circular(100)
@@ -243,23 +132,113 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                   InkWell(
                       onTap: () {
 
-                        Get.to(AddEmployee());
+                        Get.to(AddEmployee(userDoc : widget.userDoc));
 
                       },
                       child: Image.asset('asset/addnew.png')),
                 ],
               ),
             ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Container(
-            width: Get.width,
-            height: 300,
-            child: Table(
-              border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
-              children: tableRow,
-            ),
-          ),
+        StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: FirebaseFirestore.instance.collection('Employee').where('cid',isEqualTo: widget.userDoc.get('cid')).snapshots(),
+          builder: (context, snapshot) {
+
+
+            if(!snapshot.hasData){
+              return kprogressbar;
+            }
+
+            var  edoc = snapshot.requireData.docs;
+
+            print(edoc[0].data());
+
+            return Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                width: Get.width,
+                child: Column(
+                  children: [
+                    Table(
+                      border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
+                      children: [
+                        tableRow[0],
+
+                      ]
+
+
+
+                    ),
+                    Table(
+                        border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
+                        children: edoc.map((e) {
+
+                            return       TableRow(
+                              children: [
+                                Container(
+                                  height: 60,
+                                  child: CircleAvatar(
+                                    child: Image.asset(
+                                        'asset/livephoto.png'
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 60,
+
+                                  child: Center(
+                                    child: Text(
+                                      e.get('name'),
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 60,
+                                  child: Center(
+                                    child: Text(
+                                      e.get('Designation'),
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 60,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                      e.get('Designation'),
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 60,
+                                  child: Center(
+                                    child: ElevatedButton(
+                                      onPressed: (){
+
+                                      },
+                                      style: ButtonStyle(
+                                          backgroundColor: MaterialStateProperty.all(Kdblue)
+                                      ),
+                                      child: Text(
+                                        'EDIT',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }).toList()
+
+
+
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
         )
           ],
         ),

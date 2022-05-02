@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/APPS/selectplans.dart';
 import 'package:revoo/Controllers/authcontroller.dart';
+import 'package:revoo/constants/constants.dart';
 
+import '../constants/Api.dart';
 import 'login.dart';
 
 class Signup extends StatefulWidget {
@@ -17,8 +21,11 @@ class _SignupState extends State<Signup> {
   bool obsecure = true;
   bool obsecure1 = true;
 
+  bool loading = false;
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var nameController  = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +102,7 @@ class _SignupState extends State<Signup> {
                           ),
                           SizedBox(height: 20,),
                           TextFormField(
+                            controller: nameController,
                             decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
@@ -208,9 +216,43 @@ class _SignupState extends State<Signup> {
                           // ),
                           SizedBox(height: 20,),
 
-                          GestureDetector(
-                            onTap: (){
+                      loading ? kprogressbar :    GestureDetector(
+                            onTap: () async {
                               // AuthController.instance.register(emailController.text.trim(), passwordController.text.trim());
+
+                         var emailCheck =   await  FirebaseFirestore.instance
+                                  .collection('Registeration').where('email',isEqualTo: emailController.text).get();
+
+                          var nameCheck =  await  FirebaseFirestore.instance
+                                  .collection('Registeration').where('cname',isEqualTo: passwordController.text).get();
+
+
+                          if(nameCheck.docs.isNotEmpty ){
+                            Get.snackbar('Error', 'Company name already exist');
+                          }else
+                         if(emailCheck.docs.isNotEmpty ){
+                           Get.snackbar('Error', 'Email already exist');
+                         } else{
+
+                           var cdetail = {
+                             'cname': passwordController.text,
+                             'name' : nameController.text,
+                             'email' : emailController.text,
+                             'apps' : ''
+                           };
+
+
+
+                           await FirebaseFirestore.instance
+                               .collection('Registeration').add(cdetail);
+
+                         var result =  await   AllApi().sendEmail(subject: 'Revoo Registeration', content: 'New Registeration ${cdetail}', toEmail: 'arsalank28@gmail.com');
+                        print(result);
+
+                           Get.to(SelectPlans(cdetails:cdetail));
+
+                         }
+
 
                             },
                             child: Container(

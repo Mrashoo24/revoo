@@ -13,6 +13,7 @@ class AttendencReportModel {
   String? status;
   String? timestamp;
   String? cid;
+  String? difference;
 
   AttendencReportModel(
       {this.date,
@@ -28,7 +29,7 @@ class AttendencReportModel {
         this.did,
         this.status,
         this.timestamp,
-        this.cid});
+        this.cid,this.difference});
 
   AttendencReportModel.fromJson(Map<String, dynamic> json) {
 
@@ -46,6 +47,7 @@ class AttendencReportModel {
     status = json['status'];
     timestamp = json['timestamp'];
     cid = json['cid'];
+    difference = json['difference'];
 
   }
 
@@ -65,6 +67,7 @@ class AttendencReportModel {
     data['status'] = this.status;
     data['timestamp'] = this.timestamp;
     data['cid'] = this.cid;
+    data['difference'] = this.difference;
     return data;
   }
 }

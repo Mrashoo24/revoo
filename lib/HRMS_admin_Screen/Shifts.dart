@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,8 @@ import '../constants/constants.dart';
 import 'adbranchpg2.dart';
 
 class ShiftsManagement extends StatefulWidget {
-  const ShiftsManagement({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const ShiftsManagement({Key? key, required this.userDoc}) : super(key: key);
 
   @override
   _ShiftsManagementState createState() => _ShiftsManagementState();

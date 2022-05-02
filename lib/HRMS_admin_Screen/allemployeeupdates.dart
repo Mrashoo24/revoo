@@ -10,7 +10,8 @@ import '../Controllers/dailyUpdatesController.dart';
 import '../home/homepage.dart';
 
 class AllEmployeeUpdates extends StatefulWidget {
-  const AllEmployeeUpdates({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const AllEmployeeUpdates({Key? key, required this.userDoc}) : super(key: key);
 
   @override
   _AllEmployeeUpdatesState createState() => _AllEmployeeUpdatesState();
@@ -124,7 +125,7 @@ class _AllEmployeeUpdatesState extends State<AllEmployeeUpdates> {
                           ),
                           InkWell(
                             onTap: (){
-                              Get.to(HomePageMain());
+                              Get.to(HomePageMain(userDoc: widget.userDoc,));
                             },
                             child: Card(
                               color: Colors.green,

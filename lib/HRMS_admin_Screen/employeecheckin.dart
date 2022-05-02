@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,8 @@ import 'package:revoo/constants/constants.dart';
 import '../home/homepage.dart';
 
 class EmployeeCheckin extends StatefulWidget {
-  const EmployeeCheckin({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const EmployeeCheckin({Key? key, required this.userDoc}) : super(key: key);
 
   @override
   _EmployeeCheckinState createState() => _EmployeeCheckinState();
@@ -139,7 +141,7 @@ class _EmployeeCheckinState extends State<EmployeeCheckin> {
                     ),
                     InkWell(
                       onTap: (){
-                          Get.to(HomePageMain());
+                          Get.to(HomePageMain(userDoc: widget.userDoc,));
                       },
                       child: Card(
                         color: Colors.green,

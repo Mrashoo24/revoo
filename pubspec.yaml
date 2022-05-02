@@ -53,6 +53,11 @@ dependencies:
   table_calendar: ^3.0.5
   intl: ^0.17.0
   date_ranger: ^0.0.1
+  http: ^0.13.4
+  geocoding: ^2.0.4
+  multi_stream_builder: ^0.0.1
+  location: ^4.3.0
+  google_maps_flutter: ^2.0.6
 
 
 

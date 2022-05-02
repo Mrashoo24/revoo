@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../Login/login.dart';
 import '../Login/signup.dart';
 import '../constants/constants.dart';
 import '../constants/constants.dart';
@@ -13,7 +17,8 @@ import '../constants/constants.dart';
 import '../constants/constants.dart';
 
 class SelectPlans extends StatefulWidget {
-  const SelectPlans({Key? key}) : super(key: key);
+  final Map cdetails ;
+  const SelectPlans({Key? key, required this.cdetails}) : super(key: key);
 
   @override
   _SelectPlansState createState() => _SelectPlansState();
@@ -28,6 +33,8 @@ bool selectedsales = false;
 bool selectedinventory = false;
 bool selectedproject = false;
 bool selectedpos = false;
+
+bool loading = false;
 
 
 bool valuefirst = false;
@@ -181,10 +188,30 @@ var price = 0.0 ;
 
                                           ),
                                           SizedBox(height:20),
-                                          InkWell(
-                                            onTap: (){
+                                       loading?
+                                           kprogressbar
+                                           :   InkWell(
+                                            onTap: () async {
 
-                                              Get.to(Signup());
+                                              setState(() {
+                                                loading = true;
+                                              });
+                                          var doc =    await  FirebaseFirestore.instance
+                                                  .collection('Registeration').where('email',isEqualTo: widget.cdetails['email']).get();
+
+                                          await  FirebaseFirestore.instance
+                                              .collection('Registeration').doc(doc.docs[0].id).update({
+                                            'apps':jsonEncode(selectedApps)
+                                          });
+
+                                              setState(() {
+                                                loading = false;
+                                              });
+
+                                              Get.snackbar('Successful', 'Someone will assist you shortly');
+
+                                              Get.offAll(LoginScreen());
+
                                             },
                                             child
                                                 : Container(decoration: BoxDecoration(borderRadius:BorderRadius.circular(10),gradient: LinearGradient(
@@ -211,7 +238,7 @@ var price = 0.0 ;
                                             ),
                                           ),
                                           SizedBox(height: 10,),
-                                          Text('\$ ${price}',style: TextStyle(color: kblue,fontSize: 24),),
+                                          Text('\$ ${price.toPrecision(2)}',style: TextStyle(color: kblue,fontSize: 24),),
                                           SizedBox(height: 10,),
                                           InkWell(
                                             onTap: (){
@@ -2051,8 +2078,8 @@ Row buildSelectedAppRow(title,image) {
 
                                           ),SizedBox(width: 20),
                                           Container(
-                                              width: 100,
-                                              child: Text(title,style:TextStyle(fontSize: 22,))),
+                                              width: Get.width*0.2,
+                                              child: Text(title,style:TextStyle(fontSize: 12,))),
 
                                         ],
 
@@ -2109,7 +2136,8 @@ Widget buildStack(icon, String title,String parent) {
                                                    value! ?  selectedApps.add(
                                                        {'title':title , 'image' : icon,
                                                        'price': title == 'POS' ? '10.99' :
-                                                       '2.99'
+                                                       '2.99',
+                                                         'app' : parent
                                                        }) :
                                                    selectedApps.removeAt(indexoFSeleceted);
 

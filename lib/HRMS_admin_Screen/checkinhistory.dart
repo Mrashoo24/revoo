@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'package:revoo/constants/constants.dart';
 
 import '../home/homepage.dart';
 class CheckinHistory extends StatefulWidget {
-  const CheckinHistory({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const CheckinHistory({Key? key, required this.userDoc}) : super(key: key);
 
   @override
   _CheckinHistoryState createState() => _CheckinHistoryState();

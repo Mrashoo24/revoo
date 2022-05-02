@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,8 @@ import '../constants/constants.dart';
 
 
 class HomePageMain extends StatefulWidget {
-  const HomePageMain({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const HomePageMain({Key? key,required this.userDoc}) : super(key: key);
 
   @override
   _HomePageMainState createState() => _HomePageMainState();
@@ -28,25 +30,26 @@ class _HomePageMainState extends State<HomePageMain> {
   var selectedCard = 'Home'; //for changing name
   var selectedindex = 0; //for changing index of page
 
-  var homepages = [
-    AdminDashboard(),
-    MyPlan(),
-    DBcrud4(),
-    Departments(key: Key('department'),),
-    AllEmployeePage(),
-    ShiftsManagement(),
-    CheckinHistory(),
-    EmployeeCheckin(),
-    AcceptLeave(),
-    AllEmployeeUpdates(), //0
-
-    Container(), //1
-    Certificate(),
-  ];
 
 
   @override
   Widget build(BuildContext context) {
+
+    var homepages = [
+      AdminDashboard(userDoc: widget.userDoc,),
+      MyPlan(userDoc: widget.userDoc,),
+      DBcrud4(userDoc: widget.userDoc,),
+      Departments(key: Key('department'),userDoc: widget.userDoc,),
+      AllEmployeePage(userDoc: widget.userDoc,),
+      ShiftsManagement(userDoc: widget.userDoc,),
+      CheckinHistory(userDoc: widget.userDoc,),
+      EmployeeCheckin(userDoc: widget.userDoc,),
+      AcceptLeave(userDoc: widget.userDoc,),
+      AllEmployeeUpdates(userDoc: widget.userDoc,), //0
+
+      Container(), //1
+      Certificate(),
+    ];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -61,15 +64,15 @@ class _HomePageMainState extends State<HomePageMain> {
             child: Image.asset('asset/navicon.png'),
           ),
         ),
-        actions: [
-          Image.asset('asset/bellicon.png'),
-
-          Image.asset('asset/settingsicon.png'),
-
-          Image.asset('asset/usericon.png'),
-
-          SizedBox(width: 12,),
-        ],
+        // actions: [
+        //   Image.asset('asset/bellicon.png'),
+        //
+        //   Image.asset('asset/settingsicon.png'),
+        //
+        //   Image.asset('asset/usericon.png'),
+        //
+        //   SizedBox(width: 12,),
+        // ],
       ),
       drawer: buildDrawer(),
       bottomNavigationBar: commonWidgets.buildBNB(),

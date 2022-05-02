@@ -12,7 +12,8 @@ import '../constants/constants.dart';
 import 'adbranchpg2.dart';
 
 class Departments extends StatefulWidget {
-  const Departments({required Key key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const Departments({required Key key, required this.userDoc}) : super(key: key);
 
   @override
   _DepartmentsState createState() => _DepartmentsState();

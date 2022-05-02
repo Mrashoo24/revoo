@@ -28,6 +28,7 @@ class AuthController extends GetxController{
     //our user would be notified
     _user.bindStream(auth.userChanges());
     ever(_user, _initialScreen);
+
   }
   _initialScreen(User? user){
     if(user==null){

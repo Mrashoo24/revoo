@@ -17,8 +17,8 @@ import '../constants/constants.dart';
 import '../home/homepage.dart';
 import '../model/leavemodel.dart';
 
-class AcceptLeave extends StatefulWidget {
-  const AcceptLeave({Key? key}) : super(key: key);
+class AcceptLeave extends StatefulWidget {  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const AcceptLeave({Key? key, required this.userDoc}) : super(key: key);
 
   @override
   _AcceptLeaveState createState() => _AcceptLeaveState();

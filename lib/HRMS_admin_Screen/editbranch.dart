@@ -15,20 +15,24 @@ import '../constants/map.dart';
 import '../home/homepage.dart';
 
 
-class AddBranches extends StatefulWidget {
+class EditBranches extends StatefulWidget {
+    final String name;
+    final List latlist ;
+    final String address;
+    final String id;
+    final String locality;
 
-
-  const AddBranches({Key? key,}) : super(key: key);
+  const EditBranches({Key? key, required this.latlist, required this.name, required this.address, required this.id, required this.locality,}) : super(key: key);
 
   @override
   _DBcrudState createState() => _DBcrudState();
 }
 
-class _DBcrudState extends State<AddBranches> {
+class _DBcrudState extends State<EditBranches> {
 
   TextEditingController name = TextEditingController();
   TextEditingController address = TextEditingController();
-   String location1  = '';
+  String location1  = '';
 
   var latitude;
   var longitude;
@@ -51,6 +55,18 @@ class _DBcrudState extends State<AddBranches> {
   var userLatitude = "";
   var userLongitude = "";
   late GeoPoint userGeoPoint;
+
+  @override
+  void initState() {
+    setState(() {
+      location1 = widget.locality;
+      name = TextEditingController(text:widget.name);
+      address = TextEditingController(text:widget.address);
+       latitude =widget.latlist[0];
+       longitude =widget.latlist[1];
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +186,7 @@ class _DBcrudState extends State<AddBranches> {
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding:
-                                EdgeInsets.only(left: 20, top: 25, bottom: 25),
+                            EdgeInsets.only(left: 20, top: 25, bottom: 25),
                             hintText: 'Branch Name',
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
@@ -193,7 +209,7 @@ class _DBcrudState extends State<AddBranches> {
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding:
-                                EdgeInsets.only(left: 20, top: 25, bottom: 25),
+                            EdgeInsets.only(left: 20, top: 25, bottom: 25),
                             hintText: 'Address',
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
@@ -206,7 +222,7 @@ class _DBcrudState extends State<AddBranches> {
                       SizedBox(
                         height: 12,
                       ),
-                    loading ? kprogressbar :  InkWell(
+                      loading ? kprogressbar :  InkWell(
                         onTap: () async {
                           setState(() {
                             loading = true;
@@ -216,15 +232,15 @@ class _DBcrudState extends State<AddBranches> {
                               loc: LatLng(latitude, longitude),
 
                               userRef: ''),
-                            fullscreenDialog: true
+                              fullscreenDialog: true
 
                           )?.then((value) {
-                                print('result = $value');
-                                setState(() {
-                                 latitude = value[0]['lat'];
-                                  longitude = value[0]['lon'];
-                                  location1 = value[0]['address'];
-                                });
+                            print('result = $value');
+                            setState(() {
+                              latitude = value[0]['lat'];
+                              longitude = value[0]['lon'];
+                              location1 = value[0]['address'];
+                            });
                           });
                           setState(() {
                             loading = false;
@@ -232,7 +248,7 @@ class _DBcrudState extends State<AddBranches> {
                         },
                         child: TextFormField(
 
-                    enabled: false,
+                          enabled: false,
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: bgGrey,
@@ -302,7 +318,7 @@ class _DBcrudState extends State<AddBranches> {
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
+                                  BorderRadius.all(Radius.circular(10))),
                               side: BorderSide(width: 3.0, color: kblue),
                               primary: Colors.white,
                               padding: EdgeInsets.symmetric(
@@ -311,9 +327,9 @@ class _DBcrudState extends State<AddBranches> {
                                   fontSize: 30, fontWeight: FontWeight.bold)),
                           child: Center(
                               child: Text(
-                            '< Back',
-                            style: TextStyle(color: kblue, fontSize: 15),
-                          ))),
+                                '< Back',
+                                style: TextStyle(color: kblue, fontSize: 15),
+                              ))),
                       SizedBox(
                         width: 25,
                       ),
@@ -323,22 +339,15 @@ class _DBcrudState extends State<AddBranches> {
 
                           var userdata = await firestore.collection('Employee').doc(uid).get();
 
-                        await firestore.collection('Branch').add(
-                           {
-                             'branch_name':name.text,
-                             'address':address.text,
-                             'location' : [latitude,longitude],
-                             'locality' : location1,
-                             'cid' : userdata.get('cid')
-                           }
-                         ).then((value) async {
-                          await firestore.collection('Branch').doc(value.id).update({
-                            'bid' :value.id
-                          });
-                        });
-                     var docSnap =  await firestore.collection('Branch').doc('etsPUmBE29lqbbhR4G2C').get();
-                     print(docSnap.data());
-                        Get.to(HomePageMain(userDoc: userdata,));
+                          await firestore.collection('Branch').doc(widget.id).update(
+                              {
+                                'branch_name': name.text,
+                                'address': address.text,
+                                'location' : [latitude,longitude],
+                                'locality' : location1,
+                                'cid' : userdata.get('cid')
+                              }
+                          );
                         },
                         child: Container(
                           width: 110,
@@ -356,9 +365,9 @@ class _DBcrudState extends State<AddBranches> {
                           ),
                           child: Center(
                               child: Text(
-                            'Add',
-                            style: TextStyle(color: Colors.white),
-                          )),
+                                'Update',
+                                style: TextStyle(color: Colors.white),
+                              )),
                         ),
                       ),
                     ],

@@ -9,7 +9,8 @@ import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 import '../constants/constants.dart';
 
 class AddEmployee extends StatefulWidget {
-  const AddEmployee({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  const AddEmployee({Key? key, required this.userDoc}) : super(key: key);
 
   @override
   _AddEmployeeState createState() => _AddEmployeeState();
@@ -377,7 +378,9 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                         ),
                       ),
+
                       SizedBox(height: 12,),
+
                       Row(
                         children: [
                           Text("Phone Number"),
@@ -518,12 +521,14 @@ class _AddEmployeeState extends State<AddEmployee> {
                       SizedBox(width: 25,),
                       InkWell(
                         onTap: () async {
+
                           print('branchnsme = ${selectedValue}');
+
 
 
                           await firestore.collection("Employee").add(
                               {
-                                'Branch Name':empname.text,
+                                'name':empname.text,
                                 "selectBranch" : selectedValue,
                                 "selectManager" : selectedValuea,
                                 "selectHr" : selectedValueb,
@@ -542,13 +547,17 @@ class _AddEmployeeState extends State<AddEmployee> {
                                     .doc(value.id)
                                     .update
                                   ({
-                                  'bid': value.id
+                                  'uid': value.id
                                 });
                               }
                           );
+
                                 var docSnap =  await firestore.collection('Employee').doc('QOebgqfRn7wqKCpyrRtw').get();
+
                                 print(docSnap.data());
-                                Get.to(DBcrud4());
+
+                                Get.to(DBcrud4(userDoc: widget.userDoc,));
+
                                 },
 
 
@@ -570,6 +579,8 @@ class _AddEmployeeState extends State<AddEmployee> {
                           child: Center(child: Text('Add',style: TextStyle(color: Colors.white),)),
                         ),
                       ),
+
+
                     ],
                   ),
                 ],
