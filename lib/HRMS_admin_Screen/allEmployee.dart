@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revoo/HRMS_admin_Screen/addemployee.dart';
+import 'package:collection/collection.dart';
 
 import '../constants/constants.dart';
 
@@ -17,7 +18,7 @@ class AllEmployeePage extends StatefulWidget {
 
 class _AllEmployeePageState extends State<AllEmployeePage> {
   var selectedValue = 0;
-
+  var selectedBranch ='';
 
 
   @override
@@ -35,7 +36,7 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
             child: Center(
               child: Text(
                 'Name',
-                style: TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -44,7 +45,7 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
             child: Center(
               child: Text(
                 'Role',
-                style: TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -53,7 +54,7 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
             child: Center(
               child: AutoSizeText(
                 'Department',
-                style: TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -96,37 +97,48 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                     style: TextStyle(color: kblue, fontSize: 14),
                   ),
                   SizedBox(width: 8,),
-                  Container(
-                    height: 30,
-                    width: Get.width*0.35,
-                    decoration: BoxDecoration(
-                      color:bgGrey,
-                      borderRadius: BorderRadius.circular(100)
-                    ),
-                    child: Padding(
-                      padding:   EdgeInsets.symmetric(horizontal: 8.0),
-                      child: DropdownButton(
-                        underline: Text(''),
-                        
-                        borderRadius: BorderRadius.circular(10),
-                        value: selectedValue,
-                        onChanged: (int? value){
+                  StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                    stream: FirebaseFirestore.instance.collection('Branch').where('cid',isEqualTo: widget.userDoc.get('cid')).snapshots(),
+                    builder: (context, snapshot) {
+
+                      if(!snapshot.hasData){
+                        return kprogressbar;
+
+                      }
+
+                      var bDocs = snapshot.requireData.docs;
+
+                      return Container(
+                        height: 30,
+                        width: Get.width*0.35,
+                        decoration: BoxDecoration(
+                          color:bgGrey,
+                          borderRadius: BorderRadius.circular(100)
+                        ),
+                        child: Padding(
+                          padding:   EdgeInsets.symmetric(horizontal: 8.0),
+                          child: DropdownButton(
+                            underline: Text(''),
+                            
+                            borderRadius: BorderRadius.circular(10),
+                            value: selectedValue,
+                            onChanged: (int? value){
 
 
 
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                        },
-                        items: [
+                              setState(() {
+                                selectedValue = value!;
+                                selectedBranch = bDocs[value].get('bid');
+                              });
+                              
+                            },
+                            items:
+                            bDocs.mapIndexed((index, element) => (DropdownMenuItem(child: Text(element.get('branch_name')),value: index,))).toList()
 
-                          DropdownMenuItem(child: Text('By brancha'),value: 0,),
-                        DropdownMenuItem(child: Text('By branchb'),value: 1,),
-                        DropdownMenuItem(child: Text('By branchc'),value: 2,)
-
-                      ],
-                      ),
-                    ),
+                          ),
+                        ),
+                      );
+                    }
                   ),
                   SizedBox(width: 30,),
                   InkWell(
@@ -140,9 +152,12 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
               ),
             ),
         StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-            stream: FirebaseFirestore.instance.collection('Employee').where('cid',isEqualTo: widget.userDoc.get('cid')).snapshots(),
+            stream:
+            selectedBranch != '' ?  FirebaseFirestore.instance.collection('Employee').where('bid',isEqualTo: selectedBranch).snapshots()
+                : FirebaseFirestore.instance.collection('Employee').where('cid',isEqualTo: widget.userDoc.get('cid')).snapshots(),
           builder: (context, snapshot) {
 
+              print(selectedBranch);
 
             if(!snapshot.hasData){
               return kprogressbar;
@@ -150,13 +165,14 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
 
             var  edoc = snapshot.requireData.docs;
 
-            print(edoc[0].data());
+
 
             return Padding(
               padding: const EdgeInsets.all(15.0),
               child: Container(
                 width: Get.width,
-                child: Column(
+                child:
+                Column(
                   children: [
                     Table(
                       border: TableBorder.symmetric(inside:BorderSide(color: Kdblue),outside:BorderSide(color: Colors.white)),
@@ -213,18 +229,7 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                                 Container(
                                   height: 60,
                                   child: Center(
-                                    child: ElevatedButton(
-                                      onPressed: (){
-
-                                      },
-                                      style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all(Kdblue)
-                                      ),
-                                      child: Text(
-                                        'EDIT',
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                    ),
+                                    child: Icon(Icons.edit),
                                   ),
                                 ),
                               ],

@@ -74,7 +74,7 @@ var price = 0.0 ;
                            children: [
                              Text('Try it with a\n14-day trial',style:  TextStyle(fontSize: 25,color: Colors.grey),),
                              SizedBox(height: 10,),
-                             Text('Any tagline like "Choose your plan/\nChoose your app now',style: TextStyle(fontSize:15,color:Colors.grey),),
+                             Text('Choose your app now',style: TextStyle(fontSize:15,color:Colors.grey),),
                            ],
                          ),
                        ),

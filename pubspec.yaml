@@ -58,6 +58,8 @@ dependencies:
   multi_stream_builder: ^0.0.1
   location: ^4.3.0
   google_maps_flutter: ^2.0.6
+  day_night_time_picker: ^1.0.5
+
 
 
 

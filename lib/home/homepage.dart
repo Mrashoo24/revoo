@@ -48,7 +48,7 @@ class _HomePageMainState extends State<HomePageMain> {
       AllEmployeeUpdates(userDoc: widget.userDoc,), //0
 
       Container(), //1
-      Certificate(),
+
     ];
     return Scaffold(
       appBar: AppBar(

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,10 +9,13 @@ import 'package:revoo/Employee/leaveRequest.dart';
 import 'package:revoo/Employee/watchdashboard.dart';
 
 import '../constants/constants.dart';
+import 'Certificate/certificate.dart';
 import 'employeedash202.dart';
 
 class EmployeeHomePage extends StatefulWidget {
-  const EmployeeHomePage({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+
+  const EmployeeHomePage({Key? key, required this.userDoc}) : super(key: key);
 
   @override
   _EmployeeHomePageState createState() => _EmployeeHomePageState();
@@ -24,17 +28,20 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
 
   late String email;
 
-  var homepages = [
-    EmployeeDashboard1(), //0
-    Watchdashboard(),
-    Dailyupdates(), //1
-    LeaveRequestEmployee(),
 
-  ];
 
 
   @override
   Widget build(BuildContext context) {
+    var homepages = [
+      EmployeeDashboard1(userDoc: widget.userDoc,), //0
+      // Watchdashboard(),
+      // Dailyupdates(), //1
+      LeaveRequestEmployee(userDoc: widget.userDoc,),
+      Certificate(),
+
+    ];
+
     return Scaffold(
       key: scafkey,
       backgroundColor: Colors.white,
@@ -142,18 +149,21 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
 
                   SizedBox(height: 30,),
                   buildNavCard('asset/home.png','Home',0),
+                  // SizedBox(height: 5,),
+                  // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                  // buildNavCard('asset/checkgrp.png','Daily Logins',1),
+                  // SizedBox(height: 5,),
+                  // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                  // buildNavCard('asset/checkpad.png','Daily Updates',1),
                   SizedBox(height: 5,),
                   Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/checkgrp.png','Daily Logins',1),
+                  buildNavCard('asset/lvapproval.png','Leave Request/\nApprovals',1),
                   SizedBox(height: 5,),
                   Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/checkpad.png','Daily Updates',2),
+                  buildNavCard('asset/lvapproval.png','Certificates',2),
                   SizedBox(height: 5,),
                   Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/lvapproval.png','Leave Request/\nApprovals',3),
-                  SizedBox(height: 5,),
-                  Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/logoff.png','Logout',4),
+                  buildNavCard('asset/logoff.png','Logout',2),
                   SizedBox(height: 5,),
 
 
