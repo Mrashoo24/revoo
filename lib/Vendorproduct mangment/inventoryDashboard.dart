@@ -10,6 +10,7 @@ import 'package:revoo/Vendorproduct%20mangment/vendorproduct38.dart';
 import '../Controllers/authcontroller.dart';
 import '../constants/constants.dart';
 import 'Batchmangment51.dart';
+import 'addcomponents.dart';
 import 'goodissue42.dart';
 import 'goodsissue43.dart';
 import 'inventory reports52.dart';
@@ -34,13 +35,8 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
     Transfercontact46(),
     Inventory52(),
     Serialnumber48(),
-
     Batchmangment(),
-
-
-
-
-
+    AddComponents(),
 
   ];
 
@@ -84,7 +80,6 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
     );
   }
 
-
   buildDrawer(){
     return  Drawer(
       child:  Card(
@@ -92,15 +87,12 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
         shape: Border(
           right: BorderSide(style: BorderStyle.none),
 
-
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: SingleChildScrollView(
             child: Column(
-
               children: [
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -164,7 +156,6 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                   ],
                 ),
 
-
                 SizedBox(height: 5,),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
 
@@ -179,6 +170,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                 buildNavCard('asset/lvapproval.png','Goods Issues',2),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
+
 
                 buildNavCard('asset/lvapproval.png','Transactions',3),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
@@ -200,26 +192,26 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
 
-                buildNavCard('asset/logoff.png','Logout',8),
+                buildNavCard('asset/lvapproval.png','Components',8),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
 
+                buildNavCard('asset/logoff.png','Logout',9),
+                SizedBox(height: 5,),
 
               ],
             ),
           ),
-
         ),
-
       ),
     );
   }
-
 
   buildNavCard(String image,String name,index) {
 
     return InkWell(
       onTap: (){
-        if(index == 8){
+        if(index == 9){
 
           name == "Logout" ?
           AuthController.instance.logout()
@@ -320,4 +312,6 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
       ),
     );
   }
+
+
 }
