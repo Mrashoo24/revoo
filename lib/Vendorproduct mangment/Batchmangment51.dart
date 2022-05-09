@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class Batchmangment extends StatefulWidget {
 }
 
 class _BatchmangmentState extends State<Batchmangment> {
+  final fireStore = FirebaseFirestore.instance;
   var itemList = ['', 'Std1', 'Std2', 'Std3', 'Std4', 'Std5', 'Std6', 'Std7'];
 
   var itemList1 = [
@@ -146,709 +148,231 @@ class _BatchmangmentState extends State<Batchmangment> {
                     ],
                   ),
                   SizedBox(height: 20),
-                  DataTable(
-                    horizontalMargin: 20,
-                    columnSpacing: 20,
-                    columns: [
-                      DataColumn(
-                          label: Text(
-                            "Product Name 1",
-                            style: TextStyle(
-                                fontSize: 10, color: Colors.grey.shade600),
-                          )),
-                      DataColumn(
-                          label: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Text(
-                                "Intl\nPrice",
+                  StreamBuilder<QuerySnapshot<Map<String,dynamic>>>(
+                    stream: fireStore.collection('Inventory').doc('Zfm6VjimQ1BCDroRad2L').collection('Batch_number_management').snapshots(),
+                    builder: (context,snapshot){
+                      return DataTable(
+                        horizontalMargin: 20,
+                        columnSpacing: 20,
+                        columns: [
+                          DataColumn(
+                              label: Text(
+                                "Product Name 1",
                                 style: TextStyle(
-                                    fontSize: 12 , color: Colors.grey.shade600),
-                              ),
-                            ),
-                          )),
-                      DataColumn(
-                          label: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Center(
-                                child: Center(
+                                    fontSize: 10, color: Colors.grey.shade600),
+                              )),
+                          DataColumn(
+                              label: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 20.0),
                                   child: Text(
-                                    "Local\nprice",
+                                    "Intl\nPrice",
+                                    style: TextStyle(
+                                        fontSize: 12 , color: Colors.grey.shade600),
+                                  ),
+                                ),
+                              )),
+                          DataColumn(
+                              label: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 20.0),
+                                  child: Center(
+                                    child: Center(
+                                      child: Text(
+                                        "Local\nprice",
+                                        style: TextStyle(
+                                            fontSize: 12, color: Colors.grey.shade600),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )),
+
+                          DataColumn(
+                              label: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                child: Center(
+
+                                  child: Text(
+                                    "Action",
                                     style: TextStyle(
                                         fontSize: 12, color: Colors.grey.shade600),
                                   ),
                                 ),
-                              ),
-                            ),
-                          )),
-
-                      DataColumn(
-                          label: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: Center(
-
-                              child: Text(
-                                "Action",
-                                style: TextStyle(
-                                    fontSize: 12, color: Colors.grey.shade600),
-                              ),
-                            ),
-                          )),
-                    ],
+                              )),
+                        ],
 
 
 
 
 
-                    rows: [
-                      DataRow(cells: [
-                        DataCell(Text(
-                          "Product Name",
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
+                        rows: [
+                          DataRow(cells: [
+                            DataCell(Text(
+                              "Product Name",
+                              style: TextStyle(fontSize: 12),
+                            )),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 15),
                                 child: Align(
-                                    alignment: Alignment.center,
+                                  alignment: Alignment.centerRight,
+                                  child: Container(
+                                    width: 50,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: bgGrey,
+                                    ),
+                                    child: Align(
+                                        alignment: Alignment.center,
 
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
+                                        child: Text(
+                                          'Rs.350',
+                                          style: TextStyle(color: Colors.orange),
+                                        )),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
 
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 15),
                                 child: Align(
-                                    alignment: Alignment.center,
+                                  alignment: Alignment.centerRight,
+                                  child: Container(
+                                    width: 50,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: bgGrey,
+                                    ),
+                                    child: Align(
+                                        alignment: Alignment.center,
 
+                                        child: Text(
+                                          'Rs.350',
+                                          style: TextStyle(color: Colors.orange),
+                                        )),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            DataCell(
+                              Center(
+                                child: Container(
+                                  height: 20,
+                                  margin: EdgeInsets.symmetric(vertical: 10),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.blue.shade900,
+                                        Colors.blue,
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
                                     child: Text(
-                                        'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Center(
-                            child: Container(
-                              height: 20,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Edit',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10),
+                                      'Edit',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 10),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(
-                          "Product Name",
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
+                          ]),
+                          DataRow(cells: [
+                            DataCell(Text(
+                              "Product Name",
+                              style: TextStyle(fontSize: 12),
+                            )),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 15),
                                 child: Align(
-                                    alignment: Alignment.center,
+                                  alignment: Alignment.centerRight,
+                                  child: Container(
+                                    width: 50,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: bgGrey,
+                                    ),
+                                    child: Align(
+                                        alignment: Alignment.center,
 
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
+                                        child: Text(
+                                          'Rs.350',
+                                          style: TextStyle(color: Colors.orange),
+                                        )),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
 
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 15),
                                 child: Align(
-                                    alignment: Alignment.center,
+                                  alignment: Alignment.centerRight,
+                                  child: Container(
+                                    width: 50,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: bgGrey,
+                                    ),
+                                    child: Align(
+                                        alignment: Alignment.center,
 
+                                        child: Text(
+                                          'Rs.350',
+                                          style: TextStyle(color: Colors.orange),
+                                        )),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            DataCell(
+                              Center(
+                                child: Container(
+                                  height: 20,
+                                  margin: EdgeInsets.symmetric(vertical: 10),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.blue.shade900,
+                                        Colors.blue,
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
                                     child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Center(
-                            child: Container(
-                              height: 20,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Edit',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10),
+                                      'Edit',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 10),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ]),
-
-                      DataRow(cells: [
-                        DataCell(Text(
-                          "Product Name",
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Center(
-                            child: Container(
-                              height: 20,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Edit',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(
-                          "Product Name",
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Center(
-                            child: Container(
-                              height: 20,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Edit',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(
-                          "Product Name",
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Center(
-                            child: Container(
-                              height: 20,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Edit',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(
-                          "Product Name",
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Center(
-                            child: Container(
-                              height: 20,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Edit',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(
-                          "Product Name",
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Center(
-                            child: Container(
-                              height: 20,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Edit',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(
-                          "Product Name",
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bgGrey,
-                                ),
-                                child: Align(
-                                    alignment: Alignment.center,
-
-                                    child: Text(
-                                      'Rs.350',
-                                      style: TextStyle(color: Colors.orange),
-                                    )),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        DataCell(
-                          Center(
-                            child: Container(
-                              height: 20,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Edit',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ]),
+                          ]),
+                        ],
+                        border: TableBorder.all(color:kblue),
+                      );
+                    },
 
 
-
-
-                    ],
-                    border: TableBorder.all(color:kblue),
                   ),
                 ],
               ),

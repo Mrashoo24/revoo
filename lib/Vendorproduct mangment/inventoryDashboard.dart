@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:revoo/Vendorproduct%20mangment/serialnumber48.dart';
+import 'package:revoo/Vendorproduct%20mangment/serial_number_management.dart';
 import 'package:revoo/Vendorproduct%20mangment/tansfer47.dart';
 import 'package:revoo/Vendorproduct%20mangment/transaction44.dart';
 import 'package:revoo/Vendorproduct%20mangment/transferadd46.dart';

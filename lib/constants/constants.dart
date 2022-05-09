@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:revoo/constants/commonWidgets.dart';
 
 import 'package:revoo/constants/commonWidgets.dart';
@@ -24,3 +26,5 @@ var commonWidgets = CommonWidgets();
 var sblue = Color(0xFF649AE3);
 
 var mannu = Color(0xFF1B57A7);
+
+var kprogressbar = Center(child: CircularProgressIndicator(color: kblue,),);
