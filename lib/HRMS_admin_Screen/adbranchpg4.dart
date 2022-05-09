@@ -186,7 +186,7 @@ class _DBcrud4State extends State<DBcrud4> {
           title: Row(
             children: [
               Container(
-                width: Get.width * 0.25,
+                width: 140,
                 child: Text(
                   title,
                   style: TextStyle(color: Colors.white),

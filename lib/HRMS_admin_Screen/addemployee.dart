@@ -19,7 +19,7 @@ class _AddEmployeeState extends State<AddEmployee> {
   var selectedValueBranch = '4L3hXNLK08Wwh2fhPEMe';
   var selectedValuemanager = 'bbiC9LlOWdekemISmJFa6cMKNdl1';
   var selectedValueHR = 'bbiC9LlOWdekemISmJFa6cMKNdl1';
-  var selectedValuec = 'bbiC9LlOWdekemISmJFa6cMKNdl1';
+  var selectedValuec = '92cF8tnZ4B26MomVAyp6';
   var selectedValuee = 'ktaDFQum0VTncqJVWITk';
 
   var branchname = [
@@ -129,7 +129,7 @@ class _AddEmployeeState extends State<AddEmployee> {
 
             selectedValueBranch = branchDoc[0].id;
             selectedValuemanager = empDoc[0].id;
-            selectedValuec = empDoc[0].id;
+            selectedValuec = shiftDoc[0].id;
             selectedValuee = empDoc[0].id;
 
             return  Container(
@@ -456,7 +456,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                                 Padding(
                                   padding:   EdgeInsets.only(left: 20.0),
                                   child: DropdownButton<String?>(
-                                    hint: Text("Select Role"),
+                                    hint: Text("Select Shift"),
                                     value: selectedValuec,
                                     onChanged: (String? value){
                                       setState(() {

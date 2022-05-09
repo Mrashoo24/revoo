@@ -246,8 +246,8 @@ class _SignupState extends State<Signup> {
                            await FirebaseFirestore.instance
                                .collection('Registeration').add(cdetail);
 
-                         var result =  await   AllApi().sendEmail(subject: 'Revoo Registeration', content: 'New Registeration ${cdetail}', toEmail: 'arsalank28@gmail.com');
-                        print(result);
+                        //  var result =  await   AllApi().sendEmail(subject: 'Revoo Registeration', content: 'New Registeration ${cdetail}', toEmail: 'arsalank28@gmail.com');
+                        // print(result);
 
                            Get.to(SelectPlans(cdetails:cdetail));
 

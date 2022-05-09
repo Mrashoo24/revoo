@@ -270,10 +270,13 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                                       'cid' : widget.userDoc.get('cid'),
                                       'uid' : widget.userDoc.get('uid'),
                                       'did' : widget.userDoc.get('did'),
-                                      'startdate' : dateRange.start ,
-                                      'enddate' : dateRange.end ,
-                                      'date':dateRange.start,
-                                      'id':''
+                                      'startdate' : DateFormat('yyyy/MM/dd').format(dateRange.start) ,
+                                      'enddate' : DateFormat('yyyy/MM/dd').format(dateRange.end) ,
+                                      'date':DateFormat('yyyy/MM/dd').format(dateRange.start),
+                                      'id':'',
+                                      'name':widget.userDoc.get('name'),
+                                      'status': '0',
+                                      'reason':submit.text
 
                                     }).then((value) async {
                                       await firestore.collection('Leaves').doc(value.id).update({

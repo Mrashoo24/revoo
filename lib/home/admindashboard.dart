@@ -156,98 +156,98 @@ class _AdminDashboardState extends State<AdminDashboard> {
                               ),
 
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding:   EdgeInsets.only(left:Get.width*0.125),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
 
-                                          Text('In-Time',style: TextStyle(color: ktextcolor,fontSize: 18),),
-                                          SizedBox(width: 15),
-                                          Container(
-                                            height: Get.height*0.05,
-                                            width: Get.width*0.09,
-                                            color: Colors.grey.shade400,
-                                            child: Center(child: Text(checkinHours.isNotEmpty ? checkinHours[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
-                                          ),
-                                          SizedBox(width: 15),
-                                          Container(
-                                            height: Get.height*0.05,
-                                            width: Get.width*0.09,
-                                            color: Colors.grey.shade400,
-                                            child: Center(child: Text(checkInMinutes.isNotEmpty ? checkInMinutes[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
-                                          ),
+                                        Container(
+                                            width:180,
+                                            child: Text('In-Time',style: TextStyle(color: ktextcolor,fontSize: 18),)),
+                                        SizedBox(width: 15),
+                                        Container(
+                                          height: Get.height*0.05,
+                                          width: Get.width*0.09,
+                                          color: Colors.grey.shade400,
+                                          child: Center(child: Text(checkinHours.isNotEmpty ? checkinHours[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
+                                        ),
+                                        SizedBox(width: 15),
+                                        Container(
+                                          height: Get.height*0.05,
+                                          width: Get.width*0.09,
+                                          color: Colors.grey.shade400,
+                                          child: Center(child: Text(checkInMinutes.isNotEmpty ? checkInMinutes[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
+                                        ),
 
-                                          SizedBox(width: 15),
-                                          Container(
-                                            height: Get.height*0.05,
-                                            width: Get.width*0.18,
-                                            color: Colors.grey.shade400,
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Text(checkInMinutes.isNotEmpty ? checkInMinutes[1] : '--',style: TextStyle(color: kblue,fontSize: 18),),
-                                                  SizedBox(width: 10,),
-                                                  Image.asset('asset/smallarrowdown.png'),
-                                                ],
-                                              ),
+                                        SizedBox(width: 15),
+                                        Container(
+                                          height: Get.height*0.05,
+                                          width: Get.width*0.18,
+                                          color: Colors.grey.shade400,
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(checkInMinutes.isNotEmpty ? checkInMinutes[1] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                                                SizedBox(width: 10,),
+                                                Image.asset('asset/smallarrowdown.png'),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                            width: 200,
+                                            child: Text('Out Time',style: TextStyle(color: ktextcolor,fontSize: 18),)),
+                                        SizedBox(width: 15),
+                                        Container(
+                                          height: Get.height*0.05,
+                                          width: Get.width*0.09,
+                                          color: Colors.grey.shade400,
+                                          child: Center(child: Text(checkoutHours.isNotEmpty ? checkoutHours[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
+                                        ),
+                                        SizedBox(width: 15),
+                                        Container(
+                                          height: Get.height*0.05,
+                                          width: Get.width*0.09,
+                                          color: Colors.grey.shade400,
+                                          child: Center(child: Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
+                                        ),
+
+                                        SizedBox(width: 15),
+                                        Container(
+                                          height: Get.height*0.05,
+                                          width: Get.width*0.18,
+                                          color: Colors.grey.shade400,
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[1] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: 16,),
+
+
+                                      ],
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10,),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding:   EdgeInsets.only(left:Get.width*0.09),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text('Out Time',style: TextStyle(color: ktextcolor,fontSize: 18),),
-                                      SizedBox(width: 15),
-                                      Container(
-                                        height: Get.height*0.05,
-                                        width: Get.width*0.09,
-                                        color: Colors.grey.shade400,
-                                        child: Center(child: Text(checkoutHours.isNotEmpty ? checkoutHours[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
-                                      ),
-                                      SizedBox(width: 15),
-                                      Container(
-                                        height: Get.height*0.05,
-                                        width: Get.width*0.09,
-                                        color: Colors.grey.shade400,
-                                        child: Center(child: Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
-                                      ),
 
-                                      SizedBox(width: 15),
-                                      Container(
-                                        height: Get.height*0.05,
-                                        width: Get.width*0.18,
-                                        color: Colors.grey.shade400,
-                                        child: Center(
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[1] : '--',style: TextStyle(color: kblue,fontSize: 18),),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 16,),
-
-
-                                    ],
-                                  ),
-                                ),
-                              ),
                               SizedBox(height: 30,),
                               Text ('Total hours:',style: TextStyle(color: ktextcolor,fontSize: 18),),
                               Row(
@@ -646,7 +646,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
                        var workingEmployees = empDocs.length - attendenceDocs.length;
 
-                        return Column(
+                        return Wrap(
                           children: [
                             buildCard('View Employees','${empDocs.length}\nEmployees'),
                             buildCard('View Departments','${depDocs.length}\nDepartments'),
@@ -818,49 +818,53 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
   }
 
-  Padding buildCard(String title,String subtitle) {
+   buildCard(String title,String subtitle) {
     return Padding(
             padding: const EdgeInsets.only(left: 25,right: 25,bottom: 15),
-            child: Card(
-              elevation: 10,
-              child:Stack(
-                children: [
-                  Container(
-                    width: Get.width,
+            child: Container(
+              width: 300,
+              height: 200,
+              child: Card(
+                elevation: 10,
+                child:Stack(
+                  children: [
+                    Container(
+                      width: 300,
 
-                    child: ClipRect(child: Image.asset("asset/cardbg.png",fit: BoxFit.fill,)),
+                      child: ClipRect(child: Image.asset("asset/cardbg.png",fit: BoxFit.fill,)),
 
 
-                  ),
-                  Column(
-                    children: [
-                      Align(
-                          child: Padding(
-                            padding:  EdgeInsets.only(top: 20,right: 25),
-                            child: Text (title,style: TextStyle(color: Colors.white,fontSize: 18),),
-                          ),
-                        alignment: Alignment.topRight,
+                    ),
+                    Column(
+                      children: [
+                        Align(
+                            child: Padding(
+                              padding:  EdgeInsets.only(top: 20,right: 25),
+                              child: Text (title,style: TextStyle(color: Colors.white,fontSize: 18),),
+                            ),
+                          alignment: Alignment.topRight,
 
-                      ),
-                      Align(
-                        child: Padding(
-                          padding:  EdgeInsets.only(top: 40,left: 25,bottom: 20),
-                          child: Text (subtitle,style: TextStyle(color: kblue,fontSize: 25),),
                         ),
-                        alignment: Alignment.bottomLeft,
+                        Align(
+                          child: Padding(
+                            padding:  EdgeInsets.only(top: 40,left: 25,bottom: 20),
+                            child: Text (subtitle,style: TextStyle(color: kblue,fontSize: 25),),
+                          ),
+                          alignment: Alignment.bottomLeft,
 
-                      ),
+                        ),
 
-                    ],
+                      ],
 
-                  ),
+                    ),
 
 
 
-                ],
+                  ],
+                ),
+
+
               ),
-
-
             ),
           );
 

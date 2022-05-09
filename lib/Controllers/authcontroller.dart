@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:revoo/First/welcomscreen.dart';
 
+import '../APPS/selectplans.dart';
 import '../Login/login.dart';
 import '../Login/yourapps.dart';
 import '../constants/constants.dart';
@@ -33,10 +34,16 @@ class AuthController extends GetxController{
   _initialScreen(User? user){
     if(user==null){
       print("Login Page");
-      Get.offAll(()=>WelcomeScreen());
+      Get.offAll(()=>LoginScreen());
     }else{
       Get.offAll(()=>Yourapps());
     }
+    // Get.offAll(SelectPlans(cdetails: {
+    //   'cname': '0',
+    //   'name' :'k',
+    //   'email' : 'emailController.text',
+    //   'apps' : ''
+    // }));
   }
 
   void register (String email, password)async {

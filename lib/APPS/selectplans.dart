@@ -65,7 +65,11 @@ var price = 0.0 ;
                  children: [
                    Stack(
                      children: [
-                       Image.asset('asset/newimg.png'),
+                       Container(
+                         height: 300,
+               width: Get.width,
+                           child: ClipRRect(child: Image.asset('asset/newimg.png',fit: BoxFit.fill,))
+                       ),
                        Padding(
                          padding:  EdgeInsets.only(top: 95.0,left: 12),
                          child: Column(
@@ -295,11 +299,11 @@ var price = 0.0 ;
 
                        buildExpansionPanel('Administration',selected,
                        [
-                         buildStack('asset/newone.png','Create Branches','Administration'),
-                         buildStack('asset/imga.png', 'Create Departments','Administration'),
+                         buildStack('asset/newone.png','Create Branches/Employees/Others','Administration'),
+                         buildStack('asset/imga.png', 'Events Manage','Administration'),
                          buildStack('asset/imgb.png', 'Audio/Video Meetings','Administration'),
                          buildStack('asset/imgc.png', 'Report','Administration'),
-                         buildStack('asset/name1.png', 'Name','Administration'),
+                         buildStack('asset/name1.png', 'Employee Management','Administration'),
 
 
 
@@ -473,7 +477,8 @@ var price = 0.0 ;
                              buildStack('asset/projectmeeting.png', 'Birthday Alerts','HRMS'),
                              buildStack('asset/bdae.png', 'Project Meetings','HRMS'),
                              buildStack('asset/holiday.png', 'Alert On Excess Holidays','HRMS'),
-
+                             buildStack('asset/bdae.png', 'Appraisal','HRMS'),
+                             buildStack('asset/holiday.png', 'Recruitment Management','HRMS'),
 
 
                    ]

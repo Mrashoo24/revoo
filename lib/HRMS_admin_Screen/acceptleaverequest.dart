@@ -141,18 +141,23 @@ class _AcceptLeaveState extends State<AcceptLeave> {
             ),
           ),
           Expanded(
-            child: GetX<LeaveController>(
-              init: Get.put<LeaveController>(LeaveController()),
-              builder: (LeaveController leaveController) {
-                if(leaveController.LeaveList.value.isEmpty){
-                  print('no data found');
-                }
-               var upDatedlist =  leaveController.LeaveName.where((element)  {
+            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream:FirebaseFirestore.instance.collection('Leaves').snapshots(),
+              builder: (context,snapshot) {
 
-                  print(element.date);
-                  return DateFormat('yyyy/MM/dd').parse(element.date!).isAfter(DateFormat('yyyy/MM/dd').parse(start))
+                if(!snapshot.hasData){
+                  return kprogressbar;
+                }
+
+
+               var  leaveController =  snapshot.requireData.docs;
+
+               var upDatedlist =  leaveController.where((element)  {
+
+                  print(element.get('date'));
+                  return DateFormat('yyyy/MM/dd').parse(element.get('date').toString()).isAfter(DateFormat('yyyy/MM/dd').parse(start))
                  &&
-                      DateFormat('yyyy/MM/dd').parse(element.date!).isBefore(DateFormat('yyyy/MM/dd').parse(end)
+                      DateFormat('yyyy/MM/dd').parse(element.get('date').toString()).isBefore(DateFormat('yyyy/MM/dd').parse(end)
 
 
                       )
@@ -167,7 +172,16 @@ class _AcceptLeaveState extends State<AcceptLeave> {
                   shrinkWrap: true,
                   itemCount: upDatedlist.length,
                   itemBuilder: (context,index){
-                    LeaveDisplay allLeaveList = upDatedlist[index];
+
+                    var allLeave = [];
+
+                for (var element in upDatedlist) {
+                      allLeave.add(LeaveDisplay.fromJson(element.data()));
+                    }
+
+                    LeaveDisplay allLeaveList = allLeave[index];
+
+
 
 
                     return
@@ -337,7 +351,7 @@ class _AcceptLeaveState extends State<AcceptLeave> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                name + department,
+                                name + department + ' ',
                                 style: TextStyle(color: kblue, fontSize: 12),
                               ),
                               Text(
