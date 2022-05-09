@@ -13,7 +13,7 @@ class Batchmangment extends StatefulWidget {
 }
 
 class _BatchmangmentState extends State<Batchmangment> {
-  var itemList = ['', 'Std1', 'Std2', 'Std3', 'Std4', 'Std5', 'Std6', 'Std7'];
+  var itemList = ['', 'Std1', 'Std2', 'Std3', 'Std4', 'Std5', 'Std6', 'Std7','std78'];
 
   var itemList1 = [
     '',

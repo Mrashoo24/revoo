@@ -18,7 +18,7 @@ class Productstatusbar extends StatefulWidget {
 class _ProductstatusbarState extends State<Productstatusbar> {
 
 
-  var itemList = ['', 'Std1', 'Std2', 'Std3', 'Std4', 'Std5', 'Std6', 'Std7'];
+  var itemList = ['', 'Std1', 'Std2', 'Std3', 'Std4', 'Std5', 'Std6', 'Std7','Std9s'];
 
   var itemList1 = ['', 'in', 'out', ];
   String initialValue = '';

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:revoo/Controllers/goodsissuecontroller.dart';
 
 import '../HRMS_admin_Screen/adbranchpg2.dart';
 import '../constants/constants.dart';
@@ -118,122 +119,127 @@ class _Goodsissue43State extends State<Goodsissue43> {
 
 
                       SizedBox( height: 20),
+
                       Container(
-                        width: Get.width,
-                        height: 300,
+                        child: GetX(init: Get.put<GoodsissueController>(GoodsissueController()),
+                            builder: (GoodsissueController goodsissuecontroller){
+                          return ListView.builder(itemCount: goodsissuecontroller.goodsisu.length,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context,index){
+                                return Container(
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  width: Get.width,
+                                  height: 300,
 
-                        decoration: BoxDecoration(
+                                  decoration: BoxDecoration(
 
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 12.0,top: 5),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        CircleAvatar( radius: 15,
-                                            backgroundColor: Colors.white),
-                                        SizedBox( width: 9),
-
-                                        Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 5.0),
-                                              child: Text(
-                                                'Goods Issue',
-                                                style: TextStyle(
-                                                  color: Colors.yellow.shade600,
-                                                  fontSize: 17,
+                                    color: mannu,
 
 
-                                                ),
-                                              ),
-                                            ),     SizedBox(width: 35),
-                                            Text("Feb 22 2021 4.pm",style: TextStyle(
-                                                color: Colors.white,fontSize: 11
-
-                                            ),)
-                                          ],
-                                        ),
-
-
-                                      ],
-                                    ),
-
-                                    SizedBox(height: 8),
-
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-
-
-                                      ,
-
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 15,
-                                      ),
-                                    ),
-
-
+                                    borderRadius: BorderRadius.circular(15),
 
                                   ),
+                                  child: Align(
+                                    alignment: Alignment.topLeft,
 
-                                ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 12.0,top: 5),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  CircleAvatar( radius: 15,
+                                                      backgroundColor: Colors.white),
+                                                  SizedBox( width: 9),
+
+                                                  Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 5.0),
+                                                        child: Text(
+                                                          'Issue Number ${index + 1}',
+                                                          style: TextStyle(
+                                                            color: Colors.yellow.shade600,
+                                                            fontSize: 17,
 
 
-                                SizedBox(height: 20),
-                                Row(
-                                  children: [
+                                                          ),
+                                                        ),
+                                                      ),     SizedBox(width: 35),
+                                                      Text("${goodsissuecontroller.goodsisu[index].date}}",style: TextStyle(
+                                                          color: Colors.white,fontSize: 11
+
+                                                      ),)
+                                                    ],
+                                                  ),
+
+
+                                                ],
+                                              ),
+
+                                              SizedBox(height: 8),
+
+
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 10),
+                                            child: Center(
+                                              child: Text(
+                                                '${goodsissuecontroller.goodsisu[index].issue}',
+
+                                                style: TextStyle(
+                                                  color: Colors.white,fontSize: 15,
+                                                ),
+                                              ),
+
+
+
+                                            ),
+
+                                          ),
+
+
+                                          SizedBox(height: 20),
+                                          Row(
+                                            children: [
 
 
 
 
-                                    SizedBox(width: 200),
+                                              SizedBox(width: 200),
 
 
-                                    SizedBox(width: 30),
-                                    Image.asset("asset/messageicon.png")
+                                              SizedBox(width: 30),
+                                              Image.asset("asset/messageicon.png")
 
-                                  ],
-                                ),
-
-
-
+                                            ],
+                                          ),
 
 
 
 
 
-                              ],
-                            ),
 
-                          ),
-                        ),
 
+
+                                        ],
+                                      ),
+
+                                    ),
+                                  ),
+
+                                );
+                              }) ;
+            }),
                       ),
+
+
+
 
 
 

@@ -24,7 +24,7 @@ class _GoodissueState extends State<Goodissue> {
     'Std4',
     'Std5',
     'Std6',
-    'Std7'
+    'Std78'
   ];
   @override
   Widget build(BuildContext context) {

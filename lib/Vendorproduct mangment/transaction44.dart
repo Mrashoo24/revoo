@@ -24,7 +24,8 @@ class _Transaction44State extends State<Transaction44> {
     'Std4',
     'Std5',
     'Std6',
-    'Std7'
+    'Std7',
+        'Std10'
   ];
   @override
   Widget build(BuildContext context) {
