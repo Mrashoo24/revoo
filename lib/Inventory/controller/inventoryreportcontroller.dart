@@ -4,7 +4,9 @@ import '../model/inventoryreportmodel.dart';
 
 class Inventoryreportcontroller extends GetxController{
   FirebaseFirestore firebase = FirebaseFirestore.instance;
+
   Rx<List<Inventoryreportmodel>> inventoryreport = Rx<List<Inventoryreportmodel>>([]);
+
   List<Inventoryreportmodel> get inventory => inventoryreport.value;
   @override
   void onInit() {

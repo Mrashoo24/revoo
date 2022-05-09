@@ -1,6 +1,8 @@
 class Inventoryreportmodel {
   String? productName;
+
   String? intlPrice;
+
   String? localPrice;
 
   Inventoryreportmodel({this.productName, this.intlPrice, this.localPrice});

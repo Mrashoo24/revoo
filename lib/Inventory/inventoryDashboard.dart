@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:revoo/Vendorproduct%20mangment/serialnumber48.dart';
-import 'package:revoo/Vendorproduct%20mangment/tansfer47.dart';
-import 'package:revoo/Vendorproduct%20mangment/transaction44.dart';
-import 'package:revoo/Vendorproduct%20mangment/transferadd46.dart';
-import 'package:revoo/Vendorproduct%20mangment/vendorproduct38.dart';
-
+import 'package:revoo/Inventory/serialnumber48.dart';
+import 'package:revoo/Inventory/transaction44.dart';
+import 'package:revoo/Inventory/transferadd46.dart';
+import 'package:revoo/Inventory/vendorproduct38.dart';
 import '../Controllers/authcontroller.dart';
 import '../constants/constants.dart';
 import 'Batchmangment51.dart';
