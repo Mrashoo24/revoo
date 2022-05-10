@@ -6,7 +6,6 @@ import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
 import 'package:revoo/HRMS_admin_Screen/employeecheckin.dart';
 import 'package:revoo/home/admindashboard.dart';
-import '../Employee/Certificate/certificate.dart';
 import '../HRMS_admin_Screen/Shifts.dart';
 import '../HRMS_admin_Screen/acceptleaverequest.dart';
 import '../HRMS_admin_Screen/allEmployee.dart';

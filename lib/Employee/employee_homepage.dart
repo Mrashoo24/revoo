@@ -7,9 +7,7 @@ import 'package:revoo/Employee/dailyupdates.dart';
 import 'package:revoo/Employee/employeedash1stpg.dart';
 import 'package:revoo/Employee/leaveRequest.dart';
 import 'package:revoo/Employee/watchdashboard.dart';
-
 import '../constants/constants.dart';
-import 'Certificate/certificate.dart';
 import 'employeedash202.dart';
 
 class EmployeeHomePage extends StatefulWidget {
@@ -38,7 +36,7 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
       // Watchdashboard(),
       // Dailyupdates(), //1
       LeaveRequestEmployee(userDoc: widget.userDoc,),
-      Certificate(),
+      // Certificate(),
 
     ];
 

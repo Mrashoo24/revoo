@@ -52,6 +52,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    var H = MediaQuery.of(context).size.height;
+    var W = MediaQuery.of(context).size.width;
+
     var firestore =  FirebaseFirestore.instance;
 
     print('curentDate = $currentDate');
@@ -209,20 +212,29 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                       children: [
                                         Container(
                                             width: 200,
-                                            child: Text('Out Time',style: TextStyle(color: ktextcolor,fontSize: 18),)),
+                                            child: Padding(
+                                              padding:  EdgeInsets.only(left: Get.width*0.009),
+                                              child: Text('Out Time',style: TextStyle(color: ktextcolor,fontSize: 18),),
+                                            )),
                                         SizedBox(width: 15),
                                         Container(
                                           height: Get.height*0.05,
                                           width: Get.width*0.09,
                                           color: Colors.grey.shade400,
-                                          child: Center(child: Text(checkoutHours.isNotEmpty ? checkoutHours[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
+                                          child: Center(child: Padding(
+                                            padding:  EdgeInsets.only(right: Get.width*0.00098),
+                                            child: Text(checkoutHours.isNotEmpty ? checkoutHours[0] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                                          )),
                                         ),
                                         SizedBox(width: 15),
                                         Container(
                                           height: Get.height*0.05,
                                           width: Get.width*0.09,
                                           color: Colors.grey.shade400,
-                                          child: Center(child: Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
+                                          child: Center(child: Padding(
+                                            padding:  EdgeInsets.only(right: Get.width*0.00098),
+                                            child: Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[0] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                                          )),
                                         ),
 
                                         SizedBox(width: 15),
@@ -234,7 +246,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                             child: Row(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[1] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                                                Padding(
+                                                  padding:  EdgeInsets.only(right: Get.width*0.01),
+                                                  child: Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[1] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                                                ),
                                               ],
                                             ),
                                           ),
