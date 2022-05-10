@@ -47,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Stack(
                 children: [
                   Positioned(
+
                       top:-180,
 left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
@@ -57,6 +58,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
 
                   ),
+
                   Positioned(
                       bottom: Get.height < 800 ?-73 :Get.height < 1000 ? 122 : 73,
                       right : Get.height < 800 ?-40 :Get.height < 1000 ? -20 : 40 ,
@@ -72,7 +74,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                    child: Padding(
 
-                      padding: const EdgeInsets.all(15.0),
+                      padding:  EdgeInsets.only(bottom: 15.0,top: 15,left: Get.width*0.25,right: Get.width*0.25),
                       child: Card(
                         color: Colors.grey.shade200,
                         shape: RoundedRectangleBorder(
