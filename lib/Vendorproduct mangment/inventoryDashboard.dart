@@ -36,7 +36,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
     Inventory52(),
     Serialnumber48(),
     Batchmangment(),
-    AddComponents(),
+    AddComponents(selecteditems: [],),
 
   ];
 
@@ -141,7 +141,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                                     SizedBox(width: 15,),
                                     Image.asset('asset/rightarrow.png')
                                   ],
-
+//
                                 ),
 
                               ),

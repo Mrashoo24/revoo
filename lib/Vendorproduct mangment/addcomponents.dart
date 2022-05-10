@@ -149,7 +149,7 @@ class _AddComponentsState extends State<AddComponents> {
       };
 
 
-      allInventory.add((newList1 element.get('name')));
+
 
 
     });
@@ -158,21 +158,6 @@ class _AddComponentsState extends State<AddComponents> {
 
     print('list ${widget.selecteditems}');
 
-    await showDialog(
-      context: context,
-      builder: (ctx) {
-        return  MultiSelectDialog(searchable: true,
-          items: allInventory,
 
-          initialValue:selectedItems!,
-          onConfirm: (List<Map<String,String>>values) {
-            setState(() {
-              selectedItems = values;
-            });
-            print('confiremd : $values');
-          },
-        );
-      },
-    );
   }
 }
