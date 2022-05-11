@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -12,6 +16,7 @@ import 'package:cell_calendar/cell_calendar.dart';
 
 
 import '../Models/attendencmodel.dart';
+import '../Timer/count_down.dart';
 import '../graph/piechart.dart';
 
 class AdminDashboard extends StatefulWidget {
@@ -32,6 +37,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   TextEditingController minutein = TextEditingController();
   TextEditingController hourout = TextEditingController();
   TextEditingController minuteout = TextEditingController();
+  CountDownController? _controller;
 
   var sampleEvents = [
     CalendarEvent(eventName: "Event 1",eventDate: DateTime.now(),eventBackgroundColor: Colors.black),
@@ -46,6 +52,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
   var checkoutHours  = [];
   var checkoutMinutes =  [];
   var difference = '';
+
+  var shiftTime  = '';
+  DateTime? convertedShiftTime ;
+
+
+  var workinghours = '';
 
   var currentDate = DateFormat('yyyy/MM/dd').format(DateTime.now());
 
@@ -123,12 +135,21 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
                 DocumentSnapshot querySnapshot  = future.requireData[0] as DocumentSnapshot;
 
-                var shiftTime  = querySnapshot.get('time');
+                 shiftTime  = querySnapshot.get('time');
 
-                var convertedShiftTime = DateFormat('hh:mm a').parse(shiftTime);
+                 convertedShiftTime = DateFormat('hh:mm a').parse(shiftTime);
 
 
-                var workinghours = querySnapshot.get('hours');
+                 workinghours = querySnapshot.get('hours');
+
+
+                 var convertedfCheckinTime = DateFormat('hh:mm a').parse(checkinTime);
+
+                 var endtime = convertedfCheckinTime.add(Duration(hours: double.parse(workinghours).round()));
+
+                var endDifference =endtime.difference( DateTime(1970,01,01,DateTime.now().hour,DateTime.now().minute,DateTime.now().second));
+
+                 print('endtime = ${endtime} convertedfCheckinTime = ${convertedfCheckinTime} Diffreence = ${endDifference.inHours} Day = ${DateTime(1970,01)}');
 
 
                 return Column(
@@ -304,9 +325,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
                                         var currentTime = DateFormat('hh:mm a').parse(DateFormat('hh:mm a').format(DateTime.now()));
 
-                                        var checkDifference =  currentTime.isAfter(convertedShiftTime.add(Duration(minutes: 15)));
+                                        var checkDifference =  currentTime.isAfter(convertedShiftTime!.add(Duration(minutes: 15)));
 
-                                        var checkinDifference =  currentTime.difference(convertedShiftTime);
+                                        var checkinDifference =  currentTime.difference(convertedShiftTime!);
 
                                         var convertedDifference =  checkinDifference.toString().split(':');
 
@@ -317,8 +338,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                         print(currentTime);
                                         print(checkinDifference);
 
-                                        var checkinstatus = checkDifference ? 'late' : currentTime.isBefore(convertedShiftTime.add(Duration(minutes: 15)))
-                                            && currentTime.isAfter(convertedShiftTime.subtract(Duration(minutes: 15))) ? 'perfect' :
+                                        var checkinstatus = checkDifference ? 'late' : currentTime.isBefore(convertedShiftTime!.add(Duration(minutes: 15)))
+                                            && currentTime.isAfter(convertedShiftTime!.subtract(Duration(minutes: 15))) ? 'perfect' :
 
                                         'early';
 
@@ -681,7 +702,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ),
 
 
-
+                    Container(
+                        height: 200,
+                        child: CountdownPage(hours:endDifference.inHours,minutes: endDifference.inMinutes % 60,seconds: endDifference.inSeconds % 60,))
 
                     // Padding(
                     //     padding: const EdgeInsets.only(bottom: 35.0,top: 15,),
@@ -884,4 +907,242 @@ class _AdminDashboardState extends State<AdminDashboard> {
           );
 
   }
+
+
+  // Widget _countDownTimer () {
+  //   var report = '';
+  //   // var timing = snapshot.requireData[1];
+  //   String checkInTime = "-----";
+  //   String checkOutTime = "-----";
+  //   String date = "-----";
+  //   int endTime = 0;
+  //   bool checkLoginTimeEarly =true;
+  //   bool checkLoginTimeLate = true;
+  //   bool checkLoginTimeBefore = true;
+  //   int endTime1 = 0;
+  //
+  //   int initialTime = 0;
+  //   if (report != "No Data") {
+  //     checkInTime = checkinTime;
+  //     // report["checkin"];
+  //     checkOutTime = checkoutTime == "" ? "-----" : checkoutTime;
+  //     // report["checkout"];
+  //     date = date;
+  //     // report["date"];
+  //     var dateAndTime =
+  //     DateFormat('hh:mm a').parse(checkInTime).toString();
+  //     var splitDateAndTime = dateAndTime.split(' ');
+  //     checkInTime = splitDateAndTime[1];
+  //     // String day = date.substring(0, 2);
+  //     // String month = date.substring(3, 5);
+  //     // String year = date.substring(6, 10);
+  //     date = '2022-05-11';
+  //         // year + '-' + month + '-' + day;
+  //     // if (timing.studyPermit == '0' && timing.maternityPermit == '0') {
+  //
+  //
+  //     var dateAndTimetest =
+  //     DateFormat('hh:mm').parse(shiftTime.replaceAll('PM', '')); /// Reporting time
+  //
+  //
+  //     var reprtingDateTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,dateAndTimetest.hour,dateAndTimetest.second);
+  //
+  //     print('reportTime $dateAndTimetest');
+  //
+  //
+  //
+  //     var closinttime = dateAndTimetest.add(Duration(hours:  int.parse(workinghours)));
+  //     checkLoginTimeBefore = closinttime.isBefore(dateAndTimetest);
+  //     checkLoginTimeEarly = closinttime.isAfter(DateFormat('hh:mm').parse(DateFormat('hh:mm').format(DateTime(1970,01,01,DateTime.now().hour,DateTime.now().minute,DateTime.now().second))));
+  //     checkLoginTimeLate = closinttime.isBefore(DateFormat('hh:mm').parse(DateFormat('hh:mm').format(DateTime.now())));
+  //
+  //     print('close $closinttime $checkLoginTimeEarly $checkLoginTimeBefore');
+  //
+  //     initialTime = checkLoginTimeLate ? closinttime.difference(dateAndTimetest).inHours : DateFormat('hh:mm a').parse(DateFormat('hh:mm a').format(DateTime.now())).difference(dateAndTimetest).inSeconds;
+  //
+  //     print('initime ${DateFormat('hh:mm a').parse(DateFormat('hh:mm a').format(DateTime.now()))}');
+  //
+  //
+  //     print(DateTime.now());
+  //     // endTime = checkOutTime != "-----"?
+  //     // dateAndTimetest.add(Duration(hours:  int.parse(widget.userModel.hoursOfShift))).hour : 0;
+  //
+  //     // endTime =  closinttime.difference(DateFormat('hh:mm').parse(DateFormat('hh:mm').format(DateTime.now()))).inHours;
+  //
+  //     closinttime = DateTime(1970,01,01,closinttime.hour,closinttime.hour,closinttime.second);
+  //
+  //     print('nerw closin time ${closinttime}');
+  //
+  //     endTime =  closinttime.difference(dateAndTimetest).inSeconds;
+  //
+  //     endTime1 =
+  //     //         closinttime.millisecondsSinceEpoch +
+  //     // (1000 * (int.parse(widget.userModel.hoursOfShift) * 3600));
+  //
+  //     checkOutTime == "-----"
+  //         ? DateTime.parse(date + ' ' + DateFormat('hh:mm:ss.SSS').format(dateAndTimetest))
+  //         .millisecondsSinceEpoch +
+  //         (1000 * (int.parse(workinghours) * 3600))
+  //         : 0;
+  //
+  //     print('checvkintime ${DateFormat('hh:mm:ss.SSS').format(dateAndTimetest)}');
+  //     // if(checkOutTime != "-----"){
+  //     //   _controller.pause();
+  //     // }
+  //     // } else {
+  //     //   endT.ime = checkOutTime == "-----"
+  //     //       ? DateTime.parse(date + ' ' + checkInTime)
+  //     //               .millisecondsSinceEpoch +
+  //     //           (1000 * (5 * 3600))
+  //     //       : 0;
+  //     // }
+  //     print('endtime $endTime $endTime1');
+  //   }
+  //   // _controller.start();
+  //   print('endtime $endTime');
+  //   print('initime $initialTime');
+  //   print('checkoutime $checkOutTime ${checkOutTime != "-----"}');
+  //
+  //   // print('${initialTime > int.parse(shiftTime) * 3600} $checkLoginTimeBefore ${checkInTime == "-----" } ${ checkOutTime != "-----" }' );
+  //
+  //   CountdownTimerController _controller2 = CountdownTimerController(endTime: 4);
+  //   return Center(
+  //     child: Container(
+  //         child: Stack(
+  //           children: [
+  //             Align(
+  //               alignment: Alignment.center,
+  //               child: CircularCountDownTimer(
+  //                 // Countdown duration in Seconds.
+  //                 duration: 6 ,
+  //
+  //                 // Countdown initial elapsed Duration in Seconds.
+  //                 initialDuration: 1,
+  //
+  //                 // Controls (i.e Start, Pause, Resume, Restart) the Countdown Timer.
+  //                 controller: _controller,
+  //
+  //                 // Width of the Countdown Widget.
+  //                 width: 120,
+  //
+  //                 // Height of the Countdown Widget.
+  //                 height: Get.width*0.4,
+  //
+  //                 // Ring Color for Countdown Widget.
+  //                 ringColor: Colors.grey[300]!,
+  //
+  //                 // Ring Gradient for Countdown Widget.
+  //                 ringGradient: null,
+  //
+  //                 // Filling Color for Countdown Widget.
+  //                 fillColor: Colors.green.shade400,
+  //
+  //                 // Filling Gradient for Countdown Widget.
+  //                 fillGradient: null,
+  //
+  //                 // Background Color for Countdown Widget.
+  //                 backgroundColor: Colors.white.withOpacity(0.8),
+  //
+  //                 // Background Gradient for Countdown Widget.
+  //                 backgroundGradient: null,
+  //
+  //                 // Border Thickness of the Countdown Ring.
+  //                 strokeWidth: 7.0,
+  //
+  //                 // Begin and end contours with a flat edge and no extension.
+  //                 strokeCap: StrokeCap.round,
+  //
+  //                 // Text Style for Countdown Text.
+  //                 textStyle: TextStyle(
+  //                     fontSize: Get.width*0.4,
+  //                     color: Colors.white,
+  //                     fontWeight: FontWeight.bold),
+  //
+  //                 // Format for the Countdown Text.
+  //                 textFormat: CountdownTextFormat.S,
+  //
+  //                 // Handles Countdown Timer (true for Reverse Countdown (max to 0), false for Forward Countdown (0 to max)).
+  //                 isReverse: false,
+  //
+  //                 // Handles Animation Direction (true for Reverse Animation, false for Forward Animation).
+  //                 isReverseAnimation: false,
+  //
+  //                 // Handles visibility of the Countdown Text.
+  //                 isTimerTextShown: false,
+  //
+  //                 // Handles the timer start.
+  //                 autoStart: true,
+  //
+  //                 // This Callback will execute when the Countdown Starts.
+  //                 onStart: () {
+  //                   // Here, do whatever you want
+  //                   print('Countdown Started');
+  //                 },
+  //
+  //                 // This Callback will execute when the Countdown Ends.
+  //                 onComplete: () {
+  //                   // Here, do whatever you want
+  //                   print('Countdown Ended');
+  //                 },
+  //               ),
+  //             ),
+  //             Align(
+  //               alignment: Alignment.bottomCenter,
+  //               child: Container(
+  //                 margin: EdgeInsets.only(top: 50),
+  //                 child: Column(
+  //                   children: [
+  //                     CountdownTimer(
+  //                       endWidget:  Text(''),
+  //                       endTime: 8,
+  //                       textStyle:  TextStyle(
+  //                           color: Colors.black,
+  //                           fontSize: Get.height*0.02,
+  //                           fontWeight: FontWeight.bold
+  //
+  //                       ),
+  //                       controller: _controller2,
+  //                       onEnd: () {
+  //                         if (checkOutTime == '-----') {
+  //                           ScaffoldMessenger.of(context).showSnackBar(
+  //                             SnackBar(
+  //                               content: Text(
+  //                                 'Shift over. You can check out now.',
+  //                               ),
+  //                             ),
+  //                           );
+  //                         }
+  //                       },
+  //                     ),
+  //                     SizedBox(height: 5,),
+  //                     Text(
+  //                       DateFormat('dd-MM-yyyy')
+  //                           .format(DateTime.now()),
+  //                       style: TextStyle(
+  //                           fontSize: Get.width*0.027,
+  //                           color: Colors.black,
+  //                           fontWeight: FontWeight.bold
+  //                       ),
+  //                     ),
+  //                     SizedBox(height: 5,),
+  //                     Text(
+  //                       'ONLINE',
+  //                       style: TextStyle(
+  //                           fontSize: Get.width*0.027,
+  //                           color: Colors.black,
+  //                           fontWeight: FontWeight.bold
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //
+  //           ],
+  //         )
+  //
+  //     ),
+  //   );
+  // }
+
 }
