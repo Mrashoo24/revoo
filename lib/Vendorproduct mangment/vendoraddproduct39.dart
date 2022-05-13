@@ -1,10 +1,17 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../Controllers/IpcatagoryController.dart';
 import '../constants/constants.dart';
+import '../model/IpcatagoryModel.dart';
 
 class Addproduct39 extends StatefulWidget {
   const Addproduct39({Key? key}) : super(key: key);
@@ -14,6 +21,35 @@ class Addproduct39 extends StatefulWidget {
 }
 
 class _Addproduct39State extends State<Addproduct39> {
+  File? image;
+  File? image1;
+  Future pickImage() async{
+    try {
+      await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemporory = File(image!.path);
+      setState(() =>
+        this.image = imageTemporory);
+
+    } on PlatformException catch (e){
+      print('Failed to pick image: $e');
+    }
+  }
+
+  Future pickImage1() async{
+    try {
+      await ImagePicker().pickImage(source: ImageSource.camera,);
+      if (image == null) return;
+      final imageTemporory = File(image!.path);
+      setState(() =>
+      this.image = imageTemporory);
+
+    } on PlatformException catch (e){
+      print('Failed to pick image: $e');
+    }
+  }
+
+
   String initialValue = 'Product category';
 
   var itemList = [
@@ -34,6 +70,7 @@ class _Addproduct39State extends State<Addproduct39> {
   ];
   @override
   Widget build(BuildContext context) {
+    var firestore = FirebaseFirestore.instance;
      return SafeArea(
       child: Scaffold(
         body: Container(
@@ -72,80 +109,101 @@ class _Addproduct39State extends State<Addproduct39> {
                           child: Text('Add New Product',style: TextStyle(fontSize: 30,color: kblue),)),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Container(
-                        width: 145,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: Kdblue,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Row(
-                            children: [
-                              Text('Purchased :',style: TextStyle(color: Colors.white,fontSize: 15),),
-                              SizedBox(width: 8,),
-                              Container(
-                                width: 45,
-                                height: 22,
-                                decoration: BoxDecoration(color: bgGrey),
-                                child: Center(child: Text("24",style: TextStyle(color: kyellow,fontSize:15),)),
-                              ),
-
-                            ],
-                          ),
-                        ),
-
-                      ),SizedBox(width: 20,),
-                      Container(
-                        width: 130,
-                        height: 36,
-                        margin: EdgeInsets.all(8),
-                        decoration: BoxDecoration(border: Border.all(
-                            color: Kdblue,width: 2
-                        )),
-                        child: Padding(
-                          padding:   EdgeInsets.only(left: 16),
-                          child: Row(
-                            children: [
-                              Text('Print Label',style: TextStyle(fontSize: 17,color: kblue),),
-                              SizedBox(width: 9,),
-                              Image.asset('asset/dropdwn.png'),
-
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Container(
+                  //       width: 145,
+                  //       height: 36,
+                  //       decoration: BoxDecoration(
+                  //         color: Kdblue,
+                  //       ),
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.all(5.0),
+                  //         child: Row(
+                  //           children: [
+                  //             Text('Purchased :',style: TextStyle(color: Colors.white,fontSize: 15),),
+                  //             SizedBox(width: 8,),
+                  //             Container(
+                  //               width: 45,
+                  //               height: 22,
+                  //               decoration: BoxDecoration(color: bgGrey),
+                  //               child: Center(child: Text("24",style: TextStyle(color: kyellow,fontSize:15),)),
+                  //             ),
+                  //
+                  //           ],
+                  //         ),
+                  //       ),
+                  //
+                  //     ),SizedBox(width: 20,),
+                  //     Container(
+                  //       width: 130,
+                  //       height: 36,
+                  //       margin: EdgeInsets.all(8),
+                  //       decoration: BoxDecoration(border: Border.all(
+                  //           color: Kdblue,width: 2
+                  //       )),
+                  //       child: Padding(
+                  //         padding:   EdgeInsets.only(left: 16),
+                  //         child: Row(
+                  //           children: [
+                  //             Text('Print Label',style: TextStyle(fontSize: 17,color: kblue),),
+                  //             SizedBox(width: 9,),
+                  //             Image.asset('asset/dropdwn.png'),
+                  //
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 20,),
                   Row(
                     children: [
-                      Container(
-                        height: 100,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
+                      Stack(
+                        children:[
+                          Container(
+                            height: 100,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade300,
 
 
-                        ),
-                        child: InkWell(
-                          // onTap: ()async{
-                          //   final result = await  FilePicker.platform.pickFiles(
-                          //   allowMultiple: false,
-                          //   type: Filrtype.custom,
-                          //   allowedExtentions['png','jpg'],
-                          //   );
-                          //   },
-                          child: Icon(
-                            Icons.person,
-                            size: 50,
-                            color:  Colors.grey,
+                            ),
+                            child: InkWell(
+
+                              onTap: (){
+                                pickImage();
+                              },
+                              // onTap: ()async{
+                              //   final result = await  FilePicker.platform.pickFiles(
+                              //   allowMultiple: false,
+                              //   type: Filrtype.custom,
+                              //   allowedExtentions['png','jpg'],
+                              //   );
+                              //   },
+                              child: Icon(
+                                Icons.production_quantity_limits_outlined,
+                                size: 50,
+                                color:  Colors.grey,
+                              ),
+                            ),
+
+
+
+
                           ),
-                        ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 65,left: 120),
+                            child: InkWell(
 
+                              onTap: (){
+                                pickImage1();
+                              },
 
+                                child: Icon(Icons.camera_alt_rounded,size: 50,color: Colors.grey[500],),
+                            ),
+                          ),
+                          ],
                       ),SizedBox(width: 20),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -184,7 +242,7 @@ class _Addproduct39State extends State<Addproduct39> {
                   ),
                   Row(
                     children: [
-                      Text('Upload a profile picture',style: TextStyle(color: kblue),),
+                      Text('Upload a product picture',style: TextStyle(color: kblue),),
                     ],
                   ),
                   SizedBox(height: 20),
@@ -240,7 +298,7 @@ class _Addproduct39State extends State<Addproduct39> {
                               Flexible(
                                 child: Column(
                                   children: [
-                                    Text('Price sale',style: TextStyle(fontSize: 18,color:kblue ),),
+                                    Text('Sell Price',style: TextStyle(fontSize: 18,color:kblue ),),
                                     Divider(
                                       height: 5,thickness: 1,color: kblue,
                                     ),
@@ -375,7 +433,16 @@ class _Addproduct39State extends State<Addproduct39> {
                             icon: Icon(Icons.keyboard_arrow_down,color: kblue,),
                             items: itemList.map((String items) {
                               return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(), onChanged: (String? value) {  },
+                            }).toList(), onChanged: ( value) {
+                              setState(() {
+                                initialValue = value as String;
+                              });
+                                },
+
+
+
+
+
 
                           ),
                         ),
@@ -404,7 +471,11 @@ class _Addproduct39State extends State<Addproduct39> {
                             icon: Icon(Icons.keyboard_arrow_down,color: kblue,),
                             items: componentlist.map((String items) {
                               return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(), onChanged: (String? value) {  },
+                            }).toList(), onChanged: ( value) {
+                            setState(() {
+                              initialValue1 = value as String;
+                            });
+                          },
 
                           ),
                         ),
@@ -412,56 +483,22 @@ class _Addproduct39State extends State<Addproduct39> {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            InkWell(
-                              child: ElevatedButton(onPressed: (){
-
-                              },
-
-                                  style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      shape:RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(10))
-                                      ),
-                                      side: BorderSide(width: 3.0, color: kblue ),
-                                      primary: Colors.white,
-                                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
-                                      textStyle: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold)),
-                                  child: Center(child: Text('< Back',style: TextStyle(
-                                      color: kblue,fontSize: 15
-                                  ),))),
-                            ),
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(kblue)
+                                ),
+                                onPressed: (){
+                                  Get.back();
+                                }, child: Text('Back')),
                             SizedBox(width: 25,),
-                            Container(
-                              width: 110,
-                              height: 41,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(kblue)
                                 ),
-                                borderRadius: BorderRadius.circular(10),
-
-
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: Text('Duplicate',style: TextStyle(
-                                      color: Colors.white,fontSize: 15
-                                  ),),
-                                ),
-                              ),
-
-                            ),
+                                onPressed: (){
+                                  }, child: Text('Add')),
                           ],
                         ),
-
                       ],
                     ),
                   ),

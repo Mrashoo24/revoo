@@ -13,6 +13,7 @@ class YourLeaveReqController extends GetxController{
 
   @override
   void onInit() {
+
     LeaveList.bindStream(firestore.collection('Leaves').snapshots().map((event) {
 
       List<YourLeaveReq> LeaveName = [];

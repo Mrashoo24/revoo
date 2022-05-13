@@ -148,16 +148,11 @@ class _AcceptLeaveState extends State<AcceptLeave> {
                   print('no data found');
                 }
                var upDatedlist =  leaveController.LeaveName.where((element)  {
-
-                  print(element.date);
+                 print(element.date);
                   return DateFormat('yyyy/MM/dd').parse(element.date!).isAfter(DateFormat('yyyy/MM/dd').parse(start))
                  &&
                       DateFormat('yyyy/MM/dd').parse(element.date!).isBefore(DateFormat('yyyy/MM/dd').parse(end)
-
-
-                      )
-
-                  ;
+                      );
                 }).toList();
 
                 print('new updated list length${upDatedlist.length}');
