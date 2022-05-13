@@ -92,10 +92,11 @@ class _CountdownPageState extends State<CountdownPage>
             alignment: Alignment.center,
             children: [
               SizedBox(
-                width: 180,
-                height: 180,
+                width: 130,
+                height: 130,
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.grey.shade300,
+                  backgroundColor: Colors.white,
+                  color: Colors.grey.shade500,
                   value: progress,
                   strokeWidth: 6,
                 ),
@@ -124,8 +125,9 @@ class _CountdownPageState extends State<CountdownPage>
                   builder: (context, child) => Text(
                     countText,
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white
                     ),
                   ),
                 ),

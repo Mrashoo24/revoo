@@ -7,6 +7,7 @@ import 'package:revoo/Controllers/branchController.dart';
 import 'package:revoo/Controllers/departmentController.dart';
 import 'package:revoo/Controllers/departmentControllerTableRow.dart';
 import 'package:revoo/HRMS_admin_Screen/departments/adddepartment.dart';
+import 'package:revoo/HRMS_admin_Screen/editDepartment.dart';
 import 'package:revoo/models/branchModel.dart';
 import '../constants/constants.dart';
 import 'adbranchpg2.dart';
@@ -100,7 +101,7 @@ class _DepartmentsState extends State<Departments> {
                                   ),
                                   InkWell(
                                       onTap: () {
-                                        Get.to(AddBranches());
+                                        Get.to(AddDepartments(userDoc: widget.userDoc,));
                                       },
                                       child: Image.asset('asset/addnew.png')),
                                 ],
@@ -149,7 +150,7 @@ class _DepartmentsState extends State<Departments> {
                                               itemBuilder: (context,index){
                                                 return   buildListTile(
                                                     buttonMenuPosition, context,
-                                                    title: bdoc[index].get('Dept Name'),
+                                                    title: bdoc[index].get('dept_name'),
                                                     tagcolor: kyellow,
                                                     id:bdoc[index].id,
                                                     bdoc: bdoc[index]
@@ -223,7 +224,8 @@ class _DepartmentsState extends State<Departments> {
                   ),
                   SizedBox(width: 10,),
                   IconButton(icon:Icon(Icons.edit),color: Colors.white, onPressed: () async {
-                    Get.to(EditBranches(latlist: bdoc.get('location'), name: title, address: bdoc.get('address'), id: id, locality: bdoc.get('locality')));
+                    Get.to(EditDepartment(deptName: title, branchName: selectedValue,userDoc: widget.userDoc ,id: id,));
+
                     // await   showDialog(
                     //        context: context,
                     //        builder: (context) {

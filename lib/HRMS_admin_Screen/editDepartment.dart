@@ -9,15 +9,18 @@ import '../../Controllers/branchController.dart';
 import '../../constants/constants.dart';
 
 
-class AddDepartments extends StatefulWidget {
+class EditDepartment extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
-  const AddDepartments({Key? key, required this.userDoc}) : super(key: key);
+  final String? id;
+  final String? deptName;
+  final String? branchName;
+  const EditDepartment({Key? key,  this.deptName,  this.branchName, required this.userDoc, this.id}) : super(key: key);
 
   @override
-  _AddDepartmentsState createState() => _AddDepartmentsState();
+  _EditDepartment createState() => _EditDepartment();
 }
 
-class _AddDepartmentsState extends State<AddDepartments> {
+class _EditDepartment extends State<EditDepartment> {
 
   var firestore =  FirebaseFirestore.instance;
   TextEditingController deptName = TextEditingController();
@@ -239,13 +242,11 @@ class _AddDepartmentsState extends State<AddDepartments> {
                       SizedBox(width: 25,),
                       InkWell(
                         onTap: () async {
-                          await  firestore.collection('Department').add({
+                          await  firestore.collection('Department').doc(widget.id).update({
 
                             "dept_name" : deptName.text,
-                            "head" : head.text,
-                            "no_employee" : noEmployee.text,
                             "bid" : selectedValue,
-                            "cid" : widget.userDoc.get('cid')
+
                           });
                           Get.back();
                         },
@@ -264,7 +265,7 @@ class _AddDepartmentsState extends State<AddDepartments> {
                             borderRadius: BorderRadius.circular(10),
 
                           ),
-                          child: Center(child: Text('Add',style: TextStyle(color: Colors.white),)),
+                          child: Center(child: Text('Update',style: TextStyle(color: Colors.white),)),
                         ),
                       ),
                     ],
