@@ -78,6 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.0"
+  circular_countdown_timer:
+    dependency: "direct main"
+    description:
+      name: circular_countdown_timer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
   clock:
     dependency: transitive
     description:
@@ -148,13 +155,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  dropdown_search:
-    dependency: "direct main"
-    description:
-      name: dropdown_search
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -244,13 +244,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_datetime_picker:
+  flutter_countdown_timer:
     dependency: "direct main"
     description:
-      name: flutter_datetime_picker
+      name: flutter_countdown_timer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.1"
+    version: "4.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -265,6 +265,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  flutter_ringtone_player:
+    dependency: "direct main"
+    description:
+      name: flutter_ringtone_player
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -310,13 +317,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.1"
-  google_maps:
-    dependency: transitive
-    description:
-      name: google_maps
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.3.0"
   google_maps_flutter:
     dependency: "direct main"
     description:
@@ -331,13 +331,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
-  google_maps_flutter_web:
-    dependency: "direct main"
-    description:
-      name: google_maps_flutter_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.2+1"
   horizontal_data_table:
     dependency: "direct main"
     description:
@@ -387,13 +380,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
-  js_wrapping:
-    dependency: transitive
-    description:
-      name: js_wrapping
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.4"
   lints:
     dependency: transitive
     description:
@@ -541,13 +527,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.7.4"
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.11.1"
   percent_indicator:
     dependency: "direct main"
     description:
@@ -611,13 +590,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.3"
-  sanitize_html:
-    dependency: transitive
-    description:
-      name: sanitize_html
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   simple_gesture_detector:
     dependency: transitive
     description:
@@ -799,5 +771,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.16.0 <3.0.0"
+  dart: ">=2.16.1 <3.0.0"
   flutter: ">=2.10.0"

@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
 
         debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: LoginScreen()
+          body: LoginScreen()
 
         // DateTimeComboLinePointChart.withSampleData(),
       )

@@ -11,14 +11,17 @@ import '../constants/constants.dart';
 
 class AddShift extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
-
-  const AddShift({Key? key, required this.userDoc}) : super(key: key);
+  final id;
+  final workingHours;
+  final loginTime;
+  const AddShift({Key? key, required this.userDoc, this.workingHours, this.loginTime, this.id}) : super(key: key);
 
   @override
   _AddShiftState createState() => _AddShiftState();
 }
 
 class _AddShiftState extends State<AddShift> {
+
   TimeOfDay _time = TimeOfDay.now().replacing(hour: 11, minute: 30);
   var selectedTime = '';
 
@@ -203,17 +206,17 @@ class _AddShiftState extends State<AddShift> {
                       SizedBox(
                         width: 25,
                       ),
-                     loading ? kprogressbar : InkWell(
+                      loading ? kprogressbar : InkWell(
                         onTap: () async {
                           setState(() {
                             loading = true;
                           });
-                         var firestore = FirebaseFirestore.instance;
+                          var firestore = FirebaseFirestore.instance;
                           var uid =FirebaseAuth.instance.currentUser!.uid;
 
                           var userdata = await firestore.collection('Employee').doc(uid).get();
 
-                          await firestore.collection('Shifts').add(
+                          await firestore.collection('Shifts').doc(widget.id).update(
 
                               {
                                 'hours':hours.text,
