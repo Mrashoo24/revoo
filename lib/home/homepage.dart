@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/HRMS_admin_Screen/Reports/reports.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
 import 'package:revoo/HRMS_admin_Screen/employeecheckin.dart';
+import 'package:revoo/Purchasing/reports.dart';
 import 'package:revoo/home/admindashboard.dart';
 import '../Employee/Certificate/certificate.dart';
 import '../HRMS_admin_Screen/Shifts.dart';
@@ -48,7 +50,7 @@ class _HomePageMainState extends State<HomePageMain> {
       AllEmployeeUpdates(userDoc: widget.userDoc,), //0
 
       Container(), //1
-
+HRMSReports(userDoc: widget.userDoc)
     ];
     return Scaffold(
       appBar: AppBar(
@@ -197,12 +199,12 @@ class _HomePageMainState extends State<HomePageMain> {
                 SizedBox(height: 5,),
                 buildNavCard('asset/lvapproval.png','Daily Updates',9),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-
+                buildNavCard('asset/lvapproval.png','Reports',11),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 buildNavCard('asset/logoff.png','Logout',10),
                 SizedBox(height: 5,),
 
-                buildNavCard('asset/lvapproval.png','Certificate',11),
-                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+
 
 
 
