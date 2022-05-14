@@ -19,8 +19,8 @@ class _AddEmployeeState extends State<AddEmployee> {
   var selectedValuea = 1;
   var selectedValueb = 2;
   var selectedValuec = 3;
-  var selectedValued = 4;
-  var selectedValuee = 5;
+  // var selectedValued = 4;
+  // var selectedValuee = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -390,64 +390,64 @@ class _AddEmployeeState extends State<AddEmployee> {
                           Text("Select Shift"),
                         ],
                       ),
-                      Container(
-                        color: bgGrey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:   EdgeInsets.only(left: 20.0),
-                              child: DropdownButton(
-                                hint: Text("Select Role"),
-                                value: selectedValued,
-                                onChanged: (int? value){
-                                  setState(() {
-                                    selectedValued = value!;
-                                  });
-                                },
-                                items: [
-
-                                  DropdownMenuItem(child: Text('Day Shift'),value: 0,),
-                                  DropdownMenuItem(child: Text('Night Shift'),value: 1,),
-
-
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   color: bgGrey,
+                      //   child: Row(
+                      //     children: [
+                      //       Padding(
+                      //         padding:   EdgeInsets.only(left: 20.0),
+                      //         child: DropdownButton(
+                      //           hint: Text("Select Role"),
+                      //           value: selectedValued,
+                      //           onChanged: (int? value){
+                      //             setState(() {
+                      //               selectedValued = value!;
+                      //             });
+                      //           },
+                      //           items: [
+                      //
+                      //             DropdownMenuItem(child: Text('Day Shift'),value: 0,),
+                      //             DropdownMenuItem(child: Text('Night Shift'),value: 1,),
+                      //
+                      //
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(height: 12,),
                       Row(
                         children: [
                           Text("Select Role"),
                         ],
                       ),
-                      Container(
-                        color: bgGrey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:   EdgeInsets.only(left: 20.0),
-                              child: DropdownButton(
-                                hint: Text("Select Role"),
-                                value: selectedValuee,
-                                onChanged: (int? value){
-                                  setState(() {
-                                    selectedValuee = value!;
-                                  });
-                                },
-                                items: [
-
-                                  DropdownMenuItem(child: Text('Role A'),value: 0,),
-                                  DropdownMenuItem(child: Text('Role B'),value: 1,),
-                                  DropdownMenuItem(child: Text('Role C'),value: 2,)
-
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   color: bgGrey,
+                      //   child: Row(
+                      //     children: [
+                      //       Padding(
+                      //         padding:   EdgeInsets.only(left: 20.0),
+                      //         child: DropdownButton(
+                      //           hint: Text("Select Role"),
+                      //           value: selectedValuee,
+                      //           onChanged: (int? value){
+                      //             setState(() {
+                      //               selectedValuee = value!;
+                      //             });
+                      //           },
+                      //           items: [
+                      //
+                      //             DropdownMenuItem(child: Text('Role A'),value: 0,),
+                      //             DropdownMenuItem(child: Text('Role B'),value: 1,),
+                      //             DropdownMenuItem(child: Text('Role C'),value: 2,)
+                      //
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
 
 
                     ],

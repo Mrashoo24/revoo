@@ -139,15 +139,12 @@ class _Addproduct38State extends State<Addproduct38> {
                                       style: TextStyle(
                                         color: Colors.yellow.shade600,
                                         fontSize: 19,
-
-
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 120.0,bottom: 10),
                                       child: Icon(Icons.more_vert,color: Colors.white),
                                     ),
-
                                   ],
                                 ),
                                 Padding(
@@ -161,24 +158,17 @@ class _Addproduct38State extends State<Addproduct38> {
                                     ),
                                   ),
                                 )
-
                               ],
                             ),
-
                           ),
                         ),
-
                       ),
                       SizedBox( height: 18),
                       Container(
                         width: 500,
                         height: 90,
-
                         decoration: BoxDecoration(
-
                           color: mannu,
-
-
                           borderRadius: BorderRadius.circular(15),
 
                         ),

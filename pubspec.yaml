@@ -56,6 +56,10 @@ dependencies:
   file_picker: ^4.5.1
   image_picker: ^0.8.5
   permission_handler: ^9.2.0
+  shared_preferences: ^2.0.15
+  multi_select_item: ^1.0.3
+  multi_select_flutter: ^4.1.2
+
 
 
 
