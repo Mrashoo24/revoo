@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/APPS/selectplans.dart';
 import 'package:revoo/Controllers/authcontroller.dart';
+import 'package:revoo/constants/constants.dart';
 
+import '../constants/Api.dart';
 import 'login.dart';
 
 class Signup extends StatefulWidget {
@@ -17,8 +21,11 @@ class _SignupState extends State<Signup> {
   bool obsecure = true;
   bool obsecure1 = true;
 
+  bool loading = false;
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var nameController  = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +76,33 @@ class _SignupState extends State<Signup> {
                           SizedBox(
                             height: 20,
                           ),
-
                           TextFormField(
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                                hintText: 'Your Company Name',
+
+                                hintStyle: TextStyle(
+                                    color: Colors.grey
+                                ),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white)
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white)
+                                ),
+                                enabledBorder:OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white)
+                                )
+
+
+                            ),
+                          ),
+                          SizedBox(height: 20,),
+                          TextFormField(
+                            controller: nameController,
                             decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
@@ -117,82 +149,117 @@ class _SignupState extends State<Signup> {
 
                             ),
                           ),
+                          // SizedBox(height: 20,),
+                          // TextFormField(
+                          //   controller: passwordController,
+                          //   obscureText: obsecure,
+                          //   decoration: InputDecoration(
+                          //       filled: true,
+                          //       fillColor: Colors.white,
+                          //       contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                          //       hintText: 'Set Password',
+                          //       hintStyle: TextStyle(
+                          //           color: Colors.grey
+                          //       ),
+                          //       border: OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       focusedBorder: OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       enabledBorder:OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       suffixIcon: InkWell(
+                          //             onTap: (){
+                          //               setState(() {
+                          //                 obsecure == true ? obsecure = false : obsecure = true;
+                          //               });
+                          //             },
+                          //           child:Icon(CupertinoIcons.eye_slash_fill,color: Colors.yellow.shade700,)
+                          //       )
+                          //
+                          //
+                          //   ),
+                          // ),
+                          // SizedBox(height: 20,),
+                          // TextFormField(
+                          //   controller: passwordController,
+                          //   obscureText: obsecure1,
+                          //   decoration: InputDecoration(
+                          //       filled: true,
+                          //       fillColor: Colors.white,
+                          //       contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
+                          //       hintText: 'Confirm Password',
+                          //       hintStyle: TextStyle(
+                          //           color: Colors.grey
+                          //       ),
+                          //       border: OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       focusedBorder: OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       enabledBorder:OutlineInputBorder(
+                          //           borderSide: BorderSide(color: Colors.white)
+                          //       ),
+                          //       suffixIcon: InkWell(
+                          //           onTap: (){
+                          //             setState(() {
+                          //               obsecure1 == true ? obsecure1 = false : obsecure1 = true;
+                          //             });
+                          //           },
+                          //           child: Icon(CupertinoIcons.eye_slash_fill,color: Colors.yellow.shade700,))
+                          //
+                          //
+                          //   ),
+                          // ),
                           SizedBox(height: 20,),
-                          TextFormField(
-                            controller: passwordController,
-                            obscureText: obsecure,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                                hintText: 'Set Password',
-                                hintStyle: TextStyle(
-                                    color: Colors.grey
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                enabledBorder:OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                suffixIcon: InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          obsecure == true ? obsecure = false : obsecure = true;
-                                        });
-                                      },
-                                    child:Icon(CupertinoIcons.eye_slash_fill,color: Colors.yellow.shade700,)
-                                )
+
+                      loading ? kprogressbar :    GestureDetector(
+                            onTap: () async {
+                              // AuthController.instance.register(emailController.text.trim(), passwordController.text.trim());
+
+                         var emailCheck =   await  FirebaseFirestore.instance
+                                  .collection('Registeration').where('email',isEqualTo: emailController.text).get();
+
+                          var nameCheck =  await  FirebaseFirestore.instance
+                                  .collection('Registeration').where('cname',isEqualTo: passwordController.text).get();
 
 
-                            ),
-                          ),
-                          SizedBox(height: 20,),
-                          TextFormField(
-                            controller: passwordController,
-                            obscureText: obsecure1,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
-                                hintText: 'Confirm Password',
-                                hintStyle: TextStyle(
-                                    color: Colors.grey
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                enabledBorder:OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                suffixIcon: InkWell(
-                                    onTap: (){
-                                      setState(() {
-                                        obsecure1 == true ? obsecure1 = false : obsecure1 = true;
-                                      });
-                                    },
-                                    child: Icon(CupertinoIcons.eye_slash_fill,color: Colors.yellow.shade700,))
+                          if(nameCheck.docs.isNotEmpty ){
+                            Get.snackbar('Error', 'Company name already exist');
+                          }else
+                         if(emailCheck.docs.isNotEmpty ){
+                           Get.snackbar('Error', 'Email already exist');
+                         } else{
+
+                           var cdetail = {
+                             'cname': passwordController.text,
+                             'name' : nameController.text,
+                             'email' : emailController.text,
+                             'apps' : ''
+                           };
 
 
-                            ),
-                          ),
-                          SizedBox(height: 20,),
 
-                          GestureDetector(
-                            onTap: (){
-                              AuthController.instance.register(emailController.text.trim(), passwordController.text.trim());
+                           await FirebaseFirestore.instance
+                               .collection('Registeration').add(cdetail);
+
+                        //  var result =  await   AllApi().sendEmail(subject: 'Revoo Registeration', content: 'New Registeration ${cdetail}', toEmail: 'arsalank28@gmail.com');
+                        // print(result);
+
+                           Get.to(SelectPlans(cdetails:cdetail));
+
+                         }
+
+
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Center(child: Text('SIGN UP',style: TextStyle(
+                                child: Center(child: Text('Submit',style: TextStyle(
                                     color: Colors.white,fontSize: 20
                                 ),)),
                               ),

@@ -23,7 +23,6 @@ import 'HRMS_admin_Screen/adbranchpg1.dart';
 import 'HRMS_admin_Screen/adbranchpg3.dart';
 import 'HRMS_admin_Screen/adbranchpg4.dart';
 
-import 'HRMS_admin_Screen/alreadyhavebranch.dart';
 import 'HRMS_admin_Screen/employeecheckin.dart';
 import 'Login/signup.dart';
 import 'Login/yourapps.dart';
@@ -36,7 +35,14 @@ import 'graph/linegraph.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => Get.put(AuthController()));
+  await Firebase.initializeApp(options: FirebaseOptions(
+    apiKey: "AIzaSyBr-TjYkCaHCSvuRN0U6UajSeJTNrzYv64",
+    authDomain: "revoo-57e23.firebaseapp.com",
+    storageBucket: "revoo-57e23.appspot.com",
+    projectId: "revoo-57e23",
+    messagingSenderId: "702579453139",
+    appId: "1:702579453139:web:082dbb521cac125eac3826",
+  ),).then((value) => Get.put(AuthController()));
   runApp(const MyApp());
 }
 
@@ -69,7 +75,7 @@ class MyApp extends StatelessWidget {
 
         debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: AlreadyHaveBranch()
+        body: LoginScreen()
 
         // DateTimeComboLinePointChart.withSampleData(),
       )

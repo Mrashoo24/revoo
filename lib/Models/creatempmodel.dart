@@ -24,37 +24,39 @@ class CreatEmpModel {
         this.password,
         this.phoneNumber,
         this.selectShift,
-        this.selectRoles});
+        this.selectRoles}
+      );
 
   CreatEmpModel.fromJson(Map<String, dynamic> json) {
-    empName = json['emp_Name'];
-    selectBranch = json['select_branch'];
-    selectManager = json['select_manager'];
-    selectHr = json['select_hr'];
-    fullAdsress = json['full_adsress'];
+    empName = json['emp Name'];
+    selectBranch = json['select branch'];
+    selectManager = json['select manager'];
+    selectHr = json['select hr'];
+    fullAdsress = json['full adsress'];
     designation = json['designation'];
     dob = json['dob'];
     email = json['email'];
     password = json['password'];
-    phoneNumber = json['phone_number'];
-    selectShift = json['select_shift'];
-    selectRoles = json['select_roles'];
+    phoneNumber = json['phone number'];
+    selectShift = json['select shift'];
+    selectRoles = json['select roles'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['emp_Name'] = this.empName;
-    data['select_branch'] = this.selectBranch;
-    data['select_manager'] = this.selectManager;
-    data['select_hr'] = this.selectHr;
-    data['full_adsress'] = this.fullAdsress;
+    data['emp Name'] = this.empName;
+    data['select branch'] = this.selectBranch;
+    data['select manager'] = this.selectManager;
+    data['select hr'] = this.selectHr;
+    data['full adsress'] = this.fullAdsress;
     data['designation'] = this.designation;
     data['dob'] = this.dob;
     data['email'] = this.email;
     data['password'] = this.password;
-    data['phone_number'] = this.phoneNumber;
-    data['select_shift'] = this.selectShift;
-    data['select_roles'] = this.selectRoles;
+    data['phone number'] = this.phoneNumber;
+    data['select shift'] = this.selectShift;
+    data['select roles'] = this.selectRoles;
     return data;
   }
 }
+

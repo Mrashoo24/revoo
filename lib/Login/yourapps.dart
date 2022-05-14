@@ -1,4 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +12,7 @@ import 'package:revoo/Pos/PosDashboard.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
 import 'package:revoo/Purchasing/purchasing_dashboard.dart';
 import 'package:revoo/Vendorproduct%20mangment/inventoryDashboard.dart';
+import 'package:revoo/home/homepage.dart';
 
 import '../Controllers/authcontroller.dart';
 import '../Employee/employee_homepage.dart';
@@ -28,6 +31,8 @@ class _YourappsState extends State<Yourapps> {
 
   @override
   Widget build(BuildContext context) {
+ var firestore =   FirebaseFirestore.instance;
+ var auth =   FirebaseAuth.instance.currentUser;
     return SafeArea(
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -63,15 +68,12 @@ class _YourappsState extends State<Yourapps> {
                     ],
                   ),
                 ),
-
                 SizedBox(
                   height: 15,),
                 Container(
                   child: Text("Your Apps",style: TextStyle(color: kblue ,fontSize: 25),
                   ),
-
                 ),
-
                 SizedBox(height: 30,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -79,11 +81,18 @@ class _YourappsState extends State<Yourapps> {
                     runSpacing: 20,
                     spacing: 50,
                     children: [
-                      buildAppCard('Admin','asset/prjct.png',(){
-                        Get.to(DBcrud1());
+                      buildAppCard('Admin','asset/prjct.png',() async {
+                       var userDoc = await firestore.collection('Employee').doc(auth!.uid).get();
+
+
+
+                     var branchDoc =  await firestore.collection('Branch').where('cid',isEqualTo: userDoc.get('cid')).get();
+
+                        await branchDoc.docs.isEmpty ? Get.to(DBcrud1()) : Get.to(HomePageMain(userDoc:userDoc));
                       }),
-                      buildAppCard('HRMS','asset/prjct.png',(){
-                        Get.to(EmployeeHomePage());
+                      buildAppCard('HRMS','asset/prjct.png',() async {
+                        var userDoc = await firestore.collection('Employee').doc(auth!.uid).get();
+                        Get.to(EmployeeHomePage(userDoc:userDoc));
                       }),
 
                       buildAppCard('PROJECT MANAGEMENT','asset/calculator.png',(){
@@ -93,8 +102,6 @@ class _YourappsState extends State<Yourapps> {
                       buildAppCard('PURCHASE & OPERATIONS','asset/inventory.png',(){
                         Get.to(PurchasingDashboard());
                       }),
-
-
                     Column(
                       children: [
                         InkWell(
@@ -102,7 +109,6 @@ class _YourappsState extends State<Yourapps> {
                             Get.to(InventoryDashboard());
                           },
                           child: Card(
-
                               color: Kdblue,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -112,38 +118,25 @@ class _YourappsState extends State<Yourapps> {
                                 height: 100,
                                 child: Center(child: ClipRRect(child: Image.asset('asset/inventory_1.png',),)),
                               )
-
                           ),
                         ),
-                        
                         Container(width:100,child: Center(child: AutoSizeText('Inventory',style: TextStyle(color: kyellow ,fontSize: 14),textAlign: TextAlign.center,))),
                       ],
                     ),
-
                       buildAppCard('POS','asset/money.png',(){
-
                           Get.to(PosDashboard());
-
-
                       }),
                       buildAppCard('SALES','asset/increaseaaa.png',(){
-
                         Get.to(SalesDashboard());
-
                       }),
-
                       buildAppCard('Accounting','asset/accounting_icon.png',(){
-
                         Get.to(AccountingDashboard());
-
                       }),
                     ],
                   ),
                 )
-
               ],
             ),
-
           ),
         ),
       ),

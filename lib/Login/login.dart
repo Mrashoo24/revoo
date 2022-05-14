@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/APPS/selectplans.dart';
 import 'package:revoo/Controllers/authcontroller.dart';
 import 'package:revoo/Login/signup.dart';
 import 'package:revoo/Login/yourapps.dart';
+import 'package:revoo/constants/constants.dart';
+
 import 'package:revoo/home/admindashboard.dart';
+
 import 'package:revoo/home/homepage.dart';
 
 import '../Employee/employee_homepage.dart';
@@ -22,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
   bool obsecure = true;
-
+  bool loading = false;
   TextEditingController password = TextEditingController();
 
   TextEditingController email = TextEditingController();
@@ -43,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Stack(
                 children: [
                   Positioned(
+
                       top:-180,
 left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
@@ -53,6 +58,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
 
                   ),
+
                   Positioned(
                       bottom: Get.height < 800 ?-73 :Get.height < 1000 ? 122 : 73,
                       right : Get.height < 800 ?-40 :Get.height < 1000 ? -20 : 40 ,
@@ -68,7 +74,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                    child: Padding(
 
-                      padding: const EdgeInsets.all(15.0),
+                      padding:  EdgeInsets.only(bottom: 15.0,top: 15,left: Get.width*0.25,right: Get.width*0.25),
                       child: Card(
                         color: Colors.grey.shade200,
                         shape: RoundedRectangleBorder(
@@ -149,10 +155,19 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                               ),
                               SizedBox(height: 20,),
 
-                              GestureDetector(
+                              loading ?
+                                  kprogressbar
+                                  :     GestureDetector(
                                 onTap: () {
+                                  setState(() {
+                                    loading =true;
+                                  });
                                   AuthController.instance.login(emailController.text.trim(), passwordController.text.trim());
-                                },
+                                  setState(() {
+                                    loading =false;
+                                  });
+
+                                  },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   child: Padding(
@@ -174,7 +189,8 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                       onTap: (){
                                         Get.to(Signup());
                                       },
-                                      child: Text('Don\'t have an account?',style: TextStyle(color: Colors.yellow.shade700),))),
+                                      child: Text('Don\'t have an account?',style: TextStyle(color: Colors.yellow.shade700),)
+                                  )),
 
                               SizedBox(height: 10,),
 

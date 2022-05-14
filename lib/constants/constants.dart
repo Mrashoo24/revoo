@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:revoo/constants/commonWidgets.dart';
 
@@ -27,3 +26,5 @@ var sblue = Color(0xFF649AE3);
 var mannu = Color(0xFF1B57A7);
 
 var kprogressbar = Center(child: CircularProgressIndicator(color: kblue),);
+
+var clo = Color(0xFFF5DF9F);

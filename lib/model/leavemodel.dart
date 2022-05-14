@@ -21,7 +21,7 @@ class LeaveDisplay {
     status1 = json['status1'];
     status2 = json['status2'];
     id = json ['id'];
-    textinput = json ['text input'];
+    textinput = json ['reason'];
   }
 
   Map<String, dynamic> toJson() {

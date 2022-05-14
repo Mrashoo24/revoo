@@ -17,15 +17,8 @@ class BasicPlanController extends GetxController {
     basicpls.bindStream(firestore.collection("Company").doc("jdeN29JAU0tlAscbbdFx")
         .collection('Plan').doc('Plan')
         .snapshots().map((event) {
-
-
-
         basicpls.value =BasicPlan.fromJson(event.data()!);
-
       return basicpls.value;
     }));
-
   }
-
-
 }

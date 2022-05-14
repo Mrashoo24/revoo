@@ -11,7 +11,9 @@ import '../HRMS_admin_Screen/plans/calendar.dart';
 
 
 class LeaveRequestEmployee extends StatefulWidget {
-  const LeaveRequestEmployee({Key? key}) : super(key: key);
+  final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+
+  const LeaveRequestEmployee({Key? key, required this.userDoc}) : super(key: key);
 
   @override
   _LeaveRequestEmployeeState createState() => _LeaveRequestEmployeeState();
@@ -260,23 +262,28 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                             setState(() {
                               loading = true;
                             });
-                          await firestore.collection('new_leave_req').add(
-                            {
-                              "reasons" : submit.text
-                            }
-                            ).then(
-                              (value)async{
-                                await firestore.collection('new_leave_req').doc(value.id).update(
-                                    {'bid' : value.id,
-                                     'mid' : value.id,
-                                      'hid' : value.id,
-                                      'cid' : value.id,
-                                      'uid' : value.id,
-                                      'did' : value.id,
-                                      'startdate' : dateRange.start ,
-                                      'enddate' : dateRange.end ,
 
-                                    });
+                                await firestore.collection('Leaves').add(
+                                    {'bid' : widget.userDoc.get('bid'),
+                                     'mid' : widget.userDoc.get('mid'),
+                                      'hid' : widget.userDoc.get('hid'),
+                                      'cid' : widget.userDoc.get('cid'),
+                                      'uid' : widget.userDoc.get('uid'),
+                                      'did' : widget.userDoc.get('did'),
+                                      'startdate' : DateFormat('yyyy/MM/dd').format(dateRange.start) ,
+                                      'enddate' : DateFormat('yyyy/MM/dd').format(dateRange.end) ,
+                                      'date':DateFormat('yyyy/MM/dd').format(dateRange.start),
+                                      'id':'',
+                                      'name':widget.userDoc.get('name'),
+                                      'status': '0',
+                                      'reason':submit.text
+
+                                    }).then((value) async {
+                                      await firestore.collection('Leaves').doc(value.id).update({
+                                        'id' : value.id
+                                      });
+                                });
+
                                 Get.snackbar("Leave Request", "",
                                   backgroundColor: Colors.transparent,
                                   snackPosition: SnackPosition.BOTTOM,
@@ -285,9 +292,7 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                                 setState(() {
                                   loading = false;
                                 });
-                              }
 
-                          );
                           // CircularProgressIndicator(
                           //   strokeWidth: 2.0,
                           //   valueColor : AlwaysStoppedAnimation(Colors.blueAccent),
@@ -312,10 +317,11 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                                   ),
                                 ),
                               ),
+
                             ],
                           ),
                         ),
-
+                        SizedBox(height: 40,),
                       ],
                     ),
 

@@ -14,7 +14,7 @@
 //   //AuthController.instance
 //   static BRAuthController instance =  Get.find();
 //   //email,password,name
-//
+
 //   late Rx<User?> _user;
 //   FirebaseAuth auth = FirebaseAuth.instance;
 //
