@@ -1,16 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/APPS/selectplans.dart';
+import 'package:revoo/Controllers/authcontroller.dart';
 import 'package:revoo/Login/signup.dart';
+import 'package:revoo/Login/yourapps.dart';
+import 'package:revoo/constants/constants.dart';
 
+import 'package:revoo/home/admindashboard.dart';
+
+import 'package:revoo/home/homepage.dart';
+
+import '../Employee/employee_homepage.dart';
+
+
+
+ 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key key= const Key('LoginScreen')}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  bool obsecure = true;
+  bool loading = false;
+  TextEditingController password = TextEditingController();
+
+  TextEditingController email = TextEditingController();
+
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     print(Get.height);
@@ -24,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Stack(
                 children: [
                   Positioned(
+
                       top:-180,
 left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
@@ -34,6 +58,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
 
                   ),
+
                   Positioned(
                       bottom: Get.height < 800 ?-73 :Get.height < 1000 ? 122 : 73,
                       right : Get.height < 800 ?-40 :Get.height < 1000 ? -20 : 40 ,
@@ -49,7 +74,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                    child: Padding(
 
-                      padding: const EdgeInsets.all(15.0),
+                      padding:  EdgeInsets.only(bottom: 15.0,top: 15,left: Get.width*0.25,right: Get.width*0.25),
                       child: Card(
                         color: Colors.grey.shade200,
                         shape: RoundedRectangleBorder(
@@ -67,6 +92,8 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                 height: 17,
                               ),
                               TextFormField(
+
+                                controller: emailController,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
@@ -88,42 +115,70 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                                 ),
                               ),
-                              SizedBox(height: 20,),
+                              SizedBox(height: 30,),
                               TextFormField(
+                                controller: passwordController,
+                                obscureText: obsecure,
                                 decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
                                     contentPadding: EdgeInsets.only(left: 20,top: 25,bottom: 25),
                                     hintText: 'Password',
+
                                     hintStyle: TextStyle(
                                       color: Colors.grey
                                     ),
+
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(color: Colors.white)
                                     ),
+
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(color: Colors.white)
                                     ),
+
                                     enabledBorder:OutlineInputBorder(
                                         borderSide: BorderSide(color: Colors.white)
                                     ),
-                                  suffixIcon: Icon(Icons.remove_red_eye_outlined,color: Colors.yellow.shade700,)
+
+                                  suffixIcon: InkWell(onTap:(){
+                                    setState(() {
+                                      obsecure ? obsecure = false : obsecure = true;
+                                    });
+                                  },child: obsecure ?
+                                  Icon(Icons.remove_red_eye_outlined,color: Colors.yellow.shade700,)
+                                      : Container(width:5,height:5,child: ClipRRect(child: Image.asset('asset/eyeclose.png')))
+                                  )
 
 
                                 ),
                               ),
                               SizedBox(height: 20,),
 
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Center(child: Text('SIGN IN',style: TextStyle(
-                                    color: Colors.white,fontSize: 20
-                                  ),)),
-                                ),
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
+                              loading ?
+                                  kprogressbar
+                                  :     GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    loading =true;
+                                  });
+                                  AuthController.instance.login(emailController.text.trim(), passwordController.text.trim());
+                                  setState(() {
+                                    loading =false;
+                                  });
+
+                                  },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(child: Text('SIGN IN',style: TextStyle(
+                                      color: Colors.white,fontSize: 20
+                                    ),)),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])
+                                  ),
                                 ),
                               ),
                               SizedBox(height: 10,),
@@ -134,7 +189,9 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                       onTap: (){
                                         Get.to(Signup());
                                       },
-                                      child: Text('Don\'t have an account?',style: TextStyle(color: Colors.yellow.shade700),))),
+                                      child: Text('Don\'t have an account?',style: TextStyle(color: Colors.yellow.shade700),)
+                                  )),
+
                               SizedBox(height: 10,),
 
                               Align(
@@ -143,6 +200,8 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: Text('Forgot Password?',style: TextStyle(color: Colors.yellow.shade700),),
                                   )),
+
+
                             ],
                           ),
                         ),
