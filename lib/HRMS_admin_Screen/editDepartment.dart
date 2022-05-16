@@ -27,6 +27,16 @@ class _EditDepartment extends State<EditDepartment> {
   TextEditingController head = TextEditingController();
   TextEditingController noEmployee = TextEditingController();
   var selectedValue = '';
+
+  @override
+  void initState() {
+    setState(() {
+      deptName = TextEditingController(text: widget.deptName);
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

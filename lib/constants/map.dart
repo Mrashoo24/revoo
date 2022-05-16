@@ -63,22 +63,22 @@ class _MapScreenState extends State<MapScreen> {
 
   }
 
-  Future<Placemark>getAddress(LatLng locationdata) async {
-    // // From a query
-    // final query = "1600 Amphiteatre Parkway, Mountain View";
-    // var addresses = await Geocoder.local.findAddressesFromQuery(query);
-    // var first = addresses.first;
-    // print("${first.featureName} : ${first.coordinates}");
-
-// From coordinates
-    final coordinates =  await placemarkFromCoordinates(locationdata.latitude, locationdata.longitude);
-    print('coordinates = ${coordinates.first}');
-    var addresses = await coordinates[0];
-    // var first = addresses.first;
-    // print("${first.featureName} : ${first.addressLine}");
-    return addresses;
-
-  }
+//   Future<Placemark>getAddress(LatLng locationdata) async {
+//     // // From a query
+//     // final query = "1600 Amphiteatre Parkway, Mountain View";
+//     // var addresses = await Geocoder.local.findAddressesFromQuery(query);
+//     // var first = addresses.first;
+//     // print("${first.featureName} : ${first.coordinates}");
+//
+// // From coordinates
+//     final coordinates =  await placemarkFromCoordinates(locationdata.latitude, locationdata.longitude);
+//     print('coordinates = ${coordinates.first}');
+//     var addresses = await coordinates[0];
+//     // var first = addresses.first;
+//     // print("${first.featureName} : ${first.addressLine}");
+//     return addresses;
+//
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class _MapScreenState extends State<MapScreen> {
     // });
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title:Text("Set Delivery Location")),
+        appBar: AppBar(title:Text("Set Location")),
         body: Stack(
           children: [GoogleMap(
             mapType: MapType.normal,
@@ -111,12 +111,12 @@ class _MapScreenState extends State<MapScreen> {
                   onDragEnd: (currentlatlng) async {
                     // final coordinates =  coder.Coordinates(currentlatlng.latitude, currentlatlng.longitude);
                     // var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
-                   Placemark address = await getAddress(currentlatlng);
+                   // Placemark address = await getAddress(currentlatlng);
                     setState(()  {
 
                       latlng = currentlatlng;
-                      addressArea = address.subLocality!;
-                      addressFull = address.street!;
+                      addressArea = '';
+                      addressFull = '';
 
                     });
 
@@ -159,12 +159,12 @@ class _MapScreenState extends State<MapScreen> {
                     ElevatedButton(onPressed: () async {
 
 
-                      Placemark address = await getAddress(LatLng(latlng.latitude, latlng.longitude));
+                      // Placemark address = await getAddress(LatLng(latlng.latitude, latlng.longitude));
                           Get.back(
                           result: [{
                             'lat': latlng.latitude,
                             'lon':latlng.longitude,
-                            'address': address.subLocality
+                            'address': ''
                           }]
                           );
 

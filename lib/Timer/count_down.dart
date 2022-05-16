@@ -25,8 +25,6 @@ class _CountdownPageState extends State<CountdownPage>
 
     Duration count = controller.duration! * controller.value;
 
-    print('count = $count duration  = ${controller.duration} ${controller.value}');
-
 
     return controller.isDismissed
         ? '${(controller.duration!.inHours).toString().padLeft(2,'0')}:${(controller.duration!.inMinutes % 60).toString().padLeft(2, '0')}:${(controller.duration!.inSeconds % 60).toString().padLeft(2, '0')}'

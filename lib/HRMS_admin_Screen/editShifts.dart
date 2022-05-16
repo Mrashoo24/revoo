@@ -225,16 +225,7 @@ class _AddShiftState extends State<AddShift> {
                                 'cid' : userdata.get('cid')
                               }
 
-                          ).then((value) async {
-
-                            await firestore.collection('Shifts').doc(value.id).update({
-                              'id' :value.id
-                            });
-                            setState(() {
-                              loading = false;
-                            });
-
-                          });
+                          );
 
 
                         },

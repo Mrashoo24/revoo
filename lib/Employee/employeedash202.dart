@@ -162,7 +162,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                           children: [
                             Container(
                               width: Get.width,
-                              height: Get.height*0.53,
+                              height: Get.height*0.7,
                               child: ClipRect(
                                 child: Image.asset(
                                   'asset/dcbg.png',fit: BoxFit.fill,),
@@ -616,7 +616,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                   //     ),
                                   //   ],
                                   // ),
-                                  currentDocument.isNotEmpty ?  Container(
+                                  currentDocument.isNotEmpty && checkoutTime == '' ?  Container(
 
                                       height: 200,
                                       child: CountdownPage(hours:endDifference!.inHours,minutes: endDifference!.inMinutes % 60,seconds: endDifference!.inSeconds % 60,))

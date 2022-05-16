@@ -301,7 +301,7 @@ var price = 0.0 ;
                        [
                          buildStack('asset/newone.png','Create Branches/Employees/Others','Administration'),
                          buildStack('asset/imga.png', 'Events Manage','Administration'),
-                         buildStack('asset/imgb.png', 'Audio/Video Meetings','Administration'),
+                         // buildStack('asset/imgb.png', 'Audio/Video Meetings','Administration'),
                          buildStack('asset/imgc.png', 'Report','Administration'),
                          buildStack('asset/name1.png', 'Employee Management','Administration'),
 
@@ -464,21 +464,21 @@ var price = 0.0 ;
                            [
                      buildStack('asset/emp.png','Create Employees','HRMS'),
                      buildStack('asset/slot.png', 'Create Shift Slot','HRMS'),
-                     buildStack('asset/loc.png', 'Location Based Attendance','HRMS'),
-                     buildStack('asset/bio.png', 'Connection And Bio Metric','HRMS'),
+                     // buildStack('asset/loc.png', 'Location Based Attendance','HRMS'),
+                     // buildStack('asset/bio.png', 'Connection And Bio Metric','HRMS'),
                      buildStack('asset/leave.png', 'leave Management','HRMS'),
-                     buildStack('asset/meet.png', 'Live Meetings','HRMS'),
-                     buildStack('asset/loca.png', 'location Tracking For field Staff','HRMS'),
+                     // buildStack('asset/meet.png', 'Live Meetings','HRMS'),
+                     // buildStack('asset/loca.png', 'location Tracking For field Staff','HRMS'),
                      buildStack('asset/rep.png', 'Reports','HRMS'),
-                             buildStack('asset/hr.png', 'HR PayRolls','HRMS'),
-                             buildStack('asset/face.png', 'Face Attendance','HRMS'),
+                             // buildStack('asset/hr.png', 'HR PayRolls','HRMS'),
+                             // buildStack('asset/face.png', 'Face Attendance','HRMS'),
                              buildStack('asset/cert.png', 'Certificates Management','HRMS'),
-                             buildStack('asset/noti.png','personalized Notifications','HRMS'),
-                             buildStack('asset/projectmeeting.png', 'Birthday Alerts','HRMS'),
-                             buildStack('asset/bdae.png', 'Project Meetings','HRMS'),
-                             buildStack('asset/holiday.png', 'Alert On Excess Holidays','HRMS'),
-                             buildStack('asset/bdae.png', 'Appraisal','HRMS'),
-                             buildStack('asset/holiday.png', 'Recruitment Management','HRMS'),
+                             // buildStack('asset/noti.png','personalized Notifications','HRMS'),
+                             // buildStack('asset/projectmeeting.png', 'Birthday Alerts','HRMS'),
+                             // buildStack('asset/bdae.png', 'Project Meetings','HRMS'),
+                             // buildStack('asset/holiday.png', 'Alert On Excess Holidays','HRMS'),
+                             // buildStack('asset/bdae.png', 'Appraisal','HRMS'),
+                             // buildStack('asset/holiday.png', 'Recruitment Management','HRMS'),
 
 
                    ]
