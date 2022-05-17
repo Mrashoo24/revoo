@@ -250,9 +250,4 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
       ),
     );
   }
-
-
-
-
-
 }

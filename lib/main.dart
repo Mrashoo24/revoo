@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -35,14 +36,17 @@ import 'graph/linegraph.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: FirebaseOptions(
+ kIsWeb ?  await Firebase.initializeApp(options: FirebaseOptions(
     apiKey: "AIzaSyBr-TjYkCaHCSvuRN0U6UajSeJTNrzYv64",
     authDomain: "revoo-57e23.firebaseapp.com",
     storageBucket: "revoo-57e23.appspot.com",
     projectId: "revoo-57e23",
     messagingSenderId: "702579453139",
     appId: "1:702579453139:web:082dbb521cac125eac3826",
-  ),).then((value) => Get.put(AuthController()));
+  ),).then((value) => Get.put(AuthController()))  :
+ await Firebase.initializeApp().then((value) => Get.put(AuthController()))
+
+  ;
   runApp(const MyApp());
 }
 

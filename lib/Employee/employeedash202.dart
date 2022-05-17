@@ -11,6 +11,7 @@ import 'package:revoo/graph/piechart.dart';
 import '../Models/attendencmodel.dart';
 import '../Timer/count_down.dart';
 import '../constants/constants.dart';
+import 'package:geolocator/geolocator.dart';
 
 class EmployeeDashboard1 extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
@@ -57,16 +58,38 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
   DateTime? endtime ;
   Duration? endDifference;
 
+  String latitudeData = '';
+  String longitudeData = '';
+  Position? geoPosition;
+
+  @override
+  void initState() {
+
+    super.initState();
+    getCurrentLocation();
+  }
+
+  getCurrentLocation() async{
+      LocationPermission permission = await Geolocator.checkPermission();
+
+      if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
+    print("Permission not given");
+    }else{
+        setState(() async {
+          geoPosition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+        });
+      }
+  }
 
 
   var currentDate = DateFormat('yyyy/MM/dd').format(DateTime.now());
+
 
 
   @override
   Widget build(BuildContext context) {
     var H = MediaQuery.of(context).size.height;
     var W = MediaQuery.of(context).size.width;
-
     var firestore =  FirebaseFirestore.instance;
 
     print('curentDate = $currentDate');
@@ -154,8 +177,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                       print('endtime = ${endtime} convertedfCheckinTime = ${convertedfCheckinTime} Diffreence = ${endDifference!.inHours} Day = ${DateTime(1970,01)}');
 
                     }
-
-
                     return Column(
                       children: [
                         Stack(
@@ -389,16 +410,21 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                                     cid: widget.userDoc.get('cid'),
                                                   ).toJson()).then((value) async {
 
+                                                    setState(() {
+                                                      latitudeData = '${geoPosition?.latitude}';
+                                                      longitudeData = '${geoPosition?.longitude}';
+                                                    });
+
                                                     await  firestore.collection('attendence_report').doc(value.id).update(
-                                                        {'id':value.id});
+
+                                                        {'id':value.id,'latitude': latitudeData,'longitude':longitudeData});
                                                     setState(() {
                                                       reasonController.clear();
+                                                      loading =false;
                                                       Get.back();
                                                     });
 
-                                                    setState(() {
-                                                      loading =false;
-                                                    });
+
 
 
                                                   });
@@ -428,8 +454,13 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                               cid: widget.userDoc.get('cid'),
                                             ).toJson()).then((value) async {
 
+                                              setState(() {
+                                                latitudeData = '${geoPosition?.latitude}';
+                                                longitudeData = '${geoPosition?.longitude}';
+                                              });
+
                                               await  firestore.collection('attendence_report').doc(value.id).update(
-                                                  {'id':value.id});
+                                                  {'id':value.id,'latitude':latitudeData,'longitude':longitudeData});
 
                                               setState(() {
                                                 loading =false;

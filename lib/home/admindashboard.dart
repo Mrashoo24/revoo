@@ -132,6 +132,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                             right: 180, top: 30, bottom: 10),
                                         child: Text(
                                           'Branch(s)',
+
                                           style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 20,
