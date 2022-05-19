@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:revoo/Controllers/authcontroller.dart';
+import 'package:revoo/Controllers/myempcontroller.dart';
 import 'package:revoo/Employee/employeedash202.dart';
 
 import 'package:revoo/First/welcomscreen.dart';
@@ -35,14 +37,22 @@ import 'graph/linegraph.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: FirebaseOptions(
+
+
+
+
+
+ kIsWeb ? await Firebase.initializeApp(options: FirebaseOptions(
     apiKey: "AIzaSyBr-TjYkCaHCSvuRN0U6UajSeJTNrzYv64",
     authDomain: "revoo-57e23.firebaseapp.com",
     storageBucket: "revoo-57e23.appspot.com",
     projectId: "revoo-57e23",
     messagingSenderId: "702579453139",
     appId: "1:702579453139:web:082dbb521cac125eac3826",
-  ),).then((value) => Get.put(AuthController()));
+  ),).then((value) => Get.put(AuthController())) :
+ await Firebase.initializeApp().then((value) => Get.put(AuthController()))
+  ;
+
   runApp(const MyApp());
 }
 

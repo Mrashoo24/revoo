@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,11 +9,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 
 import '../Controllers/IpcatagoryController.dart';
 import '../constants/constants.dart';
 import '../model/IpcatagoryModel.dart';
-import '../model/componentmodel.dart';
+import '../model/productmodel.dart';
 import 'addproductselectcomponent.dart';
 
 class Addproduct39 extends StatefulWidget {
@@ -24,6 +28,23 @@ class Addproduct39 extends StatefulWidget {
 }
 
 class _Addproduct39State extends State<Addproduct39> {
+
+  int _counter = 0;
+  increment(){
+    setState(() {
+      _counter++;
+
+    });
+
+  }
+
+  decrement(){
+    setState(() {
+      _counter--;
+
+    });
+  }
+
 
   File? image;
   File? image1;
@@ -56,6 +77,7 @@ class _Addproduct39State extends State<Addproduct39> {
 
   String initialValue = 'Product category';
 var productcategoryvalue = 'Product category0';
+  List<Map<String,String>>? selectedItems = [];
 
   var itemList = [
     // 'Product category',
@@ -77,6 +99,7 @@ var productcategoryvalue = 'Product category0';
     'product Component3',
     'product Component4',
   ];
+  bool loading = false;
   TextEditingController productname = TextEditingController();
   TextEditingController producttype = TextEditingController();
   TextEditingController sellprice = TextEditingController();
@@ -399,6 +422,54 @@ var productcategoryvalue = 'Product category0';
                                 ],
                               ),
                             ),
+                            SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 120,
+                              color: Colors.grey[300],
+                              child: Center(
+                                child: Text(
+                                  'Add Quantity',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width:15),
+                            Container(
+                              height: 30, width: 100,
+                              decoration: BoxDecoration(borderRadius:BorderRadius.circular(5),color: Colors.grey[300],),
+
+                              child: Row(
+                                children: [
+                                  InkWell(
+                                    onTap: increment,
+                                    child: Icon(Icons.add,color: kblue,size: 20,),
+                                  ),
+
+                                  VerticalDivider(indent: 1,endIndent: 1,color: kblue,),
+                                  InkWell(
+                                    onTap :decrement ,
+
+                                    child: Icon(Icons.remove,color: kblue,size: 20,),
+                                  ),
+                                  VerticalDivider(indent: 1,endIndent: 1,color: kblue,),
+
+                                  SizedBox(width: 5),
+                                  Text("$_counter",style: TextStyle(fontSize: 14,color:  kblue),),
+
+                                ],
+                              ),
+
+                            ),
+                          ],
+
+
+
+                        ),
+                            SizedBox(height: 20,),
                             // SizedBox(height: 1),
                             // Align(
                             //     alignment: Alignment.centerLeft,
@@ -481,34 +552,34 @@ var productcategoryvalue = 'Product category0';
                             InkWell(
                               onTap: (){
 
+                                _showMultiSelect(context);
 
-
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return StatefulBuilder(
-                                          builder: (context,
-                                              setDialogState) {
-                                            return AlertDialog(
-                                              title:
-                                              Text('Component List'),
-                                              content: AddComponents(
-                                                name: ProductModel().name,
-                                                price: ProductModel().purchaseprice,
-                                                quantity: ProductModel().quantity,
-                                                type: 'edit',
-                                                id: ProductModel().id,
-                                                  _showMultiSelect(context);
-                                                // selecteditems: newlist,
-                                              ),
-                                            );
-                                          },
-                                          );
-                                    }
-                                    );
+                                // showDialog(
+                                //     context: context,
+                                //     builder: (context) {
+                                //       return StatefulBuilder(
+                                //           builder: (context,
+                                //               setDialogState) {
+                                //             return AlertDialog(
+                                //               title:
+                                //               Text('Component List'),
+                                //               content: AddComponents(
+                                //                 name: ProductModel().name,
+                                //                 price: ProductModel().purchaseprice,
+                                //                 quantity: ProductModel().quantity,
+                                //                 type: 'edit',
+                                //                 id: ProductModel().id,
+                                //
+                                //                 // selecteditems: newlist,
+                                //               ),
+                                //             );
+                                //           },
+                                //           );
+                                //     }
+                                //     );
                               },
                               child: Container(
-                                color: kblue,
+                                color: Kdblue,
 
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -520,43 +591,191 @@ var productcategoryvalue = 'Product category0';
                               ),
                             ),
                             SizedBox(height: 20),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
+
+
+                            //N EW
+                            SizedBox(height: 5,),
+                            Container(
+                              width: 200,
+                              child: Row(
+                                children: selectedItems!.map((e) {
+                                  return Text('${e['name']}, ');
+                                }).toList(),
+                              ),
+                            ),
+                            SizedBox(height: 10,),
+                            Container(
+                              height: 100,
+                              width: 400,
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+
+                                  itemCount: selectedItems!.length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                              width:100,
+                                              child: Text(selectedItems![index]['name']!)),
+                                          SizedBox(width: 10,),
+                                          Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Container(
+                                              width: 30,
+                                              child: Text(selectedItems![index]['unit']!,style: TextStyle(fontSize: 10),),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: TextField(
+                                              decoration: InputDecoration(
+                                                  border: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(10.0),
+                                                  ),
+                                                  filled: true,
+
+                                                  labelText: 'Quantity',
+                                                  labelStyle: TextStyle(color: Colors.grey[800],fontSize: 8),
+                                                  hintStyle: TextStyle(color: Colors.grey[800],fontSize: 8),
+                                                  hintText: 'Quantity',
+                                                  fillColor: Colors.white70),
+                                              keyboardType: TextInputType.number,
+                                              onChanged: (value1){
+                                                print('previo = ${selectedItems![index]}');
+                                                print('value = $value1');
+
+                                                selectedItems![index].update('quantity', (value) => value1.toString());
+
+                                                print('updated = ${selectedItems![index]}');
+
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }
+                              ),
+                            ),
+                            SizedBox(height: 10,),
+
+                            loading ? Center(child: CircularProgressIndicator(color: kblue,),) :   Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
+
                                 ElevatedButton(
                                     style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(kblue)
+                                        backgroundColor: MaterialStateProperty.all(Kdblue)
+                                    ),
+                                    onPressed: () async {
+                                      if(productname.text.isEmpty || costprice.text.isEmpty || _counter.toString().isEmpty|| selectedItems!.isEmpty){
+                                        print('not good1');
+                                        Get.snackbar('Error', 'Please Enter All Details');
+                                      }else{
+                                        print('all good');
+                                        setState(() {
+                                          loading = true;
+                                        });
+                                          FirebaseFirestore.instance.collection('Products').add(
+                                              ProductModel().toJson(ProductModel(
+                                                  productname: productname.text,
+                                                  quantity: _counter.toString(),
+                                                components: jsonEncode(selectedItems),
+                                                  costprice: '100',
+                                                  sellprice: sellprice.text,
+                                                  producttype: producttype.text,
+                                                  cid: 'id',
+                                                  productcategory: productcategoryvalue,
+                                                  date:DateFormat('yyyy/MM/dd').format(DateTime.now())
+
+                                                //              "costprice":  costprice.text,
+                                                //              "productname": productname.text,
+                                                //              "sellprice": sellprice.text,
+                                                //              "producttype":producttype.text,
+                                                //              "productcategory": productcategoryvalue,
+                                                //              "unit": _counter.toString(),
+                                              ))).then((value) {
+                                            FirebaseFirestore.instance.collection('Products').doc(value.id).update({'cid':value.id});
+
+                                            setState(() {
+                                              loading = false;
+                                            });
+                                            Get.back();
+                                          });
+                                        // else{
+                                        //
+                                        //
+                                        //   FirebaseFirestore.instance.collection('Inventory').doc(widget.id).update(ProductModel().toJson(ProductModel(
+                                        //       name: productname.text,quantity: _counter.toString(),sold: '0',components:  jsonEncode(selectedItems),purchaseprice: '100',
+                                        //       sellprice: sellprice.text,
+                                        //       cid: compModel['cid']
+                                        //   ))).then((value) {
+                                        //     setState(() {
+                                        //       loading = false;
+                                        //     });
+                                        //     Get.back();
+                                        //   });
+                                        // }
+
+
+
+                                      }
+
+
+
+                                    }, child: Text('Add')),
+
+                                ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(Kdblue),
                                     ),
                                     onPressed: (){
                                       Get.back();
-                                    }, child: Text('Back')),
-                                SizedBox(width: 25,),
-                                
-                                
-                                ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(kblue)
-                                    ),
-                                    onPressed: ()async{
-                                      await firestore.collection('Product').add(
-                                       {
-                                         "costprice":  costprice.text,
-                                         "productname": productname.text,
-                                         "sellprice": sellprice.text,
-                                         "producttype":producttype.text,
-                                         "productcategory": productcategoryvalue,
+                                    }, child: Text('Cancel')),
 
-                                       }
-                                      ).then((value)  async
-                                      {
-                                        await firestore.collection('Product').doc(value.id).update(
-                                            {'cid': value.id
-                                            });
-                                      }
-                                      );
-                                    }, child: Text('Add')),
                               ],
                             ),
+
+
+                            // Row(
+                            //   mainAxisSize: MainAxisSize.min,
+                            //   children: [
+                            //     ElevatedButton(
+                            //         style: ButtonStyle(
+                            //             backgroundColor: MaterialStateProperty.all(kblue)
+                            //         ),
+                            //         onPressed: (){
+                            //           Get.back();
+                            //         }, child: Text('Back')),
+                            //     SizedBox(width: 25,),
+                            //
+                            //
+                            //     ElevatedButton(
+                            //         style: ButtonStyle(
+                            //             backgroundColor: MaterialStateProperty.all(kblue)
+                            //         ),
+                            //         onPressed: ()async{
+                            //           await firestore.collection('Product').add(
+                            //            {
+                            //              "costprice":  costprice.text,
+                            //              "productname": productname.text,
+                            //              "sellprice": sellprice.text,
+                            //              "producttype":producttype.text,
+                            //              "productcategory": productcategoryvalue,
+                            //              "unit": _counter.toString(),
+                            //
+                            //            }
+                            //           ).then((value)  async
+                            //           {
+                            //             await firestore.collection('Product').doc(value.id).update(
+                            //                 {'cid': value.id
+                            //                 });
+                            //           }
+                            //           );
+                            //         }, child: Text('Add')),
+                            //   ],
+                            // ),
                           ],
                         ),
                       ),
@@ -586,11 +805,9 @@ var productcategoryvalue = 'Product category0';
 
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
                             color: Kdblue,
-
                           ),
                           child: Align(
                             alignment: Alignment.center,
-
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -602,7 +819,6 @@ var productcategoryvalue = 'Product category0';
                                 ),
                                 ClipRect(child: Image.asset('asset/groupdash.png')),
                                 ClipRect(child: Image.asset('asset/pathdash.png')),
-
                               ],
                             ),
                           ),
@@ -627,6 +843,52 @@ var productcategoryvalue = 'Product category0';
       ),
 
 
+    );
+  }
+
+  void _showMultiSelect(BuildContext context) async {
+    QuerySnapshot<Map<String, dynamic>> ProductDocs = await FirebaseFirestore
+        .instance.collection('Component').get();
+
+
+    List<MultiSelectItem<Map<String, String>>> allProduct = [];
+
+    ProductDocs.docs.forEach((element) {
+      Map<String, dynamic> newList = element.data();
+      Map<String, String> newList1 = {
+
+        // "costprice":  costprice.text,
+        // "productname": productname.text,
+        // "sellprice": sellprice.text,
+        // "producttype":producttype.text,
+        "name": newList['name'],
+        'price': newList['price'],
+        'quantity': newList['quantity'],
+        'unit': newList['unit'],
+      };
+
+
+      allProduct.add(MultiSelectItem(newList1, element.get('name')));
+    });
+
+    print('valueofitems = $allProduct');
+
+
+    await showDialog(
+      context: context,
+      builder: (ctx) {
+        return MultiSelectDialog(searchable: true,
+          items: allProduct,
+
+          initialValue: selectedItems!,
+          onConfirm: (List<Map<String, String>>values) {
+            setState(() {
+              selectedItems = values;
+            });
+            print('confiremd : $values');
+          },
+        );
+      },
     );
   }
 }

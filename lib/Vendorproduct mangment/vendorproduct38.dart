@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:revoo/Vendorproduct%20mangment/vendoraddproduct39.dart';
-
+import 'package:collection/collection.dart';
 import '../HRMS_admin_Screen/adbranchpg2.dart';
 import '../constants/constants.dart';
 
@@ -15,6 +16,8 @@ class Addproduct38 extends StatefulWidget {
 }
 
 class _Addproduct38State extends State<Addproduct38> {
+  var filtervalue = 'Std1';
+  var firebase = FirebaseFirestore.instance.collection("Products");
   String initialValue = '';
 
   var itemList = [
@@ -87,7 +90,8 @@ class _Addproduct38State extends State<Addproduct38> {
                                 children: [
 
                                   SizedBox( width: 40),
-                                  DropdownButton(
+                                  DropdownButton<String?>(
+                                    value:filtervalue,
 
                                     icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
 
@@ -95,7 +99,11 @@ class _Addproduct38State extends State<Addproduct38> {
 
                                       return DropdownMenuItem(value: items, child: Text(items));
 
-                                    }).toList(), onChanged: (String? value) {  },
+                                    }).toList(), onChanged: (String? value) {
+                                   setState(() {
+                                     filtervalue = value!;
+                                   });
+                                  },
                                   ),
 
 
@@ -110,291 +118,230 @@ class _Addproduct38State extends State<Addproduct38> {
                         ],
 
                       ),
+                      SizedBox(height: 20,),
 
 
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
+                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                          stream: firebase.snapshots() ,
+                          builder: (context, snapshot) {
 
-                        decoration: BoxDecoration(
+                            if (!snapshot.hasData) {
+                              return Text('No Data');
+                            }
+                            var documents = snapshot.requireData.docs;
+                            print('documents = ${documents.length}');
 
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Project name 1',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-                                  ],
+                            return DataTable(
+                              horizontalMargin: 18,
+                              columnSpacing: 22,
+                              columns: [
+                                DataColumn(
+                                  label: Text(
+                                    "Date",
+                                    style: TextStyle(
+                                        fontSize: 10, color: Colors.grey.shade600),
+                                  ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
+
+                                DataColumn(
+                                    label: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 20.0),
+                                        child: Text(
+                                          "Name",
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.grey.shade600),
+                                        ),
+                                      ),
+                                    )),
+                                DataColumn(
+                                    label: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 20.0),
+                                        child: Center(
+                                          child: Center(
+                                            child: Text(
+                                              "Type",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.grey.shade600),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )),
+                                DataColumn(
+                                    label: Padding(
+                                      padding:
+                                      const EdgeInsets.symmetric(horizontal: 5.0),
+                                      child: Center(
+                                        child: Text(
+                                          "Quantity",
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.grey.shade600),
+                                        ),
+                                      ),
+                                    )),
+                                DataColumn(
+                                    label: Padding(
+                                      padding:
+                                      const EdgeInsets.symmetric(horizontal: 5.0),
+                                      child: Center(
+                                        child: Text(
+                                          "Sellprice",
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.grey.shade600),
+                                        ),
+                                      ),
+                                    )),
+                                DataColumn(
+                                    label: Padding(
+                                      padding:
+                                      const EdgeInsets.symmetric(horizontal: 5.0),
+                                      child: Center(
+                                        child: Text(
+                                          "CostPrice",
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.grey.shade600),
+                                        ),
+                                      ),
+                                    )),
+                                DataColumn(
+                                  label: Text(
+                                    "Add",
+                                    style: TextStyle(
+                                        fontSize: 10, color: Colors.grey.shade600),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    "Delete",
+                                    style: TextStyle(
+                                        fontSize: 10, color: Colors.grey.shade600),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    "Add Stock",
+                                    style: TextStyle(
+                                        fontSize: 10, color: Colors.grey.shade600),
+                                  ),
+                                ),
+
+                              ],
+                              rows: documents.mapIndexed((index, element) {
+                                return DataRow(cells: [
+                                  DataCell(Text(
+                                    element['date'],
+                                    style: TextStyle(fontSize: 12),
+                                  )),
+
+                                  DataCell(
+                                    Container(
+                                      margin: EdgeInsets.symmetric(vertical: 15),
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Container(
+                                          width: 50,
+                                          height: 25,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: bgGrey,
+                                          ),
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                element['productname'],
+                                                style:
+                                                TextStyle(color: Colors.orange),
+                                              )),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: mannu,
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Project name 2',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
+                                  DataCell(
+                                    Container(
+                                      margin: EdgeInsets.symmetric(vertical: 15),
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Container(
+                                          width: 50,
+                                          height: 25,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: bgGrey,
+                                          ),
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                element['producttype'],
+                                                style:
+                                                TextStyle(color: Colors.orange),
+                                              )),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 18),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Project name 3',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
+                                  DataCell(Text(
+                                    element['quantity'],
+                                    style: TextStyle(fontSize: 12),
                                   ),
-                                )
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Project name 4',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
                                   ),
-                                )
+                                  DataCell(Text(
+                                    element['sellprice'],
+                                    style: TextStyle(fontSize: 12),
+                                  )),
+                                  DataCell(Text(
+                                    element['costprice'],
+                                    style: TextStyle(fontSize: 12),
+                                  )),
+                                  DataCell(
+                                    Column(
+                                        children:[
+                                     IconButton(onPressed: (){
 
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox( height: 20),
-                      Container(
-                        width: 500,
-                        height: 90,
-
-                        decoration: BoxDecoration(
-
-                          color: mannu,
-
-
-                          borderRadius: BorderRadius.circular(15),
-
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18.0,top: 13),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Project name 5',
-                                      style: TextStyle(
-                                        color: Colors.yellow.shade600,
-                                        fontSize: 19,
-
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                      child: Icon(Icons.more_vert,color: Colors.white),
-                                    ),
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 120),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 12,
-                                      ),
-                                    ),
+                                     }, icon: Icon(Icons.add)),
+                                        ])
                                   ),
-                                )
+                                  DataCell(
+                                      Column(
+                                          children:[
+                                            IconButton(onPressed: (){
+                                              setState(() {
+                                             FirebaseFirestore.instance.collection('Products').doc(snapshot.data!.docs[index]['cid']).delete();
+                                              });
+                                            }, icon: Icon(Icons.delete_forever),
+                                            ),
+                                          ])
+                                  ),
+                                  DataCell(
+                                      Column(
+                                          children:[
+                                            IconButton(onPressed: (){
+                                              Get.defaultDialog(
+                                                content: Column(
+                                                  children: [
 
-                              ],
-                            ),
-
-                          ),
-                        ),
-
-                      ),
-
+                                                  ],
+                                                )
+                                              );
+                                            }, icon: Icon(Icons.edit)),
+                                          ])
+                                  ),
 
 
+                                ]);
+                              }).toList(),
+                              border: TableBorder.all(color: kblue),
 
-
+                            );
+                          }),
                     ],
                   ),
-
                 ],
               ),
             ),

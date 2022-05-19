@@ -11,7 +11,7 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/constants.dart';
-import '../model/componentmodel.dart';
+import '../model/productmodel.dart';
 
 class AddComponents extends StatefulWidget {
 
@@ -68,6 +68,7 @@ class _AddComponentsState extends State<AddComponents> {
 
 
           SizedBox(height: 5,),
+
           Container(
             width: 200,
             child: Row(
@@ -169,7 +170,7 @@ class _AddComponentsState extends State<AddComponents> {
                       if (widget!.type == 'add') {
                         FirebaseFirestore.instance.collection('Products').add(
                             ProductModel().toJson(ProductModel(
-                                name: name.text,
+                                productname: name.text,
                                 quantity: quantity.value.text,
                                 sold: '0',
                                 components: jsonEncode(selectedItems),
@@ -186,10 +187,10 @@ class _AddComponentsState extends State<AddComponents> {
                           Get.back();
                         });
                       } else {
-                        FirebaseFirestore.instance.collection('Inventory').doc(
+                        FirebaseFirestore.instance.collection('Products').doc(
                             widget.id).update(
                             ProductModel().toJson(ProductModel(
-                                name: name.text,
+                                productname: name.text,
                                 quantity: quantity.value.text,
                                 sold: '0',
                                 components: jsonEncode(selectedItems),

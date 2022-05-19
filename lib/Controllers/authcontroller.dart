@@ -10,6 +10,7 @@ import '../APPS/selectplans.dart';
 import '../Login/login.dart';
 import '../Login/yourapps.dart';
 import '../constants/constants.dart';
+import 'myempcontroller.dart';
 
 class AuthController extends GetxController{
   //AuthController.instance
@@ -36,6 +37,7 @@ class AuthController extends GetxController{
       print("Login Page");
       Get.offAll(()=>LoginScreen());
     }else{
+      Get.put(MyEmpController());
       Get.offAll(()=>Yourapps());
     }
     // Get.offAll(SelectPlans(cdetails: {
