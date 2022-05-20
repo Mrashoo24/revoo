@@ -20,7 +20,7 @@ class _HRMSadmincustState extends State<Ordera> {
   var itemList = [
     'Pending',
     'Delivered',
-    'Returned',
+    'Refunds',
 
   ];
   @override
@@ -119,7 +119,7 @@ class _HRMSadmincustState extends State<Ordera> {
                       ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: 10,
+                        itemCount: 1,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: EdgeInsets.all(8),
@@ -141,35 +141,64 @@ class _HRMSadmincustState extends State<Ordera> {
                                   child: Column(
                                     children: [
                                       Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'Order Name 1',
-                                            style: TextStyle(
-                                              color: Colors.yellow.shade600,
-                                              fontSize: 19,
-
-
-                                            ),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'Order Number',
+                                                    style: TextStyle(
+                                                      color: Colors.yellow.shade600,
+                                                      fontSize: 22,
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 15),
+                                                  Container(
+                                                        width: 100,
+                                                        height: 25,
+                                                        decoration: BoxDecoration(
+                                                          color: kyellow,
+                                                          borderRadius: BorderRadius.circular(10),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            'Delivered',
+                                                            style: TextStyle(
+                                                                color: Colors.black, fontSize: 15),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                  SizedBox(width: 5),
+                                                  Container(
+                                                        width: 100,
+                                                        height: 25,
+                                                        decoration: BoxDecoration(
+                                                          color: kyellow,
+                                                          borderRadius: BorderRadius.circular(10),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            'Veiw Order',
+                                                            style: TextStyle(
+                                                                color: Colors.black, fontSize: 15),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                ],
+                                              ),
+                                              OrderFields('Customer Name:'),
+                                              OrderFields('Customer Number:'),
+                                              OrderFields('Customer Address:'),
+                                              OrderFields('Date:'),
+                                              OrderFields('Prize:'),
+                                              OrderFields('Quantity:'),
+                                            ],
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 120.0,bottom: 10),
-                                            child: Icon(Icons.more_vert,color: Colors.white),
-                                          ),
-
                                         ],
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(right: 120),
-                                        child: Center(
-                                          child: Text(
-                                            "Adrees sec 14 kherghr shelter park opp littel world mall  ",
-                                            style: TextStyle(
-                                              color: Colors.white,fontSize: 12,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-
                                     ],
                                   ),
 
@@ -181,24 +210,24 @@ class _HRMSadmincustState extends State<Ordera> {
                         }
                       ),
                       SizedBox( height: 18),
-
-
-
-
-
-
                     ],
                   ),
-
                 ],
               ),
             ),
           ),
         ),
-
       ),
     );
   }
 
-
+  Text OrderFields(text) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 12,
+      ),
+    );
+  }
 }
