@@ -37,7 +37,7 @@ class _HomePageMainState extends State<HomePageMain> {
     var homepages = [
       AdminDashboard(userDoc: widget.userDoc,),
       MyPlan(userDoc: widget.userDoc,),
-      DBcrud4(userDoc: widget.userDoc,),
+      AdminDashboard(userDoc: widget.userDoc,),
       Departments(key: Key('department'),userDoc: widget.userDoc,),
       AllEmployeePage(userDoc: widget.userDoc,),
       ShiftsManagement(userDoc: widget.userDoc,),
