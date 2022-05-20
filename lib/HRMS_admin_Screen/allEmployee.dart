@@ -58,15 +58,15 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
               ),
             ),
           ),
-          Container(
-            height: 30,
-            child: Center(
-              child: AutoSizeText(
-                ' ',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
+          // Container(
+          //   height: 30,
+          //   child: Center(
+          //     child: AutoSizeText(
+          //       ' ',
+          //       style: TextStyle(fontSize: 12),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
 
@@ -226,12 +226,12 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  height: 60,
-                                  child: Center(
-                                    child: Icon(Icons.edit),
-                                  ),
-                                ),
+                                // Container(
+                                //   height: 60,
+                                //   child: Center(
+                                //     child: Icon(Icons.edit),
+                                //   ),
+                                // ),
                               ],
                             );
                           }).toList()
@@ -250,9 +250,4 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
       ),
     );
   }
-
-
-
-
-
 }

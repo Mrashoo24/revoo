@@ -74,7 +74,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                    child: Padding(
 
-                      padding:  EdgeInsets.only(bottom: 15.0,top: 15,left: Get.width*0.25,right: Get.width*0.25),
+                      padding:  EdgeInsets.only(bottom: 15.0,top: 15,left: Get.width*0.35,right: Get.width*0.35),
                       child: Card(
                         color: Colors.grey.shade200,
                         shape: RoundedRectangleBorder(
@@ -168,7 +168,7 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
                                   });
 
                                   },
-                                child: Container(
+                                child: loading ? kprogressbar : Container(
                                   width: MediaQuery.of(context).size.width,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),

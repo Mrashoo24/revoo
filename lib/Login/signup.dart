@@ -66,7 +66,8 @@ class _SignupState extends State<Signup> {
                         borderRadius: BorderRadius.circular(20)
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 30.0,left: 30.0,top: 25,bottom: 20),
+                      padding:  EdgeInsets.only(bottom: 15.0,top: 15,left: Get.width*0.35,right: Get.width*0.35),
+
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,

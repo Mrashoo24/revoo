@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:revoo/Employee/Leaves/leaveHistory.dart';
 import 'package:revoo/constants/constants.dart';
 
 import '../HRMS_admin_Screen/plans/calendar.dart';
@@ -83,17 +84,35 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                       ),
                     ),
                     SizedBox(height: 5),
-                    Container(
-                      height: 120,
-                      width: Get.width,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          _dailCard('Taken', 5),
-                          _dailCard('Remaining', 15),
-                          _dailCard('Total Leaves', 20),
-                        ],
-                      ),
+                    StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                        stream:FirebaseFirestore.instance.collection('Leaves')
+                            .where('uid',isEqualTo: widget.userDoc.get('uid'))
+                            .snapshots(),
+                      builder: (context, snapshot) {
+                          
+                          if(!snapshot.hasData){
+                            return kprogressbar;
+                          }
+                          
+                          var userLeaveDoc = snapshot.requireData.docs;
+                          
+                          var takeLeave = userLeaveDoc.where((element) => element.get('status') == 0);
+                          var totalLeave = 15;
+                          var remainingLeave = totalLeave - takeLeave.length;
+
+                        return Container(
+                          height: 120,
+                          width: Get.width,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              _dailCard('Taken', takeLeave.length),
+                              _dailCard('Remaining', 15),
+                              _dailCard('Total Leaves', 20),
+                            ],
+                          ),
+                        );
+                      }
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,6 +310,7 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
                                 );
                                 setState(() {
                                   loading = false;
+                                  submit.clear();
                                 });
 
                           // CircularProgressIndicator(
@@ -379,46 +399,52 @@ class _LeaveRequestEmployeeState extends State<LeaveRequestEmployee> {
   }
 
   Widget _dailCard(name, number) {
-    return Container(
-      width: 120,
-      height: 80,
-      margin: EdgeInsets.only(left: 15),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('asset/userTEamsbackground.png'),
+
+    return InkWell(
+      onTap: (){
+        Get.to(LeaveHistory(userDoc: widget.userDoc));
+      },
+      child: Container(
+        width: 120,
+        height: 80,
+        margin: EdgeInsets.only(left: 15),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('asset/userTEamsbackground.png'),
+          ),
         ),
-      ),
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '$name',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Image.asset(
-                  'asset/EllipseforuserTeams.png',
-                  fit: BoxFit.fitWidth,
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '$name',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
                 ),
-                Image.asset('asset/EllipsesmallForuserTeams.png'),
-                Text('$number',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold))
-              ],
-            )
-          ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  Image.asset(
+                    'asset/EllipseforuserTeams.png',
+                    fit: BoxFit.fitWidth,
+                  ),
+                  Image.asset('asset/EllipsesmallForuserTeams.png'),
+                  Text('$number',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold))
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

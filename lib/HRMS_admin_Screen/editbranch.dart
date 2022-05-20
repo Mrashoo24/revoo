@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -25,10 +26,10 @@ class EditBranches extends StatefulWidget {
   const EditBranches({Key? key, required this.latlist, required this.name, required this.address, required this.id, required this.locality,}) : super(key: key);
 
   @override
-  _DBcrudState createState() => _DBcrudState();
+  _EditBranchesState createState() => _EditBranchesState();
 }
 
-class _DBcrudState extends State<EditBranches> {
+class _EditBranchesState extends State<EditBranches> {
 
   TextEditingController name = TextEditingController();
   TextEditingController address = TextEditingController();
@@ -254,7 +255,7 @@ class _DBcrudState extends State<EditBranches> {
                               fillColor: bgGrey,
                               contentPadding:
                               EdgeInsets.only(left: 20, top: 25, bottom: 25),
-                              hintText: latitude == null ? 'Location' : location1   ,
+                              hintText: latitude == null ? 'Location' : latitude.toString()   ,
                               hintStyle: TextStyle(color: Colors.grey),
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white)),
@@ -338,14 +339,17 @@ class _DBcrudState extends State<EditBranches> {
                           var uid =FirebaseAuth.instance.currentUser!.uid;
 
                           var userdata = await firestore.collection('Employee').doc(uid).get();
-
+                          var myLocation = GeoFirePoint(latitude, longitude);
+                          print(myLocation.data);
                           await firestore.collection('Branch').doc(widget.id).update(
                               {
                                 'branch_name': name.text,
-                                'address': address.text,
-                                'location' : [latitude,longitude],
+                                'address': userAddress,
+                                'location' : myLocation.data,
                                 'locality' : location1,
-                                'cid' : userdata.get('cid')
+                                'cid' : userdata.get('cid'),
+                                'latitude': latitude,
+                                'longitude' : longitude,
                               }
                           );
                         },

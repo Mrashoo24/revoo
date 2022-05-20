@@ -446,7 +446,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                           Row(
                             children: [
                               Text(
-                                  "Select Role"),
+                                  "Select Shift"),
                             ],
                           ),
                           Container(
@@ -463,7 +463,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                                         selectedValuec = value!;
                                       });
                                     },
-                                    items:empDoc.mapIndexed((index, element) => DropdownMenuItem(child: Text(element.get("name")),value: element.id,),
+                                    items:shiftDoc.mapIndexed((index, element) => DropdownMenuItem(child: Text(element.get("time")),value: element.id,),
                                     ).toList(),
                                   ),
 
@@ -472,11 +472,11 @@ class _AddEmployeeState extends State<AddEmployee> {
                             ),
                           ),
                           SizedBox(height: 12,),
-                          Row(
-                            children: [
-                              Text("Select Shift"),
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     Text("Select Shift"),
+                          //   ],
+                          // ),
                           // Container(
                           //   color: bgGrey,
                           //   child: Row(
@@ -593,9 +593,9 @@ class _AddEmployeeState extends State<AddEmployee> {
                                   }
                               );
 
-                              var docSnap =  await firestore.collection('Employee').doc('QOebgqfRn7wqKCpyrRtw').get();
-
-                              print(docSnap.data());
+                              // var docSnap =  await firestore.collection('Employee').doc('QOebgqfRn7wqKCpyrRtw').get();
+                              //
+                              // print(docSnap.data());
 
                               Get.back();
 

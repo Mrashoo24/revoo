@@ -238,7 +238,7 @@ class _DBcrudState extends State<AddBranches> {
                               fillColor: bgGrey,
                               contentPadding:
                               EdgeInsets.only(left: 20, top: 25, bottom: 25),
-                              hintText: latitude == null ? 'Location' : location1   ,
+                              hintText: latitude == null ? 'Location' : latitude.toString()   ,
                               hintStyle: TextStyle(color: Colors.grey),
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white)),

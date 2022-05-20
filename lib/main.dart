@@ -43,9 +43,9 @@ Future<void> main() async {
     projectId: "revoo-57e23",
     messagingSenderId: "702579453139",
     appId: "1:702579453139:web:082dbb521cac125eac3826",
-  ),).then((value) => Get.put(AuthController()))
-  :
+  ),).then((value) => Get.put(AuthController()))  :
  await Firebase.initializeApp().then((value) => Get.put(AuthController()))
+
   ;
   runApp(const MyApp());
 }

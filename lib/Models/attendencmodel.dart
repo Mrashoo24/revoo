@@ -14,6 +14,8 @@ class AttendencReportModel {
   String? timestamp;
   String? cid;
   String? difference;
+  String? latitude;
+  String? longitude;
 
   AttendencReportModel(
       {this.date,
@@ -29,7 +31,11 @@ class AttendencReportModel {
         this.did,
         this.status,
         this.timestamp,
-        this.cid,this.difference});
+        this.cid,this.difference,
+        this.latitude,
+        this.longitude
+
+        });
 
   AttendencReportModel.fromJson(Map<String, dynamic> json) {
 
@@ -48,6 +54,8 @@ class AttendencReportModel {
     timestamp = json['timestamp'];
     cid = json['cid'];
     difference = json['difference'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
 
   }
 
@@ -68,6 +76,8 @@ class AttendencReportModel {
     data['timestamp'] = this.timestamp;
     data['cid'] = this.cid;
     data['difference'] = this.difference;
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
     return data;
   }
 }

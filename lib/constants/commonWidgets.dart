@@ -1,10 +1,15 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:http/http.dart' as http;
+
+
 import 'constants.dart';
 
-class CommonWidgets{
+class CommonWidgets extends GetxService{
 
   Widget buildBNB(){
     return Container(
@@ -35,6 +40,16 @@ class CommonWidgets{
     );
   }
 
+  Future<Uint8List> getImage (url) async {
 
+    print('getting requres');
+
+    http.Response response1 = await http.get(
+      Uri.parse(url),
+    );
+
+    print('response $response1');
+   return response1.bodyBytes; //Uint8List
+  }
 
 }

@@ -1,9 +1,11 @@
 import 'package:cell_calendar/cell_calendar.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:revoo/graph/piechart.dart';
@@ -11,6 +13,9 @@ import 'package:revoo/graph/piechart.dart';
 import '../Models/attendencmodel.dart';
 import '../Timer/count_down.dart';
 import '../constants/constants.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 
 class EmployeeDashboard1 extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
@@ -57,16 +62,49 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
   DateTime? endtime ;
   Duration? endDifference;
 
+  String latitudeData = '';
+  String longitudeData = '';
+  Position? geoPosition;
+  Geolocator userGeoPoint = Geolocator();
+  GeoFirePoint? myLocation;
 
+  // LatLng _center ;
+  // Position currentLocation;
+
+
+  @override
+  void initState() {
+
+    super.initState();
+    getCurrentLocation();
+    // getUserLocation();
+  }
+
+  Future<Position> locateuser()async{
+    return Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+  }
+
+    getCurrentLocation() async{
+      LocationPermission permission = await Geolocator.checkPermission();
+
+      if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
+    print("Permission not given");
+    }else{
+        setState(() async {
+          geoPosition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+        });
+      }
+  }
 
   var currentDate = DateFormat('yyyy/MM/dd').format(DateTime.now());
 
 
+
   @override
   Widget build(BuildContext context) {
+    myLocation = GeoFirePoint(double.parse(latitudeData), double.parse(longitudeData));
     var H = MediaQuery.of(context).size.height;
     var W = MediaQuery.of(context).size.width;
-
     var firestore =  FirebaseFirestore.instance;
 
     print('curentDate = $currentDate');
@@ -154,15 +192,13 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                       print('endtime = ${endtime} convertedfCheckinTime = ${convertedfCheckinTime} Diffreence = ${endDifference!.inHours} Day = ${DateTime(1970,01)}');
 
                     }
-
-
                     return Column(
                       children: [
                         Stack(
                           children: [
                             Container(
                               width: Get.width,
-                              height: Get.height*0.53,
+                              height: Get.height*0.7,
                               child: ClipRect(
                                 child: Image.asset(
                                   'asset/dcbg.png',fit: BoxFit.fill,),
@@ -228,7 +264,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                             ),
                                           ],
                                         ),
-
                                       ),
                                       SizedBox(height: 10,),
                                       Align(
@@ -389,16 +424,21 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                                     cid: widget.userDoc.get('cid'),
                                                   ).toJson()).then((value) async {
 
+                                                    setState(() {
+                                                      latitudeData = '${geoPosition?.latitude}';
+                                                      longitudeData = '${geoPosition?.longitude}';
+                                                    });
+
                                                     await  firestore.collection('attendence_report').doc(value.id).update(
-                                                        {'id':value.id});
+
+                                                        {'id':value.id,'latitude': latitudeData,'longitude':longitudeData});
                                                     setState(() {
                                                       reasonController.clear();
+                                                      loading =false;
                                                       Get.back();
                                                     });
 
-                                                    setState(() {
-                                                      loading =false;
-                                                    });
+
 
 
                                                   });
@@ -428,8 +468,13 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                               cid: widget.userDoc.get('cid'),
                                             ).toJson()).then((value) async {
 
+                                              setState(() {
+                                                latitudeData = '${geoPosition?.latitude}';
+                                                longitudeData = '${geoPosition?.longitude}';
+                                              });
+
                                               await  firestore.collection('attendence_report').doc(value.id).update(
-                                                  {'id':value.id});
+                                                  {'id':value.id,'latitude':latitudeData,'longitude':longitudeData});
 
                                               setState(() {
                                                 loading =false;
@@ -616,7 +661,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                   //     ),
                                   //   ],
                                   // ),
-                                  currentDocument.isNotEmpty ?  Container(
+                                  currentDocument.isNotEmpty && checkoutTime == '' ?  Container(
 
                                       height: 200,
                                       child: CountdownPage(hours:endDifference!.inHours,minutes: endDifference!.inMinutes % 60,seconds: endDifference!.inSeconds % 60,))
