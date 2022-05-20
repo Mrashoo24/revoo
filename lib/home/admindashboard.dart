@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -233,7 +234,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   ),
                   SizedBox(width: 10,),
                   IconButton(icon:Icon(Icons.edit),color: Colors.white, onPressed: () async {
-                    Get.to(EditBranches(latlist: bdoc.get('location'), name: title, address: bdoc.get('address'), id: id, locality: bdoc.get('locality')));
+
+                    GeoPoint geo = bdoc.get('location.geopoint');
+
+                    Get.to(EditBranches(latlist: [geo.latitude,geo.longitude], name: title, address: bdoc.get('address'), id: id, locality: bdoc.get('locality')));
                     // await   showDialog(
                     //        context: context,
                     //        builder: (context) {

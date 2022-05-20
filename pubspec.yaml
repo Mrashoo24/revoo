@@ -74,6 +74,7 @@ dependencies:
   circular_countdown_timer: ^0.2.1
   flutter_countdown_timer: ^4.1.0
   geolocator: ^8.2.1
+  geoflutterfire: ^3.0.3
 
 
 

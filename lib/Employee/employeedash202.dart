@@ -1,9 +1,11 @@
 import 'package:cell_calendar/cell_calendar.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:revoo/graph/piechart.dart';
@@ -12,6 +14,8 @@ import '../Models/attendencmodel.dart';
 import '../Timer/count_down.dart';
 import '../constants/constants.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 
 class EmployeeDashboard1 extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
@@ -61,15 +65,26 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
   String latitudeData = '';
   String longitudeData = '';
   Position? geoPosition;
+  Geolocator userGeoPoint = Geolocator();
+  GeoFirePoint? myLocation;
+
+  // LatLng _center ;
+  // Position currentLocation;
+
 
   @override
   void initState() {
 
     super.initState();
     getCurrentLocation();
+    // getUserLocation();
   }
 
-  getCurrentLocation() async{
+  Future<Position> locateuser()async{
+    return Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+  }
+
+    getCurrentLocation() async{
       LocationPermission permission = await Geolocator.checkPermission();
 
       if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
@@ -81,13 +96,13 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
       }
   }
 
-
   var currentDate = DateFormat('yyyy/MM/dd').format(DateTime.now());
 
 
 
   @override
   Widget build(BuildContext context) {
+    myLocation = GeoFirePoint(double.parse(latitudeData), double.parse(longitudeData));
     var H = MediaQuery.of(context).size.height;
     var W = MediaQuery.of(context).size.width;
     var firestore =  FirebaseFirestore.instance;
@@ -249,7 +264,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                             ),
                                           ],
                                         ),
-
                                       ),
                                       SizedBox(height: 10,),
                                       Align(
