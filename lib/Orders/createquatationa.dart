@@ -61,339 +61,134 @@ class _Createquotation25State extends State<Createquotation25> {
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "customer Name",
+                              "Customer Name",
                               style: TextStyle(color: kblue),
                             )),
-                        SizedBox(height: 3),
+                        SizedBox(height: 5),
                         Divider(
                           height: 1,
                         ),
-                        SizedBox(height: 3),
-                        Container(
-                          height: 32,
-                          child: Container(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: bgGrey,
-                                contentPadding:
-                                EdgeInsets.only(left: 20, top: 2, bottom: 3),
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                              ),
-                            ),
-                          ),
-                        ),
+                        SizedBox(height: 10),
+                        QuotationTextfeild(),
                         SizedBox(height: 10),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Date",
+                            "Customer Number",
                             style: TextStyle(color: kblue),
                           ),
                         ),
                         Divider(
                           height: 1,
                         ),
-                        SizedBox(height: 3),
-                        Container(
-                          height: 32,
-                          child: Container(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: bgGrey,
-                                contentPadding:
-                                EdgeInsets.only(left: 20, top: 2, bottom: 3),
-                                hintStyle: TextStyle(color: Colors.grey),
-                                suffixIcon: Icon(
-                                  Icons.calendar_today,
-                                  color: kblue,
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Payment terms",
-                            style: TextStyle(color: kblue),
-                          ),
-                        ),
-                        Divider(
-                          thickness: 1,
-                          height: 2,
-                        ),
                         SizedBox(height: 5),
-                        Container(
-                          height: 32,
-                          child: Container(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: bgGrey,
-                                contentPadding:
-                                EdgeInsets.only(left: 20, top: 2, bottom: 3),
-                                hintStyle: TextStyle(color: Colors.grey),
-                                suffixIcon: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: kblue,
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
+                        QuotationTextfeild(),
+                        SizedBox(height: 10),
                         Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Payment method",
-                            style: TextStyle(color: kblue),
-                          ),
-                        ),
-                        Divider(
-                          thickness: 1,
-                          height: 2,
-                        ),
-                        SizedBox(height: 5),
-                        Container(
-                          height: 32,
-                          child: Container(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: bgGrey,
-                                contentPadding:
-                                EdgeInsets.only(left: 20, top: 2, bottom: 3),
-                                hintStyle: TextStyle(color: Colors.grey),
-                                suffixIcon: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: kblue,
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Tags",
-                            style: TextStyle(color: kblue),
-                          ),
-                        ),
-                        Divider(
-                          thickness: 1,
-                          height: 2,
-                        ),
-                        SizedBox(height: 5),
-                        Container(
-                          height: 32,
-                          child: Container(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: bgGrey,
-                                contentPadding:
-                                EdgeInsets.only(left: 20, top: 2, bottom: 3),
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 30),
-                        Row(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Online payment",
-                                style: TextStyle(color: kblue),
-                              ),
-                            ),
-                            SizedBox(height: 30),
-                            SizedBox(width: 163),
-                            Radio(
-                              value: yesvslue,
-                              groupValue: groupvalue,
-                              onChanged: (int? value) {
-                                setState(() {
-                                  groupvalue = value!;
-                                });
-                                setState(() {});
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 0),
-                        Row(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Online signature",
-                                style: TextStyle(color: kblue),
-                              ),
-                            ),
-                            SizedBox(height: 30),
-                            SizedBox(width: 161),
-                            Radio(
-                              value: novalue,
-                              groupValue: groupvalue,
-                              onChanged: (int? value) {
-                                setState(() {
-                                  groupvalue = value!;
-                                });
-                                setState(() {});
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 0),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Generate pdf",
-                                    style: TextStyle(color: kblue),
-                                  ),
-                                ),
-                                SizedBox(height: 30),
-                                SizedBox(width: 180),
-                                Radio(
-                                  value: govalue,
-                                  groupValue: groupvalue,
-                                  onChanged: (int? value) {
-                                    setState(() {
-                                      groupvalue = value!;
-                                    });
-                                    setState(() {});
-                                  },
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20),
-                            Container(
-                              width: 350,
-                              height: 39,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: Text(
-                                    'Add product',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 25),
-
-
-                            Row(
-                              children: [
-                                Text(
-                                  "Product name is added",
-                                  style: TextStyle(color: kblue, fontSize: 20),
-                                ),
-                                SizedBox(width: 65),
-                                Checkbox(
-                                    value: value1,
-                                    checkColor: Colors.white,
-                                    onChanged: (value) {
-                                      setState(() {});
-                                      this.value1 = value!;
-                                    }),
-
-                              ],
-                            ),
-
-
-
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            )),
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Email",
+          style: TextStyle(color: kblue),
+        ),
       ),
-    );
+                        Divider(
+                          thickness: 1,
+                          height: 2,
+                        ),
+                        SizedBox(height: 5),
+                        QuotationTextfeild(),
+                        SizedBox(height: 10),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Item Description",
+                            style: TextStyle(color: kblue),
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                          height: 2,
+                        ),
+                        SizedBox(height: 5),
+                        QuotationTextfeild(),
+                        SizedBox(height: 10),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Quantity",
+                            style: TextStyle(color: kblue),
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                          height: 2,
+                        ),
+                        SizedBox(height: 5),
+                        QuotationTextfeild(),
+                        SizedBox(height: 10),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Amount",
+                            style: TextStyle(color: kblue),
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                          height: 2,
+                        ),
+                        SizedBox(height: 5),
+                        QuotationTextfeild(),
+                        SizedBox(height: 30),
+
+                        Container(
+                         width: 150,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.blue.shade900,
+                                Colors.blue,
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text(
+                                'Add Quotation',
+                                style: TextStyle(color: Colors.white, fontSize: 15),),),),),
+                      ],),),],),)),),);
+  }
+
+  Container QuotationTextfeild() {
+    return Container(
+                        height: 32,
+                        child: Container(
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding:
+                              EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(12))),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(12))),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(12))),
+                            ),
+                          ),
+                        ),
+                      );
   }
 }

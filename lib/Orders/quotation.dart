@@ -126,7 +126,7 @@ class _HRMSadmincustState extends State<Quotation> {
                       ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 10,
+                          itemCount: 1,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: EdgeInsets.all(8),
@@ -149,19 +149,23 @@ class _HRMSadmincustState extends State<Quotation> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                                           children: [
                                             Text(
                                               'Product Name 1',
                                               style: TextStyle(
                                                 color: Colors.yellow.shade600,
-                                                fontSize: 19,
-
-
-                                              ),
-                                            ),
-                                            Icon(Icons.more_vert,color: Colors.white),
-
+                                                fontSize: 19,),),
+                                            SizedBox(width: 15),
+                                            Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
+                                              borderRadius: BorderRadius.circular(10),
+                                            ), child: Center(child: Text('Accept', style: TextStyle(
+                                                color: Colors.black, fontSize: 15),),),),
+                                            SizedBox(width: 5),
+                                            Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
+                                              borderRadius: BorderRadius.circular(10),
+                                            ), child: Center(child: Text('Reject', style: TextStyle(
+                                                color: Colors.black, fontSize: 15),),),),
                                           ],
                                         ),
                                         Text(

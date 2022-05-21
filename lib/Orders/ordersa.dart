@@ -91,6 +91,7 @@ class _HRMSadmincustState extends State<Ordera> {
                                     icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
                                     items: itemList.map((String items) {
                                       return DropdownMenuItem(value: items, child: Text(items));
+
                                     }).toList(), onChanged: (String? value) {  },
                                   ),
 
@@ -144,7 +145,8 @@ class _HRMSadmincustState extends State<Ordera> {
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [Row(children: [Text('Order Number',
+                                                children: [
+                                                  Row(children: [Text('Order Number',
                                                         style: TextStyle(color: Colors.yellow.shade600, fontSize: 22,),),
                                                       SizedBox(width: 15),
                                                       Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
@@ -153,12 +155,83 @@ class _HRMSadmincustState extends State<Ordera> {
                                                                     color: Colors.black, fontSize: 15),),),),
                                                       SizedBox(width: 5),
                                                       InkWell(
-                                                        onTap: (){Get.defaultDialog(content: Text("data"));},
+                                                        onTap: (){Get.defaultDialog(
+                                                          radius: 15,
+                                                            backgroundColor: Kdblue,
+                                                            title: "Order Details",
+                                                            titleStyle: TextStyle(color: kyellow),
+
+                                                            titlePadding: EdgeInsets.all(0),
+                                                            content: Column(
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                OrderFields('Customer Name:'),
+                                                                Text(
+                                                                  snapshot.data!.docs[index]['customer_name'],
+                                                                  style: TextStyle(
+                                                                      color: Colors.white, fontSize: 12),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                OrderFields('Customer Number:'),
+                                                                Text(
+                                                                  snapshot.data!.docs[index]['customer_number'],
+                                                                  style: TextStyle(
+                                                                      color: Colors.white, fontSize: 12),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                OrderFields('Customer Address:'),
+                                                                Text(
+                                                                  snapshot.data!.docs[index]['customer_address'],
+                                                                  style: TextStyle(
+                                                                      color: Colors.white, fontSize: 12),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                OrderFields('Date:'),
+                                                                Text(
+                                                                  snapshot.data!.docs[index]['date'],
+                                                                  style: TextStyle(
+                                                                      color: Colors.white, fontSize: 12),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                OrderFields('Prize:'),
+                                                                Text(
+                                                                  snapshot.data!.docs[index]['price'],
+                                                                  style: TextStyle(
+                                                                      color: Colors.white, fontSize: 12),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                OrderFields('Quantity:'),
+                                                                Text(
+                                                                  snapshot.data!.docs[index]['quantity'],
+                                                                  style: TextStyle(
+                                                                      color: Colors.white, fontSize: 12),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ));},
                                                         child: Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
                                                                 borderRadius: BorderRadius.circular(10),
                                                               ), child: Center(child: Text('Veiw Order', style: TextStyle(
                                                             color: Colors.black, fontSize: 15),),),),
                                                       ),],),
+                                                  SizedBox(height: 10),
                                                   Row(
                                                     children: [
                                                       OrderFields('Customer Name:'),
@@ -179,46 +252,7 @@ class _HRMSadmincustState extends State<Ordera> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Row(
-                                                    children: [
-                                                      OrderFields('Customer Address:'),
-                                                      Text(
-                                                        snapshot.data!.docs[index]['customer_address'],
-                                                        style: TextStyle(
-                                                            color: Colors.white, fontSize: 12),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      OrderFields('Date:'),
-                                                      Text(
-                                                          snapshot.data!.docs[index]['date'],
-                                                        style: TextStyle(
-                                                            color: Colors.white, fontSize: 12),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      OrderFields('Prize:'),
-                                                      Text(
-                                                        snapshot.data!.docs[index]['price'],
-                                                        style: TextStyle(
-                                                            color: Colors.white, fontSize: 12),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      OrderFields('Quantity:'),
-                                                      Text(
-                                                          snapshot.data!.docs[index]['quantity'],
-                                                        style: TextStyle(
-                                                            color: Colors.white, fontSize: 12),
-                                                      ),
-                                                    ],
-                                                  ),
+
                                                 ],
                                               ),
                                             ],
