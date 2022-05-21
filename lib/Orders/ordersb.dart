@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -18,9 +19,15 @@ class _Addorder23State extends State<Addorder23> {
   int novalue = 1;
   int govalue = 2;
   bool value1 = false;
-
+  TextEditingController customername = TextEditingController();
+  TextEditingController customernumber = TextEditingController();
+  TextEditingController customeraddress = TextEditingController();
+  TextEditingController quantity = TextEditingController();
+  TextEditingController price = TextEditingController();
+  TextEditingController date = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var firestore = FirebaseFirestore.instance.collection('Addorders');
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -65,7 +72,7 @@ class _Addorder23State extends State<Addorder23> {
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "customer Name",
+                          "Customer Name",
                           style: TextStyle(color: kblue),
                         )),
                     SizedBox(height: 3),
@@ -77,6 +84,7 @@ class _Addorder23State extends State<Addorder23> {
                       height: 32,
                       child: Container(
                         child: TextFormField(
+                          controller: customername,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
@@ -101,12 +109,12 @@ class _Addorder23State extends State<Addorder23> {
                     ),
                     SizedBox(height: 10),
                     Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Date",
-                        style: TextStyle(color: kblue),
-                      ),
-                    ),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Customer Number",
+                          style: TextStyle(color: kblue),
+                        )),
+                    SizedBox(height: 3),
                     Divider(
                       height: 1,
                     ),
@@ -115,280 +123,241 @@ class _Addorder23State extends State<Addorder23> {
                       height: 32,
                       child: Container(
                         child: TextFormField(
+                          controller: customernumber,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding:
-                                EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
                             hintStyle: TextStyle(color: Colors.grey),
-                            suffixIcon: Icon(
-                              Icons.calendar_today,
-                              color: kblue,
-                            ),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                             focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Payment terms",
-                        style: TextStyle(color: kblue),
-                      ),
-                    ),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Customer Address",
+                          style: TextStyle(color: kblue),
+                        )),
+                    SizedBox(height: 3),
                     Divider(
-                      thickness: 1,
-                      height: 2,
+                      height: 1,
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 3),
                     Container(
                       height: 32,
                       child: Container(
                         child: TextFormField(
+                          controller: customeraddress,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding:
-                                EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
                             hintStyle: TextStyle(color: Colors.grey),
-                            suffixIcon: Icon(
-                              Icons.arrow_drop_down,
-                              color: kblue,
-                            ),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                             focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Payment method",
-                        style: TextStyle(color: kblue),
-                      ),
-                    ),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Quantity",
+                          style: TextStyle(color: kblue),
+                        )),
+                    SizedBox(height: 3),
                     Divider(
-                      thickness: 1,
-                      height: 2,
+                      height: 1,
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 3),
                     Container(
                       height: 32,
                       child: Container(
                         child: TextFormField(
+                          controller: quantity,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding:
-                                EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
                             hintStyle: TextStyle(color: Colors.grey),
-                            suffixIcon: Icon(
-                              Icons.arrow_drop_down,
-                              color: kblue,
-                            ),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                             focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Tags",
-                        style: TextStyle(color: kblue),
-                      ),
-                    ),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Price",
+                          style: TextStyle(color: kblue),
+                        )),
+                    SizedBox(height: 3),
                     Divider(
-                      thickness: 1,
-                      height: 2,
+                      height: 1,
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 3),
                     Container(
                       height: 32,
                       child: Container(
                         child: TextFormField(
+                          controller: price,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: bgGrey,
                             contentPadding:
-                                EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                             focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(12))),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
-                    Row(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Online payment",
-                            style: TextStyle(color: kblue),
+                    SizedBox(height: 10),
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Date",
+                          style: TextStyle(color: kblue),
+                        )),
+                    SizedBox(height: 3),
+                    Divider(
+                      height: 1,
+                    ),
+                    SizedBox(height: 3),
+                    Container(
+                      height: 32,
+                      child: Container(
+                        child: TextFormField(
+                          controller: date,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: bgGrey,
+                            contentPadding:
+                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
                           ),
                         ),
-                        SizedBox(height: 30),
-                        SizedBox(width: 163),
-                        Radio(
-                          value: yesvslue,
-                          groupValue: groupvalue,
-                          onChanged: (int? value) {
-                            setState(() {
-                              groupvalue = value!;
-                            });
-                            setState(() {});
-                          },
-                        ),
-                      ],
+                      ),
                     ),
-                    SizedBox(height: 0),
-                    Row(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Online signature",
-                            style: TextStyle(color: kblue),
-                          ),
-                        ),
-                        SizedBox(height: 30),
-                        SizedBox(width: 161),
-                        Radio(
-                          value: novalue,
-                          groupValue: groupvalue,
-                          onChanged: (int? value) {
-                            setState(() {
-                              groupvalue = value!;
-                            });
-                            setState(() {});
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 0),
+
+
+
+
                     Column(
                       children: [
-                        Row(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Generate pdf",
-                                style: TextStyle(color: kblue),
-                              ),
-                            ),
-                            SizedBox(height: 30),
-                            SizedBox(width: 180),
-                            Radio(
-                              value: govalue,
-                              groupValue: groupvalue,
-                              onChanged: (int? value) {
-                                setState(() {
-                                  groupvalue = value!;
-                                });
-                                setState(() {});
-                              },
-                            ),
-                          ],
-                        ),
+
                         SizedBox(height: 20),
-                        Container(
-                          width: 350,
-                          height: 39,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.blue.shade900,
-                                Colors.blue,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
+                        InkWell(
+                          onTap: () {
+                            firestore.add({
+                              "customer_address" : customeraddress.text,
+                              "customer_name" : customername.text,
+                              "customer_number" : customernumber.text,
+                              "date" : DateTime.now(),
+                              "price" : price.text,
+                              "quantity" : quantity.text
+                            }).then((value) {
+                              firestore.doc(value.id).update({
+
+                                "id" : value.id
+
+                              });
+
+
+                            }
+
+
+                            );
+                          },
+                          child: Container(
+                            width: 350,
+                            height: 39,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.blue.shade900,
+                                  Colors.blue,
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text(
-                                'Add product',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Text(
+                                  'Add product',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 25),
-
-
-                        Row(
-                          children: [
-                            Text(
-                              "Product name is added",
-                              style: TextStyle(color: kblue, fontSize: 20),
-                            ),
-                            SizedBox(width: 65),
-                            Checkbox(
-                                value: value1,
-                                checkColor: Colors.white,
-                                onChanged: (value) {
-                                  setState(() {});
-                                  this.value1 = value!;
-                                }),
-
-                          ],
-                        ),
-
-
-
                       ],
                     ),
                   ],
