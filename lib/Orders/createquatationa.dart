@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +17,16 @@ class _Createquotation25State extends State<Createquotation25> {
   int novalue = 1;
   int govalue = 2;
   bool value1 = false;
+
+  TextEditingController customername = TextEditingController();
+  TextEditingController customernumber = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController itemdescription = TextEditingController();
+  TextEditingController quantity = TextEditingController();
+  TextEditingController amount = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var firestore = FirebaseFirestore.instance.collection("CreateQuotation");
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -69,7 +78,7 @@ class _Createquotation25State extends State<Createquotation25> {
                           height: 1,
                         ),
                         SizedBox(height: 10),
-                        QuotationTextfeild(),
+                        QuotationTextfeild(customername),
                         SizedBox(height: 10),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -82,7 +91,7 @@ class _Createquotation25State extends State<Createquotation25> {
                           height: 1,
                         ),
                         SizedBox(height: 5),
-                        QuotationTextfeild(),
+                        QuotationTextfeild(customernumber),
                         SizedBox(height: 10),
                         Align(
         alignment: Alignment.centerLeft,
@@ -96,7 +105,7 @@ class _Createquotation25State extends State<Createquotation25> {
                           height: 2,
                         ),
                         SizedBox(height: 5),
-                        QuotationTextfeild(),
+                        QuotationTextfeild(email),
                         SizedBox(height: 10),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -110,7 +119,7 @@ class _Createquotation25State extends State<Createquotation25> {
                           height: 2,
                         ),
                         SizedBox(height: 5),
-                        QuotationTextfeild(),
+                        QuotationTextfeild(itemdescription),
                         SizedBox(height: 10),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -124,7 +133,7 @@ class _Createquotation25State extends State<Createquotation25> {
                           height: 2,
                         ),
                         SizedBox(height: 5),
-                        QuotationTextfeild(),
+                        QuotationTextfeild(quantity ),
                         SizedBox(height: 10),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -138,55 +147,68 @@ class _Createquotation25State extends State<Createquotation25> {
                           height: 2,
                         ),
                         SizedBox(height: 5),
-                        QuotationTextfeild(),
+                        QuotationTextfeild(amount ),
                         SizedBox(height: 30),
 
-                        Container(
-                         width: 150,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.blue.shade900,
-                                Colors.blue,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
+                        InkWell(
+                          onTap: (){
+                            firestore.add(
+                              {
+                                "customer_name" : customername.text,
+                                "customer_number" : customernumber.text,
+                                "email" : email.text,
+
+
+
+                              }
+                            );
+                          },
+                          child: Container(
+                           width: 150,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.blue.shade900,
+                                  Colors.blue,
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text(
-                                'Add Quotation',
-                                style: TextStyle(color: Colors.white, fontSize: 15),),),),),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Text(
+                                  'Add Quotation',
+                                  style: TextStyle(color: Colors.white, fontSize: 15),),),),),
+                        ),
                       ],),),],),)),),);
   }
 
-  Container QuotationTextfeild() {
+  Container QuotationTextfeild(controller)  {
     return Container(
                         height: 32,
-                        child: Container(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: bgGrey,
-                              contentPadding:
-                              EdgeInsets.only(left: 20, top: 2, bottom: 3),
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
-                            ),
+                        child: TextFormField(
+                          controller:controller,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: bgGrey,
+                            contentPadding:
+                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
                           ),
                         ),
                       );

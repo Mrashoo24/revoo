@@ -325,15 +325,7 @@ class _Addorder23State extends State<Addorder23> {
                             }).then((value) {
                               firestore.doc(value.id).update({
 
-                                "id" : value.id
-
-                              });
-
-
-                            }
-
-
-                            );
+                                "id" : value.id});});
                             Get.to(Ordera());
                           },
                           child: Container(
