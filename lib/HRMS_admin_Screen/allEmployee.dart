@@ -201,6 +201,8 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                                 Container(
                                   height: 60,
 
+
+
                                   child: Center(
                                     child: Text(
                                       e.get('name'),
