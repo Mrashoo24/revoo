@@ -75,7 +75,7 @@ class _HRMSadmincustState extends State<Ordera> {
                           )
                           ),
                           Container(
-                            height:25,
+                            height:20,
                             decoration: BoxDecoration(
                                 color:  bgGrey,
                                 borderRadius: BorderRadius.circular(10)
@@ -88,13 +88,9 @@ class _HRMSadmincustState extends State<Ordera> {
 
                                   SizedBox( width: 40),
                                   DropdownButton(
-
                                     icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
-
                                     items: itemList.map((String items) {
-
                                       return DropdownMenuItem(value: items, child: Text(items));
-
                                     }).toList(), onChanged: (String? value) {  },
                                   ),
 
@@ -147,52 +143,22 @@ class _HRMSadmincustState extends State<Ordera> {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        'Order Number',
-                                                        style: TextStyle(
-                                                          color: Colors.yellow.shade600,
-                                                          fontSize: 22,
-                                                        ),
-                                                      ),
+                                              Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [Row(children: [Text('Order Number',
+                                                        style: TextStyle(color: Colors.yellow.shade600, fontSize: 22,),),
                                                       SizedBox(width: 15),
-                                                      Container(
-                                                            width: 100,
-                                                            height: 25,
-                                                            decoration: BoxDecoration(
-                                                              color: kyellow,
+                                                      Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
                                                               borderRadius: BorderRadius.circular(10),
-                                                            ),
-                                                            child: Center(
-                                                              child: Text(
-                                                                'Delivered',
-                                                                style: TextStyle(
-                                                                    color: Colors.black, fontSize: 15),
-                                                              ),
-                                                            ),
-                                                          ),
+                                                            ), child: Center(child: Text('Delivered', style: TextStyle(
+                                                                    color: Colors.black, fontSize: 15),),),),
                                                       SizedBox(width: 5),
-                                                      Container(
-                                                            width: 100,
-                                                            height: 25,
-                                                            decoration: BoxDecoration(
-                                                              color: kyellow,
-                                                              borderRadius: BorderRadius.circular(10),
-                                                            ),
-                                                            child: Center(
-                                                              child: Text(
-                                                                'Veiw Order',
-                                                                style: TextStyle(
-                                                                    color: Colors.black, fontSize: 15),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                    ],
-                                                  ),
+                                                      InkWell(
+                                                        onTap: (){Get.defaultDialog(content: Text("data"));},
+                                                        child: Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
+                                                                borderRadius: BorderRadius.circular(10),
+                                                              ), child: Center(child: Text('Veiw Order', style: TextStyle(
+                                                            color: Colors.black, fontSize: 15),),),),
+                                                      ),],),
                                                   Row(
                                                     children: [
                                                       OrderFields('Customer Name:'),
@@ -227,7 +193,7 @@ class _HRMSadmincustState extends State<Ordera> {
                                                     children: [
                                                       OrderFields('Date:'),
                                                       Text(
-                                                          (""),
+                                                          snapshot.data!.docs[index]['date'],
                                                         style: TextStyle(
                                                             color: Colors.white, fontSize: 12),
                                                       ),
