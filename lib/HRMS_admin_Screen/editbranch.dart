@@ -80,7 +80,7 @@ class _EditBranchesState extends State<EditBranches> {
         _permissionGranted = await location.requestPermission();
         if (_permissionGranted != PermissionStatus.granted) {
           Get.snackbar(
-              "Error", "Please Turn on Location to Show Restaurant Near You");
+              "Error", "Please Turn on Location");
           return [43.69289033334936, -105.21582876032612];
         }
       }
@@ -90,7 +90,7 @@ class _EditBranchesState extends State<EditBranches> {
         _serviceEnabled = await location.requestService();
         if (!_serviceEnabled) {
           Get.snackbar(
-              "Error", "Please Turn on Location to Show Restaurant Near You");
+              "Error", "Please Turn on Location");
 
           return [43.69289033334936, -105.21582876032612];
         }
@@ -352,6 +352,7 @@ class _EditBranchesState extends State<EditBranches> {
                                 'longitude' : longitude,
                               }
                           );
+                          Get.back();
                         },
                         child: Container(
                           width: 110,

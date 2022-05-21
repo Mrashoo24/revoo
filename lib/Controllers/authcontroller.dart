@@ -63,11 +63,11 @@ class AuthController extends GetxController{
 
       await auth.signInWithEmailAndPassword(email: email, password: password);
 
-    }catch(e){
+    } on FirebaseAuthException catch(e){
       Get.snackbar("About Login", "Login Message",
         backgroundColor: kblue.withOpacity(0.4),
         snackPosition: SnackPosition.BOTTOM,
-        titleText: Text(e.toString().replaceAll('[firebase_auth/user-not-found] ','')),
+        titleText: Text(e.message.toString().replaceAll('[firebase_auth/user-not-found] ','')),
 
       );
     }

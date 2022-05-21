@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:revoo/constants/commonWidgets.dart';
 
 import 'package:revoo/constants/commonWidgets.dart';
@@ -28,3 +29,5 @@ var mannu = Color(0xFF1B57A7);
 var kprogressbar = Center(child: CircularProgressIndicator(color: kblue),);
 
 var clo = Color(0xFFF5DF9F);
+
+ final bool kchecksize = Get.height < 1000 ;
