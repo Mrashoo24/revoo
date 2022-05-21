@@ -105,18 +105,11 @@ class _Addproduct38State extends State<Addproduct38> {
                                    });
                                   },
                                   ),
-
-
                                 ],
                               ),
                             ),
-
-
-
                           ),
-
                         ],
-
                       ),
                       SizedBox(height: 20,),
 
@@ -124,7 +117,6 @@ class _Addproduct38State extends State<Addproduct38> {
                       StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                           stream: firebase.snapshots() ,
                           builder: (context, snapshot) {
-
                             if (!snapshot.hasData) {
                               return Text('No Data');
                             }
@@ -325,21 +317,19 @@ class _Addproduct38State extends State<Addproduct38> {
                                               Get.defaultDialog(
                                                 content: Column(
                                                   children: [
-
-                                                  ],
+                                                    ],
                                                 )
                                               );
                                             }, icon: Icon(Icons.edit)),
                                           ])
                                   ),
-
-
                                 ]);
                               }).toList(),
                               border: TableBorder.all(color: kblue),
 
                             );
-                          }),
+                          }
+                          ),
                     ],
                   ),
                 ],

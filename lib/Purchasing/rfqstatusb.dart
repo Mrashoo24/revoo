@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,7 @@ class RFQsStatusb extends StatefulWidget {
 }
 
 class _RFQsStatusState extends State<RFQsStatusb> {
-
+  var firebase = FirebaseFirestore.instance.collection("RFQform");
   String initialValue = '';
 
   var itemList = [
@@ -86,311 +87,287 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                   CircleAvatar(
                     backgroundColor: Colors.green,
                     radius: 10,//Text
-                  ),SizedBox(width: 8),Text('Approved',style: TextStyle(color: kblue,fontSize: 20),),
+                  ),SizedBox(width: 8),
+                  InkWell(child: Text('Approved',style: TextStyle(color: kblue,fontSize: 20),)),
                   SizedBox(width: 25),
                   CircleAvatar(
                     backgroundColor: reddy,
                     radius: 10,//Text
-                  ),SizedBox(width: 8),Text('Declined',style: TextStyle(color: kblue,fontSize: 20),),
+                  ),SizedBox(width: 8),
+                  InkWell(child: Text('Declined',style: TextStyle(color: kblue,fontSize: 20),)),
                 ],
               ),
               SizedBox(height: 15),
-              Container(
-                height: Get.height,
-                width: Get.width,
-
-                child: Center(
-                  child: ListView(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      DataTable(
-                          columns: [
-                            DataColumn(label: Text(''),),
-                            DataColumn(label: Text('RFQs',style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black
-                            ),),),
-                            DataColumn(label: Text('Prize',style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black
-                            ),),),
-                            DataColumn(label: Text('Delivery\nTime',style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black
-                            ),),),
-                            DataColumn(label: Text('Meeting',style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black
-                            ),),),
-
-
-
-                          ],
-                          rows: [
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: Colors.green,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('2',style: TextStyle(color: kyellow),)
-                              ),
+              StreamBuilder<QuerySnapshot<Map<String,dynamic>>>(
+                stream: firebase.snapshots(),
+                builder: (context, snapshot) {
+                  if(!snapshot.hasData){
+                    return Text('No Data');
+                  }
+                  var documents = snapshot.requireData.docs;
+                  print('documents = ${documents.length}');
+                  return Container(
+                    height: Get.height,
+                    width: Get.width,
+                    child: Center(
+                      child: ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          DataTable(
+                              columns: [
+                                DataColumn(label: Text(''),),
+                                DataColumn(label: Text('RFQs',style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black
+                                ),),),
+                                DataColumn(label: Text('Prize',style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black
+                                ),),),
+                                DataColumn(label: Text('Delivery\nTime',style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black
+                                ),),),
+                              ],
+                              rows: [
+                                DataRow(cells: [
+                                  DataCell(
+                                    CircleAvatar(
+                                      backgroundColor: Colors.green,
+                                      radius: 10,//Text
+                                    ),
+                                  ),
+                                  DataCell(
+                                      Text('RFQ Name')
+                                  ),
+                                  DataCell(
+                                      Text('8000')
+                                  ),
+                                  DataCell(
+                                      Text('SQL Engine')
+                                  ),
 
 
 
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: reddy,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('3',style: TextStyle(color: kyellow),)
-                              ),
+                                ]),
+                                DataRow(cells: [
+                                  DataCell(
+                                    CircleAvatar(
+                                      backgroundColor: reddy,
+                                      radius: 10,//Text
+                                    ),
+                                  ),
+                                  DataCell(
+                                      Text('RFQ Name')
+                                  ),
+                                  DataCell(
+                                      Text('8000')
+                                  ),
+                                  DataCell(
+                                      Text('SQL Engine')
+                                  ),
 
 
 
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: Colors.green,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('5',style: TextStyle(color: kyellow),)
-                              ),
 
+                                ]),
+                                // DataRow(cells: [
+                                //   DataCell(
+                                //     CircleAvatar(
+                                //       backgroundColor: Colors.green,
+                                //       radius: 10,//Text
+                                //     ),
+                                //   ),
+                                //   DataCell(
+                                //       Text('RFQ Name')
+                                //   ),
+                                //   DataCell(
+                                //       Text('8000')
+                                //   ),
+                                //   DataCell(
+                                //       Text('SQL Engine')
+                                //   ),
+                                //
+                                //
+                                //
+                                //
+                                // ]),
+                                // DataRow(cells: [
+                                //   DataCell(
+                                //     CircleAvatar(
+                                //       backgroundColor: reddy,
+                                //       radius: 10,//Text
+                                //     ),
+                                //   ),
+                                //   DataCell(
+                                //       Text('RFQ Name')
+                                //   ),
+                                //   DataCell(
+                                //       Text('8000')
+                                //   ),
+                                //   DataCell(
+                                //       Text('SQL Engine')
+                                //   ),
+                                //
+                                //
+                                //
+                                //
+                                // ]),
+                                // DataRow(cells: [
+                                //   DataCell(
+                                //     CircleAvatar(
+                                //       backgroundColor: Colors.green,
+                                //       radius: 10,//Text
+                                //     ),
+                                //   ),
+                                //   DataCell(
+                                //       Text('RFQ Name')
+                                //   ),
+                                //   DataCell(
+                                //       Text('8000')
+                                //   ),
+                                //   DataCell(
+                                //       Text('SQL Engine')
+                                //   ),
+                                //
+                                //
+                                //
+                                //
+                                // ]),
+                                // DataRow(cells: [
+                                //   DataCell(
+                                //     CircleAvatar(
+                                //       backgroundColor: reddy,
+                                //       radius: 10,//Text
+                                //     ),
+                                //   ),
+                                //   DataCell(
+                                //       Text('RFQ Name')
+                                //   ),
+                                //   DataCell(
+                                //       Text('8000')
+                                //   ),
+                                //   DataCell(
+                                //       Text('SQL Engine')
+                                //   ),
+                                //
+                                //
+                                //
+                                //
+                                // ]),
+                                // DataRow(cells: [
+                                //   DataCell(
+                                //     CircleAvatar(
+                                //       backgroundColor: Colors.green,
+                                //       radius: 10,//Text
+                                //     ),
+                                //   ),
+                                //   DataCell(
+                                //       Text('RFQ Name')
+                                //   ),
+                                //   DataCell(
+                                //       Text('8000')
+                                //   ),
+                                //   DataCell(
+                                //       Text('SQL Engine')
+                                //   ),
+                                //
+                                //
+                                //
+                                // ]),
+                                // DataRow(cells: [
+                                //   DataCell(
+                                //     CircleAvatar(
+                                //       backgroundColor: reddy,
+                                //       radius: 10,//Text
+                                //     ),
+                                //   ),
+                                //   DataCell(
+                                //       Text('RFQ Name')
+                                //   ),
+                                //   DataCell(
+                                //       Text('8000')
+                                //   ),
+                                //   DataCell(
+                                //       Text('SQL Engine')
+                                //   ),
+                                //
+                                //
+                                //
+                                //
+                                // ]),
+                                // DataRow(cells: [
+                                //   DataCell(
+                                //     CircleAvatar(
+                                //       backgroundColor: Colors.green,
+                                //       radius: 10,//Text
+                                //     ),
+                                //   ),
+                                //   DataCell(
+                                //       Text('RFQ Name')
+                                //   ),
+                                //   DataCell(
+                                //       Text('8000')
+                                //   ),
+                                //   DataCell(
+                                //       Text('SQL Engine')
+                                //   ),
+                                //
+                                //
+                                //
+                                //
+                                // ]),
+                                // DataRow(cells: [
+                                //   DataCell(
+                                //     CircleAvatar(
+                                //       backgroundColor: reddy,
+                                //       radius: 10,//Text
+                                //     ),
+                                //   ),
+                                //   DataCell(
+                                //       Text('RFQ Name')
+                                //   ),
+                                //   DataCell(
+                                //       Text('8000')
+                                //   ),
+                                //   DataCell(
+                                //       Text('SQL Engine')
+                                //   ),
+                                //
+                                //
+                                //
+                                //
+                                // ]),
+                                // DataRow(cells: [
+                                //   DataCell(
+                                //     CircleAvatar(
+                                //       backgroundColor: Colors.green,
+                                //       radius: 10,//Text
+                                //     ),
+                                //   ),
+                                //   DataCell(
+                                //       Text('RFQ Name')
+                                //   ),
+                                //   DataCell(
+                                //       Text('8000')
+                                //   ),
+                                //   DataCell(
+                                //       Text('SQL Engine')
+                                //   ),
+                                //
+                                // ]),
 
+                              ])
+                        ],
+                      ),
+                    ),
 
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: reddy,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text("3",style: TextStyle(color: kyellow),)
-                              ),
-
-
-
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: Colors.green,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('6',style: TextStyle(color: kyellow),)
-                              ),
-
-
-
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: reddy,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('5',style: TextStyle(color: kyellow),)
-                              ),
-
-
-
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: Colors.green,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('6',style: TextStyle(color: kyellow),)
-                              ),
-
-
-
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: reddy,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('8',style: TextStyle(color: kyellow),)
-                              ),
-
-
-
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: Colors.green,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('6',style: TextStyle(color: kyellow),)
-                              ),
-
-
-
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: reddy,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('9',style: TextStyle(color: kyellow),)
-                              ),
-
-
-
-                            ]),
-                            DataRow(cells: [
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundColor: Colors.green,
-                                  radius: 10,//Text
-                                ),
-                              ),
-                              DataCell(
-                                  Text('RFQ Name')
-                              ),
-                              DataCell(
-                                  Text('8000')
-                              ),
-                              DataCell(
-                                  Text('SQL Engine')
-                              ),
-                              DataCell(
-                                  Text('4',style: TextStyle(color: kyellow),)
-                              ),
-
-
-
-                            ]),
-
-                          ])
-                    ],
-                  ),
-                ),
-
+                  );
+                }
               ),
             ],
           ),
