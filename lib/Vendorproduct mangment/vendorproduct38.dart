@@ -303,10 +303,40 @@ class _Addproduct38State extends State<Addproduct38> {
                                       Column(
                                           children:[
                                             IconButton(onPressed: (){
-                                              setState(() {
-                                             FirebaseFirestore.instance.collection('Products').doc(snapshot.data!.docs[index]['cid']).delete();
-                                              });
-                                            }, icon: Icon(Icons.delete_forever),
+
+                                              Get.defaultDialog(
+                                                title:  'Are oyu sure you want to delete?',
+                                                content:
+                                                Container(
+                                                  height: 200,
+                                                  width: 200,
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: (){
+
+                                                          setState(() {
+                                                            FirebaseFirestore.instance.collection('Products').doc(snapshot.data!.docs[index]['cid']).delete();
+                                                          });
+                                                        },
+                                                          child:
+                                                      Text('Yes')),
+                                                      InkWell(
+                                                          onTap: (){
+                                                            Get.back();
+                                                          },
+                                                          child: Text('No')),
+                                                    ],
+                                                  ),
+
+
+                                                ),
+
+                                              );
+                                            },
+
+                                             icon: Icon(Icons.delete_forever),
                                             ),
                                           ])
                                   ),
