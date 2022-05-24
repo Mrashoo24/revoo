@@ -1,13 +1,17 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pdf;
 import 'package:revoo/constants/commonWidgets.dart';
@@ -37,6 +41,13 @@ class _HRMSReportsState extends State<HRMSReports> {
   List<List<String>> adminReportList = [];
   List<List<String>> servicesReportList = [];
   List<List<String>> workingReportList = [];
+
+
+  var selectedFilter2 = DateFormat('yyyy').format(DateTime.now());
+
+  var selectedFilter3 = DateFormat('MMM').format(DateTime.now());
+
+
   Set userSet = {};
   var _isDailyReport = false;
   var _isOpening = false;
@@ -47,15 +58,46 @@ class _HRMSReportsState extends State<HRMSReports> {
 
   @override
   Widget build(BuildContext context) {
+
     var listofReports = [
       "Attendance Report All",
       "Daily Report All",
-      "Employee Attendance Report"
+      "Employee Attendance Report",
+      "Salary Report"
       // 'OutGeo Login',
       // 'Certificate report how many employees ask for certificate',
       // 'Administrative leave report',
       // 'Working Report',
     ];
+
+    var dropList2 = [
+      DropdownMenuItem(child: Text('2021'),value: '2021',),
+      DropdownMenuItem(child: Text('2022'),value: '2022',),
+      DropdownMenuItem(child: Text('2023'),value: '2023',),
+      DropdownMenuItem(child: Text('2024'),value: '2024',),
+      DropdownMenuItem(child: Text('2025'),value: '2025',),
+      DropdownMenuItem(child: Text('2026'),value: '2026',),
+      DropdownMenuItem(child: Text('2027'),value: '2027',),
+      DropdownMenuItem(child: Text('2028'),value: '2028',),
+      DropdownMenuItem(child: Text('2029'),value: '2029',),
+      DropdownMenuItem(child: Text('2030'),value: '2030',),
+    ];
+
+    var dropList3 = [
+      DropdownMenuItem(child: Text('Jan'),value: 'Jan',),
+      DropdownMenuItem(child: Text('Feb'),value: 'Feb',),
+      DropdownMenuItem(child: Text('Mar'),value: 'Mar',),
+      DropdownMenuItem(child: Text('Apr'),value: 'Apr',),
+      DropdownMenuItem(child: Text('May'),value: 'May',),
+      DropdownMenuItem(child: Text('Jun'),value: 'Jun',),
+      DropdownMenuItem(child: Text('Jul'),value: 'Jul',),
+      DropdownMenuItem(child: Text('Aug'),value: 'Aug',),
+      DropdownMenuItem(child: Text('Sep'),value: 'Sep',),
+      DropdownMenuItem(child: Text('Oct'),value: 'Oct',),
+      DropdownMenuItem(child: Text('Nov'),value: 'Nov',),
+      DropdownMenuItem(child: Text('Dec'),value: 'Dec',),
+    ];
+
 
 
 
@@ -337,6 +379,169 @@ class _HRMSReportsState extends State<HRMSReports> {
       html.Url.revokeObjectUrl(url);
 
     }
+
+    Future<void> salaryReport({
+      required String reportName,
+      required String userName,
+      required String userId,
+      required designation,
+      required String fromdate,
+      required String todate,
+      required List<List<String>> listofreport,
+      required headers,
+      required logo,
+      required companyName
+    }) async {
+      final certificatePdf = pdf.Document();
+
+      // Uint8List bytes1 = (await NetworkAssetBundle(Uri.parse(logo))
+      //     .load(logo))
+      //     .buffer
+      //     .asUint8List();
+      final profileImage = pdf.MemoryImage(
+        (await rootBundle.load('asset/anlogos.jpg')).buffer.asUint8List(),
+      );
+
+      certificatePdf.addPage(
+        pdf.MultiPage(
+          pageFormat: PdfPageFormat.a4,
+          margin: const pdf.EdgeInsets.all(32.0),
+          build: (pdf.Context context) {
+            return <pdf.Widget>[
+              pdf.Header(
+                child: pdf.Column(
+                  crossAxisAlignment: pdf.CrossAxisAlignment.start,
+                  children: [
+                    pdf.Row(
+                        mainAxisAlignment: pdf.MainAxisAlignment.center,
+                        children: [
+                          pdf.Image(profileImage,height: 100,width: 100),
+                        ]
+                    ),
+                    pdf.Row(
+                        mainAxisAlignment: pdf.MainAxisAlignment.center,
+                        children: [
+                          pdf.Text(
+                            '$companyName',
+                            textAlign: pdf.TextAlign.center,
+                            style: pdf.TextStyle(
+                                fontWeight: pdf.FontWeight.bold,
+                                fontSize: 16,
+                                decoration: pdf.TextDecoration.underline,
+                                color: PdfColor.fromHex('0D3974')
+                            ),
+                          ),
+                        ]
+                    ),
+                    pdf.Text('Date: ' + fromdate,style: pdf.TextStyle(color:PdfColor.fromHex('0D3974'))),
+                    todate == null ? pdf.SizedBox()  : pdf.Text('To Date: ' + todate,style: pdf.TextStyle(color:PdfColor.fromHex('0D3974'))),
+
+                  ],
+                ),
+              ),
+
+              pdf.Row(
+                  mainAxisAlignment: pdf.MainAxisAlignment.center,
+                  children: [
+                    pdf.Text(
+                      '$reportName',
+                      textAlign: pdf.TextAlign.center,
+                      style: pdf.TextStyle(
+                          fontWeight: pdf.FontWeight.bold,
+                          fontSize: 24,
+                          decoration: pdf.TextDecoration.underline,
+                          color: PdfColor.fromHex('0D3974')
+                      ),
+                    ),
+                  ]
+              ),
+//               pdf.Paragraph(
+//                 margin: const pdf.EdgeInsets.only(top: 12.0),
+//                 text: '''
+// The Sharjah Education Council of the Government of Sharjah testifies that , an Emirati national, has been working for us since and remains at the helm to date, and the following are their job data:''',
+//               ),
+              pdf.SizedBox(height: 20),
+
+              pdf.Text(
+                'Employee Name: $userName',
+                textAlign: pdf.TextAlign.center,
+                style: pdf.TextStyle(
+                    fontWeight: pdf.FontWeight.bold,
+                    fontSize: 10,
+                    color: PdfColor.fromHex('0D3974')
+                ),
+              ),
+              pdf.SizedBox(height: 20),
+
+              pdf.Text(
+                'Employee Id: $userId',
+                textAlign: pdf.TextAlign.center,
+                style: pdf.TextStyle(
+                    fontWeight: pdf.FontWeight.bold,
+                    fontSize: 10,
+                    color: PdfColor.fromHex('0D3974')
+                ),
+              ),
+              pdf.SizedBox(height: 20),
+              pdf.Text(
+                'Designation: $designation',
+                textAlign: pdf.TextAlign.center,
+                style: pdf.TextStyle(
+                    fontWeight: pdf.FontWeight.bold,
+                    fontSize: 10,
+                    color: PdfColor.fromHex('0D3974')
+                ),
+              ),
+//               pdf.Paragraph(
+//                 margin: const pdf.EdgeInsets.only(top: 12.0),
+//                 text: '''
+// The Sharjah Education Council of the Government of Sharjah testifies that , an Emirati national, has been working for us since and remains at the helm to date, and the following are their job data:''',
+//               ),
+              pdf.SizedBox(height: 30),
+              pdf.Table.fromTextArray(
+                  headers: headers,
+                  headerDecoration: pdf.BoxDecoration(
+                    color: PdfColor.fromHex('DEB539'),
+                  ),
+                  data: listofreport,
+                  border: pdf.TableBorder.all(),
+                  cellStyle: pdf.TextStyle(color: PdfColor.fromHex('1B57A7')),
+                  cellAlignments: {
+                    1: pdf.Alignment.center,
+                  },
+                  headerStyle: pdf.TextStyle(color: PdfColor.fromHex('0D3974'))
+
+
+              ),
+            ];
+          },
+        ),
+      );
+
+      if(kIsWeb){
+
+        var  bytes = await certificatePdf.save();
+
+        final blob = html.Blob([bytes], 'application/pdf');
+
+        final url = html.Url.createObjectUrlFromBlob(blob);
+
+        html.window.open(url, "_blank");
+        html.Url.revokeObjectUrl(url);
+
+      }else{
+
+        await openPDFANDROID(certificatePdf);
+
+      }
+
+
+
+        // _certificate = file;
+        // _fileName = fileName;
+
+    }
+
 
 
     // void workingReport({
@@ -793,10 +998,12 @@ class _HRMSReportsState extends State<HRMSReports> {
                   ),
                   DropdownSearch<String>(
                     // maxHeight: Get.height * 0.5,
-                    mode: Mode.MENU,
                     items: listofReports,
-                    label: "Report Type",
-                    hint: "Select Report",
+                    dropdownSearchDecoration :InputDecoration(
+                      label: Text("Report Type"),
+                      hintText: "Select Report",
+                    ),
+
                     onChanged: (value) {
                       print(value);
                       setState(() {
@@ -867,11 +1074,11 @@ class _HRMSReportsState extends State<HRMSReports> {
                         ? const SizedBox()
                         : DropdownSearch<String>(
                       // maxHeight: Get.height * 0.6,
-                      mode: Mode.MENU,
+                      dropdownSearchDecoration :InputDecoration(
+                        label: Text("Report Type"),
+                        hintText: "Select Report",
+                      ),
                       items: dropDownEmployee,
-                      showSearchBox: true,
-                      label: "Select Employee",
-                      hint: "Select Employee",
                       onChanged: (value) {
                         print(value);
 
@@ -883,6 +1090,23 @@ class _HRMSReportsState extends State<HRMSReports> {
                     ),
                   SizedBox(
                     height: 10,
+                  ),
+                  selectedReport != 'Salary Report' ? SizedBox() :   DropdownButton(
+                      value: selectedFilter2,
+                      items: dropList2, onChanged: (String? value){
+                    setState(() {
+                      selectedFilter2 = value!;
+                    });
+                  }
+                  ) ,
+
+                  selectedReport != 'Salary Report' ? SizedBox() :    DropdownButton(
+                      value: selectedFilter3,
+                      items: dropList3, onChanged: (String? value){
+                    setState(() {
+                      selectedFilter3 = value!;
+                    });
+                  }
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -1331,6 +1555,232 @@ class _HRMSReportsState extends State<HRMSReports> {
                               snackPosition: SnackPosition.BOTTOM);
                         }
                       }
+
+                      if (selectedReport == "Salary Report") {
+                        if (dateSelected != null &&
+                            selectedReport != null && todateSelected !=null
+                            && selectedEmployee != null
+                        ) {
+                          print("clicked $selectedReport");
+
+                          QuerySnapshot<Map<String, dynamic>> newListUsers = await firestore.collection('Employee')
+                              .where('name',isEqualTo:selectedEmployee).get();
+
+                         var particularEmpModel = newListUsers.docs[0];
+
+                          QuerySnapshot<Map<String, dynamic>> listUser = await firestore.collection('attendence_report')
+                              .where('cid',isEqualTo: widget.userDoc.get('cid'))
+                              .where('uid',isEqualTo:newListUsers.docs[0].get('uid')).get();
+
+                          var compDocs = listUser.docs;
+
+
+                          compDocs =
+                              compDocs.where((element) {
+
+                                return DateFormat('yyyy').format(DateFormat('yyyy/MM/dd').parse(element.get('date')))
+
+                                    == selectedFilter2;
+
+                              }).toList();
+
+                          var newDocs =  compDocs.where((element) {
+
+                            return DateFormat('MMM').format(DateFormat('yyyy/MM/dd').parse(element.get('date')))
+
+                                == selectedFilter3;
+
+                          }).toList();
+
+
+                          var wrkhour = 0.0;
+                          var wrkday = 0;
+
+                          var attendenceCount = newDocs.where((element) => element.get('status') != 'Absent').length;
+
+                          var absentCount = newDocs.where((element) => element.get('status') == 'Absent').length;
+
+                          await Future.forEach(newDocs,
+                                  (QueryDocumentSnapshot<Map<String, dynamic>> element) async {
+
+                                print('worlday = $wrkday');
+
+                                wrkhour = wrkhour + double.parse(element.get('working_hours') == '' ? '0' : element.get('working_hours'));
+
+
+                              });
+
+                          print('wrkhour = $wrkhour');
+
+
+
+                          DocumentSnapshot<Map<String, dynamic>> shiftDetails = await firestore.collection('Shifts').doc(newListUsers.docs[0].get('shiftid'))
+                              .get();
+                          
+                         var totalHoursTowrk = double.parse(shiftDetails.get('hours')) *
+                              DateFormat('yyyy/MM/dd').parse(dateSelected!).difference(DateFormat('yyyy/MM/dd').parse(todateSelected!)).inDays;
+
+                         var totalHoursAfterAbsent = wrkhour - (attendenceCount * double.parse(shiftDetails.get('hours')));
+
+                         var difference = totalHoursTowrk - totalHoursAfterAbsent;
+
+
+
+                          var basicpay =    double.parse(particularEmpModel.get('basic_pay'));
+                          var hra =    double.parse(particularEmpModel.get('house_rent_allowance'));
+                          var ma =    double.parse(particularEmpModel.get('medical_allowance'));
+                          var conveyance =    double.parse(particularEmpModel.get('conveyance'));
+                          var mealc =    double.parse(particularEmpModel.get('meal_coupon'));
+                          var tra =    double.parse(particularEmpModel.get('travel_allowance'));
+
+                  //deduction
+                          var pf =  double.parse(particularEmpModel.get('general_provident_fund'));
+                          var pt =  double.parse(particularEmpModel.get('profession_tax'));
+
+                     var netpay =    double.parse(particularEmpModel.get('net_pay'));
+
+
+                     var totaldeduction =   double.parse(particularEmpModel.get('total_deductions'));
+                          var grosspay =   double.parse(particularEmpModel.get('gross_pay'));
+
+
+
+                               var totalSalary = netpay /  (31 - absentCount);
+
+
+
+
+
+
+                          attendanceReportList = [
+                            [
+                              'Basic Pay',
+                              '$basicpay',
+                              'Professional Tax',
+                              '$pt'
+                            ],
+                            [
+                            'HRA',
+                            '$hra',
+                            'PF',
+                            '$pf'
+                          ],
+                            [
+                              'Medical Allowance',
+                              '$mealc',
+                              '',
+                              ''
+                            ],
+                            [
+                              'Conveyance',
+                              '$conveyance',
+                              '',
+                              ''
+                            ],
+                            [
+                              'Meal Coupon',
+                              '$mealc',
+                              '',
+                              ''
+                            ],
+                            [
+                              'Travel Allowance',
+                              '$tra',
+                              '',
+                              ''
+                            ],
+                            [
+                              '',
+                              '',
+                              '',
+                              ''
+                            ],
+                            [
+                              '',
+                              '',
+                              '',
+                              ''
+                            ],
+                            [
+                              '',
+                              '',
+                              'Total Deduction',
+                              '$totaldeduction'
+                            ],
+                            [
+                              'Gross Pay',
+                              '$grosspay',
+                              'Net Pay',
+                              '$totalSalary'
+                            ],
+                            [
+                              '',
+                              '',
+                              '',
+                              ''
+                            ],
+                          ];
+
+                          //
+                          // attendanceReportList.add([
+                          //
+                          //   wrkhour.toPrecision(2).toString(),
+                          //   attendenceCount.toString(),
+                          // ]);
+
+
+                          var newList = newListUsers.docs;
+
+
+                          print("newList = ${newList}");
+                          print("attendanceReportList = $attendanceReportList");
+
+                          print("dateSelected = $dateSelected");
+
+                          print("selectedEmployee = $selectedEmployee");
+
+                          print("todateSelected = $todateSelected");
+
+
+                          QuerySnapshot<Map<String, dynamic>> newListCompany = await firestore.collection('Company')
+                              .where('cid',isEqualTo:widget.userDoc.get('cid')!).get();
+
+
+
+
+
+
+                          await salaryReport(
+                              reportName: 'Salary Report',
+                              userName: selectedEmployee.toString(),
+                              userId: newList[0].get('empid'),
+                              designation: newList[0].get('Designation'),
+                              fromdate: dateSelected!,
+                              todate: todateSelected ?? '',
+                              listofreport: attendanceReportList,
+                              headers: [
+                                'EMOLUMENTS',
+                                'AMOUNT',
+                                'DEDUCTIONS',
+                                'AMOUNT',
+
+                              ],
+                              logo:newListCompany.docs[0].get('logo'),
+                              companyName:newListCompany.docs[0].get('company_name')
+
+                          );
+                          setState(() {
+                            _isOpening = false;
+                          });
+
+                          // await _savePdf("Delay Report", dateSelected);
+
+                        } else {
+
+                          Get.snackbar("Error", "Please Fill All Details",
+                              snackPosition: SnackPosition.BOTTOM);
+                        }
+                      }
                       
                       setState(() {
                         _isOpening = false;
@@ -1349,6 +1799,16 @@ class _HRMSReportsState extends State<HRMSReports> {
         },
       ),
     );
+  }
+
+  Future<void> openPDFANDROID(pdf.Document certificatePdf) async {
+    Directory documentDirectory = await getApplicationDocumentsDirectory();
+    String documentPath = documentDirectory.path;
+    String fileName =
+        DateFormat('hh:mm:ss').format(DateTime.now()) + '_OutGeo Report.pdf';
+    File file = File("$documentPath/$fileName");
+    file.writeAsBytesSync(await certificatePdf.save());
+    await OpenFile.open(file.path);
   }
 
 
