@@ -8,7 +8,10 @@
     <!-- Include only if your app benefits from precise location access. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-   <application
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+
+
+    <application
         android:label="revoo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -80,6 +81,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
               var  bdoc = snapshot.requireData.docs;
 
+
+
               return Stack(
                 children: [
                   Container(
@@ -132,6 +135,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                             right: 180, top: 30, bottom: 10),
                                         child: Text(
                                           'Branch(s)',
+
                                           style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 20,
@@ -204,21 +208,42 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ),
               ),
               SizedBox(width: 40),
-              CircleAvatar(
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: tagcolor,
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  child: Center(
-                    child: AutoSizeText(
-                      '1',
-                      style: TextStyle(color: Colors.white, fontSize: 2),
-                    ),
-                  ),
-                ),
+              StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                stream: firestore.collection('Employee').where('bid',isEqualTo: id).snapshots(),
+                builder: (context, snapshot1) {
+
+                  if(!snapshot1.hasData){
+                    return kprogressbar;
+                  }
+
+                  var empDoc = snapshot1.requireData.docs;
+
+                  return Row(
+                    children: [
+                      CircleAvatar(
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            color: tagcolor,
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Center(
+                            child: AutoSizeText(
+                              empDoc.length.toString(),
+                              style: TextStyle(color: Colors.white, fontSize: 2),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Employees',
+                        style: TextStyle(color: Colors.white, fontSize: 10),
+                      ),
+
+                    ],
+                  );
+                }
               ),
               SizedBox(
                 width: 5,
@@ -226,182 +251,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Employees',
-                    style: TextStyle(color: Colors.white, fontSize: 10),
-                  ),
-                  SizedBox(width: 10,),
                   IconButton(icon:Icon(Icons.edit),color: Colors.white, onPressed: () async {
-                    Get.to(EditBranches(latlist: bdoc.get('location'), name: title, address: bdoc.get('address'), id: id, locality: bdoc.get('locality')));
-                    // await   showDialog(
-                    //        context: context,
-                    //        builder: (context) {
-                    //          return StatefulBuilder(
-                    //              builder: (context, setState1) {
-                    //                return AlertDialog(
-                    //                  contentPadding:
-                    //                  EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
-                    //                  shape: RoundedRectangleBorder(
-                    //                      borderRadius: BorderRadius.circular(50)),
-                    //                  content: SingleChildScrollView(
-                    //                    child: Column(
-                    //                      children: [
-                    //                        Container(
-                    //                          width: 400,
-                    //                          height: 400,
-                    //                          decoration: BoxDecoration(
-                    //                              border: Border.all(
-                    //                                  width: 2, color: kblue),
-                    //                              borderRadius:
-                    //                              BorderRadius.circular(50)),
-                    //                          child: Padding(
-                    //                            padding: const EdgeInsets.all(8.0),
-                    //                            child: Column(
-                    //                              children: [
-                    //                                Align(
-                    //                                  alignment: Alignment.topRight,
-                    //                                  child: InkWell(
-                    //                                    onTap: () {
-                    //                                      Get.back();
-                    //                                    },
-                    //                                    child: CircleAvatar(
-                    //                                      child: Icon(Icons.close),
-                    //                                      backgroundColor: Kdblue,
-                    //                                    ),
-                    //                                  ),
-                    //                                ),
-                    //                                Text(
-                    //                                  'Rename Branch Name',
-                    //                                  style: TextStyle(
-                    //                                      fontSize: 30,
-                    //                                      color: kblue),
-                    //                                ),
-                    //                                SizedBox(height: 10),
-                    //                                TextFormField(
-                    //                                  controller: nameController,
-                    //                                  decoration: InputDecoration(
-                    //                                      filled: true,
-                    //                                      fillColor: bgGrey,
-                    //                                      contentPadding:
-                    //                                      EdgeInsets.only(
-                    //                                          left: 20,
-                    //                                          top: 25,
-                    //                                          bottom: 25),
-                    //                                      hintText: 'Choose a Name',
-                    //                                      hintStyle: TextStyle(
-                    //                                          color: Colors.grey),
-                    //                                      border: OutlineInputBorder(
-                    //                                          borderSide: BorderSide(
-                    //                                              color: Colors
-                    //                                                  .white)),
-                    //                                      focusedBorder:
-                    //                                      OutlineInputBorder(
-                    //                                          borderSide: BorderSide(
-                    //                                              color: Colors
-                    //                                                  .white)),
-                    //                                      enabledBorder:
-                    //                                      OutlineInputBorder(
-                    //                                          borderSide: BorderSide(
-                    //                                              color: Colors
-                    //                                                  .white))),
-                    //                                ),
-                    //                                SizedBox(height: 100),
-                    //                                Row(
-                    //                                  mainAxisSize:
-                    //                                  MainAxisSize.min,
-                    //                                  children: [
-                    //                                    ElevatedButton(
-                    //                                        onPressed: () {
-                    //                                          Get.back();
-                    //                                        },
-                    //                                        style: ElevatedButton.styleFrom(
-                    //                                            elevation: 0,
-                    //                                            shape: RoundedRectangleBorder(
-                    //                                                borderRadius:
-                    //                                                BorderRadius.all(
-                    //                                                    Radius.circular(
-                    //                                                        10))),
-                    //                                            side: BorderSide(
-                    //                                                width: 3.0,
-                    //                                                color: kblue),
-                    //                                            primary:
-                    //                                            Colors.white,
-                    //                                            padding: EdgeInsets
-                    //                                                .symmetric(
-                    //                                                horizontal:
-                    //                                                32,
-                    //                                                vertical:
-                    //                                                11),
-                    //                                            textStyle: TextStyle(
-                    //                                                fontSize: 30,
-                    //                                                fontWeight:
-                    //                                                FontWeight
-                    //                                                    .bold)),
-                    //                                        child: Center(
-                    //                                            child: Text(
-                    //                                              '< Back',
-                    //                                              style: TextStyle(
-                    //                                                  color: kblue,
-                    //                                                  fontSize: 15),
-                    //                                            ))),
-                    //                                    SizedBox(
-                    //                                      width: 25,
-                    //                                    ),
-                    //                                    InkWell(
-                    //                                      onTap: () async {
-                    //                                        await firestore.collection('Branch').doc(id).update(
-                    //                                            {
-                    //                                              'branch_name' : nameController
-                    //                                            });
-                    //                                      },
-                    //                                      child: Container(
-                    //                                        width: 110,
-                    //                                        height: 41,
-                    //                                        decoration: BoxDecoration(
-                    //                                          gradient:
-                    //                                          LinearGradient(
-                    //                                            colors: [
-                    //                                              Colors
-                    //                                                  .blue.shade900,
-                    //                                              Colors.blue,
-                    //                                            ],
-                    //                                            begin:
-                    //                                            Alignment.topLeft,
-                    //                                            end: Alignment
-                    //                                                .bottomRight,
-                    //                                          ),
-                    //                                          borderRadius:
-                    //                                          BorderRadius
-                    //                                              .circular(10),
-                    //                                        ),
-                    //                                        child: Padding(
-                    //                                          padding:
-                    //                                          const EdgeInsets
-                    //                                              .all(8.0),
-                    //                                          child: Center(
-                    //                                            child: Text(
-                    //                                              'Rename',
-                    //                                              style: TextStyle(
-                    //                                                  color: Colors
-                    //                                                      .white,
-                    //                                                  fontSize: 15),
-                    //                                            ),
-                    //                                          ),
-                    //                                        ),
-                    //                                      ),
-                    //                                    ),
-                    //                                  ],
-                    //                                ),
-                    //                              ],
-                    //                            ),
-                    //                          ),
-                    //                        ),
-                    //                      ],
-                    //                    ),
-                    //                  ),
-                    //                );
-                    //              });
-                    //        });
+
+                    GeoPoint geo = bdoc.get('location.geopoint');
+
+                    Get.to(EditBranches(latlist: [geo.latitude,geo.longitude], name: title, address: bdoc.get('address'), id: id, locality: bdoc.get('locality')));
+
                   },)
                 ],
               ),

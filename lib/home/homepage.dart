@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/HRMS_admin_Screen/LocationHistory/tripuser.dart';
 import 'package:revoo/HRMS_admin_Screen/Reports/reports.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
@@ -37,19 +38,21 @@ class _HomePageMainState extends State<HomePageMain> {
   Widget build(BuildContext context) {
 
     var homepages = [
-      AdminDashboard(userDoc: widget.userDoc,),
-      MyPlan(userDoc: widget.userDoc,),
-      DBcrud4(userDoc: widget.userDoc,),
-      Departments(key: Key('department'),userDoc: widget.userDoc,),
-      AllEmployeePage(userDoc: widget.userDoc,),
-      ShiftsManagement(userDoc: widget.userDoc,),
-      CheckinHistory(userDoc: widget.userDoc,),
-      EmployeeCheckin(userDoc: widget.userDoc,),
-      AcceptLeave(userDoc: widget.userDoc,),
-      AllEmployeeUpdates(userDoc: widget.userDoc,), //0
+      AdminDashboard(userDoc: widget.userDoc,),//0
+      MyPlan(userDoc: widget.userDoc,),//1
+      AdminDashboard(userDoc: widget.userDoc,),//2
+      Departments(key: Key('department'),userDoc: widget.userDoc,),//3
+      AllEmployeePage(userDoc: widget.userDoc,),//4
+      ShiftsManagement(userDoc: widget.userDoc,),//5
+      CheckinHistory(userDoc: widget.userDoc,),//6
+      EmployeeCheckin(userDoc: widget.userDoc,),//7
+      AcceptLeave(userDoc: widget.userDoc,),//8
+      AllEmployeeUpdates(userDoc: widget.userDoc,), //9
 
-      Container(), //1
-HRMSReports(userDoc: widget.userDoc)
+      Container(), //10
+HRMSReports(userDoc: widget.userDoc),//11
+      TripUsers(userDoc: widget.userDoc),//12
+
     ];
     return Scaffold(
       appBar: AppBar(
@@ -200,6 +203,9 @@ HRMSReports(userDoc: widget.userDoc)
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 buildNavCard('asset/lvapproval.png','Reports',11),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/lvapproval.png','Locations History',12),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 buildNavCard('asset/logoff.png','Logout',10),
                 SizedBox(height: 5,),
 
@@ -257,6 +263,8 @@ HRMSReports(userDoc: widget.userDoc)
                   Expanded(
                     child: InkWell(
                       onTap: (){
+
+
 
                       },
                       child: Padding(

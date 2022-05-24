@@ -1,16 +1,25 @@
+import 'dart:async';
+
 import 'package:cell_calendar/cell_calendar.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:revoo/graph/piechart.dart';
+import 'package:location/location.dart' as locations;
 
 import '../Models/attendencmodel.dart';
 import '../Timer/count_down.dart';
 import '../constants/constants.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 
 class EmployeeDashboard1 extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
@@ -57,20 +66,64 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
   DateTime? endtime ;
   Duration? endDifference;
 
+  String latitudeData = '';
+  String longitudeData = '';
+  Position? geoPosition;
+  Geolocator userGeoPoint = Geolocator();
+  GeoFirePoint? myLocation;
+  late StreamSubscription<locations.LocationData> locationSubscription;
 
+  // LatLng _center ;
+  // Position currentLocation;
+
+
+  @override
+  void initState() {
+
+    super.initState();
+
+    // getUserLocation();
+  }
+
+  Future<Position> locateuser()async{
+    return Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+  }
+
+  Future<Position> getCurrentLocation() async{
+      // LocationPermission permission = await Geolocator.checkPermission();
+       LocationPermission permission= await Geolocator.requestPermission();
+
+      if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
+        // LocationPermission permission = await Geolocator.requestPermission();
+    print("Permission not given");
+    }else{
+        print('got permission');
+      var  geoPosition1 =  await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+        setState(()  {
+          geoPosition = geoPosition1;
+          print('geo1 = $geoPosition1');
+        });
+      }
+      return geoPosition!;
+  }
 
   var currentDate = DateFormat('yyyy/MM/dd').format(DateTime.now());
 
 
+
   @override
   Widget build(BuildContext context) {
+    locations.Location location = new locations.Location();
+
+    final geo = Geoflutterfire();
     var H = MediaQuery.of(context).size.height;
     var W = MediaQuery.of(context).size.width;
-
     var firestore =  FirebaseFirestore.instance;
 
     print('curentDate = $currentDate');
     print('uid = ${widget.userDoc.id}');
+
+  var   branchDir = firestore.collection('Branch').where('bid',isEqualTo: widget.userDoc.get('bid'));
 
     return Scaffold(
 
@@ -154,25 +207,19 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                       print('endtime = ${endtime} convertedfCheckinTime = ${convertedfCheckinTime} Diffreence = ${endDifference!.inHours} Day = ${DateTime(1970,01)}');
 
                     }
-
-
                     return Column(
                       children: [
                         Stack(
                           children: [
                             Container(
+
                               width: Get.width,
-                              height: Get.height*0.7,
-                              child: ClipRect(
-                                child: Image.asset(
-                                  'asset/dcbg.png',fit: BoxFit.fill,),
+                              // height: Get.height*0.7,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(image: AssetImage( 'asset/dcbg.png'),fit: BoxFit.fill,)
                               ),
-
-                            ),
-
-                            Align(
-                              alignment: Alignment.center,
-                              child: Column(
+                              child:
+                              Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -188,12 +235,14 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                     children: [
                                       Align(
                                         alignment: Alignment.center,
-                                        child: Row(
+                                        child:
+                                        Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
 
                                             Container(
-                                                width:180,
+
+                                                width:100,
                                                 child: Text('In-Time',style: TextStyle(color: ktextcolor,fontSize: 18),)),
                                             SizedBox(width: 15),
                                             Container(
@@ -228,7 +277,6 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                             ),
                                           ],
                                         ),
-
                                       ),
                                       SizedBox(height: 10,),
                                       Align(
@@ -236,12 +284,11 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
+                                            SizedBox(width: 16,),
                                             Container(
-                                                width: 200,
-                                                child: Padding(
-                                                  padding:  EdgeInsets.only(left: Get.width*0.009),
-                                                  child: Text('Out Time',style: TextStyle(color: ktextcolor,fontSize: 18),),
-                                                )),
+
+                                                width: 100,
+                                                child: Text('Out Time',style: TextStyle(color: ktextcolor,fontSize: 18),)),
                                             SizedBox(width: 15),
                                             Container(
                                               height: Get.height*0.05,
@@ -317,135 +364,227 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                       loading ? kprogressbar
                                           :
                                       ElevatedButton(onPressed: () async {
+                                        setState(() {
+                                          loading =true;
+                                        });
+                                        Position geoposition =    await     getCurrentLocation();
+
+                                        var   myLocation = GeoFirePoint(geoposition.latitude, geoposition.longitude);
+
+                                        print('nearby branch = a');
+                                        var ref  =  geo.collection(collectionRef: branchDir
+                                        )
+
+                                            .within(center: myLocation, radius: 0.1, field: "location");
+
+                                        ref.listen((event) {
+                                          print('check event = ${event.length}');
 
 
-                                        if(checkinTime == ''){
 
-                                          setState(() {
-                                            loading =true;
-                                          });
+                                          if(event.isEmpty) {
 
-
-                                          var currentCheckinTime =   DateFormat('hh:mm a').format(DateTime.now());
-
-                                          var currentTime = DateFormat('hh:mm a').parse(DateFormat('hh:mm a').format(DateTime.now()));
-
-                                          var checkDifference =  currentTime.isAfter(convertedShiftTime!.add(Duration(minutes: 15)));
-
-                                          var checkinDifference =  currentTime.difference(convertedShiftTime!);
-
-                                          var convertedDifference =  checkinDifference.toString().split(':');
-
-                                          var differencehoursMinuts = convertedDifference[0] + '.' + convertedDifference[1]
-
-                                          ;
-                                          print(convertedShiftTime);
-                                          print(currentTime);
-                                          print(checkinDifference);
-
-                                          var checkinstatus = checkDifference ? 'late' : currentTime.isBefore(convertedShiftTime!.add(Duration(minutes: 15)))
-                                              && currentTime.isAfter(convertedShiftTime!.subtract(Duration(minutes: 15))) ? 'perfect' :
-
-                                          'early';
-
-                                          if(checkinstatus == 'late'){
                                             Get.defaultDialog(
-                                                title: 'Reason For Coming Late',
-                                                content: Padding(
-                                                  padding: const EdgeInsets.all(16.0),
-                                                  child: Column(
-                                                    children: [
-                                                      TextFormField(
-                                                        controller: reasonController
-                                                        ,decoration: InputDecoration(
-                                                          label: Text("Reason for your late login"),
-                                                          border: OutlineInputBorder(
-                                                              borderSide: BorderSide(color: Colors.black)
-                                                          )
-                                                      ),
-
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+                                                title: 'SORRY',
+                                                middleText: 'YOU ARE NOT NEAR YOUR OFFICE',
                                                 onConfirm: (){
-                                                  print(checkinstatus);
-                                                  firestore.collection('attendence_report')
-                                                      .add(AttendencReportModel(
-                                                    date : DateFormat('yyyy/MM/dd').format(DateTime.now()),
-                                                    reason: reasonController.text,
-                                                    mid: widget.userDoc.get('mid'),
-                                                    uid:widget.userDoc.id,
-                                                    checkin:currentCheckinTime,
-                                                    workingHours: '',
-                                                    workingStatus: '',
-                                                    id: '',
-                                                    bid: widget.userDoc.get('bid'),
-                                                    checkout: '',
-                                                    did: widget.userDoc.get('did'),
-                                                    status: checkinstatus,
-                                                    difference: differencehoursMinuts,
-                                                    timestamp: DateTime.now().toString(),
-                                                    cid: widget.userDoc.get('cid'),
-                                                  ).toJson()).then((value) async {
-
-                                                    await  firestore.collection('attendence_report').doc(value.id).update(
-                                                        {'id':value.id});
-                                                    setState(() {
-                                                      reasonController.clear();
-                                                      Get.back();
-                                                    });
-
-                                                    setState(() {
-                                                      loading =false;
-                                                    });
-
-
-                                                  });
+                                                  Get.back();
                                                 },
-
-                                                textConfirm: "Submit"
-
+                                                textConfirm: 'OK',
+                                                confirmTextColor: Colors.white
                                             );
+
+                                            // Get.snackbar('SORRY', 'YOU ARE NOT NEAR YOUR OFFICE',snackPosition: SnackPosition.BOTTOM,
+                                            //     backgroundColor: kyellow.withOpacity(0.8),colorText: Colors.white
+                                            // );
+
+                                            setState(() {
+                                              loading = false;
+                                            });
+
                                           }else{
-                                            print(checkinstatus);
-                                            firestore.collection('attendence_report')
-                                                .add(AttendencReportModel(
-                                              date : DateFormat('yyyy/MM/dd').format(DateTime.now()),
-                                              reason: '',
-                                              mid: widget.userDoc.get('mid'),
-                                              uid:widget.userDoc.id,
-                                              checkin:currentCheckinTime,
-                                              workingHours: '',
-                                              workingStatus: '',
-                                              id: '',
-                                              bid: widget.userDoc.get('bid'),
-                                              checkout: '',
-                                              did: widget.userDoc.get('did'),
-                                              status: checkinstatus,
-                                              difference: differencehoursMinuts,
-                                              timestamp: DateTime.now().toString(),
-                                              cid: widget.userDoc.get('cid'),
-                                            ).toJson()).then((value) async {
 
-                                              await  firestore.collection('attendence_report').doc(value.id).update(
-                                                  {'id':value.id});
 
+
+                                            if(checkinTime == ''){
+
+                                              var   myLocation = GeoFirePoint(geoPosition!.latitude, geoPosition!.longitude);
+
+
+                                              var ref  = geo.collection(collectionRef: branchDir
+                                              )
+
+                                                  .within(center: myLocation, radius: 20, field: "location");
+
+                                              var nearBranch = ref.length;
+
+                                              // ref.listen((event) {
+                                              // }).asFuture();
+
+
+
+                                              var currentCheckinTime =   DateFormat('hh:mm a').format(DateTime.now());
+
+                                              var currentTime = DateFormat('hh:mm a').parse(DateFormat('hh:mm a').format(DateTime.now()));
+
+                                              var checkDifference =  currentTime.isAfter(convertedShiftTime!.add(Duration(minutes: 15)));
+
+                                              var checkinDifference =  currentTime.difference(convertedShiftTime!);
+
+                                              var convertedDifference =  checkinDifference.toString().split(':');
+
+                                              var differencehoursMinuts = convertedDifference[0] + '.' + convertedDifference[1]
+
+                                              ;
+                                              print(convertedShiftTime);
+                                              print(currentTime);
+                                              print(checkinDifference);
+
+                                              var checkinstatus = checkDifference ? 'late' : currentTime.isBefore(convertedShiftTime!.add(Duration(minutes: 15)))
+                                                  && currentTime.isAfter(convertedShiftTime!.subtract(Duration(minutes: 15))) ? 'perfect' :
+
+                                              'early';
+
+                                              if(checkinstatus == 'late'){
+                                                Get.defaultDialog(
+                                                    barrierDismissible: false,
+                                                    title: 'Reason For Coming Late',
+                                                    content: Padding(
+                                                      padding: const EdgeInsets.all(16.0),
+                                                      child: Column(
+                                                        children: [
+                                                          TextFormField(
+                                                            controller: reasonController
+                                                            ,decoration: InputDecoration(
+                                                              label: Text("Reason for your late login"),
+                                                              border: OutlineInputBorder(
+                                                                  borderSide: BorderSide(color: Colors.black)
+                                                              )
+                                                          ),
+
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    onConfirm: (){
+                                                      print(checkinstatus);
+                                                      firestore.collection('attendence_report')
+                                                          .add(AttendencReportModel(
+                                                        date : DateFormat('yyyy/MM/dd').format(DateTime.now()),
+                                                        reason: reasonController.text,
+                                                        mid: widget.userDoc.get('mid'),
+                                                        uid:widget.userDoc.id,
+                                                        checkin:currentCheckinTime,
+                                                        workingHours: '',
+                                                        workingStatus: '',
+                                                        id: '',
+                                                        bid: widget.userDoc.get('bid'),
+                                                        checkout: '',
+                                                        did: widget.userDoc.get('did'),
+                                                        status: checkinstatus,
+                                                        difference: differencehoursMinuts,
+                                                        timestamp: DateTime.now().toString(),
+                                                        cid: widget.userDoc.get('cid'),
+                                                      ).toJson()).then((value) async {
+
+                                                        setState(() {
+                                                          latitudeData = '${geoPosition?.latitude}';
+                                                          longitudeData = '${geoPosition?.longitude}';
+                                                        });
+
+
+
+                                                        await  firestore.collection('attendence_report').doc(value.id).update(
+
+                                                            {'id':value.id,'latitude': latitudeData,'longitude':longitudeData});
+                                                        setState(() {
+                                                          reasonController.clear();
+                                                          loading =false;
+                                                          Get.back();
+                                                        });
+
+
+
+
+                                                      });
+                                                    },
+
+                                                    textConfirm: "Submit",
+                                                    onCancel: (){
+
+                                                      setState(() {
+                                                        loading = false;
+                                                      });
+                                                      Get.back();
+
+                                                    }
+
+                                                );
+                                              }else{
+                                                print(checkinstatus);
+                                                firestore.collection('attendence_report')
+                                                    .add(AttendencReportModel(
+                                                  date : DateFormat('yyyy/MM/dd').format(DateTime.now()),
+                                                  reason: '',
+                                                  mid: widget.userDoc.get('mid'),
+                                                  uid:widget.userDoc.id,
+                                                  checkin:currentCheckinTime,
+                                                  workingHours: '',
+                                                  workingStatus: '',
+                                                  id: '',
+                                                  bid: widget.userDoc.get('bid'),
+                                                  checkout: '',
+                                                  did: widget.userDoc.get('did'),
+                                                  status: checkinstatus,
+                                                  difference: differencehoursMinuts,
+                                                  timestamp: DateTime.now().toString(),
+                                                  cid: widget.userDoc.get('cid'),
+                                                ).toJson()).then((value) async {
+
+                                                  setState(() {
+                                                    latitudeData = '${geoPosition?.latitude}';
+                                                    longitudeData = '${geoPosition?.longitude}';
+                                                  });
+
+                                                  await  firestore.collection('attendence_report').doc(value.id).update(
+                                                      {'id':value.id,'latitude':latitudeData,'longitude':longitudeData});
+
+                                                  setState(() {
+                                                    loading =false;
+                                                  });
+
+
+                                                });
+                                              }
+                                            }
+                                            else{
+
+                                              Get.defaultDialog(
+                                                  title: 'SORRY',
+                                                  middleText: 'YOU ALREADY CHECKEDIN',
+                                                  onConfirm: (){
+                                                    Get.back();
+                                                  },
+                                                  textConfirm: 'OK',
+                                                  confirmTextColor: kyellow
+                                              );
+
+                                              // Get.snackbar('SORRY', 'YOU ALREADY CHECKEDIN',snackPosition: SnackPosition.BOTTOM,
+                                              //     backgroundColor: kblue.withOpacity(0.8),colorText: Colors.white
+                                              // );
                                               setState(() {
-                                                loading =false;
+                                                loading = false;
                                               });
 
+                                            }
 
-                                            });
                                           }
-                                        }
-                                        else{
 
-                                          Get.snackbar('SORRY', 'YOU ALREADY CHECKEDIN',snackPosition: SnackPosition.BOTTOM,
-                                              backgroundColor: kblue.withOpacity(0.8),colorText: Colors.white
-                                          );
 
-                                        }
+
+
+
+                                        }).asFuture();
 
 
 
@@ -555,75 +694,797 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                     ],
                                   ),
 
-                                  // Stack(
-                                  //   children: [
-                                  //     Padding(
-                                  //       padding: const EdgeInsets.only(left: 25.0,right: 25.0,top: 10),
-                                  //       child: Card(
-                                  //         elevation: 5,
-                                  //         color: Colors.grey.shade200,
-                                  //         shape: RoundedRectangleBorder(
-                                  //             borderRadius: BorderRadius.circular(0)
-                                  //         ),
-                                  //         child: Column(
-                                  //           children: [
-                                  //             Padding(
-                                  //               padding: const EdgeInsets.only(top: 50.0,left: 8,right: 8),
-                                  //               child: Text('You have 2 new request/approvals from the finance department,HR department,and the accounting department ',
-                                  //                 style: TextStyle(
-                                  //                     color: kblue
-                                  //                 ),
-                                  //                 textAlign: TextAlign.center,
-                                  //               ),
-                                  //             ),
-                                  //             Row(
-                                  //               mainAxisSize: MainAxisSize.min,
-                                  //               children: [
-                                  //                 Padding(
-                                  //                   padding: const EdgeInsets.only(top: 20.0,left: 8,right: 0),
-                                  //                   child: Text('Click here to',
-                                  //                     style: TextStyle(
-                                  //                         color: kblue,
-                                  //                       fontSize: 16
-                                  //                     ),
-                                  //                     textAlign: TextAlign.center,
-                                  //                   ),
-                                  //                 ),
-                                  //                 Padding(
-                                  //                   padding: const EdgeInsets.only(top: 20.0,right: 2),
-                                  //                   child: Text(' View Now!',
-                                  //                     style: TextStyle(
-                                  //                         color: kyellow,
-                                  //                       fontWeight: FontWeight.bold,
-                                  //                       fontSize: 16
-                                  //                     ),
-                                  //                     textAlign: TextAlign.center,
-                                  //                   ),
-                                  //                 ),
-                                  //               ],
-                                  //             ),
-                                  //             Image.asset('asset/rightarrow.png',width: 30,),
-                                  //             SizedBox(height: 20,),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //     Align(
-                                  //       alignment: Alignment.topRight,
-                                  //       child: Container(
-                                  //           margin: EdgeInsets.only(right: 25),
-                                  //           child: Image.asset('asset/wrongyellow.png',width: 30,height: 30,)),
-                                  //     ),
-                                  //   ],
-                                  // ),
+                                  SizedBox(height: 20,),
+
+                                  StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                                      stream: firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                                          .where('date',isEqualTo: DateFormat('yyyy/MM/dd').format(DateTime.now()))
+                                          .snapshots(),
+                                      builder: (context, tripsnapshot) {
+
+                                        if(!tripsnapshot.hasData){
+                                          return kprogressbar;
+                                        }
+
+
+                                        print('date = ${DateFormat('yyyy/MM/dd').format(DateTime.now())}');
+
+                                        var value1 = tripsnapshot.requireData;
+
+
+
+                                        return Container(
+                                          width: Get.width * 0.3,
+                                          child: ElevatedButton(
+                                              onPressed: () async {
+                                                if(value1.docs.isEmpty){
+                                                  print('runnning location');
+                                                  Position geoposition =    await     getCurrentLocation();
+                                                  location.changeSettings(distanceFilter: 0.5);
+
+
+
+                                                  location.onLocationChanged.listen((locations.LocationData currentLocation) async {
+                                                 var value = await   firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                                                        .where('date',isEqualTo: DateFormat('yyyy/MM/dd').format(DateTime.now())).get();
+
+                                                    // Use current location
+                                                    print('values = ${value.docs.length}');
+
+                                                    if(value.docs.isNotEmpty){
+                                                      print('runnning location notempty');
+
+
+
+
+
+
+                                                      List location1 =    value.docs[0].get('location');
+
+                                                      location1.add({
+                                                        'lat' : geoposition.latitude,
+                                                        'lon' : geoposition.longitude,
+                                                        'time' : DateTime.now()
+                                                      });
+
+
+
+                                                      bool check =   kIsWeb ? false: await location.isBackgroundModeEnabled();
+
+                                                      print('checklocationbackground = $check');
+
+                                                      check ?        firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                                                          .doc(value.docs[0].id)
+                                                          .update({
+                                                        'location' : location1
+
+                                                      }) :
+
+                                                      kIsWeb ?
+                                                      firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                                                          .doc(value.docs[0].id)
+                                                          .update({
+                                                        'location' : location1
+
+                                                      })
+                                                          :
+                                                      print('location disabled');
+
+                                                    }
+                                                    else{
+                                                      print('weblocation empty');
+
+                                                      bool check =   kIsWeb ? false : await location.isBackgroundModeEnabled();
+                                                      print('checklocationbackground = $check');
+                                                      check   ?      firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                                                          .add({
+                                                        'location' : [{
+                                                          'lat' : geoposition.latitude,
+                                                          'lon' : geoposition.longitude,
+                                                          'time' : DateTime.now()
+                                                        }],
+                                                        'date' : DateFormat('yyyy/MM/dd').format(DateTime.now())
+
+                                                      }) : kIsWeb ?
+                                                      firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                                                          .add({
+                                                        'location' : [{
+                                                          'lat' : geoposition.latitude,
+                                                          'lon' : geoposition.longitude,
+                                                          'time' : DateTime.now()
+                                                        }],
+                                                        'date' : DateFormat('yyyy/MM/dd').format(DateTime.now())
+
+                                                      })
+                                                          : print('location disable');
+
+
+                                                    }
+
+
+
+                                                  });
+
+                                                  kIsWeb ? print('weblocation') :     location.enableBackgroundMode(enable: true);
+
+
+
+                                                  setState(() {
+
+                                                  });
+
+                                                }else{
+
+                                                  setLocationOff(location);
+
+                                                }
+
+
+
+
+
+                                              },
+
+                                              style: ElevatedButton.styleFrom(
+                                                  elevation: 0,
+                                                  shape:RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.all(Radius.circular(10))
+                                                  ),
+                                                  side: BorderSide(width: 1.0, color: Colors.white,),
+                                                  primary: kyellow,
+                                                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 11),
+                                                  textStyle: TextStyle(
+                                                      fontSize: 30,
+                                                      fontWeight: FontWeight.bold)),
+                                              child: Center(child: Text(value1.docs.isNotEmpty ?'END TRIP': 'START TRIP',style: TextStyle(
+                                                  color: Colors.white,fontSize: 12
+                                              ),))),
+                                        );
+                                      }
+                                  ),
+
+
+
                                   currentDocument.isNotEmpty && checkoutTime == '' ?  Container(
 
                                       height: 200,
                                       child: CountdownPage(hours:endDifference!.inHours,minutes: endDifference!.inMinutes % 60,seconds: endDifference!.inSeconds % 60,))
                                       : SizedBox(),
+                                  SizedBox(height: 10,),
                                 ],
                               ),
+
                             ),
+
+                            // Align(
+                            //   alignment: Alignment.center,
+                            //   child:
+                            //   Column(
+                            //     mainAxisAlignment: MainAxisAlignment.center,
+                            //     mainAxisSize: MainAxisSize.min,
+                            //     children: [
+                            //       SizedBox(height: 10,),
+                            //       Text('Daily Check-in, ${currentDate}',style: TextStyle(color: ktextcolor,fontSize: 18),),
+                            //       Padding(
+                            //         padding:  EdgeInsets.only(left: Get.width*0.1,right: Get.width*0.1),
+                            //         child: Divider(color: ktextcolor,),
+                            //       ),
+                            //
+                            //       Column(
+                            //         mainAxisAlignment: MainAxisAlignment.center,
+                            //         children: [
+                            //           Align(
+                            //             alignment: Alignment.center,
+                            //             child:
+                            //             Row(
+                            //               mainAxisSize: MainAxisSize.min,
+                            //               children: [
+                            //
+                            //                 Container(
+                            //
+                            //                     width:100,
+                            //                     child: Text('In-Time',style: TextStyle(color: ktextcolor,fontSize: 18),)),
+                            //                 SizedBox(width: 15),
+                            //                 Container(
+                            //                   height: Get.height*0.05,
+                            //                   width: Get.width*0.09,
+                            //                   color: Colors.grey.shade400,
+                            //                   child: Center(child: Text(checkinHours.isNotEmpty ? checkinHours[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
+                            //                 ),
+                            //                 SizedBox(width: 15),
+                            //                 Container(
+                            //                   height: Get.height*0.05,
+                            //                   width: Get.width*0.09,
+                            //                   color: Colors.grey.shade400,
+                            //                   child: Center(child: Text(checkInMinutes.isNotEmpty ? checkInMinutes[0] : '--',style: TextStyle(color: kblue,fontSize: 18),)),
+                            //                 ),
+                            //
+                            //                 SizedBox(width: 15),
+                            //                 Container(
+                            //                   height: Get.height*0.05,
+                            //                   width: Get.width*0.18,
+                            //                   color: Colors.grey.shade400,
+                            //                   child: Center(
+                            //                     child: Row(
+                            //                       mainAxisSize: MainAxisSize.min,
+                            //                       children: [
+                            //                         Text(checkInMinutes.isNotEmpty ? checkInMinutes[1] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                            //                         SizedBox(width: 10,),
+                            //                         Image.asset('asset/smallarrowdown.png'),
+                            //                       ],
+                            //                     ),
+                            //                   ),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           ),
+                            //           SizedBox(height: 10,),
+                            //           Align(
+                            //             alignment: Alignment.center,
+                            //             child: Row(
+                            //               mainAxisSize: MainAxisSize.min,
+                            //               children: [
+                            //                 SizedBox(width: 16,),
+                            //                 Container(
+                            //
+                            //                     width: 100,
+                            //                     child: Text('Out Time',style: TextStyle(color: ktextcolor,fontSize: 18),)),
+                            //                 SizedBox(width: 15),
+                            //                 Container(
+                            //                   height: Get.height*0.05,
+                            //                   width: Get.width*0.09,
+                            //                   color: Colors.grey.shade400,
+                            //                   child: Center(child: Padding(
+                            //                     padding:  EdgeInsets.only(right: Get.width*0.00098),
+                            //                     child: Text(checkoutHours.isNotEmpty ? checkoutHours[0] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                            //                   )),
+                            //                 ),
+                            //                 SizedBox(width: 15),
+                            //                 Container(
+                            //                   height: Get.height*0.05,
+                            //                   width: Get.width*0.09,
+                            //                   color: Colors.grey.shade400,
+                            //                   child: Center(child: Padding(
+                            //                     padding:  EdgeInsets.only(right: Get.width*0.00098),
+                            //                     child: Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[0] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                            //                   )),
+                            //                 ),
+                            //
+                            //                 SizedBox(width: 15),
+                            //                 Container(
+                            //                   height: Get.height*0.05,
+                            //                   width: Get.width*0.18,
+                            //                   color: Colors.grey.shade400,
+                            //                   child: Center(
+                            //                     child: Row(
+                            //                       mainAxisSize: MainAxisSize.min,
+                            //                       children: [
+                            //                         Padding(
+                            //                           padding:  EdgeInsets.only(right: Get.width*0.01),
+                            //                           child: Text(checkoutMinutes.isNotEmpty ? checkoutMinutes[1] : '--',style: TextStyle(color: kblue,fontSize: 18),),
+                            //                         ),
+                            //                       ],
+                            //                     ),
+                            //                   ),
+                            //                 ),
+                            //                 SizedBox(width: 16,),
+                            //
+                            //               ],
+                            //             ),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //
+                            //       SizedBox(height: 30,),
+                            //       Text ('Total hours:',style: TextStyle(color: ktextcolor,fontSize: 18),),
+                            //       SizedBox(height: 10,),
+                            //       Padding(
+                            //         padding:  EdgeInsets.only(left: Get.width*0.03),
+                            //         child: Row(
+                            //           mainAxisSize: MainAxisSize.min,
+                            //           children: [
+                            //             Container(
+                            //               height: Get.height*0.05,
+                            //               width: Get.width*0.20,
+                            //               color: Colors.grey.shade400,
+                            //               child: Center(child: Text('$difference',style: TextStyle(color: kblue,fontSize: 18),)),
+                            //
+                            //             ),
+                            //             Center(child: Text(' hrs.',style: TextStyle(color: Colors.white,fontSize: 18),)),
+                            //
+                            //
+                            //             SizedBox(width: 12,),
+                            //             Image.asset('asset/dc hrs icon.png'),
+                            //           ],
+                            //         ),
+                            //       ),SizedBox(height: 20,),
+                            //       Row(
+                            //         mainAxisSize: MainAxisSize.min,
+                            //         children: [
+                            //           loading ? kprogressbar
+                            //               :
+                            //           ElevatedButton(onPressed: () async {
+                            //             setState(() {
+                            //               loading =true;
+                            //             });
+                            //      Position geoposition =    await     getCurrentLocation();
+                            //
+                            //             var   myLocation = GeoFirePoint(geoposition.latitude, geoposition.longitude);
+                            //
+                            //      print('nearby branch = a');
+                            //             var ref  =  geo.collection(collectionRef: branchDir
+                            //             )
+                            //
+                            //                 .within(center: myLocation, radius: 0.1, field: "location");
+                            //
+                            //    ref.listen((event) {
+                            //      print('check event = ${event.length}');
+                            //
+                            //
+                            //
+                            //           if(event.isEmpty) {
+                            //
+                            //             Get.defaultDialog(
+                            //               title: 'SORRY',
+                            //               middleText: 'YOU ARE NOT NEAR YOUR OFFICE',
+                            //               onConfirm: (){
+                            //                 Get.back();
+                            //               },
+                            //               textConfirm: 'OK',
+                            //                 confirmTextColor: Colors.white
+                            //             );
+                            //
+                            //             // Get.snackbar('SORRY', 'YOU ARE NOT NEAR YOUR OFFICE',snackPosition: SnackPosition.BOTTOM,
+                            //             //     backgroundColor: kyellow.withOpacity(0.8),colorText: Colors.white
+                            //             // );
+                            //
+                            //             setState(() {
+                            //               loading = false;
+                            //             });
+                            //
+                            //           }else{
+                            //
+                            //
+                            //
+                            //             if(checkinTime == ''){
+                            //
+                            //               var   myLocation = GeoFirePoint(geoPosition!.latitude, geoPosition!.longitude);
+                            //
+                            //
+                            //               var ref  = geo.collection(collectionRef: branchDir
+                            //               )
+                            //
+                            //                   .within(center: myLocation, radius: 20, field: "location");
+                            //
+                            //               var nearBranch = ref.length;
+                            //
+                            //               // ref.listen((event) {
+                            //               // }).asFuture();
+                            //
+                            //
+                            //
+                            //               var currentCheckinTime =   DateFormat('hh:mm a').format(DateTime.now());
+                            //
+                            //               var currentTime = DateFormat('hh:mm a').parse(DateFormat('hh:mm a').format(DateTime.now()));
+                            //
+                            //               var checkDifference =  currentTime.isAfter(convertedShiftTime!.add(Duration(minutes: 15)));
+                            //
+                            //               var checkinDifference =  currentTime.difference(convertedShiftTime!);
+                            //
+                            //               var convertedDifference =  checkinDifference.toString().split(':');
+                            //
+                            //               var differencehoursMinuts = convertedDifference[0] + '.' + convertedDifference[1]
+                            //
+                            //               ;
+                            //               print(convertedShiftTime);
+                            //               print(currentTime);
+                            //               print(checkinDifference);
+                            //
+                            //               var checkinstatus = checkDifference ? 'late' : currentTime.isBefore(convertedShiftTime!.add(Duration(minutes: 15)))
+                            //                   && currentTime.isAfter(convertedShiftTime!.subtract(Duration(minutes: 15))) ? 'perfect' :
+                            //
+                            //               'early';
+                            //
+                            //               if(checkinstatus == 'late'){
+                            //                 Get.defaultDialog(
+                            //                   barrierDismissible: false,
+                            //                     title: 'Reason For Coming Late',
+                            //                     content: Padding(
+                            //                       padding: const EdgeInsets.all(16.0),
+                            //                       child: Column(
+                            //                         children: [
+                            //                           TextFormField(
+                            //                             controller: reasonController
+                            //                             ,decoration: InputDecoration(
+                            //                               label: Text("Reason for your late login"),
+                            //                               border: OutlineInputBorder(
+                            //                                   borderSide: BorderSide(color: Colors.black)
+                            //                               )
+                            //                           ),
+                            //
+                            //                           ),
+                            //                         ],
+                            //                       ),
+                            //                     ),
+                            //                     onConfirm: (){
+                            //                       print(checkinstatus);
+                            //                       firestore.collection('attendence_report')
+                            //                           .add(AttendencReportModel(
+                            //                         date : DateFormat('yyyy/MM/dd').format(DateTime.now()),
+                            //                         reason: reasonController.text,
+                            //                         mid: widget.userDoc.get('mid'),
+                            //                         uid:widget.userDoc.id,
+                            //                         checkin:currentCheckinTime,
+                            //                         workingHours: '',
+                            //                         workingStatus: '',
+                            //                         id: '',
+                            //                         bid: widget.userDoc.get('bid'),
+                            //                         checkout: '',
+                            //                         did: widget.userDoc.get('did'),
+                            //                         status: checkinstatus,
+                            //                         difference: differencehoursMinuts,
+                            //                         timestamp: DateTime.now().toString(),
+                            //                         cid: widget.userDoc.get('cid'),
+                            //                       ).toJson()).then((value) async {
+                            //
+                            //                         setState(() {
+                            //                           latitudeData = '${geoPosition?.latitude}';
+                            //                           longitudeData = '${geoPosition?.longitude}';
+                            //                         });
+                            //
+                            //
+                            //
+                            //                         await  firestore.collection('attendence_report').doc(value.id).update(
+                            //
+                            //                             {'id':value.id,'latitude': latitudeData,'longitude':longitudeData});
+                            //                         setState(() {
+                            //                           reasonController.clear();
+                            //                           loading =false;
+                            //                           Get.back();
+                            //                         });
+                            //
+                            //
+                            //
+                            //
+                            //                       });
+                            //                     },
+                            //
+                            //                     textConfirm: "Submit",
+                            //                   onCancel: (){
+                            //
+                            //                     setState(() {
+                            //                       loading = false;
+                            //                     });
+                            //                     Get.back();
+                            //
+                            //                   }
+                            //
+                            //                 );
+                            //               }else{
+                            //                 print(checkinstatus);
+                            //                 firestore.collection('attendence_report')
+                            //                     .add(AttendencReportModel(
+                            //                   date : DateFormat('yyyy/MM/dd').format(DateTime.now()),
+                            //                   reason: '',
+                            //                   mid: widget.userDoc.get('mid'),
+                            //                   uid:widget.userDoc.id,
+                            //                   checkin:currentCheckinTime,
+                            //                   workingHours: '',
+                            //                   workingStatus: '',
+                            //                   id: '',
+                            //                   bid: widget.userDoc.get('bid'),
+                            //                   checkout: '',
+                            //                   did: widget.userDoc.get('did'),
+                            //                   status: checkinstatus,
+                            //                   difference: differencehoursMinuts,
+                            //                   timestamp: DateTime.now().toString(),
+                            //                   cid: widget.userDoc.get('cid'),
+                            //                 ).toJson()).then((value) async {
+                            //
+                            //                   setState(() {
+                            //                     latitudeData = '${geoPosition?.latitude}';
+                            //                     longitudeData = '${geoPosition?.longitude}';
+                            //                   });
+                            //
+                            //                   await  firestore.collection('attendence_report').doc(value.id).update(
+                            //                       {'id':value.id,'latitude':latitudeData,'longitude':longitudeData});
+                            //
+                            //                   setState(() {
+                            //                     loading =false;
+                            //                   });
+                            //
+                            //
+                            //                 });
+                            //               }
+                            //             }
+                            //             else{
+                            //
+                            //               Get.defaultDialog(
+                            //                   title: 'SORRY',
+                            //                   middleText: 'YOU ALREADY CHECKEDIN',
+                            //                   onConfirm: (){
+                            //                     Get.back();
+                            //                   },
+                            //                   textConfirm: 'OK',
+                            //                 confirmTextColor: kyellow
+                            //               );
+                            //
+                            //               // Get.snackbar('SORRY', 'YOU ALREADY CHECKEDIN',snackPosition: SnackPosition.BOTTOM,
+                            //               //     backgroundColor: kblue.withOpacity(0.8),colorText: Colors.white
+                            //               // );
+                            //               setState(() {
+                            //                 loading = false;
+                            //               });
+                            //
+                            //             }
+                            //
+                            //           }
+                            //
+                            //
+                            //
+                            //
+                            //
+                            //      }).asFuture();
+                            //
+                            //
+                            //
+                            //
+                            //           },
+                            //
+                            //               style: ElevatedButton.styleFrom(
+                            //                   elevation: 0,
+                            //                   shape:RoundedRectangleBorder(
+                            //                       borderRadius: BorderRadius.all(Radius.circular(10))
+                            //                   ),
+                            //                   side: BorderSide(width: 3.0, color: Colors.white,),
+                            //                   primary: Kdblue,
+                            //                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 11),
+                            //                   textStyle: TextStyle(
+                            //                       fontSize: 30,
+                            //                       fontWeight: FontWeight.bold)),
+                            //               child: Center(child: Text('Check-in',style: TextStyle(
+                            //                   color: Colors.white,fontSize: 15
+                            //               ),))),
+                            //           SizedBox(width: 25,),
+                            //           ElevatedButton(
+                            //               onPressed: () async {
+                            //
+                            //
+                            //                 if(checkoutTime == ''){
+                            //                   setState(() {
+                            //                     loading =true;
+                            //                   });
+                            //
+                            //                   var currentCheckOutTime =   DateFormat('hh:mm a').format(DateTime.now());
+                            //
+                            //                   var currentTime = DateFormat('hh:mm a').parse(DateFormat('hh:mm a').format(DateTime.now()));
+                            //
+                            //
+                            //                   //Convert string to date
+                            //
+                            //                   print(DateFormat('hh:mm a').format(DateTime.now()));
+                            //
+                            //                   var convertedCheckinTime =  DateFormat('hh:mm a').parse(checkinTime);
+                            //
+                            //
+                            //                   print(convertedCheckinTime);
+                            //                   print(currentCheckOutTime);
+                            //
+                            //                   //calculating difference
+                            //                   var difference1 =   currentTime.difference(convertedCheckinTime);
+                            //
+                            //                   var convertedDifference = difference1.toString().split(':');
+                            //
+                            //                   var differencehoursMinuts =  convertedDifference[0] + '.' + convertedDifference[1];
+                            //
+                            //                   print('date : ${convertedDifference[0] + ':' + convertedDifference[1] }');
+                            //
+                            //
+                            //                   //next
+                            //
+                            //                   var checkDifference =  double.parse(differencehoursMinuts) > double.parse(workinghours);
+                            //                   print(convertedShiftTime);
+                            //                   print(currentTime);
+                            //                   print(checkDifference);
+                            //
+                            //                   var checkoutstatus = checkDifference ? 'overtime' : double.parse(differencehoursMinuts) == double.parse(workinghours)  ? 'perfect' :
+                            //
+                            //                   'early';
+                            //
+                            //                   print(checkoutstatus);
+                            //
+                            //                   await  firestore.collection('attendence_report').doc(currentDocument[0].id)
+                            //                       .update(
+                            //                       {
+                            //                         'working_hours': differencehoursMinuts,
+                            //                         'working_status': checkoutstatus,
+                            //                         'checkout': currentCheckOutTime,
+                            //                       });
+                            //
+                            //                   setState(() {
+                            //                     loading =false;
+                            //                   });
+                            //
+                            //
+                            //
+                            //
+                            //
+                            //                 }else{
+                            //                   Get.snackbar('SORRY', 'YOU ALREADY CHECKEDOUT',snackPosition: SnackPosition.BOTTOM,
+                            //                       backgroundColor: kblue.withOpacity(0.8),colorText: Colors.white
+                            //                   );
+                            //                 }
+                            //
+                            //               },
+                            //
+                            //               style: ElevatedButton.styleFrom(
+                            //                   shape:RoundedRectangleBorder(
+                            //                       borderRadius: BorderRadius.all(Radius.circular(10))
+                            //                   ),
+                            //                   primary: Colors.white,
+                            //                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 11),
+                            //                   textStyle: TextStyle(
+                            //                       fontSize: 30,
+                            //                       fontWeight: FontWeight.bold)),
+                            //               child: Center(child: Text('Check-out',style: TextStyle(
+                            //                   color: Kdblue,fontSize: 15
+                            //
+                            //               ),))),
+                            //
+                            //         ],
+                            //       ),
+                            //
+                            //       SizedBox(height: 20,),
+                            //
+                            //       StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                            //         stream: firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                            //             .where('date',isEqualTo: DateFormat('yyyy/MM/dd').format(DateTime.now()))
+                            //             .snapshots(),
+                            //         builder: (context, snapshot) {
+                            //
+                            //           if(!snapshot.hasData){
+                            //             return kprogressbar;
+                            //           }
+                            //
+                            //           var value = snapshot.requireData;
+                            //
+                            //
+                            //
+                            //           return Container(
+                            //             width: Get.width * 0.3,
+                            //             child: ElevatedButton(
+                            //                 onPressed: () async {
+                            //                   if(value.docs.isEmpty){
+                            //                     print('runnning location');
+                            //                     location.changeSettings(distanceFilter: 500);
+                            //
+                            //
+                            //
+                            //                location.onLocationChanged.listen((locations.LocationData currentLocation) async {
+                            //                       // Use current location
+                            //
+                            //                  print('values = ${value.docs.length}');
+                            //
+                            //                       if(value.docs.isNotEmpty){
+                            //                         print('runnning location empty');
+                            //
+                            //                         Position geoposition =    await     getCurrentLocation();
+                            //
+                            //
+                            //
+                            //
+                            //                         List location1 =    value.docs[0].get('location');
+                            //
+                            //                         location1.add({
+                            //                           'lat' : geoposition.latitude,
+                            //                           'lon' : geoposition.longitude
+                            //                         });
+                            //
+                            //
+                            //
+                            //                         bool check =   kIsWeb ? false: await location.isBackgroundModeEnabled();
+                            //
+                            //                         check ?        firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                            //                             .doc(value.docs[0].id)
+                            //                             .update({
+                            //                           'location' : location1
+                            //
+                            //                         }) :
+                            //
+                            //                         kIsWeb ?
+                            //                         firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                            //                             .doc(value.docs[0].id)
+                            //                             .update({
+                            //                           'location' : location1
+                            //
+                            //                         })
+                            //                             :
+                            //                         print('location disabled');
+                            //
+                            //                       }else{
+                            //                         print('weblocation empty');
+                            //                         Position geoposition =    await     getCurrentLocation();
+                            //
+                            //                      bool check =   kIsWeb ? false : await location.isBackgroundModeEnabled();
+                            //
+                            //                         check   ?      firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                            //                             .add({
+                            //                           'location' : [{
+                            //                             'lat' : geoposition.latitude,
+                            //                             'lon' : geoposition.longitude
+                            //                           }],
+                            //                           'date' : DateFormat('yyyy/MM/dd').format(DateTime.now())
+                            //
+                            //                         }) : kIsWeb ?
+                            //                         firestore.collection('Employee').doc(widget.userDoc.id).collection('Trips')
+                            //                             .add({
+                            //                           'location' : [{
+                            //                             'lat' : geoposition.latitude,
+                            //                             'lon' : geoposition.longitude
+                            //                           }],
+                            //                           'date' : DateFormat('yyyy/MM/dd').format(DateTime.now())
+                            //
+                            //                         })
+                            //                             : print('location disable');
+                            //
+                            //
+                            //                       }
+                            //
+                            //
+                            //                       setState(() {
+                            //
+                            //                       });
+                            //
+                            //
+                            //
+                            //                     });
+                            //
+                            //                     kIsWeb ? print('weblocation') :     location.enableBackgroundMode(enable: true);
+                            //
+                            //                   }else{
+                            //
+                            //                     print('weblocation disabled');
+                            //                    kIsWeb ? print('weblocation') : location.enableBackgroundMode(enable: false);
+                            //
+                            //                    setState(() {
+                            //
+                            //                    });
+                            //                   }
+                            //
+                            //
+                            //
+                            //
+                            //
+                            //                 },
+                            //
+                            //                 style: ElevatedButton.styleFrom(
+                            //                     elevation: 0,
+                            //                     shape:RoundedRectangleBorder(
+                            //                         borderRadius: BorderRadius.all(Radius.circular(10))
+                            //                     ),
+                            //                     side: BorderSide(width: 1.0, color: Colors.white,),
+                            //                     primary: kyellow,
+                            //                     padding: EdgeInsets.symmetric(horizontal: 25, vertical: 11),
+                            //                     textStyle: TextStyle(
+                            //                         fontSize: 30,
+                            //                         fontWeight: FontWeight.bold)),
+                            //                 child: Center(child: Text(value.docs.isNotEmpty ?'END TRIP': 'START TRIP',style: TextStyle(
+                            //                     color: Colors.white,fontSize: 15
+                            //                 ),))),
+                            //           );
+                            //         }
+                            //       ),
+                            //
+                            //
+                            //
+                            //       currentDocument.isNotEmpty && checkoutTime == '' ?  Container(
+                            //
+                            //           height: 200,
+                            //           child: CountdownPage(hours:endDifference!.inHours,minutes: endDifference!.inMinutes % 60,seconds: endDifference!.inSeconds % 60,))
+                            //           : SizedBox(),
+                            //     ],
+                            //   ),
+                            // ),
                           ],
                         ),
                         SizedBox(height: 60,),
@@ -754,7 +1615,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                               var workingEmployees = empDocs.length - attendenceDocs.length;
 
                               return Padding(
-                                padding:  EdgeInsets.only(left: Get.width*0.2),
+                                padding:  kchecksize ? EdgeInsets.only(left: 30) :EdgeInsets.only(left: Get.width*0.2),
                                 child: Wrap(
                                   children: [
                                     buildCard('View Employees','${empDocs.length}\nEmployees'),
@@ -762,9 +1623,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
                                     buildCard('Daily Logins','${attendenceDocs.length}\nDaily Logins'),
 
                                     Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 30),
+                                        // margin: EdgeInsets.symmetric(horizontal: 30),
                                         padding: EdgeInsets.only(right: Get.width*0.1),
-                                        height: Get.height*0.45,
+                                        height: 200,
                                         child: PieChartMine(dataMap: {
                                           "% of employee working":double.parse(attendenceDocs.length.toString()) ,
                                           "% of employee on leave": double.parse(workingEmployees.toString()),
@@ -927,6 +1788,16 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
 
       ),
     );
+  }
+
+  void setLocationOff(locations.Location location) {
+                                         print('weblocation disabled');
+    kIsWeb ? print('weblocation') : location.enableBackgroundMode(enable: false);
+
+    Get.snackbar('TRIP CLOSED', '');
+    setState(() {
+
+    });
   }
 
   buildCard(String title,String subtitle) {

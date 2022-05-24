@@ -225,7 +225,13 @@ class _AddShiftState extends State<AddShift> {
                                 'cid' : userdata.get('cid')
                               }
 
-                          );
+                          ).then((value) async {
+
+                            setState(() {
+                              loading = false;
+                            });
+
+                          });
 
 
                         },

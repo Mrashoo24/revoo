@@ -199,7 +199,7 @@ class _AcceptLeaveState extends State<AcceptLeave> {
 
 
                      buildRejectCard(name: allLeaveList.name.toString()
-                       ,department:allLeaveList.department.toString(),date:  allLeaveList.date.toString(),lsitofleaves: allLeaveList,textinput: allLeaveList.textinput.toString());
+                       ,department:allLeaveList.department.toString(),date:  allLeaveList.date.toString(),lsitofleaves: allLeaveList,textinput: allLeaveList.textinput.toString(), designation: '', );
 
 
 
@@ -242,7 +242,7 @@ class _AcceptLeaveState extends State<AcceptLeave> {
     );
   }
 
-  Container buildRejectCard({required String name, required String department, required String date,required LeaveDisplay lsitofleaves,required String textinput}) {
+  Container buildRejectCard({required String name, required String department,required String designation, required String date,required LeaveDisplay lsitofleaves,required String textinput}) {
     return Container(
                     decoration: BoxDecoration(
                         color: bgGrey,
@@ -257,7 +257,7 @@ class _AcceptLeaveState extends State<AcceptLeave> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                name + "${ department}",
+                                name + "${department}",
                                 style: TextStyle(color: kblue, fontSize: 12),
                               ),
                               Text(
@@ -306,7 +306,7 @@ class _AcceptLeaveState extends State<AcceptLeave> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                name + department,
+                                name,
                                 style: TextStyle(color: kblue, fontSize: 12),
                               ),
                               Text(
@@ -346,12 +346,13 @@ class _AcceptLeaveState extends State<AcceptLeave> {
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                name + department + ' ',
+                                name + department + '',
                                 style: TextStyle(color: kblue, fontSize: 12),
                               ),
                               Text(
@@ -390,7 +391,7 @@ class _AcceptLeaveState extends State<AcceptLeave> {
                                           );
                                         },
                                         child: Padding(
-                                          padding: const EdgeInsets.all(30.0),
+                                          padding:  EdgeInsets.symmetric(horizontal:Get.width*0.15),
                                           child: Container(
                                             child: Center(child: Padding(
                                               padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -420,7 +421,7 @@ class _AcceptLeaveState extends State<AcceptLeave> {
                                               );
                                         },
                                         child: Padding(
-                                          padding: const EdgeInsets.all(30.0),
+                                          padding:  EdgeInsets.symmetric(horizontal:Get.width*0.15),
                                           child: Container(
                                             child: Center(child: Padding(
                                               padding: const EdgeInsets.symmetric(vertical: 12.0),

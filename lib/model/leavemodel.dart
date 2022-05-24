@@ -8,9 +8,10 @@ class LeaveDisplay {
   String? status2;
   String? id;
   String? textinput;
+  String? designation;
 
 
-  LeaveDisplay({this.date, this.paidLeaves,this.name,this.department,this.status,this.status1,this.status2,this.textinput});
+  LeaveDisplay({this.date,this.designation,this.paidLeaves,this.name,this.department,this.status,this.status1,this.status2,this.textinput});
 
   LeaveDisplay.fromJson(Map<String, dynamic> json) {
     date = json['date '];
@@ -22,6 +23,7 @@ class LeaveDisplay {
     status2 = json['status2'];
     id = json ['id'];
     textinput = json ['reason'];
+    designation = json['designation'];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +37,7 @@ class LeaveDisplay {
     data['status2'] = this.status2;
     data['id'] = this.id;
     data[' text input']= this.textinput;
+    data['designation'] = this.designation;
 
     return data;
   }
