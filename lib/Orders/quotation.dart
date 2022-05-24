@@ -137,14 +137,9 @@ class _HRMSadmincustState extends State<Quotation> {
                                 return Padding(
                                   padding: EdgeInsets.all(8),
                                   child: Container(
-
                                     decoration: BoxDecoration(
-
                                       color: mannu,
-
-
                                       borderRadius: BorderRadius.circular(15),
-
                                     ),
                                     child: Align(
                                       alignment: Alignment.topLeft,
@@ -195,49 +190,50 @@ class _HRMSadmincustState extends State<Quotation> {
                                                 )
                                               ],
                                             ),
-                                            Row(
-                                              children: [
-                                                BuildTextCard("Email:  "),
-                                                Text(
-                                                  snapshot.data!.docs[index]['email'],
-                                                  style: TextStyle(
-                                                    color: Colors.white,fontSize: 12,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                BuildTextCard("Item Description:  "),
-                                                Text(
-                                                  snapshot.data!.docs[index]['item_description'],
-                                                  style: TextStyle(
-                                                    color: Colors.white,fontSize: 12,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                              Row(
-                                              children: [
-                                                BuildTextCard("Quantity:  "),
-                                                Text(
-                                                  snapshot.data!.docs[index]['quantity'],
-                                                  style: TextStyle(
-                                                    color: Colors.white,fontSize: 12,
-                                                  ),
-                                                )
-                                              ],
-                                            ),Row(
-                                              children: [
-                                                BuildTextCard("Amount:  "),
-                                                Text(
-                                                  snapshot.data!.docs[index]['amount'],
-                                                  style: TextStyle(
-                                                    color: Colors.white,fontSize: 12,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     BuildTextCard("Email:  "),
+                                            //     Text(
+                                            //       snapshot.data!.docs[index]['email'],
+                                            //       style: TextStyle(
+                                            //         color: Colors.white,fontSize: 12,
+                                            //       ),
+                                            //     )
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     BuildTextCard("Item Description:  "),
+                                            //     Text(
+                                            //       snapshot.data!.docs[index]['item_description'],
+                                            //       style: TextStyle(
+                                            //         color: Colors.white,fontSize: 12,
+                                            //       ),
+                                            //     )
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     BuildTextCard("Quantity:  "),
+                                            //     Text(
+                                            //       snapshot.data!.docs[index]['quantity'],
+                                            //       style: TextStyle(
+                                            //         color: Colors.white,fontSize: 12,
+                                            //       ),
+                                            //     )
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     BuildTextCard("Amount:  "),
+                                            //     Text(
+                                            //       snapshot.data!.docs[index]['amount'],
+                                            //       style: TextStyle(
+                                            //         color: Colors.white,fontSize: 12,
+                                            //       ),
+                                            //     )
+                                            //   ],
+                                            // ),
 
                                           ],),),),),);});
                         }

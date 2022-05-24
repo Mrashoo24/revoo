@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -7,6 +8,8 @@ import '../Models/creatempmodel.dart';
 
 class MyEmpController extends GetxController{
   static MyEmpController instance = Get.find();
+  
+  static var auth = FirebaseAuth.instance.currentUser!.uid!;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 

@@ -1,7 +1,11 @@
+
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../constants/constants.dart';
 
@@ -15,20 +19,61 @@ class AddNewProduct extends StatefulWidget {
 class _AddNewProductState extends State<AddNewProduct> {
 
 
+  int _counter = 0;
+  increment(){
+    setState(() {
+      _counter++;
 
+    });
 
+  }
 
-  String initialValue = 'Product category';
+  decrement(){
+    setState(() {
+      _counter--;
+
+    });
+  }
+
+  File? image;
+  File? image1;
+  Future pickImage() async{
+    try {
+      await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemporory = File(image!.path);
+      setState(() =>
+      this.image = imageTemporory);
+
+    } on PlatformException catch (e){
+      print('Failed to pick image: $e');
+    }
+  }
+
+  Future pickImage1() async{
+    try {
+      await ImagePicker().pickImage(source: ImageSource.camera,);
+      if (image == null) return;
+      final imageTemporory = File(image!.path);
+      setState(() =>
+      this.image = imageTemporory);
+
+    } on PlatformException catch (e){
+      print('Failed to pick image: $e');
+    }
+  }
+
+  var productcategoryvalue = 'Product category0';
 
   var itemList = [
-    'Product category',
-    'product category1',
-    'product category2',
-    'product category3',
-    'product category4',
 
+    DropdownMenuItem(child: Text('Product category0'),value:'Product category0' ,),
+    DropdownMenuItem(child: Text('Product category1'),value:'Product category1' ,),
+    DropdownMenuItem(child: Text('Product category2'),value:'Product category2' ,),
+    DropdownMenuItem(child: Text('Product category3'),value:'Product category3' ,),
+    DropdownMenuItem(child: Text('Product category4'),value:'Product category4' ,),
   ];
-
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -119,22 +164,49 @@ class _AddNewProductState extends State<AddNewProduct> {
                   SizedBox(height: 20,),
                   Row(
                     children: [
-                      Container(
-                        height: 100,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
+                      Stack(
+                        children: [
+                          Container(
+                          height: 100,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
 
 
+                          ),
+                          child: InkWell(
+
+                            onTap: (){
+                              pickImage();
+                            },
+                            // onTap: ()async{
+                            //   final result = await  FilePicker.platform.pickFiles(
+                            //   allowMultiple: false,
+                            //   type: Filrtype.custom,
+                            //   allowedExtentions['png','jpg'],
+                            //   );
+                            //   },
+                            child: Icon(
+                              Icons.production_quantity_limits_outlined,
+                              size: 50,
+                              color:  Colors.grey,
+                            ),
+                          ),
                         ),
-                        child: Icon(
-                          Icons.person,
-                          size: 50,
-                          color:  Colors.grey,
-                        ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 65,left: 120),
+                            child: InkWell(
 
+                              onTap: (){
+                                pickImage1();
+                              },
 
-                      ),SizedBox(width: 20),
+                              child: Icon(Icons.camera_alt_rounded,size: 50,color: Colors.grey[500],),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 20),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -348,23 +420,22 @@ class _AddNewProductState extends State<AddNewProduct> {
 
                         Container(
 
+
+                          height: 60,
+                          width: Get.width,
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           decoration: BoxDecoration(
                             color: Colors.grey.shade200,borderRadius: new BorderRadius.circular(10.0),
                           ),
                           margin: EdgeInsets.symmetric(horizontal: 3),
-                          child: DropdownButton(
-                            isExpanded: true,
-                            iconEnabledColor: Colors.blue ,
-                            style: TextStyle(color: Colors.grey, fontSize: 18),
-                            dropdownColor: Colors.grey.shade200,
-                            focusColor: Colors.black,
-                            value: initialValue,
-                            icon: Icon(Icons.keyboard_arrow_down,color: kblue,),
-                            items: itemList.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(), onChanged: (String? value) {  },
-
+                          child: DropdownButton <String?>(
+                            value:productcategoryvalue,
+                            onChanged: (String? value){
+                              setState(() {
+                                productcategoryvalue = value!;
+                              });
+                            },
+                            items: itemList,
                           ),
                         ),
                         SizedBox(height: 20),
