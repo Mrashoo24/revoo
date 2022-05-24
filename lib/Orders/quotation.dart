@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
-import '../HRMS_admin_Screen/adbranchpg2.dart';
 import 'createquatationa.dart';
 
 class Quotation extends StatefulWidget {
@@ -16,7 +16,7 @@ class Quotation extends StatefulWidget {
 
 class _HRMSadmincustState extends State<Quotation> {
   String initialValue = '';
-
+  var firestore = FirebaseFirestore.instance.collection('AddQuotation').snapshots();
   var itemList = [
     '',
     'Std1',
@@ -123,87 +123,133 @@ class _HRMSadmincustState extends State<Quotation> {
 
 
                       SizedBox( height: 20),
-                      ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 1,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Container(
-
-                                decoration: BoxDecoration(
-
-                                  color: mannu,
-
-
-                                  borderRadius: BorderRadius.circular(15),
-
-                                ),
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(13),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-
-                                          children: [
-                                            Text(
-                                              'Product Name 1',
-                                              style: TextStyle(
-                                                color: Colors.yellow.shade600,
-                                                fontSize: 19,),),
-                                            SizedBox(width: 15),
-                                            Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
-                                              borderRadius: BorderRadius.circular(10),
-                                            ), child: Center(child: Text('Accept', style: TextStyle(
-                                                color: Colors.black, fontSize: 15),),),),
-                                            SizedBox(width: 5),
-                                            Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
-                                              borderRadius: BorderRadius.circular(10),
-                                            ), child: Center(child: Text('Reject', style: TextStyle(
-                                                color: Colors.black, fontSize: 15),),),),
-                                          ],
-                                        ),
-                                        Text(
-                                          "Date: 2021-01-20",
-                                          style: TextStyle(
-                                            color: Colors.white,fontSize: 12,
-                                          ),
-                                        )
-
-                                      ],
-                                    ),
-
-                                  ),
-                                ),
-
-                              ),
-                            );
+                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                        stream: firestore,
+                        builder: (context, snapshot) {
+                          if(!snapshot.hasData){
+                            return Text("no data");
                           }
-                      ),
-                      SizedBox( height: 18),
+                          return ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: snapshot.requireData.docs.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.all(8),
+                                  child: Container(
+
+                                    decoration: BoxDecoration(
+
+                                      color: mannu,
 
 
+                                      borderRadius: BorderRadius.circular(15),
 
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
 
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(13),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'Product Name 1',
+                                                  style: TextStyle(
+                                                    color: Colors.yellow.shade600,
+                                                    fontSize: 19,),),
+                                                SizedBox(width: 15),
+                                                Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ), child: Center(child: Text('Accept', style: TextStyle(
+                                                    color: Colors.black, fontSize: 15),),),),
+                                                SizedBox(width: 5),
+                                                Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ), child: Center(child: Text('Reject', style: TextStyle(
+                                                    color: Colors.black, fontSize: 15),),),),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                  BuildTextCard("Customer Name:  "),
+                                                Text(
+                                                  snapshot.data!.docs[index]['custumer_name'],
+                                                  style: TextStyle(
+                                                    color: Colors.white,fontSize: 12,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                BuildTextCard("Customer Number:  "),
+                                                Text(
+                                                  snapshot.data!.docs[index]['custumer_number'],
+                                                  style: TextStyle(
+                                                    color: Colors.white,fontSize: 12,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                BuildTextCard("Email:  "),
+                                                Text(
+                                                  snapshot.data!.docs[index]['email'],
+                                                  style: TextStyle(
+                                                    color: Colors.white,fontSize: 12,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                BuildTextCard("Item Description:  "),
+                                                Text(
+                                                  snapshot.data!.docs[index]['item_description'],
+                                                  style: TextStyle(
+                                                    color: Colors.white,fontSize: 12,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                              Row(
+                                              children: [
+                                                BuildTextCard("Quantity:  "),
+                                                Text(
+                                                  snapshot.data!.docs[index]['quantity'],
+                                                  style: TextStyle(
+                                                    color: Colors.white,fontSize: 12,
+                                                  ),
+                                                )
+                                              ],
+                                            ),Row(
+                                              children: [
+                                                BuildTextCard("Amount:  "),
+                                                Text(
+                                                  snapshot.data!.docs[index]['amount'],
+                                                  style: TextStyle(
+                                                    color: Colors.white,fontSize: 12,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
 
+                                          ],),),),),);});
+                        }
+                      ), SizedBox( height: 18),
+                    ],),],),),),),),);}
 
-                    ],
-                  ),
-
-                ],
-              ),
-            ),
-          ),
-        ),
-
-      ),
-    );
+  Text BuildTextCard(text) {
+    return Text(
+      text,
+                                                style: TextStyle(
+                                                  color: kyellow,fontSize: 12,
+                                                ),
+                                              );
   }
-
-
 }

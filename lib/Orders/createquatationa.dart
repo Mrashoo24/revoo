@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:revoo/Orders/quotation.dart';
 
 import '../constants/constants.dart';
 
@@ -26,7 +29,7 @@ class _Createquotation25State extends State<Createquotation25> {
   TextEditingController amount = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var firestore = FirebaseFirestore.instance.collection("CreateQuotation");
+    var firestore = FirebaseFirestore.instance.collection("AddQuotation");
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -157,11 +160,12 @@ class _Createquotation25State extends State<Createquotation25> {
                                 "customer_name" : customername.text,
                                 "customer_number" : customernumber.text,
                                 "email" : email.text,
+                                "quantity" : quantity.text,
+                                "item_description" : itemdescription.text,
+                                "amount" : amount.text,
 
-
-
-                              }
-                            );
+                              }).then((value) {firestore.doc(value.id);});
+                            Get.to(Quotation());
                           },
                           child: Container(
                            width: 150,
