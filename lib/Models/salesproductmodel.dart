@@ -1,4 +1,4 @@
-class ProductModel {
+class SalesProductModel {
   String?
   quantity,
       sold,
@@ -11,11 +11,7 @@ class ProductModel {
       productname,
       producttype,
       costprice;
-
-
-
-
-  ProductModel({
+  SalesProductModel({
     this.quantity,
     this.sold,
     this.purchaseprice,
@@ -29,8 +25,8 @@ class ProductModel {
     this.date
   });
 
-  ProductModel fromJson(Map<String, dynamic> json) {
-    return ProductModel(
+  SalesProductModel fromJson(Map<String, dynamic> json) {
+    return SalesProductModel(
       quantity: json["quantity"],
       sold: json["sold"],
       purchaseprice: json["purchaseprice"],
@@ -46,7 +42,7 @@ class ProductModel {
     );
   }
 
-  toJson(ProductModel json) {
+  toJson(SalesProductModel json) {
     return {
       'quantity': json.quantity,
       'sold':  json.sold,

@@ -12,13 +12,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
-
-import '../Controllers/IpcatagoryController.dart';
-import '../Models/productmodel.dart';
+import '../Models/salesproductmodel.dart';
 import '../constants/constants.dart';
-import '../model/IpcatagoryModel.dart';
-import '../model/productmodel.dart';
-import 'addproductselectcomponent.dart';
+
 
 class Addproduct39 extends StatefulWidget {
 
@@ -271,7 +267,7 @@ class _Addproduct39State extends State<Addproduct39> {
                                         ),
                                         enabledBorder:OutlineInputBorder(
                                             borderSide: BorderSide(color: Colors.white)
-                                        )
+                                        ),
 
                                     ),
                                   ),
@@ -325,12 +321,8 @@ class _Addproduct39State extends State<Addproduct39> {
                                   ),
                                 ),
                               ),
-
-
+                              ///producttype
                               SizedBox(height: 30),
-
-
-
                               Container(
                                 height: 110,
                                 child: Row(
@@ -346,10 +338,7 @@ class _Addproduct39State extends State<Addproduct39> {
                                           SizedBox(height: 4),
                                           Container(
                                             height: 40,
-
                                             decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
-
-
                                             child: TextFormField(
                                               controller: sellprice,
                                               decoration: InputDecoration(
@@ -376,6 +365,7 @@ class _Addproduct39State extends State<Addproduct39> {
                                         ],
                                       ),
                                     ),
+                                    ///sell
                                     SizedBox(width: 10,),
                                     Flexible(
                                       child: Column(
@@ -393,10 +383,8 @@ class _Addproduct39State extends State<Addproduct39> {
                                             child: TextFormField(
                                               controller: costprice,
                                               decoration: InputDecoration(
-
                                                   filled: true,
                                                   fillColor: bgGrey,
-
                                                   border: OutlineInputBorder(
                                                     borderSide: BorderSide(color: Colors.white),
                                                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -409,7 +397,6 @@ class _Addproduct39State extends State<Addproduct39> {
                                                     borderSide: BorderSide(color: Colors.white),
                                                     borderRadius: BorderRadius.all(Radius.circular(10)),
                                                   )
-
                                               ),
                                             ),
                                           ),
@@ -445,7 +432,6 @@ class _Addproduct39State extends State<Addproduct39> {
                                           onTap: increment,
                                           child: Icon(Icons.add,color: kblue,size: 20,),
                                         ),
-
                                         VerticalDivider(indent: 1,endIndent: 1,color: kblue,),
                                         InkWell(
                                           onTap :decrement ,
@@ -453,18 +439,9 @@ class _Addproduct39State extends State<Addproduct39> {
                                           child: Icon(Icons.remove,color: kblue,size: 20,),
                                         ),
                                         VerticalDivider(indent: 1,endIndent: 1,color: kblue,),
-
                                         SizedBox(width: 5),
-                                        Text("$_counter",style: TextStyle(fontSize: 14,color:  kblue),),
-
-                                      ],
-                                    ),
-
-                                  ),
+                                        Text("$_counter",style: TextStyle(fontSize: 14,color:  kblue),),],),),
                                 ],
-
-
-
                               ),
                               SizedBox(height: 20,),
                               // SizedBox(height: 1),
@@ -675,7 +652,7 @@ class _Addproduct39State extends State<Addproduct39> {
                                             loading = true;
                                           });
                                           FirebaseFirestore.instance.collection('Products').add(
-                                              ProductModel().toJson(ProductModel(
+                                              SalesProductModel().toJson(SalesProductModel(
                                                   productname: productname.text,
                                                   quantity: _counter.toString(),
                                                   components: jsonEncode(selectedItems),
@@ -700,28 +677,10 @@ class _Addproduct39State extends State<Addproduct39> {
                                             });
                                             Get.back();
                                           });
-                                          // else{
-                                          //
-                                          //
-                                          //   FirebaseFirestore.instance.collection('Inventory').doc(widget.id).update(ProductModel().toJson(ProductModel(
-                                          //       name: productname.text,quantity: _counter.toString(),sold: '0',components:  jsonEncode(selectedItems),purchaseprice: '100',
-                                          //       sellprice: sellprice.text,
-                                          //       cid: compModel['cid']
-                                          //   ))).then((value) {
-                                          //     setState(() {
-                                          //       loading = false;
-                                          //     });
-                                          //     Get.back();
-                                          //   });
-                                          // }
-
-
-
                                         }
+                                      },
 
-
-
-                                      }, child: Text('Add')),
+                                      child: Text('Add')),
 
                                   ElevatedButton(
                                       style: ButtonStyle(
@@ -733,7 +692,6 @@ class _Addproduct39State extends State<Addproduct39> {
 
                                 ],
                               ),
-
 
                               // Row(
                               //   mainAxisSize: MainAxisSize.min,
@@ -773,16 +731,9 @@ class _Addproduct39State extends State<Addproduct39> {
                               //         }, child: Text('Add')),
                               //   ],
                               // ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              )
-          ),
-        ),
+                          // ],
+
+                          ],),),],),);},)),),
         bottomNavigationBar: Container(
 
           height: 100,
@@ -838,8 +789,6 @@ class _Addproduct39State extends State<Addproduct39> {
           ),
         ),
       ),
-
-
     );
   }
 

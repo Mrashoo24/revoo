@@ -1,12 +1,18 @@
 
+import 'dart:convert';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 
+import '../Models/salesproductmodel.dart';
 import '../constants/constants.dart';
 
 class AddNewProduct extends StatefulWidget {
@@ -64,6 +70,7 @@ class _AddNewProductState extends State<AddNewProduct> {
   }
 
   var productcategoryvalue = 'Product category0';
+  List<Map<String,String>>? selectedItems = [];
 
   var itemList = [
 
@@ -74,8 +81,14 @@ class _AddNewProductState extends State<AddNewProduct> {
     DropdownMenuItem(child: Text('Product category4'),value:'Product category4' ,),
   ];
   bool loading = false;
+  TextEditingController productname = TextEditingController();
+  TextEditingController producttype = TextEditingController();
+  TextEditingController sellprice = TextEditingController();
+  TextEditingController costprice = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    var firestore = FirebaseFirestore.instance.collection('Salesproducts');
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -219,8 +232,8 @@ class _AddNewProductState extends State<AddNewProduct> {
                           Container(
                             height: 40,
                             width: 150,
-
                             child: TextFormField(
+                              controller: productname,
                               decoration: InputDecoration(
                                   filled: true,
                                   fillColor: bgGrey,
@@ -238,6 +251,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                               ),
                             ),
                           ),
+                          ///productname
                         ],
                       ),
                     ],
@@ -246,7 +260,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                     children: [
                       Text('Upload a profile picture',style: TextStyle(color: kblue),),
                     ],
-                  ),
+                  ),///uploadprofile
                   SizedBox(height: 20),
                   Container(
                     child: Column(
@@ -254,7 +268,43 @@ class _AddNewProductState extends State<AddNewProduct> {
 
                         Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Product type',style: TextStyle(fontSize: 18,color:kblue ),)),
+                            child: Text('Product Name',style: TextStyle(fontSize: 18,color:kblue ),)),
+                        Divider(
+                          height: 5,thickness: 1,color: kblue,
+                        ),
+                        SizedBox(height: 4),
+                        Container(
+                          height: 37,
+
+                          decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
+
+                          child: TextFormField(
+                            decoration: InputDecoration(
+
+                                filled: true,
+                                fillColor: bgGrey,
+
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                ),
+                                enabledBorder:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                )
+
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Product Type',style: TextStyle(fontSize: 18,color:kblue ),)),
                         Divider(
                           height: 5,thickness: 1,color: kblue,
                         ),
@@ -300,23 +350,19 @@ class _AddNewProductState extends State<AddNewProduct> {
                               Flexible(
                                 child: Column(
                                   children: [
-                                    Text('Price sale',style: TextStyle(fontSize: 18,color:kblue ),),
+                                    Text('Sell Price',style: TextStyle(fontSize: 18,color:kblue ),),
                                     Divider(
                                       height: 5,thickness: 1,color: kblue,
                                     ),
                                     SizedBox(height: 4),
                                     Container(
                                       height: 40,
-
                                       decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
-
-
                                       child: TextFormField(
+                                        controller: sellprice,
                                         decoration: InputDecoration(
-
                                             filled: true,
                                             fillColor: bgGrey,
-
                                             border: OutlineInputBorder(
                                               borderSide: BorderSide(color: Colors.white),
                                               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -327,12 +373,8 @@ class _AddNewProductState extends State<AddNewProduct> {
                                             ),
                                             enabledBorder:OutlineInputBorder(
                                               borderSide: BorderSide(color: Colors.white),
-                                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                                            )
-
-                                        ),
-                                      ),
-                                    )
+                                              borderRadius: BorderRadius.all(Radius.circular(10)),)),),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -348,14 +390,11 @@ class _AddNewProductState extends State<AddNewProduct> {
                                     Container(
                                       height: 40,
                                       decoration: BoxDecoration(borderRadius:BorderRadius.circular(5)),
-
-
                                       child: TextFormField(
+                                        controller: costprice,
                                         decoration: InputDecoration(
-
                                             filled: true,
                                             fillColor: bgGrey,
-
                                             border: OutlineInputBorder(
                                               borderSide: BorderSide(color: Colors.white),
                                               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -368,7 +407,6 @@ class _AddNewProductState extends State<AddNewProduct> {
                                               borderSide: BorderSide(color: Colors.white),
                                               borderRadius: BorderRadius.all(Radius.circular(10)),
                                             )
-
                                         ),
                                       ),
                                     ),
@@ -382,16 +420,16 @@ class _AddNewProductState extends State<AddNewProduct> {
                         Align(
                             alignment: Alignment.centerLeft,
                             child
-
-                            : Text('Tags',style: TextStyle(fontSize: 18,color:kblue ),)),
+                            : Text('Product Type',style: TextStyle(fontSize: 18,color:kblue ),)
+                        ),
                         Divider(
                           height: 5,thickness: 1,color: kblue,
                         ),
                         Container(
                           height: 42,
                           width: 400,
-
                           child: TextFormField(
+                            controller: producttype,
                             decoration: InputDecoration(
                                 filled: true,
                                 fillColor: bgGrey,
@@ -409,7 +447,79 @@ class _AddNewProductState extends State<AddNewProduct> {
                             ),
                           ),
                         ),
+                        ///productype
+                        InkWell(
+                          onTap: (){
+                            _showMultiSelect(context);
+                          },
+                          child: Container(
+                            color: Kdblue,
+
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Select Components',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        ///select components
                         SizedBox(height: 30),
+                        Container(
+                          height: 100,
+                          width: 400,
+                          child: ListView.builder(
+                              shrinkWrap: true,
+
+                              itemCount: selectedItems!.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                          width:100,
+                                          child: Text(selectedItems![index]['name']!)),
+                                      SizedBox(width: 10,),
+                                      Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Container(
+                                          width: 30,
+                                          child: Text(selectedItems![index]['unit']!,style: TextStyle(fontSize: 10),),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: TextField(
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                              ),
+                                              filled: true,
+
+                                              labelText: 'Quantity',
+                                              labelStyle: TextStyle(color: Colors.grey[800],fontSize: 8),
+                                              hintStyle: TextStyle(color: Colors.grey[800],fontSize: 8),
+                                              hintText: 'Quantity',
+                                              fillColor: Colors.white70),
+                                          keyboardType: TextInputType.number,
+                                          onChanged: (value1){
+                                            print('previo = ${selectedItems![index]}');
+                                            print('value = $value1');
+
+                                            selectedItems![index].update('quantity', (value) => value1.toString());
+
+                                            print('updated = ${selectedItems![index]}');
+
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }
+                          ),
+                        ),
 
                         Align(alignment: Alignment.centerLeft,
                             child: Text('Product category',style: TextStyle(fontSize: 18,color:kblue ),)),
@@ -438,6 +548,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                             items: itemList,
                           ),
                         ),
+                        ///dropdown product category
                         SizedBox(height: 20),
                         Row(
                           mainAxisSize: MainAxisSize.min,
@@ -463,35 +574,58 @@ class _AddNewProductState extends State<AddNewProduct> {
                                   ),))),
                             ),
                             SizedBox(width: 25,),
-                            Container(
-                              width: 110,
-                              height: 41,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade900,
-                                    Colors.blue,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
 
+
+                            InkWell(
+                              onTap: (){
+                                  FirebaseFirestore.instance.collection('Salesproducts').add(
+                                      SalesProductModel().toJson(SalesProductModel(
+                                        productname: productname.text,
+                                        costprice: costprice.text,
+                                        sellprice: sellprice.text,
+                                        productcategory: productcategoryvalue,
+                                        producttype: producttype.text,
+                                        components: jsonEncode(selectedItems),
+                                        date: DateFormat('yyyy/MM/dd').format(DateTime.now())
+
+
+                                      ))).then((value) {
+                                    FirebaseFirestore.instance.collection('Products').doc(value.id).update({'cid':value.id});
+
+                                    setState(() {
+                                      loading = false;
+                                    });
+                                    Get.back();
+                                  });
+
+                              },
+                              child: Container(
+                                width: 110,
+                                height: 41,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.blue.shade900,
+                                      Colors.blue,
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Center(
+                                    child: Text('Add Products',style: TextStyle(
+                                        color: Colors.white,fontSize: 15
+                                    ),),
+                                  ),
+                                ),
 
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: Text('Duplicate',style: TextStyle(
-                                      color: Colors.white,fontSize: 15
-                                  ),),
-                                ),
-                              ),
-
                             ),
                           ],
                         ),
-
                       ],
                     ),
                   ),
@@ -501,7 +635,6 @@ class _AddNewProductState extends State<AddNewProduct> {
           ),
         ),
         bottomNavigationBar: Container(
-
           height: 100,
           child: Stack(
             children: [
@@ -560,6 +693,41 @@ class _AddNewProductState extends State<AddNewProduct> {
       ),
 
 
+    );
+  }
+  void _showMultiSelect(BuildContext context) async {
+    QuerySnapshot<Map<String, dynamic>> ProductDocs = await FirebaseFirestore
+        .instance.collection('component').get();
+
+
+    List<MultiSelectItem<Map<String, String>>> allProduct = [];
+
+    ProductDocs.docs.forEach((element) {
+      Map<String, dynamic> newList = element.data();
+      Map<String, String> newList1 = {
+        "name": newList['name'],
+        'price': newList['price'],
+        'quantity': newList['quantity'],
+        'unit': newList['unit'],
+      };
+      allProduct.add(MultiSelectItem(newList1, element.get('name')));
+    });
+    print('valueofitems = $allProduct');
+    await showDialog(
+      context: context,
+      builder: (ctx) {
+        return MultiSelectDialog(searchable: true,
+          items: allProduct,
+
+          initialValue: selectedItems!,
+          onConfirm: (List<Map<String, String>>values) {
+            setState(() {
+              selectedItems = values;
+            });
+            print('confiremd : $values');
+          },
+        );
+      },
     );
   }
 }
