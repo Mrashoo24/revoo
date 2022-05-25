@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -192,6 +194,14 @@ SizedBox(height: 20),
                       horizontalMargin: 18,
                       columnSpacing: 22,
                       columns: [
+
+                        DataColumn(
+                          label: Text(
+                            "Remark",
+                            style: TextStyle(
+                                fontSize: 10, color: Colors.grey.shade600),
+                          ),
+                        ),
                         DataColumn(
                           label: Text(
                             "RFQs",
@@ -199,7 +209,6 @@ SizedBox(height: 20),
                                 fontSize: 10, color: Colors.grey.shade600),
                           ),
                         ),
-
                         DataColumn(
                             label: Center(
                               child: Padding(
@@ -241,113 +250,48 @@ SizedBox(height: 20),
                                 ),
                               ),
                             )),
-                        // DataColumn(
-                        //     label: Padding(
-                        //       padding:
-                        //       const EdgeInsets.symmetric(horizontal: 5.0),
-                        //       child: Center(
-                        //         child: Text(
-                        //           "Sellprice",
-                        //           style: TextStyle(
-                        //               fontSize: 12,
-                        //               color: Colors.grey.shade600),
-                        //         ),
-                        //       ),
-                        //     )),
-                        // DataColumn(
-                        //     label: Padding(
-                        //       padding:
-                        //       const EdgeInsets.symmetric(horizontal: 5.0),
-                        //       child: Center(
-                        //         child: Text(
-                        //           "CostPrice",
-                        //           style: TextStyle(
-                        //               fontSize: 12,
-                        //               color: Colors.grey.shade600),
-                        //         ),
-                        //       ),
-                        //     )),
-                        // DataColumn(
-                        //   label: Text(
-                        //     "Add",
-                        //     style: TextStyle(
-                        //         fontSize: 10, color: Colors.grey.shade600),
-                        //   ),
-                        // ),
-                        // DataColumn(
-                        //   label: Text(
-                        //     "Delete",
-                        //     style: TextStyle(
-                        //         fontSize: 10, color: Colors.grey.shade600),
-                        //   ),
-                        // ),
-                        // DataColumn(
-                        //   label: Text(
-                        //     "Add Stock",
-                        //     style: TextStyle(
-                        //         fontSize: 10, color: Colors.grey.shade600),
-                        //   ),
-                        // ),
-
                       ],
                       rows: documents.mapIndexed((index, element) {
                         return DataRow(cells: [
-                          DataCell(Text(
+
+                          DataCell(
+                            CircleAvatar(
+                              backgroundColor: jsonDecode(element['status']) == 0 ? Colors.red : Colors.yellow,
+                              radius: 10,//Text
+                            ),
+                          ),
+                          DataCell(
+                              Text(
                             element['rfqtitle'],
                             style: TextStyle(fontSize: 12),
                           )),
-
                           DataCell(
-                            Container(
-                              margin: EdgeInsets.symmetric(vertical: 15),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Container(
-                                  width: 50,
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: bgGrey,
-                                  ),
-                                  child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        element['totalcost'],
-                                        style:
-                                        TextStyle(color: Colors.orange),
-                                      )),
-                                ),
-                              ),
-                            ),
+                            Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  element['totalcost'],
+                                  style:
+                                  TextStyle(color: Colors.orange),
+                                )),
                           ),
                           DataCell(
-                            Container(
-                              margin: EdgeInsets.symmetric(vertical: 15),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Container(
-                                  width: 50,
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: bgGrey,
-                                  ),
-                                  child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        element['vendorname'],
-                                        style:
-                                        TextStyle(color: Colors.orange),
-                                      )),
-                                ),
-                              ),
-                            ),
+                            Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  element['vendorname'],
+                                  style:
+                                  TextStyle(color: Colors.orange),
+                                )),
                           ),
-                          DataCell(Text(
+                          DataCell(
+                            Text(
                             element['status'],
                             style: TextStyle(fontSize: 12),
                           ),
+
+
                           ),
+
 
                         ]);
                       }).toList(),

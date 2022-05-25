@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -115,24 +118,25 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                       columns: [
                         DataColumn(
                           label: Text(
-                            "RFQs",
+                            "Remark",
                             style: TextStyle(
                                 fontSize: 10, color: Colors.grey.shade600),
                           ),
                         ),
-
                         DataColumn(
-                            label: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 20.0),
-                                child: Text(
-                                  "Price",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey.shade600),
-                                ),
-                              ),
-                            )),
+                          label: Text(
+                            "RfqName",
+                            style: TextStyle(
+                                fontSize: 10, color: Colors.grey.shade600),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Cost",
+                            style: TextStyle(
+                                fontSize: 10, color: Colors.grey.shade600),
+                          ),
+                        ),
                         DataColumn(
                             label: Center(
                               child: Padding(
@@ -168,6 +172,19 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                               const EdgeInsets.symmetric(horizontal: 5.0),
                               child: Center(
                                 child: Text(
+                                  "Delivery Status",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey.shade600),
+                                ),
+                              ),
+                            )),
+                        DataColumn(
+                            label: Padding(
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 5.0),
+                              child: Center(
+                                child: Text(
                                   "Accept",
                                   style: TextStyle(
                                       fontSize: 12,
@@ -188,7 +205,6 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                                 ),
                               ),
                             )),
-
                         // DataColumn(
                         //     label: Padding(
                         //       padding:
@@ -236,65 +252,46 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                         //         fontSize: 10, color: Colors.grey.shade600),
                         //   ),
                         // ),
-
                       ],
                       rows: documents.mapIndexed((index, element) {
+
                         return DataRow(cells: [
-                          DataCell(Text(
+                          DataCell(
+                            CircleAvatar(
+                              backgroundColor:jsonDecode(element['status']) == -1 ? Colors.red : Colors.green,
+                              radius: 10,//Text
+                            ),
+                          ),
+                          DataCell(
+                              Text(
                             element['rfqtitle'],
                             style: TextStyle(fontSize: 12),
                           )),
-
                           DataCell(
-                            Container(
-                              margin: EdgeInsets.symmetric(vertical: 15),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Container(
-                                  width: 50,
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: bgGrey,
-                                  ),
-                                  child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        element['totalcost'],
-                                        style:
-                                        TextStyle(color: Colors.orange),
-                                      )),
-                                ),
-                              ),
+                            Text(
+                              element['totalcost'],
+                              style:
+                              TextStyle(color: Colors.red),
                             ),
                           ),
                           DataCell(
-                            Container(
-                              margin: EdgeInsets.symmetric(vertical: 15),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Container(
-                                  width: 50,
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: bgGrey,
-                                  ),
-                                  child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        element['vendorname'],
-                                        style:
-                                        TextStyle(color: Colors.orange),
-                                      )),
-                                ),
-                              ),
+                            Text(
+                              element['vendorname'],
+                              style:
+                              TextStyle(color: Colors.orange,fontWeight: FontWeight.bold),
                             ),
                           ),
-                          DataCell(Text(
+                          DataCell(
+                            Text(
                             element['status'],
                             style: TextStyle(fontSize: 12),
                           ),
+                          ),
+                          DataCell(
+                            Text(
+                              element['deliverystatus'],
+                              style: TextStyle(fontSize: 12),
+                            ),
                           ),
                           DataCell(
                               Column(
@@ -302,7 +299,9 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                                     IconButton(
                                       onPressed: (){
 
-                                      }, icon: Icon(Icons.check),
+
+
+                                      }, icon:  Icon(Icons.check),
                                     ),
                                   ])
                           ),

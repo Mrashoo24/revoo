@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,9 +31,13 @@ class _CreatRQFState extends State<CreatRQF> {
   TextEditingController expirydate = TextEditingController();
   TextEditingController customerdate = TextEditingController();
   TextEditingController totalamount = TextEditingController();
+
+  var rnd = new Random();
+
+
   @override
   Widget build(BuildContext context) {
-
+    print("random number tanishq $rnd");
     var firestore = FirebaseFirestore.instance;
 
     return SafeArea(
@@ -305,7 +310,8 @@ class _CreatRQFState extends State<CreatRQF> {
                             ///
 
                             FirebaseFirestore.instance.collection('RFQform').add(
-                                CreateRfqModel(createrfq: createrfq.text,
+                                CreateRfqModel(
+                                    createrfq: createrfq.text,
                                     customerdate:customerdate.text,
                                     expirydate:expirydate.text,
                                     components: jsonEncode(selectedItems),
