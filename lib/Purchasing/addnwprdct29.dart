@@ -427,7 +427,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                         ),
                         Container(
                           height: 42,
-                          width: 400,
+                          width: Get.width,
                           child: TextFormField(
                             controller: producttype,
                             decoration: InputDecoration(
@@ -465,7 +465,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                           ),
                         ),
                         ///select components
-                        SizedBox(height: 30),
+                        SizedBox(height: 5),
                         Container(
                           height: 100,
                           width: 400,
@@ -550,81 +550,58 @@ class _AddNewProductState extends State<AddNewProduct> {
                         ),
                         ///dropdown product category
                         SizedBox(height: 20),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            InkWell(
-                              child: ElevatedButton(onPressed: (){
+                        SizedBox(width: 25,),
 
-                              },
 
-                                  style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      shape:RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(10))
-                                      ),
-                                      side: BorderSide(width: 3.0, color: kblue ),
-                                      primary: Colors.white,
-                                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 11),
-                                      textStyle: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold)),
-                                  child: Center(child: Text('< Back',style: TextStyle(
-                                      color: kblue,fontSize: 15
-                                  ),))),
+                        InkWell(
+                          onTap: (){
+                              FirebaseFirestore.instance.collection('Salesproducts').add(
+                                  SalesProductModel().toJson(SalesProductModel(
+                                    productname: productname.text,
+                                    costprice: costprice.text,
+                                      components: jsonEncode(selectedItems),
+                                    sellprice: sellprice.text,
+                                    productcategory: productcategoryvalue,
+                                    producttype: producttype.text,
+
+                                      cid: 'id',
+                                    date: DateFormat('yyyy/MM/dd').format(DateTime.now())
+
+
+                                  ))).then((value) {
+                                FirebaseFirestore.instance.collection('Salesproducts').doc(value.id).update({'cid':value.id});
+
+                                setState(() {
+                                  loading = false;
+                                });
+                                Get.back();
+                              });
+
+                          },
+                          child: Container(
+                            width: 110,
+                            height: 41,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.blue.shade900,
+                                  Colors.blue,
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            SizedBox(width: 25,),
-
-
-                            InkWell(
-                              onTap: (){
-                                  FirebaseFirestore.instance.collection('Salesproducts').add(
-                                      SalesProductModel().toJson(SalesProductModel(
-                                        productname: productname.text,
-                                        costprice: costprice.text,
-                                        sellprice: sellprice.text,
-                                        productcategory: productcategoryvalue,
-                                        producttype: producttype.text,
-                                        components: jsonEncode(selectedItems),
-                                        date: DateFormat('yyyy/MM/dd').format(DateTime.now())
-
-
-                                      ))).then((value) {
-                                    FirebaseFirestore.instance.collection('Products').doc(value.id).update({'cid':value.id});
-
-                                    setState(() {
-                                      loading = false;
-                                    });
-                                    Get.back();
-                                  });
-
-                              },
-                              child: Container(
-                                width: 110,
-                                height: 41,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Colors.blue.shade900,
-                                      Colors.blue,
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child: Text('Add Products',style: TextStyle(
-                                        color: Colors.white,fontSize: 15
-                                    ),),
-                                  ),
-                                ),
-
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Text('Add Products',style: TextStyle(
+                                    color: Colors.white,fontSize: 15
+                                ),),
                               ),
                             ),
-                          ],
+
+                          ),
                         ),
                       ],
                     ),
@@ -634,62 +611,6 @@ class _AddNewProductState extends State<AddNewProduct> {
             ),
           ),
         ),
-        bottomNavigationBar: Container(
-          height: 100,
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-
-                  child: Stack(
-                    children: [
-                      Align(
-
-                        child: Container(
-                          height: Get.height*0.08,
-                          decoration: BoxDecoration(
-
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                            color: Kdblue,
-
-                          ),
-                          child: Align(
-                            alignment: Alignment.center,
-
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ClipRect(child: Image.asset('asset/share.png')),
-                                ClipRect(child: Image.asset('asset/homedash.png')),
-                                Opacity(
-                                    opacity: 0.01,
-                                    child: ClipRect(child: Image.asset('asset/share.png'))
-                                ),
-                                ClipRect(child: Image.asset('asset/groupdash.png')),
-                                ClipRect(child: Image.asset('asset/pathdash.png')),
-
-                              ],
-                            ),
-                          ),
-                        ),
-                        alignment: Alignment.bottomCenter,
-                      ),
-
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding:  EdgeInsets.only(bottom: 20.0),
-                  child: Image.asset('asset/bnbAdd.png'),
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
 
 
@@ -697,7 +618,7 @@ class _AddNewProductState extends State<AddNewProduct> {
   }
   void _showMultiSelect(BuildContext context) async {
     QuerySnapshot<Map<String, dynamic>> ProductDocs = await FirebaseFirestore
-        .instance.collection('component').get();
+        .instance.collection('Sale_product_component').get();
 
 
     List<MultiSelectItem<Map<String, String>>> allProduct = [];
@@ -731,3 +652,10 @@ class _AddNewProductState extends State<AddNewProduct> {
     );
   }
 }
+
+
+
+
+
+
+

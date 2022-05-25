@@ -33,6 +33,7 @@ class _HRMSadmincustState extends State<Quotation> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+
         body: Container(
           width: Get.width,
 

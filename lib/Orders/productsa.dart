@@ -17,16 +17,14 @@ class Product extends StatefulWidget {
 
 class _HRMSadmincustState extends State<Product> {
   String initialValue = '';
-
+  var productcategoryvalue = 'Product category0';
   var itemList = [
-    '',
-    'Std1',
-    'Std2',
-    'Std3',
-    'Std4',
-    'Std5',
-    'Std6',
-    'Std7'
+
+    DropdownMenuItem(child: Text('Product category0'),value:'Product category0' ,),
+    DropdownMenuItem(child: Text('Product category1'),value:'Product category1' ,),
+    DropdownMenuItem(child: Text('Product category2'),value:'Product category2' ,),
+    DropdownMenuItem(child: Text('Product category3'),value:'Product category3' ,),
+    DropdownMenuItem(child: Text('Product category4'),value:'Product category4' ,),
   ];
   @override
   Widget build(BuildContext context) {
@@ -88,15 +86,14 @@ class _HRMSadmincustState extends State<Product> {
                                 children: [
 
                                   SizedBox( width: 40),
-                                  DropdownButton(
-
-                                    icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
-
-                                    items: itemList.map((String items) {
-
-                                      return DropdownMenuItem(value: items, child: Text(items));
-
-                                    }).toList(), onChanged: (String? value) {  },
+                                  DropdownButton <String?>(
+                                    value:productcategoryvalue,
+                                    onChanged: (String? value){
+                                      setState(() {
+                                        productcategoryvalue = value!;
+                                      });
+                                    },
+                                    items: itemList,
                                   ),
 
 
