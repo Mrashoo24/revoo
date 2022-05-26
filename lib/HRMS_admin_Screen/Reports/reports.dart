@@ -43,9 +43,9 @@ class _HRMSReportsState extends State<HRMSReports> {
   List<List<String>> workingReportList = [];
 
 
-  var selectedFilter2 = DateFormat('yyyy').format(DateTime.now());
+  var selectedYear = DateFormat('yyyy').format(DateTime.now());
 
-  var selectedFilter3 = DateFormat('MMM').format(DateTime.now());
+  var selectedMonth = DateFormat('MMM').format(DateTime.now());
 
 
   Set userSet = {};
@@ -433,8 +433,8 @@ class _HRMSReportsState extends State<HRMSReports> {
                           ),
                         ]
                     ),
-                    pdf.Text('Date: ' + fromdate,style: pdf.TextStyle(color:PdfColor.fromHex('0D3974'))),
-                    todate == null ? pdf.SizedBox()  : pdf.Text('To Date: ' + todate,style: pdf.TextStyle(color:PdfColor.fromHex('0D3974'))),
+                    pdf.Text(todate,style: pdf.TextStyle(color:PdfColor.fromHex('0D3974'))),
+                    todate == null ? pdf.SizedBox()  : pdf.Text(fromdate,style: pdf.TextStyle(color:PdfColor.fromHex('0D3974'))),
 
                   ],
                 ),
@@ -1091,20 +1091,21 @@ class _HRMSReportsState extends State<HRMSReports> {
                   SizedBox(
                     height: 10,
                   ),
-                  selectedReport != 'Salary Report' ? SizedBox() :   DropdownButton(
-                      value: selectedFilter2,
+                  selectedReport != 'Salary Report' ? SizedBox() :
+                  DropdownButton(
+                      value: selectedYear,
                       items: dropList2, onChanged: (String? value){
                     setState(() {
-                      selectedFilter2 = value!;
+                      selectedYear = value!;
                     });
                   }
                   ) ,
 
                   selectedReport != 'Salary Report' ? SizedBox() :    DropdownButton(
-                      value: selectedFilter3,
+                      value: selectedMonth,
                       items: dropList3, onChanged: (String? value){
                     setState(() {
-                      selectedFilter3 = value!;
+                      selectedMonth = value!;
                     });
                   }
                   ),
@@ -1557,8 +1558,8 @@ class _HRMSReportsState extends State<HRMSReports> {
                       }
 
                       if (selectedReport == "Salary Report") {
-                        if (dateSelected != null &&
-                            selectedReport != null && todateSelected !=null
+                        if (selectedYear != null &&
+                            selectedReport != null && selectedMonth !=null
                             && selectedEmployee != null
                         ) {
                           print("clicked $selectedReport");
@@ -1580,7 +1581,7 @@ class _HRMSReportsState extends State<HRMSReports> {
 
                                 return DateFormat('yyyy').format(DateFormat('yyyy/MM/dd').parse(element.get('date')))
 
-                                    == selectedFilter2;
+                                    == selectedYear;
 
                               }).toList();
 
@@ -1588,7 +1589,7 @@ class _HRMSReportsState extends State<HRMSReports> {
 
                             return DateFormat('MMM').format(DateFormat('yyyy/MM/dd').parse(element.get('date')))
 
-                                == selectedFilter3;
+                                == selectedMonth;
 
                           }).toList();
 
@@ -1618,7 +1619,7 @@ class _HRMSReportsState extends State<HRMSReports> {
                               .get();
                           
                          var totalHoursTowrk = double.parse(shiftDetails.get('hours')) *
-                              DateFormat('yyyy/MM/dd').parse(dateSelected!).difference(DateFormat('yyyy/MM/dd').parse(todateSelected!)).inDays;
+                              31;
 
                          var totalHoursAfterAbsent = wrkhour - (attendenceCount * double.parse(shiftDetails.get('hours')));
 
@@ -1645,14 +1646,16 @@ class _HRMSReportsState extends State<HRMSReports> {
 
 
 
-                               var totalSalary = netpay /  (31 - absentCount);
+                               var totalSalaryperday = netpay /  31;
+
+                          var totalSalaryperHour = totalSalaryperday / double.parse(shiftDetails.get('hours')) ;
+
+                          var totalSalary = totalSalaryperday * totalSalaryperHour;
 
 
 
 
-
-
-                          attendanceReportList = [
+                      attendanceReportList = [
                             [
                               'Basic Pay',
                               '$basicpay',
@@ -1755,8 +1758,8 @@ class _HRMSReportsState extends State<HRMSReports> {
                               userName: selectedEmployee.toString(),
                               userId: newList[0].get('empid'),
                               designation: newList[0].get('Designation'),
-                              fromdate: dateSelected!,
-                              todate: todateSelected ?? '',
+                              fromdate: selectedYear,
+                              todate: selectedMonth,
                               listofreport: attendanceReportList,
                               headers: [
                                 'EMOLUMENTS',

@@ -8,8 +8,9 @@ import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
 import 'package:revoo/HRMS_admin_Screen/allDepartmetns.dart';
 import 'package:revoo/HRMS_admin_Screen/employeecheckin.dart';
 import 'package:revoo/Purchasing/reports.dart';
+import 'package:revoo/constants/commonWidgets.dart';
 import 'package:revoo/home/admindashboard.dart';
-import '../HRMS_admin_Screen/Shifts.dart';
+import '../HRMS_admin_Screen/SHift/Shifts.dart';
 import '../HRMS_admin_Screen/acceptleaverequest.dart';
 import '../HRMS_admin_Screen/allEmployee.dart';
 import '../HRMS_admin_Screen/allemployeeupdates.dart';
@@ -56,6 +57,7 @@ HRMSReports(userDoc: widget.userDoc),//11
     ];
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.white,
         elevation: 0,
         leading: InkWell(
@@ -81,10 +83,8 @@ HRMSReports(userDoc: widget.userDoc),//11
       drawer: buildDrawer(),
       bottomNavigationBar: commonWidgets.buildBNB(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: Image.asset('asset/bnbAdd.png'),
-      ),
+      floatingActionButton: CommonWidgets().kfloatingButton(),
+
       key: scafkey,
       backgroundColor: Colors.white,
       body: homepages[selectedindex],

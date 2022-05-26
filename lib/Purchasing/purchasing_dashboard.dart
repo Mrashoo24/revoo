@@ -9,6 +9,7 @@ import 'package:revoo/Purchasing/rfqstatusb.dart';
 import 'package:revoo/Purchasing/vendors.dart';
 
 import '../Controllers/authcontroller.dart';
+import '../constants/commonWidgets.dart';
 import '../constants/constants.dart';
 import 'billsninvoice.dart';
 import 'calendarss.dart';
@@ -72,10 +73,8 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
       drawer: buildDrawer(),
       bottomNavigationBar: commonWidgets.buildBNB(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: Image.asset('asset/bnbAdd.png'),
-      ),
+      floatingActionButton: CommonWidgets().kfloatingButton(),
+
       key: scafkey,
       backgroundColor: Colors.white,
       body: homepages[selectedindex],

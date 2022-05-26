@@ -28,6 +28,7 @@ class _HRMSadmincustState extends State<Product> {
     'Std6',
     'Std7'
   ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,7 +57,7 @@ class _HRMSadmincustState extends State<Product> {
 
                           ),
                           InkWell(onTap: (){
-                            Get.to(AddNewProduct());
+                            // Get.to(AddNewProduct());
                           },child: Image.asset('asset/addnew.png')),
 
                         ],

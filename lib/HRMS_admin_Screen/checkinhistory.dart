@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:revoo/constants/constants.dart';
 import 'package:collection/collection.dart';
 
@@ -18,13 +20,65 @@ class CheckinHistory extends StatefulWidget {
 
 class _CheckinHistoryState extends State<CheckinHistory> {
   var selectedValue = 0;
-
+  String? dateSelected = DateFormat('yyyy/MM/dd').format(DateTime.now());
+  String? todateSelected= DateFormat('yyyy/MM/dd').format(DateTime.now().add(Duration(days: 1)));
 
 
   @override
   Widget build(BuildContext context) {
 
     List<TableRow> tableRow = [
+      TableRow(
+        children: [
+          Container(
+            height: 30,
+            child: Center(
+              child: Text(
+                'Date',
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          ),
+          Container(
+            height: 30,
+            child: Center(
+              child: Text(
+                'Status',
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          ),
+          Container(
+            height: 30,
+            child: Center(
+              child: Text(
+                'In time',
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          ),
+          Container(
+            height: 30,
+            child: Center(
+              child: AutoSizeText(
+                'Out time',
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          ),
+          Container(
+            height: 30,
+            child: Center(
+              child: AutoSizeText(
+                'Hours worked',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          ),
+
+        ],
+      ),
       TableRow(
         children: [
           Container(
@@ -183,8 +237,105 @@ class _CheckinHistoryState extends State<CheckinHistory> {
               ),
             ),
 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  onTap: () {
+                    DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime.now()
+                            .subtract(const Duration(days: 120)),
+                        maxTime: DateTime(2050, 6, 7), onChanged: (date) {
+                          print('change $date');
+                          setState(() {
+                            dateSelected = DateFormat('yyyy/MM/dd').format(date);
+                          });
+                        }, onConfirm: (date) {
+                          print('confirm $date');
+                          setState(() {
+                            dateSelected = DateFormat('yyyy/MM/dd').format(date);
+                          });
+                        },
+                        currentTime: DateTime.now(),
+                        locale: LocaleType.en);
+                  },
+                  child: Container(
+                    color: Colors.yellow,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(dateSelected == null
+                          ? "From Date"
+                          : DateFormat("yyyy/MM/dd")
+                          .parse(dateSelected!)
+                          .day
+                          .toString() +
+                          "-" +
+                          DateFormat("yyyy/MM/dd")
+                              .parse(dateSelected!)
+                              .month
+                              .toString() +
+                          "-" +
+                          DateFormat("yyyy/MM/dd")
+                              .parse(dateSelected!)
+                              .year
+                              .toString()),
+                    ),
+                  ),
+                ),
+                 InkWell(
+                  onTap: () {
+                    DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime:  DateTime.now(),
+                        maxTime: DateTime(2050, 6, 7),
+                        onChanged: (date) {
+                          print('change $date');
+                          setState(() {
+                            todateSelected = DateFormat('yyyy/MM/dd').format(date);
+                          });
+                        }, onConfirm: (date) {
+                          print('confirm $date');
+                          setState(() {
+                            todateSelected = DateFormat('yyyy/MM/dd').format(date);
+                          });
+                        },
+                        currentTime: DateTime.now(),
+                        locale: LocaleType.en);
+                  },
+                  child: Container(
+                    color: Colors.yellow,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(todateSelected == null
+                          ? "To Date"
+                          : DateFormat("yyyy/MM/dd")
+                          .parse(todateSelected!)
+                          .day
+                          .toString() +
+                          "-" +
+                          DateFormat("yyyy/MM/dd")
+                              .parse(todateSelected!)
+                              .month
+                              .toString() +
+                          "-" +
+                          DateFormat("yyyy/MM/dd")
+                              .parse(todateSelected!)
+                              .year
+                              .toString()),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
             StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: FirebaseFirestore.instance.collection('attendence_report').where('uid',isEqualTo: widget.userDoc.get('uid')).snapshots(),
+                stream: FirebaseFirestore.instance.collection('attendence_report')
+                    .where('uid',isEqualTo: widget.userDoc.get('uid'))
+                    .where('date',isGreaterThanOrEqualTo: dateSelected,
+                    isLessThanOrEqualTo: todateSelected
+                )
+                    .snapshots(),
               builder: (context, snapshot) {
 
                 if(!snapshot.hasData){
@@ -198,7 +349,7 @@ class _CheckinHistoryState extends State<CheckinHistory> {
                   padding: const EdgeInsets.all(15.0),
                   child: Container(
                     width: Get.width,
-                    height: 300,
+                height: Get.height,
                     child:   Column(
                       children: [
                         Table(
@@ -217,7 +368,17 @@ class _CheckinHistoryState extends State<CheckinHistory> {
 
                               return       TableRow(
                                 children: [
+                                  Container(
+                                    height: 60,
 
+                                    child: Center(
+                                      child: Text(
+                                        e.get('date').toString().toUpperCase(),
+                                        style:TextStyle(fontSize: 12)
+                                        ,
+                                      ),
+                                    ),
+                                  ),
                                   Container(
                                     height: 60,
 

@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:revoo/Project_Management/profile/userProjectsProfile.dart';
 
+import '../constants/commonWidgets.dart';
 import '../constants/constants.dart';
 import 'Messages/mssages.dart';
 import 'ModuleSprintScreen/modulesSprintsPage.dart';
@@ -41,10 +42,8 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
     return SafeArea(
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Image.asset('asset/bnbAdd.png'),
-        ),
+        floatingActionButton: CommonWidgets().kfloatingButton(),
+
         key: homekey,
         appBar: AppBar(
             backgroundColor: Colors.white,

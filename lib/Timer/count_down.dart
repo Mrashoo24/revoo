@@ -2,13 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:revoo/Timer/round_button.dart';
+import 'package:revoo/constants/constants.dart';
 
 
 class CountdownPage extends StatefulWidget {
- final int hours;
- final int minutes;
- final int seconds;
-  const CountdownPage({Key? key, required this.hours, required this.minutes, required this.seconds}) : super(key: key);
+  final int hours;
+  final int minutes;
+  final int seconds;
+  final double progressValues;
+  const CountdownPage({Key? key, required this.hours, required this.minutes, required this.seconds, required this.progressValues}) : super(key: key);
 
   @override
   _CountdownPageState createState() => _CountdownPageState();
@@ -51,11 +53,11 @@ class _CountdownPageState extends State<CountdownPage>
       notify();
       if (controller.isAnimating) {
         setState(() {
-          progress = controller.value;
+          // progress = controller.value;
         });
       } else {
         setState(() {
-          progress = 1.0;
+          // progress = 1.0;
           isPlaying = false;
         });
       }
@@ -93,9 +95,9 @@ class _CountdownPageState extends State<CountdownPage>
                 width: 130,
                 height: 130,
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.white,
-                  color: Colors.grey.shade500,
-                  value: progress,
+                  backgroundColor: kyellow.withOpacity(0.3),
+                  color: kyellow,
+                  value: widget.progressValues,
                   strokeWidth: 6,
                 ),
               ),
@@ -123,9 +125,9 @@ class _CountdownPageState extends State<CountdownPage>
                   builder: (context, child) => Text(
                     countText,
                     style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: kyellow
                     ),
                   ),
                 ),

@@ -4,10 +4,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:collection/collection.dart';
-import '../Controllers/branchController.dart';
-import '../constants/constants.dart';
-import 'adbranchpg2.dart';
-import 'addshift.dart';
+import 'package:revoo/HRMS_admin_Screen/SHift/editShifts.dart';
+import '../../Controllers/branchController.dart';
+import '../../constants/constants.dart';
+import '../adbranchpg2.dart';
+import '../addshift.dart';
 
 class ShiftsManagement extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
@@ -299,10 +300,15 @@ class _ShiftsManagementState extends State<ShiftsManagement> {
                                       );
                                     }
                                   ),
-                                  Container(
-                                    height: 60,
-                                    child: Center(
-                                      child: Icon(Icons.edit),
+                                  InkWell(
+                                    onTap:(){
+                                      Get.to(EditShift(userDoc: widget.userDoc,workingHours: e.get('hours'),loginTime: e.get('time'),));
+                              },
+                                    child: Container(
+                                      height: 60,
+                                      child: Center(
+                                        child: Icon(Icons.edit),
+                                      ),
                                     ),
                                   ),
                                 ],

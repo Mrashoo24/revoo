@@ -6,22 +6,19 @@ import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 
-
 import 'constants.dart';
 
-class CommonWidgets extends GetxService{
-
-  Widget buildBNB(){
+class CommonWidgets extends GetxService {
+  Widget buildBNB() {
     return Container(
-      height: Get.height*0.08,
+      height: Get.height * 0.08,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
         color: Kdblue,
-
       ),
       child: Align(
         alignment: Alignment.center,
-
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -29,19 +26,30 @@ class CommonWidgets extends GetxService{
             ClipRect(child: Image.asset('asset/homedash.png')),
             Opacity(
                 opacity: 0.01,
-                child: ClipRect(child: Image.asset('asset/share.png'))
-            ),
+                child: ClipRect(child: Image.asset('asset/share.png'))),
             ClipRect(child: Image.asset('asset/groupdash.png')),
             ClipRect(child: Image.asset('asset/pathdash.png')),
-
           ],
         ),
       ),
     );
   }
 
-  Future<Uint8List> getImage (url) async {
+  kfloatingButton() {
+    return InkWell(
+      onTap: () {
+        Get.back();
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: CircleAvatar(
+          radius: 40,
+          child: Image.asset('asset/homedash.png',color: Kdblue,),backgroundColor: Colors.white,),
+      ),
+    );
+  }
 
+  Future<Uint8List> getImage(url) async {
     print('getting requres');
 
     http.Response response1 = await http.get(
@@ -49,7 +57,6 @@ class CommonWidgets extends GetxService{
     );
 
     print('response $response1');
-   return response1.bodyBytes; //Uint8List
+    return response1.bodyBytes; //Uint8List
   }
-
 }

@@ -81,91 +81,86 @@ class _DepartmentsState extends State<Departments> {
                           fit: BoxFit.fill,
                         )),
                   ),
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      'All Departments',
-                                      style: TextStyle(color: kblue, fontSize: 25),
-                                    ),
-                                  ),
-                                  InkWell(
-                                      onTap: () {
-                                        Get.to(AddDepartments(userDoc: widget.userDoc,));
-                                      },
-                                      child: Image.asset('asset/addnew.png')),
-                                ],
-                              ),
-                              SizedBox(height: 25),
-                              Container(
-                                width: 400,
-                                height: 500,
-                                decoration: BoxDecoration(
-                                  color: bgGrey,
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: 180, top: 30, bottom: 10),
-                                        child: Text(
-                                          'Departments',
-                                          style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          width: 400,
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                kblue,
-                                                Kdblue,
-                                              ],
-                                            ),
-                                            borderRadius: BorderRadius.only(
-                                                bottomLeft: Radius.circular(45),
-                                                bottomRight: Radius.circular(45)),
-                                          ),
-                                          child: ListView.builder(
-                                              shrinkWrap: true,
-                                              physics: NeverScrollableScrollPhysics(),
-                                              itemCount: bdoc.length,
-                                              itemBuilder: (context,index){
-                                                return   buildListTile(
-                                                    buttonMenuPosition, context,
-                                                    title: bdoc[index].get('dept_name'),
-                                                    tagcolor: kyellow,
-                                                    id:bdoc[index].id,
-                                                    bdoc: bdoc[index]
-                                                );
-                                              }
-
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'All Departments',
+                                  style: TextStyle(color: kblue, fontSize: 25),
                                 ),
                               ),
+                              InkWell(
+                                  onTap: () {
+                                    Get.to(AddDepartments(userDoc: widget.userDoc,));
+                                  },
+                                  child: Image.asset('asset/addnew.png')),
                             ],
                           ),
+                          SizedBox(height: 25),
+              Container(
+                width: 400,
+
+                decoration: BoxDecoration(
+                  color: bgGrey,
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 180, top: 30, bottom: 10),
+                        child: Text(
+                          'Departments',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 400,
+                        padding: EdgeInsets.only(bottom: 20),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              kblue,
+                              Kdblue,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(45),
+                              bottomRight: Radius.circular(45)),
+                        ),
+                        child: ListView.builder(
+
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: bdoc.length,
+                            itemBuilder: (context,index){
+                              return   buildListTile(
+                                  buttonMenuPosition, context,
+                                  title: bdoc[index].get('dept_name'),
+                                  tagcolor: kyellow,
+                                  id:bdoc[index].id,
+                                  bdoc: bdoc[index]
+                              );
+                            }
+
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
                         ],
                       ),
                     ),
@@ -187,37 +182,39 @@ class _DepartmentsState extends State<Departments> {
       children: [
         ListTile(
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 140,
+              Flexible(
+                flex:4,
                 child: Text(
                   title,
                   style: TextStyle(color: Colors.white),
                 ),
               ),
-              SizedBox(width: 40),
-              CircleAvatar(
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: tagcolor,
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  child: Center(
-                    child: AutoSizeText(
-                      '1',
-                      style: TextStyle(color: Colors.white, fontSize: 2),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
+
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  CircleAvatar(
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: tagcolor,
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: Center(
+                        child: AutoSizeText(
+                          '1',
+                          style: TextStyle(color: Colors.white, fontSize: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
                   Text(
                     'Employees',
                     style: TextStyle(color: Colors.white, fontSize: 10),

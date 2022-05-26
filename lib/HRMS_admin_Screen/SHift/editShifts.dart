@@ -7,20 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../constants/constants.dart';
+import '../../constants/constants.dart';
+import '../../constants/constants.dart';
 
-class AddShift extends StatefulWidget {
+class EditShift extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
   final id;
   final workingHours;
   final loginTime;
-  const AddShift({Key? key, required this.userDoc, this.workingHours, this.loginTime, this.id}) : super(key: key);
+  const EditShift({Key? key, required this.userDoc, this.workingHours, this.loginTime, this.id}) : super(key: key);
 
   @override
-  _AddShiftState createState() => _AddShiftState();
+  _EditShiftState createState() => _EditShiftState();
 }
 
-class _AddShiftState extends State<AddShift> {
+class _EditShiftState extends State<EditShift> {
 
   TimeOfDay _time = TimeOfDay.now().replacing(hour: 11, minute: 30);
   var selectedTime = '';
@@ -37,6 +38,13 @@ class _AddShiftState extends State<AddShift> {
 
   TextEditingController time = TextEditingController();
   TextEditingController weekof = TextEditingController();
+
+  @override
+  void initState() {
+    hours = TextEditingController(text: widget.workingHours);
+    selectedTime = widget.loginTime;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +194,9 @@ class _AddShiftState extends State<AddShift> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.back();
+                          },
                           style: ElevatedButton.styleFrom(
                               elevation: 0,
                               shape: RoundedRectangleBorder(

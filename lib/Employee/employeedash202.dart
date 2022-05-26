@@ -59,9 +59,9 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
   var shiftTime  = '';
   DateTime? convertedShiftTime ;
 
-
+  double? forProgressCheck;
   var workinghours = '';
-
+  bool? checkCompletion;
   DateTime? convertedfCheckinTime ;
   DateTime? endtime ;
   Duration? endDifference;
@@ -200,11 +200,35 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
 
                       convertedfCheckinTime = DateFormat('hh:mm a').parse(checkinTime);
 
+                      var checkingHoursWorked = DateTime(1970,01,01,DateTime.now().hour,DateTime.now().minute,DateTime.now().second).difference(convertedfCheckinTime!);
+
                       endtime = convertedfCheckinTime!.add(Duration(hours: double.parse(workinghours).round()));
 
-                      endDifference =endtime!.difference( DateTime(1970,01,01,DateTime.now().hour,DateTime.now().minute,DateTime.now().second));
+                      checkCompletion = endtime!.isAfter(DateTime(1970,01,01,DateTime.now().hour,DateTime.now().minute,DateTime.now().second));
 
-                      print('endtime = ${endtime} convertedfCheckinTime = ${convertedfCheckinTime} Diffreence = ${endDifference!.inHours} Day = ${DateTime(1970,01)}');
+                     var check = endtime!.difference( DateTime(1970,01,01,DateTime.now().hour,DateTime.now().minute,DateTime.now().second));
+
+
+
+                     print('check $check');
+
+                      endDifference = check.inMinutes <= 0 ? 
+                          Duration(days: 0,hours:double.parse(workinghours).round(),minutes: 0,seconds: 0 )
+                          : check
+                          
+                      
+                      ;
+
+
+                      print('checkworkhours $checkingHoursWorked');
+                      print('checkworkseconds ${checkingHoursWorked.inSeconds}');
+                      print('checkendseconds ${Duration(hours: double.parse(workinghours).round()).inSeconds}');
+                  forProgressCheck =  checkingHoursWorked.inSeconds /
+                         Duration(hours: double.parse(workinghours).round()).inSeconds;
+
+
+                  print('progresscheck = $forProgressCheck');
+                      print('endtime = ${endtime} convertedfCheckinTime = ${convertedfCheckinTime} Diffreence = ${endDifference!.inMinutes} Day = ${DateTime(1970,01)}');
 
                     }
                     return Column(
@@ -714,7 +738,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
 
 
                                         return Container(
-                                          width: Get.width * 0.3,
+                                          padding: EdgeInsets.symmetric(horizontal: Get.width*0.3,vertical: 8),
                                           child: ElevatedButton(
                                               onPressed: () async {
                                                 if(value1.docs.isEmpty){
@@ -845,10 +869,16 @@ class _EmployeeDashboardState extends State<EmployeeDashboard1> {
 
 
 
-                                  currentDocument.isNotEmpty && checkoutTime == '' ?  Container(
+                                  currentDocument.isNotEmpty && checkoutTime == '' && (checkCompletion != null && checkCompletion! )  ?
+                                  Container(
 
                                       height: 200,
-                                      child: CountdownPage(hours:endDifference!.inHours,minutes: endDifference!.inMinutes % 60,seconds: endDifference!.inSeconds % 60,))
+                                      child: CountdownPage(hours:endDifference!.inHours,
+                                        minutes: endDifference!.inMinutes % 60,
+                                        seconds: endDifference!.inSeconds % 60,
+                                        progressValues : forProgressCheck!
+                                      ))
+
                                       : SizedBox(),
                                   SizedBox(height: 10,),
                                 ],

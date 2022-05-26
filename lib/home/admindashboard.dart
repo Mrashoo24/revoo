@@ -200,8 +200,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
         ListTile(
           title: Row(
             children: [
-              Container(
-                width: 140,
+              Flexible(
+                flex:2,
                 child: Text(
                   title,
                   style: TextStyle(color: Colors.white),
@@ -213,7 +213,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 builder: (context, snapshot1) {
 
                   if(!snapshot1.hasData){
+
                     return kprogressbar;
+
                   }
 
                   var empDoc = snapshot1.requireData.docs;
@@ -255,7 +257,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
                     GeoPoint geo = bdoc.get('location.geopoint');
 
-                    Get.to(EditBranches(latlist: [geo.latitude,geo.longitude], name: title, address: bdoc.get('address'), id: id, locality: bdoc.get('locality')));
+                    Get.to(EditBranches(latlist: [geo.latitude,geo.longitude], name: title,
+                        address: bdoc.get('address'),
+                        id: id, locality: bdoc.get('locality')));
 
                   },)
                 ],

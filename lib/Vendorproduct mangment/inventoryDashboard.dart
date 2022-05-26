@@ -8,6 +8,7 @@ import 'package:revoo/Vendorproduct%20mangment/transferadd46.dart';
 import 'package:revoo/Vendorproduct%20mangment/vendorproduct38.dart';
 
 import '../Controllers/authcontroller.dart';
+import '../constants/commonWidgets.dart';
 import '../constants/constants.dart';
 import 'Batchmangment51.dart';
 import 'goodissue42.dart';
@@ -74,11 +75,9 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
       drawer: buildDrawer(),
       bottomNavigationBar: commonWidgets.buildBNB(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: Image.asset('asset/bnbAdd.png'),
-      ),
-      key: scafkey,
+    floatingActionButton: CommonWidgets().kfloatingButton(),
+
+    key: scafkey,
       backgroundColor: Colors.white,
       body: homepages[selectedindex],
     );

@@ -7,6 +7,7 @@ import 'package:revoo/Employee/dailyupdates.dart';
 import 'package:revoo/Employee/employeedash1stpg.dart';
 import 'package:revoo/Employee/leaveRequest.dart';
 import 'package:revoo/Employee/watchdashboard.dart';
+import '../constants/commonWidgets.dart';
 import '../constants/constants.dart';
 import 'Certificate/certificate.dart';
 import 'employeedash202.dart';
@@ -68,10 +69,8 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
       ),
       bottomNavigationBar: commonWidgets.buildBNB(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: Image.asset('asset/bnbAdd.png'),
-      ),
+      floatingActionButton: CommonWidgets().kfloatingButton(),
+
       drawer: Drawer(
         child:  Card(
           color: Colors.grey.shade200,
