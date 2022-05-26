@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +14,7 @@ class Request4Quotation extends StatefulWidget {
 }
 
 class _showTasks extends State<Request4Quotation> {
+  var firebase = FirebaseFirestore.instance.collection("RFQforms");
   bool value = false;
   bool avalue = false;
 
@@ -26,69 +28,92 @@ class _showTasks extends State<Request4Quotation> {
             
             padding: EdgeInsets.only(left: 10, right: 10),
 
-            child: ListView(
-              children: [
-                Center(
-                  child: Text(
-                    'Request of Quotation',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: kblue,
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: 5),
-                Container(
-                  height: 120,
-                  width: Get.width,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      _dailCard('Sent', 20),
-                      _dailCard('Waiting', 5),
-                      _dailCard('Late', 25),
-                    ],
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>> (
+              stream: firebase.snapshots() ,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Text('No Data');
+                }
+                return ListView(
                   children: [
-                    Text(
-                      'Past Request',
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: kblue,
+                    Center(
+                      child: Text(
+                        'Request of Quotation',
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: kblue,
+                        ),
                       ),
                     ),
-                    Divider(
-                      thickness: 2,
+
+                    SizedBox(height: 5),
+                    Container(
+                      height: 120,
+                      width: Get.width,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          _dailCard('Sent', 20),
+                          _dailCard('Waiting', 5),
+                          _dailCard('Late', 25),
+                        ],
+                      ),
                     ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Past Request',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: kblue,
+                          ),
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                      ],
+                    ),
+                    StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      stream: FirebaseFirestore.instance.collection('RFQform').snapshots(),
+                      builder: (context, snapshot) {
+                        if(!snapshot.hasData){
+                          return kprogressbar;
+                        }
+                        return Container(
+                          height: Get.height * 0.7,
+                          //color: Colors.black,
+                          child: ListView.builder(
+                            itemCount: snapshot.requireData.docs.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context,index){
+                          return Container(
+                            child: Column(
+                                children : [
+                                  _TasksCard(snapshot.data!.docs[index]['customerdate'], snapshot.data!.docs[index]['createrfq'],snapshot.data!.docs[index]['date']),
+                                  // _TasksCard('RFQ Name'),
+                                  // _TasksCard('RFQ Name'),
+                                  // _TasksCard('RFQ Name'),
+                                  // _TasksCard('RFQ Name'),
+                                  // _TasksCard('RFQ Name'),
+                                  // _TasksCard('RFQ Name'),
+                                ]
+                            ),
+                          );
+                            }
+                          ),
+                        );
+                      }
+                    )
                   ],
-                ),
-                Container(
-                  height: Get.height * 0.5,
-                  //color: Colors.black,
-                  child: ListView(
-                    scrollDirection: Axis.vertical,
-                    children: [
-                      _TasksCard('RFQ IOT Device'),
-                      _TasksCard('RFQ Name'),
-                      _TasksCard('RFQ Name'),
-                      _TasksCard('RFQ Name'),
-                      _TasksCard('RFQ Name'),
-                      _TasksCard('RFQ Name'),
-                      _TasksCard('RFQ Name'),
-                    ],
-                  ),
-                )
-              ],
+                );
+              }
             ),
           ),
         ));
   }
 
-  Widget _TasksCard(name) {
+  Widget _TasksCard(cdate, text ,date) {
     return Container(
       height: 70,
       margin: EdgeInsets.all(5),
@@ -98,45 +123,44 @@ class _showTasks extends State<Request4Quotation> {
         color: kblue,
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Checkbox(
-              value: value,
 
-              checkColor: Colors.black,
-              activeColor: Colors.white,
-              side: BorderSide(color: Colors.white),
-              onChanged: (changevalue) {
-                setState(() {
-                  value = changevalue!;
-                });
-                setState(() {
-
-                });
-              }),
-          Stack(
-            alignment: AlignmentDirectional.topStart,
-            children: [
-              Text(
-                '$name',
-                style: TextStyle(color: kyellow, fontSize: 16),
-              ),
-              Text(
-                '\nloersom ipsum fhgugu gugbug ubgualf \n alfur ifuvuv usb oshane',
-                style: TextStyle(color: Colors.white),
-              )
-            ],
+          Container(
+            child: Text('Title'),
           ),
-          ImageIcon(
-            AssetImage('asset/threedots.png'),
-            color: Colors.white,
-          )
+          Text(
+            text,
+            style: TextStyle(color: kyellow, fontSize: 16),
+          ),
+          SizedBox(width: 10,),
+          Container(
+            child: Text('Expiery Date'),
+          ),
+          Text(
+            cdate,
+            style: TextStyle(color: Colors.white),
+          ),
+          SizedBox(width: 10,),
+          Container(
+            child: Text('Req Date'),
+          ),
+          Text(
+            date,
+            style: TextStyle(color: Colors.white),
+          ),
+
         ],
       ),
     );
   }
 
 }
+
+
+
+
+
 
 AppBar _buildappBar() {
   return AppBar(

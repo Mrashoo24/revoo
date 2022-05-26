@@ -167,8 +167,6 @@ class _AcceptLeaveState extends State<AcceptLeave> {
 
                 print('new updated list length${upDatedlist.length}');
                 return ListView.builder(
-
-
                   shrinkWrap: true,
                   itemCount: upDatedlist.length,
                   itemBuilder: (context,index){
@@ -180,11 +178,7 @@ class _AcceptLeaveState extends State<AcceptLeave> {
                     }
 
                     LeaveDisplay allLeaveList = allLeave[index];
-
-
-
-
-                    return
+                return
                      allLeaveList.status == '0' ?
 
                      buildRequestCard(name: allLeaveList.name.toString()

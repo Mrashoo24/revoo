@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -8,21 +9,20 @@ import '../Models/creatempmodel.dart';
 class MyEmpController extends GetxController{
   static MyEmpController instance = Get.find();
 
+  static var auth = FirebaseAuth.instance.currentUser!.uid!;
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 
-  Rx<List<CreatEmpModel>> myepmlist = Rx<List<CreatEmpModel>>([]);
+  Rx<CreatEmpModel> myepmlist = Rx<CreatEmpModel>(CreatEmpModel());
 
-  List<CreatEmpModel> get myepmname => myepmlist.value;
 
   @override
   void onInit() {
-    myepmlist.bindStream(firestore.collection('Employee').snapshots().map((event) {
-      List<CreatEmpModel> myepmname = [];
+    myepmlist.bindStream(firestore.collection('Employee').doc(auth ?? '').snapshots().map((event) {
+      CreatEmpModel myepmname =
+      CreatEmpModel.fromJson(event.data()!);
 
-      event.docs.forEach((element) {
-        myepmname.add(CreatEmpModel.fromJson(element.data()));
-      });
       return myepmname;
     }));
   }
