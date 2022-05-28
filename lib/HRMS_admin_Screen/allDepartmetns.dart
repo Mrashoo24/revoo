@@ -221,7 +221,9 @@ class _DepartmentsState extends State<Departments> {
                   ),
                   SizedBox(width: 10,),
                   IconButton(icon:Icon(Icons.edit),color: Colors.white, onPressed: () async {
-                    Get.to(EditDepartment(deptName: title, branchName: selectedValue,userDoc: widget.userDoc ,id: id,));
+
+                    Get.to(EditDepartment(deptName: title, branchName: selectedValue,userDoc: widget.userDoc ,id: id,)
+                    );
 
                     // await   showDialog(
                     //        context: context,

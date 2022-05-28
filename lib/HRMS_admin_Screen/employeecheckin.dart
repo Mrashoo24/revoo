@@ -214,9 +214,8 @@ class _EmployeeCheckinState extends State<EmployeeCheckin> {
                           return Column(
                             children: [
                               DropdownSearch<String>(
-                                popupProps: PopupProps.menu(
                                     showSelectedItems: true,
-                                    showSearchBox: true),
+                                    showSearchBox: true,
                                 items: edoc
                                     .mapIndexed(
                                       (index, element) =>

@@ -7,6 +7,7 @@ class ProductModel {
       purchaseprice,
       sellprice,
       cid,
+      bid,
       components,
       productname,
       producttype,
@@ -26,7 +27,8 @@ class ProductModel {
     this. costprice,
     this.producttype,
     this.productcategory,
-    this.date
+    this.date,
+    this.bid
   });
 
   ProductModel fromJson(Map<String, dynamic> json) {
@@ -42,7 +44,7 @@ class ProductModel {
         producttype:json['producttype'],
       productcategory: json["productcategory"],
       date:json['date'],
-
+      bid:json['bid'],
     );
   }
 
@@ -58,8 +60,8 @@ class ProductModel {
       'costprice':   json. costprice,
       'producttype' : json.producttype,
       'productcategory':   json. productcategory,
-      'date' : json.date
-
+      'date' : json.date,
+      'bid' : json.bid
     };
   }
 

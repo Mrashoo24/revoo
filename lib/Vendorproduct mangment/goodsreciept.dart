@@ -6,14 +6,14 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
 
-class Goodissue extends StatefulWidget {
-  const Goodissue({Key? key}) : super(key: key);
+class GoodReciept extends StatefulWidget {
+  const GoodReciept({Key? key}) : super(key: key);
 
   @override
-  _GoodissueState createState() => _GoodissueState();
+  _GoodRecieptState createState() => _GoodRecieptState();
 }
 
-class _GoodissueState extends State<Goodissue> {
+class _GoodRecieptState extends State<GoodReciept> {
   String initialValue = '';
 
   var itemList = [

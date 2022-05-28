@@ -11,7 +11,7 @@ import '../Controllers/authcontroller.dart';
 import '../constants/commonWidgets.dart';
 import '../constants/constants.dart';
 import 'Batchmangment51.dart';
-import 'goodissue42.dart';
+import 'goodsreciept.dart';
 import 'goodsissue43.dart';
 import 'inventory reports52.dart';
 
@@ -29,7 +29,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
 
   var homepages = [
     Addproduct38(),
-    Goodissue(),
+    // GoodReciept(),
     Goodsissue43(),
     Transaction44(),
     Transfercontact46(),
@@ -170,10 +170,10 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                 buildNavCard('asset/checkpad.png','Product List',0),
                 SizedBox(height: 5,),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-
-                buildNavCard('asset/lvapproval.png','Goods Receipts',1),
-                SizedBox(height: 5,),
-                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                //
+                // buildNavCard('asset/lvapproval.png','Goods Receipts',1),
+                // SizedBox(height: 5,),
+                // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
 
                 buildNavCard('asset/lvapproval.png','Goods Issues',2),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
