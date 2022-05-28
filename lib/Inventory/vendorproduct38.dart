@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:revoo/Vendorproduct%20mangment/vendoraddproduct39.dart';
+import 'package:revoo/Inventory/vendoraddproduct39.dart';
+// import 'package:revoo/Vendorproduct%20mangment/vendoraddproduct39.dart';
 
 import '../HRMS_admin_Screen/adbranchpg2.dart';
 import '../constants/constants.dart';

@@ -8,6 +8,7 @@ import 'package:revoo/Inventory/vendorproduct38.dart';
 import '../Controllers/authcontroller.dart';
 import '../constants/constants.dart';
 import 'Batchmangment51.dart';
+import 'component.dart';
 import 'goodissue42.dart';
 import 'goodsissue43.dart';
 import 'inventory reports52.dart';
@@ -32,7 +33,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
     Transfercontact46(),
     Inventory52(),
     Serialnumber48(),
-
+    Component(),
     Batchmangment(),
 
 
@@ -194,11 +195,15 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
 
-                buildNavCard('asset/lvapproval.png','Batch Number Management',7),
+                buildNavCard('asset/lvapproval.png','Component',7),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
 
-                buildNavCard('asset/logoff.png','Logout',8),
+                buildNavCard('asset/lvapproval.png','Batch Number Management',8),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                SizedBox(height: 5,),
+
+                buildNavCard('asset/logoff.png','Logout',9),
                 SizedBox(height: 5,),
 
 
@@ -217,7 +222,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
 
     return InkWell(
       onTap: (){
-        if(index == 8){
+        if(index == 9){
 
           name == "Logout" ?
           AuthController.instance.logout()

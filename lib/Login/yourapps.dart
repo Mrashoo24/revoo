@@ -9,11 +9,12 @@ import 'package:revoo/Orders/salesdashboard.dart';
 import 'package:revoo/Pos/PosDashboard.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
 import 'package:revoo/Purchasing/purchasing_dashboard.dart';
-import 'package:revoo/Vendorproduct%20mangment/inventoryDashboard.dart';
+// import 'package:revoo/Vendorproduct%20mangment/inventoryDashboard.dart';
 
 import '../Controllers/authcontroller.dart';
 
 import '../Employee/employee_homepage.dart';
+import '../Inventory/inventoryDashboard.dart';
 import '../constants/constants.dart';
 
 
