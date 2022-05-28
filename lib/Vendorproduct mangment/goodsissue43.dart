@@ -1,10 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
+import 'package:revoo/Controllers/goodsissuecontroller.dart';
+import 'package:collection/collection.dart';
+import 'package:revoo/Vendorproduct%20mangment/addIssues.dart';
+import '../Controllers/myempcontroller.dart';
 import '../HRMS_admin_Screen/adbranchpg2.dart';
 import '../constants/constants.dart';
+import 'model/goodissuemodel.dart';
 
 class Goodsissue43 extends StatefulWidget {
   const Goodsissue43({Key? key}) : super(key: key);
@@ -15,7 +21,11 @@ class Goodsissue43 extends StatefulWidget {
 
 class _Goodsissue43State extends State<Goodsissue43> {
 
-  String initialValue = '';
+  MyEmpController empController = Get.put(MyEmpController());
+
+  var selectedValue = 0;
+  var selectedBranch = '';
+  TextEditingController status = TextEditingController();
 
   var itemList = [
     '',
@@ -54,7 +64,7 @@ class _Goodsissue43State extends State<Goodsissue43> {
 
                           ),
                           InkWell(onTap: (){
-                            Get.to(AddBranches());
+                            Get.to(AddGoodsIssue());
                           },child: Image.asset('asset/addnew.png')),
 
                         ],
@@ -76,38 +86,53 @@ class _Goodsissue43State extends State<Goodsissue43> {
                           ),SizedBox( width: 12),
 
 
-                          Container(
-                            width:110 ,
-                            height:25,
-                            decoration: BoxDecoration(
-                                color:  bgGrey,
-                                borderRadius: BorderRadius.circular(10)
+                          StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                              stream: FirebaseFirestore.instance.collection('Branch').where('cid',isEqualTo: empController.myepmlist.value.cid).snapshots(),
+                              builder: (context, snapshot) {
 
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Row(
-                                children: [
+                                if(!snapshot.hasData){
+                                  return kprogressbar;
 
-                                  SizedBox( width: 40),
-                                  DropdownButton(
+                                }
 
-                                    icon: Icon(Icons.keyboard_arrow_down,color: Kdblue,),
+                                var bDocs = snapshot.requireData.docs;
 
-                                    items: itemList.map((String items) {
+                                print('selectedBracnh $selectedBranch');
 
-                                      return DropdownMenuItem(value: items, child: Text(items));
+                                selectedBranch =selectedBranch == '' ? bDocs.first.id : selectedBranch;
 
-                                    }).toList(), onChanged: (String? value) {  },
-                                  ),
+                                return
+                                  Container(
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        color:bgGrey,
+                                        borderRadius: BorderRadius.circular(100)
+                                    ),
+                                    child: Padding(
+                                      padding:   EdgeInsets.only(left: 8.0),
+                                      child: DropdownButton(
+                                          underline: Text(''),
+                                          style: TextStyle(fontSize: 8,color: Colors.black),
+
+                                          borderRadius: BorderRadius.circular(10),
+                                          value: selectedValue,
+                                          onChanged: (int? value){
 
 
-                                ],
-                              ),
-                            ),
 
+                                            setState(() {
+                                              selectedValue = value!;
+                                              selectedBranch = bDocs[value].get('bid');
+                                            });
 
+                                          },
+                                          items:
+                                          bDocs.mapIndexed((index, element) => (DropdownMenuItem(child: Text(element.get('branch_name')),value: index,))).toList()
 
+                                      ),
+                                    ),
+                                  );
+                              }
                           ),
 
 
@@ -118,122 +143,169 @@ class _Goodsissue43State extends State<Goodsissue43> {
 
 
                       SizedBox( height: 20),
+
                       Container(
-                        width: Get.width,
-                        height: 300,
-
-                        decoration: BoxDecoration(
-
-                          color: mannu,
+                        child: GetX(
+                            init: Get.put<GoodsissueController>(GoodsissueController()),
+                            builder: (GoodsissueController goodsissuecontroller){
 
 
-                          borderRadius: BorderRadius.circular(15),
+                              goodsissuecontroller.init(selectedBranch); // INIT S
+                              // TREAM WITH USERID
 
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
+                              List<Goodsissuemodel> goods = goodsissuecontroller.goodsissue.value;
 
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 12.0,top: 5),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        CircleAvatar( radius: 15,
-                                            backgroundColor: Colors.white),
-                                        SizedBox( width: 9),
+                              return ListView.builder(
+                                  itemCount: goodsissuecontroller.goodsisu.length,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context,index){
+                                return Container(
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  width: Get.width,
 
-                                        Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 5.0),
-                                              child: Text(
-                                                'Goods Issue',
-                                                style: TextStyle(
-                                                  color: Colors.yellow.shade600,
-                                                  fontSize: 17,
+                                  decoration: BoxDecoration(
+
+                                    color: mannu,
 
 
-                                                ),
-                                              ),
-                                            ),     SizedBox(width: 35),
-                                            Text("Feb 22 2021 4.pm",style: TextStyle(
-                                                color: Colors.white,fontSize: 11
-
-                                            ),)
-                                          ],
-                                        ),
-
-
-                                      ],
-                                    ),
-
-                                    SizedBox(height: 8),
-
-
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Center(
-                                    child: Text(
-                                      "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-                                          "Adrees sec 14 kherghr shelter park opp littel  "
-
-
-                                      ,
-
-                                      style: TextStyle(
-                                        color: Colors.white,fontSize: 15,
-                                      ),
-                                    ),
-
-
+                                    borderRadius: BorderRadius.circular(15),
 
                                   ),
+                                  child: Align(
+                                    alignment: Alignment.topLeft,
 
-                                ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 12.0,top: 5),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  CircleAvatar( radius: 15,
+                                                      backgroundColor: Colors.white),
+                                                  SizedBox( width: 9),
+
+                                                  Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 5.0),
+                                                        child: Text(
+                                                          '${goods[index].issue}',
+                                                          style: TextStyle(
+                                                            color: Colors.yellow.shade600,
+                                                            fontSize: 17,
 
 
-                                SizedBox(height: 20),
-                                Row(
-                                  children: [
+                                                          ),
+                                                        ),
+                                                      ),     SizedBox(width: 35),
+                                                      Text("${goodsissuecontroller.goodsisu[index].date}",style: TextStyle(
+                                                          color: Colors.white,fontSize: 11
+
+                                                      ),)
+                                                    ],
+                                                  ),
+
+
+                                                ],
+                                              ),
+
+                                              SizedBox(height: 8),
+
+
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 10),
+                                            child: Center(
+                                              child: Text(
+                                                '${goodsissuecontroller.goodsisu[index].description}',
+
+                                                style: TextStyle(
+                                                  color: Colors.white,fontSize: 15,
+                                                ),
+                                              ),
+
+
+
+                                            ),
+
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 10),
+                                            child: Center(
+                                              child: Text(
+                                                'Status: ${goodsissuecontroller.goodsisu[index].status}',
+
+                                                style: TextStyle(
+                                                  color: Colors.white,fontSize: 15,
+                                                ),
+                                              ),
+
+
+
+                                            ),
+
+                                          ),
+
+
+                                          SizedBox(height: 20),
+                                          Row(
+                                            children: [
+
+                                              ElevatedButton(
+                                                  onPressed: (){
+
+
+                                                Get.defaultDialog(
+                                                  title: 'Enter Status',
+                                                  content: TextFormField(
+                                                    controller: status,
+                                                  ),
+                                                  onConfirm: (){
+
+                                                    FirebaseFirestore.instance.collection('Goodsissue')
+                                                        .doc(goodsissuecontroller.goodsisu[index].id).update({'status'
+                                                        :status.text
+                                                    });
+                                                    Get.back();
+                                                  }
+                                                );
+
+                                                
+                                              },
+                                                  child: Text('Change Status'),
+                                                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(kyellow)),
+
+                                              )
+
+                                            ],
+                                          ),
 
 
 
 
-                                    SizedBox(width: 200),
-
-
-                                    SizedBox(width: 30),
-                                    Image.asset("asset/messageicon.png")
-
-                                  ],
-                                ),
 
 
 
 
+                                        ],
+                                      ),
 
+                                    ),
+                                  ),
 
-
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-
+                                );
+                              }) ;
+            }),
                       ),
+
+
+
 
 
 

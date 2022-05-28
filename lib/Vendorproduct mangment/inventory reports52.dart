@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../Controllers/inventoryreportcontroller.dart';
 import '../constants/constants.dart';
 
 class Inventory52 extends StatefulWidget {
@@ -15,7 +16,7 @@ class Inventory52 extends StatefulWidget {
 class _Inventory52State extends State<Inventory52> {
   @override
   Widget build(BuildContext context) {
-    var itemList = ['', 'Std1', 'Std2', 'Std3', 'Std4', 'Std5', 'Std6', 'Std7'];
+    var itemList = ['', 'Std1', 'Std2', 'Std3', 'Std4', 'Std5', 'Std6', 'Std7','std67'];
 
     var itemList1 = [
       '',
@@ -145,17 +146,170 @@ class _Inventory52State extends State<Inventory52> {
                     ],
                   ),
                   SizedBox(height: 20),
+                  Container(
+                    child: SingleChildScrollView(
+                      child: GetX(
+                          init: Get.put<Inventoryreportcontroller>(Inventoryreportcontroller()),
+                          builder:(Inventoryreportcontroller inventoryreport){
+                        return ListView.builder(itemCount:3,itemBuilder: (context, index) {
+                          return DataTable (
+                            horizontalMargin: 18,
+                            columnSpacing: 22,
+
+                            columns: [
+                              DataColumn(
+                                label: Text(
+                                  "SKU",
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.grey.shade600),
+                                ),),
+
+                              DataColumn(
+                                  label: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(right: 20.0),
+
+                                      child: Text(
+                                        "Intl\nPricee",
+                                        style: TextStyle(
+                                            fontSize: 12 , color: Colors.grey.shade600),
+                                      ),
+                                    ),
+                                  )),
+                              DataColumn(
+                                  label: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(right: 20.0),
+                                      child: Center(
+                                        child: Center(
+                                          child: Text(
+                                            "Local\nprice",
+                                            style: TextStyle(
+                                                fontSize: 12, color: Colors.grey.shade600),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+
+                              DataColumn(
+                                  label: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: Center(
+
+                                      child: Text(
+                                        "Action",
+                                        style: TextStyle(
+                                            fontSize: 12, color: Colors.grey.shade600),
+                                      ),
+                                    ),
+                                  )),
+                            ],
+
+
+
+
+
+                            rows: [
+                              DataRow(cells: [
+                                DataCell(Text(
+                                  inventoryreport.inventory[index].productName.toString(),
+                                  style: TextStyle(fontSize: 12),
+                                )),
+                                DataCell(
+                                  Container(
+                                    margin: EdgeInsets.symmetric(vertical: 15),
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Container(
+                                        width: 50,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: bgGrey,
+                                        ),
+                                        child: Align(
+                                            alignment: Alignment.center,
+
+                                            child: Text(
+                                              inventoryreport.inventory[index].intlPrice.toString(),
+                                              style: TextStyle(color: Colors.orange),
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                DataCell(
+                                  Container(
+                                    margin: EdgeInsets.symmetric(vertical: 15),
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Container(
+                                        width: 50,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: bgGrey,
+                                        ),
+                                        child: Align(
+                                            alignment: Alignment.center,
+
+                                            child: Text(
+                                              inventoryreport.inventory[index].localPrice.toString(),
+                                              style: TextStyle(color: Colors.orange),
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                DataCell(
+                                  Center(
+                                    child: Container(
+                                      height: 20,
+                                      margin: EdgeInsets.symmetric(vertical: 10),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.blue.shade900,
+                                            Colors.blue,
+                                          ],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Edit',
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 10),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ],
+                            border: TableBorder.all(color:kblue),
+                          );
+
+                        });
+                      }),
+                    ),
+                  ),
                   DataTable (
                     horizontalMargin: 18,
                     columnSpacing: 22,
 
                     columns: [
                       DataColumn(
-                          label: Text(
-                            "SKU",
-                            style: TextStyle(
-                                fontSize: 10, color: Colors.grey.shade600),
-                          ),),
+                        label: Text(
+                          "SKU",
+                          style: TextStyle(
+                              fontSize: 10, color: Colors.grey.shade600),
+                        ),),
 
                       DataColumn(
                           label: Center(
@@ -163,7 +317,7 @@ class _Inventory52State extends State<Inventory52> {
                               padding: const EdgeInsets.only(right: 20.0),
 
                               child: Text(
-                                "Intl\nPrice",
+                                "Intl\nPricee",
                                 style: TextStyle(
                                     fontSize: 12 , color: Colors.grey.shade600),
                               ),
@@ -284,12 +438,6 @@ class _Inventory52State extends State<Inventory52> {
                           ),
                         ),
                       ]),
-
-
-
-
-
-
                     ],
                     border: TableBorder.all(color:kblue),
                   ),

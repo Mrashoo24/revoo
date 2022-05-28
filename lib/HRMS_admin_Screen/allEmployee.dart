@@ -108,7 +108,8 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
 
                       var bDocs = snapshot.requireData.docs;
 
-                      return Container(
+                      return
+                        Container(
                         height: 30,
                         width: Get.width*0.35,
                         decoration: BoxDecoration(
