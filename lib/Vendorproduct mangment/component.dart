@@ -362,13 +362,13 @@ class _ComponentState extends State<Component> {
                 if (selectedItem == "In Stock") {
                   // var checkStatus = newListofUpdates.where((element) => element.status! == val).toList();
                   updatedresult = documents.where((element) {
-                    return int.parse(element['quantity']) > 499;
+                    return int.parse(element['quantity']) > 10;
                   }).toList();
                 }
                 if (selectedItem == "Less Stock") {
                   // var checkStatus = newListofUpdates.where((element) => element.status! == val).toList();
                   updatedresult = documents.where((element) {
-                    return int.parse(element['quantity']) < 50;
+                    return int.parse(element['quantity']) < 10;
                   }).toList();
                 }
                 if (selectedItem == "Out Stock") {

@@ -602,31 +602,33 @@ class _EditproductState extends State<Editproduct> {
                               //     ),
                               //   ),
                               // ),
-                              Align(alignment: Alignment.centerLeft,
-                                  child: Text('Product category',style: TextStyle(fontSize: 18,color:kblue ),)),
-                              SizedBox(height: 1),
-                              Divider(
-                                height: 5,thickness: 1,color: kblue,
-                              ),
-                              SizedBox(height: 5,),
-                              Container(
-                                height: 60,
-                                width: Get.width,
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,borderRadius: new BorderRadius.circular(10.0),
-                                ),
-                                margin: EdgeInsets.symmetric(horizontal: 3),
-                                child: DropdownButton <String?>(
-                                  value:productcategoryvalue,
-                                  onChanged: (String? value){
-                                    setState(() {
-                                      productcategoryvalue = value!;
-                                    });
-                                  },
-                                  items: itemList,
-                                ),
-                              ),
+                              ///Category
+                              // Align(alignment: Alignment.centerLeft,
+                              //     child: Text('Product category',style: TextStyle(fontSize: 18,color:kblue ),)),
+                              // SizedBox(height: 1),
+                              // Divider(
+                              //   height: 5,thickness: 1,color: kblue,
+                              // ),
+                              // SizedBox(height: 5,),
+                              // Container(
+                              //   height: 60,
+                              //   width: Get.width,
+                              //   padding: EdgeInsets.symmetric(horizontal: 8),
+                              //   decoration: BoxDecoration(
+                              //     color: Colors.grey.shade200,borderRadius: new BorderRadius.circular(10.0),
+                              //   ),
+                              //   margin: EdgeInsets.symmetric(horizontal: 3),
+                              //   child: DropdownButton <String?>(
+                              //     value:productcategoryvalue,
+                              //     onChanged: (String? value){
+                              //       setState(() {
+                              //         productcategoryvalue = value!;
+                              //       });
+                              //     },
+                              //     items: itemList,
+                              //   ),
+                              // ),
+                              ///Catoegor
                               // Row(
                               //   mainAxisAlignment: MainAxisAlignment.center,
                               //   children: [

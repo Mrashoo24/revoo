@@ -254,36 +254,39 @@ class _Goodsissue43State extends State<Goodsissue43> {
 
 
                                           SizedBox(height: 20),
-                                          Row(
-                                            children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
 
-                                              ElevatedButton(
-                                                  onPressed: (){
+                                                ElevatedButton(
+                                                    onPressed: (){
 
 
-                                                Get.defaultDialog(
-                                                  title: 'Enter Status',
-                                                  content: TextFormField(
-                                                    controller: status,
-                                                  ),
-                                                  onConfirm: (){
+                                                  Get.defaultDialog(
+                                                    title: 'Enter Status',
+                                                    content: TextFormField(
+                                                      controller: status,
+                                                    ),
+                                                    onConfirm: (){
 
-                                                    FirebaseFirestore.instance.collection('Goodsissue')
-                                                        .doc(goodsissuecontroller.goodsisu[index].id).update({'status'
-                                                        :status.text
-                                                    });
-                                                    Get.back();
-                                                  }
-                                                );
+                                                      FirebaseFirestore.instance.collection('Goodsissue')
+                                                          .doc(goodsissuecontroller.goodsisu[index].id).update({'status'
+                                                          :status.text
+                                                      });
+                                                      Get.back();
+                                                    }
+                                                  );
 
-                                                
-                                              },
-                                                  child: Text('Change Status'),
-                                                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(kyellow)),
 
-                                              )
+                                                },
+                                                    child: Text('Change Status'),
+                                                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(kyellow)),
 
-                                            ],
+                                                )
+
+                                              ],
+                                            ),
                                           ),
 
 
