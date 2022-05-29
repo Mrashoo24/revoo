@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -1159,56 +1160,54 @@ class _AddEmployeeState extends State<AddEmployee> {
                               print('branchnsme = ${selectedValueBranch}');
 
 
+                              try{
+                                var createdUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text);
+                                await firestore.collection("Employee").doc(createdUser.user!.uid).set(
+                                    {
+                                      'name':empname.text,
+                                      "bid" : selectedValueBranch,
+                                      "mid" : selectedValuemanager,
+                                      "hid" : selectedValueHR,
+                                      'Address':fullAdsress.text,
+                                      'Designation' : designation.text,
+                                      "dob" : dob.text,
+                                      "email" : email.text,
+                                      "password" : password.text,
+                                      "phoneNumber" : phoneNumber.text,
+                                      "shiftid" : selectedValuec,
+                                      "selectRoles" : selectedValuee,
+                                      'cid' : widget.userDoc.get('cid'),
+                                      'did' : 'did',
+                                      'reporting' : selectedValuemanager,
+                                      'uid' : createdUser.user!.uid,
+                                      'basic_pay' : basicPayController.text,
+                                      'house_rent_allowance' : houseRentAllowanceController.text,
+                                      'medical_allowance' : medicalAllowanceController.text,
+                                      'conveyance' : conveyanceController.text,
+                                      'meal_coupon' : mealCouponController.text,
+                                      'travel_allowance' :travelAllowanceController.text,
+                                      'gross_pay' : total,
+                                      'profession_tax' : professionTaxController.text,
+                                      'general_provident_fund' : generalProvidentFund,
+                                      'total_deductions' : total2,
+                                      'net_pay' : totalBalance
 
-                              await firestore.collection("Employee").add(
-                                  {
-                                    'name':empname.text,
-                                    "bid" : selectedValueBranch,
-                                    "mid" : selectedValuemanager,
-                                    "hid" : selectedValueHR,
-                                    'Address':fullAdsress.text,
-                                    'Designation' : designation.text,
-                                    "dob" : dob.text,
-                                    "email" : email.text,
-                                    "password" : password.text,
-                                    "phoneNumber" : phoneNumber.text,
-                                    "shiftid" : selectedValuec,
-                                    "selectRoles" : selectedValuee,
-                                    'cid' : widget.userDoc.get('cid'),
-                                    'did' : 'did',
-                                    'reporting' : selectedValuemanager,
-                                    'uid' : '',
-                                    'basic_pay' : basicPayController.text,
-                                    'house_rent_allowance' : houseRentAllowanceController.text,
-                                    'medical_allowance' : medicalAllowanceController.text,
-                                    'conveyance' : conveyanceController.text,
-                                    'meal_coupon' : mealCouponController.text,
-                                    'travel_allowance' :travelAllowanceController.text,
-                                    'gross_pay' : total,
-                                    'profession_tax' : professionTaxController.text,
-                                    'general_provident_fund' : generalProvidentFund,
-                                    'total_deductions' : total2,
-                                    'net_pay' : totalBalance
+                                    }
+                                );
 
-                                  }
-                              ).then(
-                                      (value) async {
-                                    await firestore.collection('Employee')
-                                        .doc(value.id)
-                                        .update
-                                      ({
-                                      'uid': value.id,
+                                // var docSnap =  await firestore.collection('Employee').doc('QOebgqfRn7wqKCpyrRtw').get();
+                                //
+                                // print(docSnap.data());
+
+                                Get.back();
+
+                              }  on FirebaseAuthException
+                              catch  (error)
+                              {
+                                  Get.snackbar('ERROR', error.code);
+                              }
 
 
-                                    });
-                                  }
-                              );
-
-                              // var docSnap =  await firestore.collection('Employee').doc('QOebgqfRn7wqKCpyrRtw').get();
-                              //
-                              // print(docSnap.data());
-
-                              Get.back();
 
                             },
 

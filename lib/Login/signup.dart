@@ -59,14 +59,16 @@ class _SignupState extends State<Signup> {
               Center(
                 child: Padding(
 
-                  padding: const EdgeInsets.all(15.0),
-                  child: Card(
+                  padding:  EdgeInsets.only(bottom: 15.0,top: 15,left:
+                  kchecksize  ? 35 :Get.width*0.35 ,right:
+                  kchecksize  ? 35 :Get.width*0.35
+                  ),                  child: Card(
                     color: Colors.grey.shade200,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)
                     ),
                     child: Padding(
-                      padding:  EdgeInsets.only(bottom: 15.0,top: 15,left: Get.width*0.35,right: Get.width*0.35),
+                      padding: const EdgeInsets.only(right: 30.0,left: 30.0,top: 15,bottom: 20),
 
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -277,7 +279,7 @@ class _SignupState extends State<Signup> {
                                   onTap: (){
                                     Get.to(LoginScreen());
                                   },
-                                  child: Text('Already hav an account?',style: TextStyle(color: Colors.yellow.shade700),))),
+                                  child: Text('Already have an account?',style: TextStyle(color: Colors.yellow.shade700),))),
 
                         ],
                       ),

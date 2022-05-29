@@ -7,6 +7,7 @@ import 'package:revoo/Employee/dailyupdates.dart';
 import 'package:revoo/Employee/employeedash1stpg.dart';
 import 'package:revoo/Employee/leaveRequest.dart';
 import 'package:revoo/Employee/watchdashboard.dart';
+import '../Controllers/myempcontroller.dart';
 import '../constants/commonWidgets.dart';
 import '../constants/constants.dart';
 import 'Certificate/certificate.dart';
@@ -27,7 +28,7 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
   var selectedindex = 0; //for changing index of page
 
   late String email;
-
+  MyEmpController myemp = Get.put(MyEmpController());
 
 
 
@@ -109,35 +110,35 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Container(
-                                    child: Text('Name of the person',style: TextStyle(fontSize: 20,color: kblue),
+                                    child: Text(myemp.myepmlist.value.name!,style: TextStyle(fontSize: 20,color: kblue),
                                         textAlign: TextAlign.left
                                     )),
                               ),
                               Container(
 
 
-                                  child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
+                                  child: Text(myemp.myepmlist.value.designation!,style: TextStyle(fontSize: 18,color: kblue),
                                       textAlign: TextAlign.left
                                   )),
-                              InkWell(
-                                onTap: (){
-
-                                },
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                          child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
-                                          )),
-                                      SizedBox(width: 15,),
-                                      Image.asset('asset/rightarrow.png')
-                                    ],
-
-                                  ),
-
-                                ),
-
-                              ),
+                              // InkWell(
+                              //   onTap: (){
+                              //
+                              //   },
+                              //   child: Container(
+                              //     child: Row(
+                              //       children: [
+                              //         Container(
+                              //             child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
+                              //             )),
+                              //         SizedBox(width: 15,),
+                              //         Image.asset('asset/rightarrow.png')
+                              //       ],
+                              //
+                              //     ),
+                              //
+                              //   ),
+                              //
+                              // ),
 
 
                             ],

@@ -1,6 +1,7 @@
 import 'package:cell_calendar/cell_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 import '../constants/constants.dart';
 
@@ -14,8 +15,8 @@ class PRCalender extends StatefulWidget {
 class _PRCalenderState extends State<PRCalender> {
 
   var sampleEvents = [
-    CalendarEvent(eventName: "Event 1",eventDate: DateTime.now(),eventBackgroundColor: Colors.black),
-    CalendarEvent(eventName: "Event 2",eventDate: DateTime.now()),
+    CalendarEvent(eventName: "RFQ 21323 Delivery",eventDate: DateTime.now(),eventBackgroundColor: kyellow),
+    CalendarEvent(eventName: "RFQ 21323 Delivery",eventDate: DateTime.now().add(Duration(days: 1)),eventBackgroundColor: kyellow),
 
   ];
 
@@ -126,103 +127,103 @@ class _PRCalenderState extends State<PRCalender> {
                 ),
               ),
 
-              Wrap(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 18,
-                        height: 18,
-                        color: Colors.black,
-                      ),
-                      SizedBox(width: 8),
-                      Text("Vendor Meetings",style: TextStyle(color: Colors.grey,fontSize: 18),),
-                    ],
-                  ),
-
-                  Row(
-                    children: [
-                      Container(
-                        width: 18,
-                        height: 18,
-                        color: kblue,
-                      ),
-                      SizedBox(width: 8),
-                      Text("Vendor Meetings",style: TextStyle(color: Colors.grey,fontSize: 18),),
-                    ],
-                  ),
-
-                  Row(
-                    children: [
-                      Container(
-                        width: 18,
-                        height: 18,
-                        color: greytxtbx,
-                      ),SizedBox(width: 8),
-                      Text("Scheduled",style: TextStyle(color: Colors.grey,fontSize: 18),),
-                    ],
-                  ),
-                ],
-              ),
+              // Wrap(
+              //   children: [
+              //     Row(
+              //       children: [
+              //         Container(
+              //           width: 18,
+              //           height: 18,
+              //           color: Colors.black,
+              //         ),
+              //         SizedBox(width: 8),
+              //         Text("Vendor Meetings",style: TextStyle(color: Colors.grey,fontSize: 18),),
+              //       ],
+              //     ),
+              //
+              //     Row(
+              //       children: [
+              //         Container(
+              //           width: 18,
+              //           height: 18,
+              //           color: kblue,
+              //         ),
+              //         SizedBox(width: 8),
+              //         Text("Vendor Meetings",style: TextStyle(color: Colors.grey,fontSize: 18),),
+              //       ],
+              //     ),
+              //
+              //     Row(
+              //       children: [
+              //         Container(
+              //           width: 18,
+              //           height: 18,
+              //           color: greytxtbx,
+              //         ),SizedBox(width: 8),
+              //         Text("Scheduled",style: TextStyle(color: Colors.grey,fontSize: 18),),
+              //       ],
+              //     ),
+              //   ],
+              // ),
 
 
 
               SizedBox(height: 30,),
-              ListView.builder(
-                itemCount: 10,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-
-                        color: Kdblue,
-
-
-                        borderRadius: BorderRadius.circular(15),
-
-                      ),
-                      child: Padding(
-                        padding:   EdgeInsets.only(left: 18.0,top: 13),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'BIO METRIC',
-                                  style: TextStyle(
-                                    color: Colors.yellow.shade600,
-                                    fontSize: 19,
-
-
-                                  ),
-                                ),
-                                InkWell(child: Icon(Icons.more_vert,color: Colors.white)),
-
-                              ],
-                            ),
-                            Text(
-                              "For GeoSensors ",
-                              style: TextStyle(
-                                color: Colors.white,fontSize: 12,
-                              ),
-                            )
-
-                          ],
-                        ),
-
-                      ),
-
-                    ),
-                  );
-                }
-              ),
+              // ListView.builder(
+              //   itemCount: 10,
+              //   shrinkWrap: true,
+              //   physics: NeverScrollableScrollPhysics(),
+              //   itemBuilder: (context, index) {
+              //     return Padding(
+              //       padding: const EdgeInsets.only(bottom: 8.0),
+              //       child: Container(
+              //         padding: EdgeInsets.all(8),
+              //         decoration: BoxDecoration(
+              //
+              //           color: Kdblue,
+              //
+              //
+              //           borderRadius: BorderRadius.circular(15),
+              //
+              //         ),
+              //         child: Padding(
+              //           padding:   EdgeInsets.only(left: 18.0,top: 13),
+              //           child: Column(
+              //             mainAxisAlignment: MainAxisAlignment.start,
+              //             crossAxisAlignment: CrossAxisAlignment.start,
+              //             children: [
+              //               Row(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //                 children: [
+              //                   Text(
+              //                     'BIO METRIC',
+              //                     style: TextStyle(
+              //                       color: Colors.yellow.shade600,
+              //                       fontSize: 19,
+              //
+              //
+              //                     ),
+              //                   ),
+              //                   InkWell(child: Icon(Icons.more_vert,color: Colors.white)),
+              //
+              //                 ],
+              //               ),
+              //               Text(
+              //                 "For GeoSensors ",
+              //                 style: TextStyle(
+              //                   color: Colors.white,fontSize: 12,
+              //                 ),
+              //               )
+              //
+              //             ],
+              //           ),
+              //
+              //         ),
+              //
+              //       ),
+              //     );
+              //   }
+              // ),
 
 
 

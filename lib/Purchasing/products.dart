@@ -26,11 +26,14 @@ class _HRMSadmincustState extends State<Products> {
     'Std6',
     'Std7'
   ];
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Container(
+
           width: Get.width,
 
           child: SingleChildScrollView(

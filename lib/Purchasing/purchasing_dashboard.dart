@@ -9,6 +9,7 @@ import 'package:revoo/Purchasing/rfqstatusb.dart';
 import 'package:revoo/Purchasing/vendors.dart';
 
 import '../Controllers/authcontroller.dart';
+import '../Controllers/myempcontroller.dart';
 import '../constants/commonWidgets.dart';
 import '../constants/constants.dart';
 import 'billsninvoice.dart';
@@ -35,13 +36,14 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
     RFQsStatusb(),
     Vendorsa(),
     Hostoryvndrname(),
-    Products(),
-    Categories(),
+    // Products(),
+    // Categories(),
     RFQsStatusa(),
     Reports(),
     PRCalender(),
-    Billsinvoice(),
+    // Billsinvoice(),
   ];
+  MyEmpController myemp = Get.put(MyEmpController());
 
 
   @override
@@ -83,6 +85,10 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
 
 
   buildDrawer(){
+
+    var empmodel =  myemp.myepmlist.value;
+
+
     return  Drawer(
       child:  Card(
         color: Colors.grey.shade200,
@@ -123,35 +129,35 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                  child: Text('Name of the person',style: TextStyle(fontSize: 20,color: kblue),
+                                  child: Text(empmodel.name!,style: TextStyle(fontSize: 20,color: kblue),
                                       textAlign: TextAlign.left
                                   )),
                             ),
                             Container(
 
 
-                                child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
+                                child: Text(empmodel.designation!,style: TextStyle(fontSize: 18,color: kblue),
                                     textAlign: TextAlign.left
                                 )),
-                            InkWell(
-                              onTap: (){
-
-                              },
-                              child: Container(
-                                child: Row(
-                                  children: [
-                                    Container(
-                                        child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
-                                        )),
-                                    SizedBox(width: 15,),
-                                    Image.asset('asset/rightarrow.png')
-                                  ],
-
-                                ),
-
-                              ),
-
-                            ),
+                            // InkWell(
+                            //   onTap: (){
+                            //
+                            //   },
+                            //   child: Container(
+                            //     child: Row(
+                            //       children: [
+                            //         Container(
+                            //             child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
+                            //             )),
+                            //         SizedBox(width: 15,),
+                            //         Image.asset('asset/rightarrow.png')
+                            //       ],
+                            //
+                            //     ),
+                            //
+                            //   ),
+                            //
+                            // ),
 
 
                           ],
@@ -177,25 +183,25 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
                 buildNavCard('asset/lvapproval.png','Purchase History',4),
                 SizedBox(height: 5,),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                buildNavCard('asset/lvapproval.png','Products',5),
+                // buildNavCard('asset/lvapproval.png','Products',5),
+                // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                // SizedBox(height: 5,),
+                // buildNavCard('asset/lvapproval.png','Products Categories',6),
+                // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                // SizedBox(height: 5,),
+                buildNavCard('asset/lvapproval.png','RFQ Records',5),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','Products Categories',6),
+                buildNavCard('asset/lvapproval.png','Reports',6),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','RFQ Records',7),
+                buildNavCard('asset/lvapproval.png','Calender',7),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','Reports',8),
-                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','Calender',9),
-                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','Bills & Invoices',10),
-                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                // buildNavCard('asset/lvapproval.png','Bills & Invoices',8),
+                // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
 
-                buildNavCard('asset/logoff.png','Logout',11),
+                buildNavCard('asset/logoff.png','Logout',8),
                 SizedBox(height: 5,),
 
 
@@ -214,7 +220,7 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
 
     return InkWell(
       onTap: (){
-        if(index == 11){
+        if(index == 8){
 
           name == "Logout" ?
           AuthController.instance.logout()

@@ -8,6 +8,7 @@ import 'package:revoo/Vendorproduct%20mangment/transferadd46.dart';
 import 'package:revoo/Vendorproduct%20mangment/vendorproduct38.dart';
 
 import '../Controllers/authcontroller.dart';
+import '../Controllers/myempcontroller.dart';
 import '../constants/commonWidgets.dart';
 import '../constants/constants.dart';
 import 'Batchmangment51.dart';
@@ -27,6 +28,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
   GlobalKey<ScaffoldState> scafkey = GlobalKey<ScaffoldState>();
   var selectedCard = 'Home'; //for changing name
   var selectedindex = 0; //for changing index of page
+  MyEmpController myemp = Get.put(MyEmpController());
 
   var homepages = [
     Addproduct38(),
@@ -45,6 +47,8 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
 
 
   ];
+
+
 
 
   @override
@@ -86,6 +90,10 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
 
 
   buildDrawer(){
+
+    var empmodel =  myemp.myepmlist.value;
+
+
     return  Drawer(
       child:  Card(
         color: Colors.grey.shade200,
@@ -126,14 +134,14 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                  child: Text('Name of the person',style: TextStyle(fontSize: 20,color: kblue),
+                                  child: Text(empmodel.name!,style: TextStyle(fontSize: 20,color: kblue),
                                       textAlign: TextAlign.left
                                   )),
                             ),
                             Container(
 
 
-                                child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
+                                child: Text(empmodel.designation!,style: TextStyle(fontSize: 18,color: kblue),
                                     textAlign: TextAlign.left
                                 )),
                             InkWell(

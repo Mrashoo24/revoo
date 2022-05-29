@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revoo/Controllers/myempcontroller.dart';
 import 'package:revoo/HRMS_admin_Screen/LocationHistory/tripuser.dart';
 import 'package:revoo/HRMS_admin_Screen/Reports/reports.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
@@ -33,6 +34,7 @@ class _HomePageMainState extends State<HomePageMain> {
   var selectedCard = 'Home'; //for changing name
   var selectedindex = 0; //for changing index of page
 
+  MyEmpController myemp = Get.put(MyEmpController());
 
 
   @override
@@ -93,6 +95,9 @@ HRMSReports(userDoc: widget.userDoc),//11
 
 
   buildDrawer(){
+
+    var empmodel =  myemp.myepmlist.value;
+
     return  Drawer(
       child:  Card(
         color: Colors.grey.shade200,
@@ -133,35 +138,35 @@ HRMSReports(userDoc: widget.userDoc),//11
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                  child: Text('Name of the person',style: TextStyle(fontSize: 20,color: kblue),
+                                  child: Text(empmodel.name!,style: TextStyle(fontSize: 20,color: kblue),
                                       textAlign: TextAlign.left
                                   )),
                             ),
                             Container(
 
 
-                                child: Text('Role/Designation',style: TextStyle(fontSize: 18,color: kblue),
+                                child: Text(empmodel.designation!,style: TextStyle(fontSize: 18,color: kblue),
                                     textAlign: TextAlign.left
                                 )),
-                            InkWell(
-                              onTap: (){
-
-                              },
-                              child: Container(
-                                child: Row(
-                                  children: [
-                                    Container(
-                                        child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
-                                        )),
-                                    SizedBox(width: 15,),
-                                    Image.asset('asset/rightarrow.png')
-                                  ],
-
-                                ),
-
-                              ),
-
-                            ),
+                            // InkWell(
+                            //   onTap: (){
+                            //
+                            //   },
+                            //   child: Container(
+                            //     child: Row(
+                            //       children: [
+                            //         Container(
+                            //             child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
+                            //             )),
+                            //         SizedBox(width: 15,),
+                            //         Image.asset('asset/rightarrow.png')
+                            //       ],
+                            //
+                            //     ),
+                            //
+                            //   ),
+                            //
+                            // ),
 
 
                           ],
@@ -225,7 +230,6 @@ HRMSReports(userDoc: widget.userDoc),//11
 
 
   buildNavCard(String image,String name,index) {
-
     return InkWell(
       onTap: (){
         if(index == 10){
