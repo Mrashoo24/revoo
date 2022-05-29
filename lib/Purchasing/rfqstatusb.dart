@@ -20,6 +20,7 @@ class _RFQsStatusState extends State<RFQsStatusb> {
   // var firebase = FirebaseFirestore.instance.collection("RFQform");
   var firebase = FirebaseFirestore.instance;
   String initialValue = '';
+  TextEditingController status = TextEditingController();
 
   var itemList = [
     '',
@@ -103,8 +104,10 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                 ],
               ),
               SizedBox(height: 15),
+
+
               StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream:firebase.collection('RFQform').doc('VVtqGoTlpkGn6rMMFXB9').collection('vendorform').snapshots(),
+                  stream:firebase.collection('RFQform').doc('Kq4JccSAiT2V5srvZARq').collection('vendorform').snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return Text('No Data');
@@ -185,7 +188,7 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                               const EdgeInsets.symmetric(horizontal: 5.0),
                               child: Center(
                                 child: Text(
-                                  "Accept",
+                                  "Mark Delviered",
                                   style: TextStyle(
                                       fontSize: 12,
                                       color: Colors.grey.shade600),
@@ -198,7 +201,7 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                               const EdgeInsets.symmetric(horizontal: 5.0),
                               child: Center(
                                 child: Text(
-                                  "Reject",
+                                  "Comments",
                                   style: TextStyle(
                                       fontSize: 12,
                                       color: Colors.grey.shade600),
@@ -258,7 +261,7 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                         return DataRow(cells: [
                           DataCell(
                             CircleAvatar(
-                              backgroundColor:jsonDecode(element['status']) == -1 ? Colors.red : Colors.green,
+                              backgroundColor:element['deliverystatus'] != 'Delivered' ? Colors.red : Colors.green,
                               radius: 10,//Text
                             ),
                           ),
@@ -299,6 +302,11 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                                     IconButton(
                                       onPressed: (){
 
+                                        firebase.collection('RFQform').doc('Kq4JccSAiT2V5srvZARq').collection('vendorform')
+                                            .doc('oKHEpbr0yQnrAEoB5cBb').update({'deliverystatus'
+                                            :'Delivered'
+                                        });
+                                        Get.back();
 
 
                                       }, icon:  Icon(Icons.check),
@@ -309,10 +317,25 @@ class _RFQsStatusState extends State<RFQsStatusb> {
                               Column(
                                   children:[
                                     IconButton(onPressed: (){
+
+                                      Get.defaultDialog(
+                                          title: 'Enter Status',
+                                          content: TextFormField(
+                                            controller: status,
+                                          ),
+                                          onConfirm: (){
+
+                                            firebase.collection('RFQform').doc('Kq4JccSAiT2V5srvZARq').collection('vendorform')
+                                                .doc('oKHEpbr0yQnrAEoB5cBb').update({'status'
+                                                :status.text
+                                            });
+                                            Get.back();
+                                          }
+                                      );
                                       // setState(() {
                                       //   FirebaseFirestore.instance.collection('RFQform').doc(snapshot.data!.docs[index]['rfqtitle']).delete();
                                       // });
-                                    }, icon: Icon(Icons.cancel),
+                                    }, icon: Icon(Icons.comment),
                                     ),
                                   ])
                           ),

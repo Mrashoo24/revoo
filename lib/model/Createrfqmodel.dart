@@ -1,6 +1,6 @@
 class CreateRfqModel {
   String? createrfq;
-  String? customerdate;
+  String? created;
   String? expirydate;
   String? quotationnumber;
   String? totalamount;
@@ -11,12 +11,15 @@ class CreateRfqModel {
   String? mid;
   String? uid;
   String? date;
+  String? status;
+  String? vendors;
+  String? recievedforms;
 
 
 
   CreateRfqModel(
       {this.createrfq,
-        this.customerdate,
+        this.created,
         this.expirydate,
         this.quotationnumber,
         this.totalamount,
@@ -27,11 +30,14 @@ class CreateRfqModel {
         this.mid,
         this.uid,
         this.date,
+        this.status,
+        this.recievedforms,
+        this.vendors
       });
 
   CreateRfqModel.fromJson(Map<String, dynamic> json) {
     createrfq = json['createrfq'];
-    customerdate = json['customerdate'];
+    created = json['created'];
     expirydate = json['expirydate'];
     quotationnumber = json['quotationnumber'];
     totalamount = json['totalamount'];
@@ -42,12 +48,16 @@ class CreateRfqModel {
     mid = json['mid'];
     uid = json['uid'];
     date = json['date'];
+    status = json['status'];
+    vendors = json['vendors'];
+    recievedforms = json['recievedforms'];
+
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['createrfq'] = this.createrfq;
-    data['customerdate'] = this.customerdate;
+    data['created'] = this.created;
     data['expirydate'] = this.expirydate;
     data['quotationnumber'] = this.quotationnumber;
     data['totalamount'] = this.totalamount;
@@ -57,7 +67,12 @@ class CreateRfqModel {
     data['did'] = this.did;
     data['mid'] = this.mid;
     data['uid'] = this.uid;
+
     data['date'] = this.date;
+    data['status'] = this.status;
+
+    data['vendors'] = this.vendors;
+    data['recievedforms'] = this.recievedforms;
 
     return data;
   }

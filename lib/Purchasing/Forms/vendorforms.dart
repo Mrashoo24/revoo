@@ -5,17 +5,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:intl/intl.dart';
-import 'package:revoo/Purchasing/Forms/vendorforms.dart';
+import 'package:revoo/Purchasing/Forms/vendorReports.dart';
 import 'package:revoo/constants/constants.dart';
 
+class AllVendorForms extends StatefulWidget {
+ final String reqId ;
+ final String name ;
+  const AllVendorForms({Key? key, required this.reqId, required this.name}) : super(key: key);
 
-
-class   Request4Quotation extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _showTasks();
+  _AllVendorFormsState createState() => _AllVendorFormsState();
 }
 
-class _showTasks extends State<Request4Quotation> {
+class _AllVendorFormsState extends State<AllVendorForms> {
   var firebase = FirebaseFirestore.instance.collection("RFQform");
   bool value = false;
   bool avalue = false;
@@ -27,103 +29,103 @@ class _showTasks extends State<Request4Quotation> {
           body: Container(
             height: Get.height,
             width: Get.width,
-            
+
             padding: EdgeInsets.only(left: 10, right: 10),
 
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>> (
-              stream: firebase.snapshots() ,
-              builder: (context, snapshot) {
-                if(!snapshot.hasData){
-                  return kprogressbar;
-                }
+                stream: firebase.snapshots() ,
+                builder: (context, snapshot) {
+                  if(!snapshot.hasData){
+                    return kprogressbar;
+                  }
 
-                var prodList = snapshot.requireData.docs;
-                
-              var sentForms =   prodList.where((element) => double.parse(element.get('vendors')) > 0 ).toList();
+                  var prodList = snapshot.requireData.docs;
 
-             var waitingForm =    prodList.where((element) => double.parse(element.get('recievedforms')) > 0 ).toList();
+                  var sentForms =   prodList.where((element) => double.parse(element.get('vendors')) > 0 ).toList();
+
+                  var waitingForm =    prodList.where((element) => double.parse(element.get('recievedforms')) > 0 ).toList();
 
                   var lateForm =    prodList.where((element) => DateFormat('yyyy/MM/dd').parse(element.get('expirydate') ).isAfter(DateTime.now())
                       && element.get('status') == '0'
                   ).toList();
 
 
-                return ListView(
-                  children: [
-                    Center(
-                      child: Text(
-                        'Request of Quotation',
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: kblue,
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(height: 5),
-                    Container(
-                      height: 120,
-                      width: Get.width,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
+                  return ListView(
+                    children: [
+                      Row(
                         children: [
-                          _dailCard('Sent', sentForms.length),
-                          _dailCard('Waiting', waitingForm.length),
-                          _dailCard('Late', lateForm.length),
+                          InkWell(
+                              onTap: (){
+                                Get.back();
+                              },
+                              child: Icon(CupertinoIcons.arrow_left,color: Kdblue,)),
+                          Center(
+                            child: Text(
+                              'Forms',
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: kblue,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Past Request',
-                          style: TextStyle(
-                            fontSize: 22,
-                            color: kblue,
-                          ),
-                        ),
-                        Divider(
-                          thickness: 2,
-                        ),
-                      ],
-                    ),
 
-                         Container(
-                          height: Get.height * 0.7,
-                          //color: Colors.black,
-                          child: ListView.builder(
-                            itemCount: snapshot.requireData.docs.length,
+                      SizedBox(height: 5),
+                      // Container(
+                      //   height: 120,
+                      //   width: Get.width,
+                      //   child: ListView(
+                      //     scrollDirection: Axis.horizontal,
+                      //     children: [
+                      //       _dailCard('Sent', sentForms.length),
+                      //       _dailCard('Waiting', waitingForm.length),
+                      //       _dailCard('Late', lateForm.length),
+                      //     ],
+                      //   ),
+                      // ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Divider(
+                            thickness: 2,
+                          ),
+                        ],
+                      ),
+
+                      Container(
+                        height: Get.height * 0.7,
+                        //color: Colors.black,
+                        child: ListView.builder(
+                            itemCount: 4,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context,index){
-                          return Container(
-                            child: Column(
-                                children : [
-                                  _TasksCard(snapshot.data!.docs[index]['created'], snapshot.data!.docs[index]['createrfq'],snapshot.data!.docs[index]['date']
-                                  , snapshot.data!.docs[index].id
-                                  ),
-                                  // _TasksCard('RFQ Name'),
-                                  // _TasksCard('RFQ Name'),
-                                  // _TasksCard('RFQ Name'),
-                                  // _TasksCard('RFQ Name'),
-                                  // _TasksCard('RFQ Name'),
-                                  // _TasksCard('RFQ Name'),
-                                ]
-                            ),
-                          );
+                              return Container(
+                                child: Column(
+                                    children : [
+                                      _TasksCard('13/02/2022', 'Vendor $index','16/02/2022'),
+                                      // _TasksCard('RFQ Name'),
+                                      // _TasksCard('RFQ Name'),
+                                      // _TasksCard('RFQ Name'),
+                                      // _TasksCard('RFQ Name'),
+                                      // _TasksCard('RFQ Name'),
+                                      // _TasksCard('RFQ Name'),
+                                    ]
+                                ),
+                              );
                             }
-                          ),
-                        )
+                        ),
+                      )
 
-                  ],
-                );
-              }
+                    ],
+                  );
+                }
             ),
           ),
         ));
   }
 
-  Widget _TasksCard(cdate, text ,date,id) {
+  Widget _TasksCard(cdate, text ,date) {
     return Container(
       margin: EdgeInsets.all(5),
       padding: EdgeInsets.all(15),
@@ -141,7 +143,7 @@ class _showTasks extends State<Request4Quotation> {
               Row(
                 children: [
                   Container(
-                    child: Text('Title',
+                    child: Text('Vendor Name',
                       style: TextStyle(color: kyellow, fontSize: 16),
                     ),
                   ),
@@ -157,7 +159,7 @@ class _showTasks extends State<Request4Quotation> {
               Row(
                 children: [
                   Container(
-                    child: Text('Expiry Date',
+                    child: Text('Sent Date',
                       style: TextStyle(color: kyellow, fontSize: 16),
                     ),
                   ),
@@ -173,7 +175,7 @@ class _showTasks extends State<Request4Quotation> {
               Row(
                 children: [
                   Container(
-                    child: Text('Req Date',
+                    child: Text('Delivery Date',
                       style: TextStyle(color: kyellow, fontSize: 16),
                     ),
                   ),
@@ -191,19 +193,20 @@ class _showTasks extends State<Request4Quotation> {
           SizedBox(height: 20,),
 
           ElevatedButton(onPressed: (){
-            Get.to(AllVendorForms(reqId: id,name:text));
 
-          }, child: Text('View Forms'),
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(kyellow)
-          ),
+            Get.to(VendorQoutations());
+
+          }, child: Text('View Quotation'),
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(kyellow)
+            ),
           )
         ],
       ),
     );
   }
-
 }
+
 
 
 

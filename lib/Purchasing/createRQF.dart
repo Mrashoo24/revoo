@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
@@ -33,6 +34,8 @@ class _CreatRQFState extends State<CreatRQF> {
   TextEditingController totalamount = TextEditingController();
 
   var rnd = new Random();
+  String dateSelected  = DateFormat('yyyy/MM/dd').format(DateTime.now().subtract(Duration(days: 1)));
+
 
 
   @override
@@ -49,11 +52,11 @@ class _CreatRQFState extends State<CreatRQF> {
               children: [
                 Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('Request Title',style: TextStyle(color: kblue, fontSize: 35),)),
+                    child: Text('Create RFQ',style: TextStyle(color: kblue, fontSize: 35),)),
                 SizedBox(height: 25,),
                 Align(
                     alignment: Alignment.centerLeft,
-                child: Text('Create RFQ',style: TextStyle(color: kblue, fontSize: 20),)),
+                child: Text('Request Title',style: TextStyle(color: kblue, fontSize: 20),)),
                 Divider(
                   color: kblue,indent: 5,endIndent: 5,thickness: 2,
                 ),
@@ -107,77 +110,103 @@ class _CreatRQFState extends State<CreatRQF> {
                 Divider(
                   color: kblue,indent: 5,endIndent: 5,thickness: 2,
                 ),
-                TextField(
-                  controller: expirydate,
-                  autocorrect: true,
-                  decoration: InputDecoration(
-                    hintStyle: TextStyle(color: Colors.white),
-                    filled: true,
-                    fillColor: greytxtbx,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      borderSide: BorderSide(color: Colors.white, width: 2),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                  ),
-                ),
+                InkWell(
+                  onTap: (){
+                    DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime.now()
+                            .subtract(const Duration(days: 120)),
+                        maxTime: DateTime(2050, 6, 7), onChanged: (date) {
+                          print('change $date');
+                          setState(() {
+                            dateSelected = DateFormat('yyyy/MM/dd').format(date);
+                          });
+                        }, onConfirm: (date) {
+                          print('confirm $date');
+                          setState(() {
+                            dateSelected = DateFormat('yyyy/MM/dd').format(date);
+                          });
+                        },
+                        currentTime: DateTime.now(),
+                        locale: LocaleType.en);
+                  },
+                  child: TextField(
+                    enabled: false,
+                    controller: expirydate,
 
-
-                SizedBox(height: 15),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Customer Date',style: TextStyle(color: kblue, fontSize: 20),)),
-                Divider(
-                  color: kblue,indent: 5,endIndent: 5,thickness: 2,
-                ),
-                TextField(
-                  controller: customerdate,
-                  autocorrect: true,
-                  decoration: InputDecoration(
-
-                    hintStyle: TextStyle(color: Colors.white),
-                    filled: true,
-                    fillColor: greytxtbx,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      borderSide: BorderSide(color: Colors.white, width: 2),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(color: Colors.white),
+                    autocorrect: true,
+                    decoration: InputDecoration(
+                      hintText: dateSelected,
+                      hintStyle: TextStyle(color: Colors.black),
+                      filled: true,
+                      fillColor: greytxtbx,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.white, width: 2),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
+                //
+                //
+                // SizedBox(height: 15),
+                // Align(
+                //     alignment: Alignment.centerLeft,
+                //     child: Text('Customer Date',style: TextStyle(color: kblue, fontSize: 20),)),
+                // Divider(
+                //   color: kblue,indent: 5,endIndent: 5,thickness: 2,
+                // ),
+                // TextField(
+                //   controller: customerdate,
+                //   autocorrect: true,
+                //   decoration: InputDecoration(
+                //
+                //     hintStyle: TextStyle(color: Colors.white),
+                //     filled: true,
+                //     fillColor: greytxtbx,
+                //     enabledBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                //       borderSide: BorderSide(color: Colors.white, width: 2),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                //       borderSide: BorderSide(color: Colors.white),
+                //     ),
+                //   ),
+                // ),
 
 
-                SizedBox(height: 15),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Total Amount',style: TextStyle(color: kblue, fontSize: 20),)),
-                Divider(
-                  color: kblue,indent: 5,endIndent: 5,thickness: 2,
-                ),
-                TextField(
-                  controller: totalamount,
-                  autocorrect: true,
-                  decoration: InputDecoration(
+                // SizedBox(height: 15),
+                // Align(
+                //     alignment: Alignment.centerLeft,
+                //     child: Text('Total Amount',style: TextStyle(color: kblue, fontSize: 20),)),
+                // Divider(
+                //   color: kblue,indent: 5,endIndent: 5,thickness: 2,
+                // ),
+                // TextField(
+                //   controller: totalamount,
+                //   autocorrect: true,
+                //   decoration: InputDecoration(
+                //
+                //     hintStyle: TextStyle(color: Colors.white),
+                //     filled: true,
+                //     fillColor: greytxtbx,
+                //     enabledBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                //       borderSide: BorderSide(color: Colors.white, width: 2),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                //       borderSide: BorderSide(color: Colors.white),
+                //     ),
+                //   ),
+                // ),
 
-                    hintStyle: TextStyle(color: Colors.white),
-                    filled: true,
-                    fillColor: greytxtbx,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      borderSide: BorderSide(color: Colors.white, width: 2),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                  ),
-                ),
+
                 SizedBox(height: 15,),
                 InkWell(
                   onTap: (){
@@ -293,7 +322,7 @@ class _CreatRQFState extends State<CreatRQF> {
                       SizedBox(width: 15),
                       InkWell(
                         onTap: ()async {
-                          if (createrfq.text.isEmpty || quotationnumber.text.isEmpty || expirydate.text.isEmpty || customerdate.text.isEmpty|| totalamount.text.isEmpty ||selectedItems!.isEmpty ) {
+                          if (createrfq.text.isEmpty || quotationnumber.text.isEmpty || selectedItems!.isEmpty ) {
                             print('not good1');
                             Get.snackbar('Error', 'Please Enter All Details');
                           } else {
@@ -312,16 +341,19 @@ class _CreatRQFState extends State<CreatRQF> {
                             FirebaseFirestore.instance.collection('RFQform').add(
                                 CreateRfqModel(
                                     createrfq: createrfq.text,
-                                    customerdate:customerdate.text,
-                                    expirydate:expirydate.text,
+                                    created:DateFormat('yyyy/MM/dd').format(DateTime.now()),
+                                    expirydate:dateSelected,
                                     components: jsonEncode(selectedItems),
                                     quotationnumber:quotationnumber.text,
-                                    totalamount: totalamount.text,
+                                    totalamount: '',
                                     cid: empModel.cid,
                                     bid: empModel.bid,
                                     did: empModel.did,
                                     mid: empModel.mid,
+                                    status: '0',
                                     uid: empModel.uid,
+                                    recievedforms: '0',
+                                    vendors: '0',
 
 
                                     date:DateFormat('yyyy/MM/dd').format(DateTime.now())).toJson()).then((value) {
