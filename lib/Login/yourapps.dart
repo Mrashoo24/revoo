@@ -9,7 +9,7 @@ import 'package:revoo/Orders/salesdashboard.dart';
 import 'package:revoo/Pos/PosDashboard.dart';
 import 'package:revoo/Project_Management/projectDashboard.dart';
 import 'package:revoo/Purchasing/purchasing_dashboard.dart';
-import 'package:revoo/Vendorproduct%20mangment/inventoryDashboard.dart';
+// import 'package:revoo/Vendorproduct%20mangment/inventoryDashboard.dart';
 
 import '../Controllers/authcontroller.dart';
 
@@ -79,7 +79,7 @@ class _YourappsState extends State<Yourapps> {
                       children: [
                         InkWell(
                           onTap: (){
-                            Get.to(InventoryDashboard());
+                            // Get.to(InventoryDashboard());
                           },
                           child: Card(
 

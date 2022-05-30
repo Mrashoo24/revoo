@@ -14,6 +14,7 @@ import 'billsninvoice.dart';
 import 'calendarss.dart';
 import 'categories.dart';
 import 'createRQF.dart';
+import 'expenses.dart';
 import 'historyvndrname.dart';
 
 class PurchasingDashboard extends StatefulWidget {
@@ -34,6 +35,7 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
     RFQsStatusa(),
     Vendorsa(),
     Hostoryvndrname(),
+    Expenses(),
     Products(),
     Categories(),
     RFQsStatusb(),
@@ -178,25 +180,28 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
                 buildNavCard('asset/lvapproval.png','Purchase History',4),
                 SizedBox(height: 5,),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                buildNavCard('asset/lvapproval.png','Products',5),
+                buildNavCard('asset/lvapproval.png','Expenses',5),
+                SizedBox(height: 5,),
+                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                buildNavCard('asset/lvapproval.png','Products',6),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','Products Categories',6),
+                buildNavCard('asset/lvapproval.png','Products Categories',7),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','RFQ Records',7),
+                buildNavCard('asset/lvapproval.png','RFQ Records',8),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','Reports',8),
+                buildNavCard('asset/lvapproval.png','Reports',9),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','Calender',9),
+                buildNavCard('asset/lvapproval.png','Calender',10),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
-                buildNavCard('asset/lvapproval.png','Bills & Invoices',10),
+                buildNavCard('asset/lvapproval.png','Bills & Invoices',11),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
 
-                buildNavCard('asset/logoff.png','Logout',11),
+                buildNavCard('asset/logoff.png','Logout',12),
                 SizedBox(height: 5,),
 
 
@@ -215,7 +220,7 @@ class _PurchasingDashboardState extends State<PurchasingDashboard> {
 
     return InkWell(
       onTap: (){
-        if(index == 11){
+        if(index == 12){
 
           name == "Logout" ?
           AuthController.instance.logout()

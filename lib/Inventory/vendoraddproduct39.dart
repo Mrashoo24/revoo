@@ -21,8 +21,8 @@ class _Addproduct39State extends State<Addproduct39> {
     'product category2',
     'product category3',
     'product category4',
-
   ];
+
   @override
   Widget build(BuildContext context) {
      return SafeArea(
@@ -141,12 +141,10 @@ class _Addproduct39State extends State<Addproduct39> {
                           Container(
                             height: 40,
                             width: 150,
-
                             child: TextFormField(
                               decoration: InputDecoration(
                                   filled: true,
                                   fillColor: bgGrey,
-
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide(color: Colors.white)
                                   ),
@@ -155,7 +153,7 @@ class _Addproduct39State extends State<Addproduct39> {
                                   ),
                                   enabledBorder:OutlineInputBorder(
                                       borderSide: BorderSide(color: Colors.white)
-                                  )
+                                  ),
 
                               ),
                             ),

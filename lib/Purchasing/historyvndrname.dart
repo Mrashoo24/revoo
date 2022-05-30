@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
+import 'package:revoo/Purchasing/vendorhistoyadd.dart';
+// import 'package:collection/collection.dart';
 import '../constants/constants.dart';
 
 class Hostoryvndrname extends StatefulWidget {
@@ -21,9 +22,7 @@ child: Scaffold(
     child: Container(
       height: Get.height,
       width: Get.width,
-
       padding: EdgeInsets.only(left: 10, right: 10),
-
       child: ListView(
         children: [
           Align(
@@ -33,7 +32,7 @@ child: Scaffold(
                   Text("History",style: TextStyle(color: kblue,fontSize: 32,)),
                   Text("Vendore Name",style: TextStyle(color: kblue,fontSize: 15,)),
                 ],
-              )),
+              ),),
           Container(
             height: 120,
             width: Get.width,
@@ -42,7 +41,6 @@ child: Scaffold(
               children: [
                 _dailCard('Total', 20),
                 _dailCard('Pending', 5),
-
               ],
             ),
           ),SizedBox(height: 20),
@@ -80,7 +78,6 @@ child: Scaffold(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("Data Created: Feb 17,22",style: TextStyle(color: Colors.white,fontSize: 19),
-
                               ),
                               CircleAvatar(radius: 8,backgroundColor: Colors.green,),
                             ],
@@ -94,36 +91,26 @@ child: Scaffold(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("BioMetric, Sensors, Chip Connector, \nRasberry device  ",style: TextStyle(color: Colors.white,fontSize: 10,),),
-
                               Text("2000",style: TextStyle(color:  kyellow,fontSize: 25,),),
                             ],
                           ),
                         ],
                       ),
-
-
                     ),
                   );
                 }
               ),
-
-
-
             ],
           ),
         ],
       ),
     ),
   ),
-)
+   floatingActionButton: FloatingActionButton(child: Icon(Icons.add),onPressed: (){Get.to(AddHistory());}),
+),
     );
   }
 }
-
-
-
-
-
 Widget _dailCard(name, number) {
   return Container(
     width: 120,
