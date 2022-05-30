@@ -19,13 +19,24 @@ class MyEmpController extends GetxController{
 
   @override
   void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+
+    print('uid = ${auth}');
     myepmlist.bindStream(firestore.collection('Employee').doc(auth ?? '').snapshots().map((event) {
       CreatEmpModel myepmname =
       CreatEmpModel.fromJson(event.data()!);
 
       return myepmname;
     }));
+
+    print('uid = ${myepmlist.value.name}');
+
+
   }
+
+
+
 }
 
 

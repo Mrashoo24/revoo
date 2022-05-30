@@ -57,46 +57,53 @@ HRMSReports(userDoc: widget.userDoc),//11
       TripUsers(userDoc: widget.userDoc),//12
 
     ];
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: InkWell(
-          onTap: (){print('clicked');
-          scafkey.currentState?.openDrawer();
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 12.0),
+    return GetX<MyEmpController>(
+      builder: (empController) {
 
-            child: Image.asset('asset/navicon.png'),
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: true,
+            backgroundColor: Colors.white,
+            elevation: 0,
+            leading: InkWell(
+              onTap: (){print('clicked');
+              scafkey.currentState?.openDrawer();
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+
+                child: Image.asset('asset/navicon.png'),
+              ),
+            ),
+            // actions: [
+            //   Image.asset('asset/bellicon.png'),
+            //
+            //   Image.asset('asset/settingsicon.png'),
+            //
+            //   Image.asset('asset/usericon.png'),
+            //
+            //   SizedBox(width: 12,),
+            // ],
           ),
-        ),
-        // actions: [
-        //   Image.asset('asset/bellicon.png'),
-        //
-        //   Image.asset('asset/settingsicon.png'),
-        //
-        //   Image.asset('asset/usericon.png'),
-        //
-        //   SizedBox(width: 12,),
-        // ],
-      ),
-      drawer: buildDrawer(),
-      bottomNavigationBar: commonWidgets.buildBNB(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: CommonWidgets().kfloatingButton(),
+          drawer: buildDrawer(empController),
+          bottomNavigationBar: commonWidgets.buildBNB(),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: CommonWidgets().kfloatingButton(),
 
-      key: scafkey,
-      backgroundColor: Colors.white,
-      body: homepages[selectedindex],
+          key: scafkey,
+          backgroundColor: Colors.white,
+          body: homepages[selectedindex],
+        );
+      }
     );
   }
 
 
-  buildDrawer(){
+  buildDrawer(MyEmpController empController){
 
-    var empmodel =  myemp.myepmlist.value;
+    var empmodel =  empController.myepmlist.value;
+
+    print('empmidel = ${empmodel.uid}');
 
     return  Drawer(
       child:  Card(

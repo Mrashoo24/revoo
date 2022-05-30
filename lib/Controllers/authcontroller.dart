@@ -37,7 +37,7 @@ class AuthController extends GetxController{
       print("Login Page");
       Get.offAll(()=>LoginScreen());
     }else{
-      Get.put(MyEmpController());
+      // Get.put(MyEmpController());
       Get.offAll(()=>Yourapps());
     }
     // Get.offAll(SelectPlans(cdetails: {

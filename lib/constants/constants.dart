@@ -30,4 +30,4 @@ var kprogressbar = Center(child: CircularProgressIndicator(color: kblue),);
 
 var clo = Color(0xFFF5DF9F);
 
- final bool kchecksize = Get.height < 700 ;
+ final bool kchecksize = Get.height < 850 ;

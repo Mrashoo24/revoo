@@ -74,9 +74,12 @@ left:  Get.height < 800 ?-120 :Get.height < 1000 ? -120 : -120 ,
 
                    child: Padding(
 
-                      padding:  EdgeInsets.only(bottom: 15.0,top: 15,left:
-                      kchecksize  ? 35 :Get.width*0.35 ,right:
-                      kchecksize  ? 35 :Get.width*0.35
+                      padding:  EdgeInsets.only(
+                          bottom: 15.0,
+                          top: 15,
+                          left:
+                      kchecksize  ? 35 :Get.width*0.35 ,
+                          right: kchecksize  ? 35 :Get.width*0.35
                       ),
                       child: Card(
                         color: Colors.grey.shade200,

@@ -15,6 +15,7 @@ import 'package:revoo/home/admindashboard.dart';
 import 'package:revoo/home/homepage.dart';
 import 'package:revoo/graph/piechart.dart';
 
+import 'Controllers/myempcontroller.dart';
 import 'Employee/employeedash1stpg.dart';
 import 'Employee/employee_homepage.dart';
 
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // MyEmpController myemp = Get.put(MyEmpController());
 
     return GetMaterialApp(
       title: 'Flutter Demo',
