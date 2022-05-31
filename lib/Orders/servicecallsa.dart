@@ -66,7 +66,11 @@ class _HRMSadmincustState extends State<Serviescall> {
                             children: [Image.asset(
                               'asset/filter_icon.png',height: 20,width: 15,
 
-                            ),  SizedBox(width: 15,),
+                            ),
+
+
+                              SizedBox(width: 15,),
+
                               Text("Filter Result by :",style: TextStyle(color:kblue,fontSize: 19,
                               )
                               ),
