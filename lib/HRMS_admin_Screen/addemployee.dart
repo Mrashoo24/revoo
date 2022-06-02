@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,8 +8,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:collection/collection.dart';
+import 'package:intl/intl.dart';
 import 'package:revoo/HRMS_admin_Screen/adbranchpg4.dart';
+import 'package:revoo/HRMS_admin_Screen/uploaddoc.dart';
+// import 'package:revoo/HRMS_admin_Screen/uploaddoc.dart';
 import '../constants/constants.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:path/path.dart';
 
 class AddEmployee extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
@@ -88,6 +95,18 @@ class _AddEmployeeState extends State<AddEmployee> {
   TextEditingController grossPayController = TextEditingController(text: '0');
   TextEditingController selectShift = TextEditingController();
   TextEditingController selectRoles = TextEditingController();
+  //
+  TextEditingController nationalid = TextEditingController();
+  TextEditingController nationalidnumber = TextEditingController();
+  TextEditingController alternetphonenumber = TextEditingController();
+  TextEditingController nomineename = TextEditingController();
+  TextEditingController nomineenumber = TextEditingController();
+  TextEditingController nomineerelation = TextEditingController();
+
+  TextEditingController datetimec = TextEditingController();
+
+
+
 
   bool nextPage = true;
   String total = "0";
@@ -103,9 +122,35 @@ class _AddEmployeeState extends State<AddEmployee> {
   String generalProvidentFund = "0";
   String totalBalance = "0";
 
+  var genderVal = 'Gender';
+  var gender = ['Gender','Male','Female','Other' ];
+
+  var initialDate = DateTime.now();
+  var firstDate = DateTime(1900);
+  var lastDate = DateTime(2100);
+
+
+  File? file;
+ _selectfile() async{
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if(result == null) return;
+    final path = result.files.single.path!;
+    setState((){
+      file = File(path);
+    });
+  }
+  _uploadfile(){
+    if(file == null) return;
+    final fileName = basename(file!.path);
+    final destination = "files/$fileName";
+
+    FirebaseApi.uploadFile(destination, file!);
+  }
+
 
   @override
   Widget build(BuildContext context) {
+    final fileName = file != null ? basename(file!.path) : "no file selected";
     total = "0";
     total2 = "0";
     total = (double.parse(basicPay) +
@@ -220,6 +265,37 @@ class _AddEmployeeState extends State<AddEmployee> {
                                 )
 
 
+                            ),
+                          ),
+                          SizedBox(height: 12,),
+                          Row(
+                            children: [
+                              Text("Gender"),
+                            ],
+                          ),
+                          Container(
+
+                            color: bgGrey,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:   EdgeInsets.all(7.0),
+                                  child:  DropdownButton<String?>(
+                                    value: genderVal,
+                                    onChanged: (String? value){
+                                      setState(() {
+                                        genderVal = value!;
+                                      });
+                                    },
+                                    items: gender.map((String items) {
+                                      return DropdownMenuItem(
+                                        value: items,
+                                        child: Text(items),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           SizedBox(height: 12,),
@@ -363,36 +439,50 @@ class _AddEmployeeState extends State<AddEmployee> {
                             ),
                           ),
                           SizedBox(height: 12,),
+                          //////////////////////////////////////////////////
                           Row(
                             children: [
-                              Text("DOB"),
+                              Text("Select Your Birthday Date"),
                             ],
                           ),
-                          TextFormField(
-                            controller: dob,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: bgGrey,
-                                contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
-                                hintText: 'DOB',
-                                enabled: true,
-                                hintStyle: TextStyle(
-                                    color: Colors.grey
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                ),
-                                enabledBorder:OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white)
-                                )
+                          Container(
+                            color: bgGrey,
+                            child: TextFormField(
+                      controller: datetimec, //editing controller of this TextField
+                      decoration: InputDecoration(
+                            fillColor: bgGrey,
+                            contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
+                            icon: Icon(Icons.calendar_today), //icon of text field
+                            // labelText: "Enter Birthday Date" //label text of field
+                      ),
+                      readOnly: true,  //set it true, so that user will not able to edit text
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                             initialDate: initialDate,
+                              firstDate: DateTime(1900), //DateTime.now() - not to allow to choose before today.
+                              lastDate: DateTime.now(),
+                        );
 
+                        if(pickedDate != null ){
+                            print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
+                            String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                            print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                            //you can implement different kind of Date Format here according to your requirement
 
-                            ),
+                            setState(() {
+                              datetimec.text = formattedDate; //set output date to TextField value.
+                            });
+                        }else{
+                            print("Date is not selected");
+                        }
+                      },
+                    ),
                           ),
-                          SizedBox(height: 12,),
+
+                          ///////////////////
+                          SizedBox(height: 15),
+
                           Row(
                             children: [
                               Text("Email"),
@@ -463,6 +553,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                             ],
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: phoneNumber,
                             decoration: InputDecoration(
                               filled: true,
@@ -485,6 +576,192 @@ class _AddEmployeeState extends State<AddEmployee> {
                             ),
                           ),
                           SizedBox(height: 12,),
+
+                          Row(
+                            children: [
+                              Text("Alternet Phone Number"),
+                            ],
+                          ),
+                          TextFormField(
+                            keyboardType: TextInputType.number,
+                            controller: alternetphonenumber,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
+                              hintText: 'Alternet Phone Number',
+                              enabled: true,
+                              hintStyle: TextStyle(
+                                  color: Colors.grey
+                              ),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              enabledBorder:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 12,),
+
+                          Row(
+                            children: [
+                              Text(
+                                  "National ID"),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: nationalid,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
+                              hintText: 'Ex. Pan Card,Aadhar-Card',
+                              enabled: true,
+                              hintStyle: TextStyle(
+                                  color: Colors.grey
+                              ),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              enabledBorder:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 12,),
+
+                          Row(
+                            children: [
+                              Text(
+                                  "National ID Number"),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: nationalidnumber,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
+                              hintText: 'National ID Number',
+                              enabled: true,
+                              hintStyle: TextStyle(
+                                  color: Colors.grey
+                              ),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              enabledBorder:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 12,),
+
+
+                          Row(
+                            children: [
+                              Text(
+                                  "Nominee Name"),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: nomineename,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
+                              hintText: 'Nominee Name',
+                              enabled: true,
+                              hintStyle: TextStyle(
+                                  color: Colors.grey
+                              ),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              enabledBorder:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 12,),
+
+                          Row(
+                            children: [
+                              Text(
+                                  "Relation With Nominee"),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: nomineerelation,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
+                              hintText: 'Relation With Nominee',
+                              enabled: true,
+                              hintStyle: TextStyle(
+                                  color: Colors.grey
+                              ),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              enabledBorder:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 12,),
+
+                          Row(
+                            children: [
+                              Text("Nominee Phone Number"),
+                            ],
+                          ),
+                          TextFormField(
+                            keyboardType: TextInputType.number,
+                            controller: nomineenumber,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
+                              hintText: 'Nominee Phone Number',
+                              enabled: true,
+                              hintStyle: TextStyle(
+                                  color: Colors.grey
+                              ),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                              enabledBorder:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 12,),
+
+
+
+
+
                           Row(
                             children: [
                               Text(
@@ -514,6 +791,11 @@ class _AddEmployeeState extends State<AddEmployee> {
                             ),
                           ),
                           SizedBox(height: 12,),
+
+                          ElevatedButton(onPressed: _selectfile, child: Text("select Documnet")),
+                          Text(fileName),
+                          SizedBox(height: 10),
+                          ElevatedButton(onPressed: _uploadfile, child: Text("Upload Documnet")),
                           // Row(
                           //   children: [
                           //     Text("Select Shift"),
@@ -1138,6 +1420,8 @@ class _AddEmployeeState extends State<AddEmployee> {
                         children: [
                           ElevatedButton(onPressed: (){
                             Get.back();
+                            // setState((){nextPage = false;});
+
                           },
                               style: ElevatedButton.styleFrom(
                                   elevation: 0,
@@ -1170,7 +1454,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                                       "hid" : selectedValueHR,
                                       'Address':fullAdsress.text,
                                       'Designation' : designation.text,
-                                      "dob" : dob.text,
+                                      "dob" : datetimec.text,
                                       "email" : email.text,
                                       "password" : password.text,
                                       "phoneNumber" : phoneNumber.text,
@@ -1190,7 +1474,15 @@ class _AddEmployeeState extends State<AddEmployee> {
                                       'profession_tax' : professionTaxController.text,
                                       'general_provident_fund' : generalProvidentFund,
                                       'total_deductions' : total2,
-                                      'net_pay' : totalBalance
+                                      'net_pay' : totalBalance,
+                                      ////
+                                      'gender': genderVal,
+                                      'nationalID': nationalid.text,
+                                      'nationalIdnumber': nationalidnumber.text,
+                                      'alternetphonenumber': alternetphonenumber.text,
+                                      'nominee_name': nomineename.text,
+                                      'nominee_number': nomineenumber.text,
+                                      'nominee_relation': nomineerelation.text,
 
                                     }
                                 );

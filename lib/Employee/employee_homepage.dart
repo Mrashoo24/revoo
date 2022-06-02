@@ -45,139 +45,142 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
 
 
 
-    return Scaffold(
-      key: scafkey,
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return GetX<MyEmpController>(builder: (empController){
+      return Scaffold(
+        key: scafkey,
         backgroundColor: Colors.white,
-        elevation: 0,
-        leading: InkWell(
-          onTap: (){
-            scafkey.currentState?.openDrawer();
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 12.0),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading: InkWell(
+            onTap: (){
+              scafkey.currentState?.openDrawer();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 12.0),
 
-            child: Image.asset('asset/navicon.png'),
+              child: Image.asset('asset/navicon.png'),
+            ),
           ),
+          actions: [
+            Image.asset('asset/bellicon.png'),
+            Image.asset('asset/settingsicon.png'),
+            Image.asset('asset/usericon.png'),
+            SizedBox(width: 12,),
+          ],
         ),
-        actions: [
-          Image.asset('asset/bellicon.png'),
-          Image.asset('asset/settingsicon.png'),
-          Image.asset('asset/usericon.png'),
-          SizedBox(width: 12,),
-        ],
-      ),
-      bottomNavigationBar: commonWidgets.buildBNB(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: CommonWidgets().kfloatingButton(),
+        bottomNavigationBar: commonWidgets.buildBNB(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: CommonWidgets().kfloatingButton(),
 
-      drawer: Drawer(
-        child:  Card(
-          color: Colors.grey.shade200,
-          shape: Border(
-            right: BorderSide(style: BorderStyle.none),
+        drawer: Drawer(
+          child:  Card(
+            color: Colors.grey.shade200,
+            shape: Border(
+              right: BorderSide(style: BorderStyle.none),
 
 
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: SingleChildScrollView(
-              child: Column(
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: SingleChildScrollView(
+                child: Column(
 
-                children: [
+                  children: [
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
 
-                      CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        backgroundImage: AssetImage('asset/profile.jfif'),
-                        radius: 30,
-                      ),
-                      SizedBox(width: 20,),
-                      Align(
-                        alignment: Alignment.bottomLeft,
+                        CircleAvatar(
+                          backgroundColor: Colors.grey,
+                          backgroundImage: AssetImage('asset/profile.jfif'),
+                          radius: 30,
+                        ),
+                        SizedBox(width: 20,),
+                        Align(
+                          alignment: Alignment.bottomLeft,
 
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                    child: Text(myemp.myepmlist.value.name!,style: TextStyle(fontSize: 20,color: kblue),
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 20.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                      child: Text(myemp.myepmlist.value.name!,style: TextStyle(fontSize: 20,color: kblue),
+                                          textAlign: TextAlign.left
+                                      )),
+                                ),
+                                Container(
+
+
+                                    child: Text(myemp.myepmlist.value.designation!,style: TextStyle(fontSize: 18,color: kblue),
                                         textAlign: TextAlign.left
                                     )),
-                              ),
-                              Container(
+                                // InkWell(
+                                //   onTap: (){
+                                //
+                                //   },
+                                //   child: Container(
+                                //     child: Row(
+                                //       children: [
+                                //         Container(
+                                //             child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
+                                //             )),
+                                //         SizedBox(width: 15,),
+                                //         Image.asset('asset/rightarrow.png')
+                                //       ],
+                                //
+                                //     ),
+                                //
+                                //   ),
+                                //
+                                // ),
 
 
-                                  child: Text(myemp.myepmlist.value.designation!,style: TextStyle(fontSize: 18,color: kblue),
-                                      textAlign: TextAlign.left
-                                  )),
-                              // InkWell(
-                              //   onTap: (){
-                              //
-                              //   },
-                              //   child: Container(
-                              //     child: Row(
-                              //       children: [
-                              //         Container(
-                              //             child: Text('Veiw Profile',style: TextStyle(fontSize: 15,color: kyellow),
-                              //             )),
-                              //         SizedBox(width: 15,),
-                              //         Image.asset('asset/rightarrow.png')
-                              //       ],
-                              //
-                              //     ),
-                              //
-                              //   ),
-                              //
-                              // ),
-
-
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                  SizedBox(height: 30,),
-                  buildNavCard('asset/home.png','Home',0),
-                  // SizedBox(height: 5,),
-                  // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  // buildNavCard('asset/checkgrp.png','Daily Logins',1),
-                  // SizedBox(height: 5,),
-                  // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  // buildNavCard('asset/checkpad.png','Daily Updates',1),
-                  SizedBox(height: 5,),
-                  Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/lvapproval.png','Leave Request/\nApprovals',1),
-                  SizedBox(height: 5,),
-                  Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/lvapproval.png','Certificates',2),
-                  SizedBox(height: 5,),
-                  Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                  buildNavCard('asset/logoff.png','Logout',2),
-                  SizedBox(height: 5,),
+                    SizedBox(height: 30,),
+                    buildNavCard('asset/home.png','Home',0),
+                    // SizedBox(height: 5,),
+                    // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    // buildNavCard('asset/checkgrp.png','Daily Logins',1),
+                    // SizedBox(height: 5,),
+                    // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    // buildNavCard('asset/checkpad.png','Daily Updates',1),
+                    SizedBox(height: 5,),
+                    Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    buildNavCard('asset/lvapproval.png','Leave Request/\nApprovals',1),
+                    SizedBox(height: 5,),
+                    Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    buildNavCard('asset/lvapproval.png','Certificates',2),
+                    SizedBox(height: 5,),
+                    Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    buildNavCard('asset/logoff.png','Logout',2),
+                    SizedBox(height: 5,),
 
 
-                ],
+                  ],
+                ),
               ),
+
             ),
 
           ),
-
         ),
-      ),
-      body: homepages[selectedindex],
-    );
+        body: homepages[selectedindex],
+      );
+    });
+
   }
 
   buildNavCard(String image,String name,index) {

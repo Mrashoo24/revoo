@@ -81,6 +81,8 @@ dependencies:
   shared_preferences: ^2.0.15
   multi_select_item: ^1.0.3
   multi_select_flutter: ^4.1.2
+  flutter_document_picker: ^5.1.0
+
 
 
 
