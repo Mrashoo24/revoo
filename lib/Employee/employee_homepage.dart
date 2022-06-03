@@ -8,6 +8,10 @@ import 'package:revoo/Employee/employeedash1stpg.dart';
 import 'package:revoo/Employee/leaveRequest.dart';
 import 'package:revoo/Employee/watchdashboard.dart';
 import '../Controllers/myempcontroller.dart';
+import '../HRMS_admin_Screen/LocationHistory/tripuser.dart';
+import '../HRMS_admin_Screen/Reports/reports.dart';
+import '../HRMS_admin_Screen/acceptleaverequest.dart';
+import '../HRMS_admin_Screen/employeecheckin.dart';
 import '../constants/commonWidgets.dart';
 import '../constants/constants.dart';
 import 'Certificate/certificate.dart';
@@ -28,7 +32,6 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
   var selectedindex = 0; //for changing index of page
 
   late String email;
-  MyEmpController myemp = Get.put(MyEmpController());
 
 
 
@@ -40,12 +43,20 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
       // Dailyupdates(), //1
       LeaveRequestEmployee(userDoc: widget.userDoc,),
       Certificate(),
+      EmployeeCheckin(userDoc: widget.userDoc,),//7
+      AcceptLeave(userDoc: widget.userDoc,),//8
+      HRMSReports(userDoc: widget.userDoc),//11
+      TripUsers(userDoc: widget.userDoc),//12
+
+
 
     ];
 
 
 
-    return GetX<MyEmpController>(builder: (empController){
+    return GetX<MyEmpController>(
+        init:Get.put(MyEmpController()),
+        builder: (empController){
       return Scaffold(
         key: scafkey,
         backgroundColor: Colors.white,
@@ -73,7 +84,9 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: CommonWidgets().kfloatingButton(),
 
-        drawer: Drawer(
+        drawer: empController.myepmlist.value.uid == null ?
+        Center(child: CircularProgressIndicator(),)
+            : Drawer(
           child:  Card(
             color: Colors.grey.shade200,
             shape: Border(
@@ -111,14 +124,14 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Container(
-                                      child: Text(myemp.myepmlist.value.name!,style: TextStyle(fontSize: 20,color: kblue),
+                                      child: Text(empController.myepmlist.value.name!,style: TextStyle(fontSize: 20,color: kblue),
                                           textAlign: TextAlign.left
                                       )),
                                 ),
                                 Container(
 
 
-                                    child: Text(myemp.myepmlist.value.designation!,style: TextStyle(fontSize: 18,color: kblue),
+                                    child: Text(empController.myepmlist.value.designation!,style: TextStyle(fontSize: 18,color: kblue),
                                         textAlign: TextAlign.left
                                     )),
                                 // InkWell(

@@ -7,7 +7,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import '../Models/creatempmodel.dart';
 
 class MyEmpController extends GetxController{
-  static MyEmpController instance = Get.find();
+
 
   static var auth = FirebaseAuth.instance.currentUser!.uid!;
 
@@ -16,6 +16,7 @@ class MyEmpController extends GetxController{
 
   Rx<CreatEmpModel> myepmlist = Rx<CreatEmpModel>(CreatEmpModel());
 
+  static MyEmpController instance = Get.find<MyEmpController>();
 
   @override
   void onInit() {

@@ -34,7 +34,6 @@ class _HomePageMainState extends State<HomePageMain> {
   var selectedCard = 'Home'; //for changing name
   var selectedindex = 0; //for changing index of page
 
-  MyEmpController myemp = Get.put(MyEmpController());
 
 
   @override
@@ -58,6 +57,7 @@ HRMSReports(userDoc: widget.userDoc),//11
 
     ];
     return GetX<MyEmpController>(
+      init: Get.put(MyEmpController()),
       builder: (empController) {
 
         return Scaffold(
@@ -85,7 +85,9 @@ HRMSReports(userDoc: widget.userDoc),//11
             //   SizedBox(width: 12,),
             // ],
           ),
-          drawer: buildDrawer(empController),
+          drawer: empController.myepmlist.value.uid == null ?
+              Center(child: CircularProgressIndicator(),)
+          : buildDrawer(empController),
           bottomNavigationBar: commonWidgets.buildBNB(),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: CommonWidgets().kfloatingButton(),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revoo/HRMS_admin_Screen/addemployee.dart';
 import 'package:collection/collection.dart';
+import 'package:revoo/HRMS_admin_Screen/editEmployee.dart';
 
 import '../constants/constants.dart';
 
@@ -58,15 +59,15 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
               ),
             ),
           ),
-          // Container(
-          //   height: 30,
-          //   child: Center(
-          //     child: AutoSizeText(
-          //       ' ',
-          //       style: TextStyle(fontSize: 12),
-          //     ),
-          //   ),
-          // ),
+          Container(
+            height: 30,
+            child: Center(
+              child: AutoSizeText(
+                ' ',
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          ),
         ],
       ),
 
@@ -229,12 +230,17 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                                     ),
                                   ),
                                 ),
-                                // Container(
-                                //   height: 60,
-                                //   child: Center(
-                                //     child: Icon(Icons.edit),
-                                //   ),
-                                // ),
+                                InkWell(
+                                  onTap: (){
+                                      Get.to(EditEmployee(userDoc: widget.userDoc),fullscreenDialog: true);
+                                  },
+                                  child: Container(
+                                    height: 60,
+                                    child: Center(
+                                      child: Icon(Icons.edit),
+                                    ),
+                                  ),
+                                ),
                               ],
                             );
                           }).toList()
