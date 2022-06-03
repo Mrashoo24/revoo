@@ -190,6 +190,7 @@ class _AddEmployeeState extends State<AddEmployee> {
         fileName = fileName1;
       });
     } else {
+
       Get.snackbar('Error', 'No File Picked');
     }
   }
