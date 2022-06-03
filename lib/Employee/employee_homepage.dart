@@ -176,9 +176,30 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
                     SizedBox(height: 5,),
                     Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                     buildNavCard('asset/lvapproval.png','Certificates',2),
+
+                    SizedBox(height: 5,),
+                     Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    buildNavCard('asset/home.png','Employee Checkin',3),
+                    // SizedBox(height: 5,),
+                    // buildNavCard('asset/checkgrp.png','Daily Logins',1),
+                    // SizedBox(height: 5,),
+                    // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    // buildNavCard('asset/checkpad.png','Daily Updates',1),
                     SizedBox(height: 5,),
                     Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                    buildNavCard('asset/logoff.png','Logout',2),
+                    buildNavCard('asset/lvapproval.png','Check Leave Request',4),
+                    SizedBox(height: 5,),
+                    Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    buildNavCard('asset/lvapproval.png','Reports',5),
+
+                    SizedBox(height: 5,),
+                    Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    buildNavCard('asset/lvapproval.png','Trips',6),
+
+                    SizedBox(height: 5,),
+
+                    Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                    buildNavCard('asset/logoff.png','Logout',7  ),
                     SizedBox(height: 5,),
 
 

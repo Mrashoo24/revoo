@@ -17,7 +17,7 @@ class Ordera extends StatefulWidget {
 
 class _HRMSadmincustState extends State<Ordera> {
   String initialValue = '';
-  var firestore = FirebaseFirestore.instance.collection('Addorders').snapshots();
+  var firestore = FirebaseFirestore.instance;
 
   var itemList = [
     'Pending',
@@ -118,7 +118,7 @@ class _HRMSadmincustState extends State<Ordera> {
                       SizedBox( height: 20),
 
                       StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                        stream: firestore,
+                        stream: firestore.collection('Addorders').snapshots(),
                         builder: (context,snapshot) {
                           if(!snapshot.hasData){
                             return Text("no data");
