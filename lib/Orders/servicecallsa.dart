@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,16 +20,13 @@ class Serviescall extends StatefulWidget {
 class _HRMSadmincustState extends State<Serviescall> {
 
   String initialValue = '';
-
+  ///var firebase = FirebaseFirestore.instance.collection().snapshots();
+  ///var firebase = FirebaseFirestore.instamce.collection().snapshots();
+  ///var
   var itemList = [
     '',
     'Std1',
     'Std2',
-    'Std3',
-    'Std4',
-    'Std5',
-    'Std6',
-    'Std7'
   ];
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,7 @@ class _HRMSadmincustState extends State<Serviescall> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Service calls',style: TextStyle(color:kblue,fontSize: 29),
+                            child: Text('Refunds',style: TextStyle(color:kblue,fontSize: 29),
                             ),
 
                           ),
@@ -64,20 +62,15 @@ class _HRMSadmincustState extends State<Serviescall> {
                         ],
                       ),
                       SizedBox(height: 10),
-
-
-
-
-
-
-
-
-
                           Row(
                             children: [Image.asset(
                               'asset/filter_icon.png',height: 20,width: 15,
 
-                            ),  SizedBox(width: 15,),
+                            ),
+
+
+                              SizedBox(width: 15,),
+
                               Text("Filter Result by :",style: TextStyle(color:kblue,fontSize: 19,
                               )
                               ),
@@ -185,34 +178,34 @@ class _HRMSadmincustState extends State<Serviescall> {
 
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Center(
-                                    child: Text(
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Adrees sec 14 kherghr shelter park opp littel ",
+                                      style: TextStyle(
+                                        color: Colors.white,fontSize: 15,),),
+                                    Text(
                                       "Adrees sec 14 kherghr shelter park opp littel "
-                                          ,
+                                      ,
 
                                       style: TextStyle(
-                                        color: Colors.white,fontSize: 15,
+                                        color: Colors.white,fontSize: 12,
                                       ),
                                     ),
-
-
-
-                                  ),
-
+                                  ],
                                 ),
-                                Align(
-                                  alignment:Alignment.centerLeft,
-                                  child: Text(
-                                    "Adrees sec 14 kherghr shelter park opp littel "
-                                    ,
-
-                                    style: TextStyle(
-                                      color: Colors.white,fontSize: 12,
-                                    ),
-                                  ),
-                                ),
+                                // Align(
+                                //   alignment:Alignment.centerLeft,
+                                //   child: Text(
+                                //     "Adrees sec 14 kherghr shelter park opp littel "
+                                //     ,
+                                //
+                                //     style: TextStyle(
+                                //       color: Colors.white,fontSize: 12,
+                                //     ),
+                                //   ),
+                                // ),
                                 Divider(
                                   height: 10,
 
@@ -229,20 +222,12 @@ class _HRMSadmincustState extends State<Serviescall> {
                                         ),
                                         SizedBox(width: 80),
                                         Image.asset("asset/callicon.png"),
-                                        SizedBox(width: 20),
+                                        SizedBox(width: 5),
                                         Image.asset("asset/message.png")
 
                                       ],
                                     )
                                 ),
-
-
-
-
-
-
-
-
                               ],
                             ),
 
@@ -251,22 +236,12 @@ class _HRMSadmincustState extends State<Serviescall> {
 
                       ),
                       SizedBox( height: 18),
-
-
-
-
-
                     ],
                   ),
-
-
               ),
             ),
           ),
         ),
-
     );
   }
-
-
 }

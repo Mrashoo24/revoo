@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -26,6 +29,34 @@ class _Addnewproduct29State extends State<Addnewprodct56> {
   bool  bvalue = false;
   bool  cvalue = false;
   bool  dvalue = false;
+
+  // File? image;
+  // File? image1;
+  // Future pickImage() async{
+  //   try {
+  //     await ImagePicker().pickImage(source: ImageSource.gallery);
+  //     if (image == null) return;
+  //     // final imageTemporory = File(image!.path);
+  //     // setState(() =>
+  //     // this.image = imageTemporory);
+  //
+  //   } on PlatformException catch (e){
+  //     print('Failed to pick image: $e');
+  //   }
+  // }
+  //
+  // Future pickImage1() async{
+  //   try {
+  //     await ImagePicker().pickImage(source: ImageSource.camera,);
+  //     if (image == null) return;
+  //     // final imageTemporory = File(image!.path);
+  //     // setState(() =>
+  //     // this.image = imageTemporory);
+  //
+  //   } on PlatformException catch (e){
+  //     print('Failed to pick image: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,21 +118,26 @@ class _Addnewproduct29State extends State<Addnewprodct56> {
                   SizedBox(height: 10,),
                   Row(
                     children: [
-                      Container(
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
+                      InkWell(
+                           onTap:  (){
+                          // pickImage();
+                        },
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+
+
+                          ),
+                          child: Icon(
+                            Icons.person,
+                            size: 40,
+                            color:  Colors.grey,
+                          ),
 
 
                         ),
-                        child: Icon(
-                          Icons.person,
-                          size: 40,
-                          color:  Colors.grey,
-                        ),
-
-
                       ),SizedBox(width: 10),
                       Column(
                         children: [

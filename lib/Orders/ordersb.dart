@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../constants/constants.dart';
 import '../constants/constants.dart';
+import 'ordersa.dart';
 
 class Addorder23 extends StatefulWidget {
   const Addorder23({Key? key}) : super(key: key);
@@ -185,85 +187,6 @@ class _Addorder23State extends State<Addorder23> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Quantity",
-                          style: TextStyle(color: kblue),
-                        )),
-                    SizedBox(height: 3),
-                    Divider(
-                      height: 1,
-                    ),
-                    SizedBox(height: 3),
-                    Container(
-                      height: 32,
-                      child: Container(
-                        child: TextFormField(
-                          controller: quantity,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: bgGrey,
-                            contentPadding:
-                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
-                            hintStyle: TextStyle(color: Colors.grey),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Price",
-                          style: TextStyle(color: kblue),
-                        )),
-                    SizedBox(height: 3),
-                    Divider(
-                      height: 1,
-                    ),
-                    SizedBox(height: 3),
-                    Container(
-                      height: 32,
-                      child: Container(
-                        child: TextFormField(
-                          controller: price,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: bgGrey,
-                            contentPadding:
-                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
-                            hintStyle: TextStyle(color: Colors.grey),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -302,6 +225,86 @@ class _Addorder23State extends State<Addorder23> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 3),
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Price",
+                          style: TextStyle(color: kblue),
+                        )),
+                    Divider(
+                      height: 1,
+                    ),
+                    SizedBox(height: 3),
+                    Container(
+                      height: 32,
+                      child: Container(
+                        child: TextFormField(
+                          controller: price,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: bgGrey,
+                            contentPadding:
+                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Quantity",
+                          style: TextStyle(color: kblue),
+                        )),
+                    SizedBox(height: 3),
+                    Divider(
+                      height: 1,
+                    ),
+                    SizedBox(height: 3),
+                    Container(
+                      height: 32,
+                      child: Container(
+                        child: TextFormField(
+                          controller: quantity,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: bgGrey,
+                            contentPadding:
+                            EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                          ),
+                        ),
+                      ),
+                    ),
+
+
+
+
 
 
 
@@ -316,21 +319,14 @@ class _Addorder23State extends State<Addorder23> {
                               "customer_address" : customeraddress.text,
                               "customer_name" : customername.text,
                               "customer_number" : customernumber.text,
-                              "date" : DateTime.now(),
+                              "date" : date.text,
                               "price" : price.text,
                               "quantity" : quantity.text
                             }).then((value) {
                               firestore.doc(value.id).update({
 
-                                "id" : value.id
-
-                              });
-
-
-                            }
-
-
-                            );
+                                "id" : value.id});});
+                            Get.to(Ordera());
                           },
                           child: Container(
                             width: 350,
