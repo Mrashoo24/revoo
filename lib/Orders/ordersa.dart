@@ -32,15 +32,12 @@ class _HRMSadmincustState extends State<Ordera> {
       child: Scaffold(
         body: Container(
           width: Get.width,
-
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child:  Column(
                 children: [
-
                   SizedBox(height: 30),
-
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -59,7 +56,6 @@ class _HRMSadmincustState extends State<Ordera> {
 
                         ],
                       ),
-
                       SizedBox( height: 10),
                       Row(
                         children: [
@@ -107,14 +103,6 @@ class _HRMSadmincustState extends State<Ordera> {
                         ],
 
                       ),
-
-
-
-
-
-
-
-
                       SizedBox( height: 20),
 
                       StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(

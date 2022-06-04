@@ -81,7 +81,7 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   SizedBox(height: 15),
                   Row(
                     children: [
-                      Text('Location',style: TextStyle(color: kblue ),),
+                      Text('Venue',style: TextStyle(color: kblue ),),
                     ],
                   ),
                   SizedBox(height: 5),

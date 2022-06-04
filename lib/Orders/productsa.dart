@@ -73,7 +73,7 @@ class _HRMSadmincustState extends State<Product> {
                           )
                           ),
                           Container(
-                            width:110 ,
+
                             height:25,
                             decoration: BoxDecoration(
                                 color:  bgGrey,

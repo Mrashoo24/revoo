@@ -8,6 +8,7 @@ import '../constants/constants.dart';
 import 'Messages/mssages.dart';
 import 'ModuleSprintScreen/modulesSprintsPage.dart';
 import 'Projectmeeting/projectmeetings.dart';
+import 'Projectmeeting/veiwmeetings.dart';
 import 'Tasks/TasksScreen.dart';
 import 'Teams/ProjectsTeamList.dart';
 
@@ -32,7 +33,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
     AllTasks(),
     ModulesSprintsPage(),
     Messages(),
-    ProjectMeetings(),
+    VeiwMeetings(),
 
 
   ];
