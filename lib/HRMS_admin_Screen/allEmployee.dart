@@ -216,7 +216,7 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                                   height: 60,
                                   child: Center(
                                     child: Text(
-                                      e.get('Designation'),
+                                      e.get('designation'),
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
@@ -225,14 +225,48 @@ class _AllEmployeePageState extends State<AllEmployeePage> {
                                   height: 60,
                                   child: Center(
                                     child: AutoSizeText(
-                                      e.get('Designation'),
+                                      e.get('designation'),
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                 ),
                                 InkWell(
                                   onTap: (){
-                                      Get.to(EditEmployee(userDoc: widget.userDoc),fullscreenDialog: true);
+                                      Get.to(EditEmployee(userDoc: widget.userDoc,
+                                        name: e.get('name'),
+                                        address: e.get('address'),
+                                        designation:e.get('designation') ,
+                                        email: e.get('email'),
+                                        pwd: e.get('password'),
+                                        number: e.get('phoneNumber'),
+                                        alt_number: e.get('alternetphonenumber'),
+                                        national_id:e.get('nationalIdnumber'),
+                                        nominee_name:e.get('nominee_name'),
+                                        role: e.get('selectRoles'),
+
+                                        rel_with_nominee:e.get('nominee_relation'),
+                                        nomniee_number: e.get('nominee_number'),
+                                        shift: e.get('shiftid'),//
+                                        gender: e.get('gender'),
+                                        branchname: e.get('bid'),//
+                                        managername: e.get('mid'),//
+                                        hrname: e.get('hid'),//
+                                        date: e.get('dob'),
+                                        basic_pay: e.get('basic_pay'),
+                                        house_allowance: e.get('house_rent_allowance'),
+                                        medical_allowance:e.get('medical_allowance') ,
+                                        conveyance: e.get('conveyance'),
+                                        meal_coupon: e.get('meal_coupon'),
+                                        travel_allowance:e.get('travel_allowance') ,
+                                        gross_pay: e.get('gross_pay'),
+                                        profession_tax: e.get('profession_tax'),
+
+                                        gpf: e.get('general_provident_fund'),
+                                        total_deduction: e.get('total_deductions'),
+                                        net_pay: e.get('net_pay'),
+                                        uid: e.get('uid'),
+
+                                      ),fullscreenDialog: true);
                                   },
                                   child: Container(
                                     height: 60,

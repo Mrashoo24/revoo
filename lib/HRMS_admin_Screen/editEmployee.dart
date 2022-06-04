@@ -11,10 +11,50 @@ import '../constants/constants.dart';
 
 class EditEmployee extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> userDoc ;
+  final String name;
+  final String address;
+  final String designation;
+  final String email;
+  final String pwd;
+  final String number;
+  final String alt_number;
+  final String national_id;
+  final String nominee_name;
+  final String rel_with_nominee;
+
+  final String nomniee_number;
+  final String shift;
+  final String role;
+  ////
+  final String gender;
+  final String branchname;
+  final String managername;
+  final String hrname;
+
+  final String date;
+
+  final String basic_pay;
+  final String house_allowance;
+  final String medical_allowance;
+  final String conveyance;
+  final String meal_coupon;
+  final String travel_allowance;
+  final String gross_pay;
+  final String profession_tax;
+  final String gpf;
+  final String total_deduction;
+  final String net_pay;
+  final String uid;
 
 
-
-  const EditEmployee({Key? key, required this.userDoc}) : super(key: key);
+  const EditEmployee({Key? key, required this.userDoc,required this.name,required this.address,
+    required this.designation,required this.email,required this.pwd,required this.number,
+    required this.alt_number,required this.national_id,required this.nominee_name,required this.nomniee_number,
+    required this.shift,required this.gender,required this.branchname,required this.managername,required this.hrname,
+    required this.date,required this.basic_pay,required this.house_allowance,required this.medical_allowance,
+    required this.conveyance,required this.meal_coupon,required this.travel_allowance,required this.gross_pay,
+    required this.rel_with_nominee,required this.role,required this.profession_tax,required this.gpf,required this.total_deduction,
+   required this.net_pay,required this.uid}) : super(key: key);
 
   @override
   _EditEmployeeState createState() => _EditEmployeeState();
@@ -70,13 +110,13 @@ class _EditEmployeeState extends State<EditEmployee> {
 
 
   TextEditingController empname = TextEditingController();
-  TextEditingController professionTaxController = TextEditingController(text: '0');
   TextEditingController basicPayController = TextEditingController(text: '0');
-  TextEditingController selectBranch = TextEditingController();
-  TextEditingController selectManager = TextEditingController();
-  TextEditingController selectHr = TextEditingController();
+
+  // TextEditingController selectBranch = TextEditingController();
+  // TextEditingController selectManager = TextEditingController();
+  // TextEditingController selectHr = TextEditingController();
+
   TextEditingController fullAdsress = TextEditingController();
-  TextEditingController totalDeductions = TextEditingController();
   TextEditingController houseRentAllowanceController = TextEditingController(text: '0');
   TextEditingController designation = TextEditingController();
   TextEditingController medicalAllowanceController = TextEditingController(text: '0');
@@ -87,10 +127,21 @@ class _EditEmployeeState extends State<EditEmployee> {
   TextEditingController password = TextEditingController();
   TextEditingController travelAllowanceController = TextEditingController(text: '0');
   TextEditingController phoneNumber = TextEditingController();
-  TextEditingController generalProvidentFundController = TextEditingController();
-  TextEditingController grossPayController = TextEditingController(text: '0');
   TextEditingController selectShift = TextEditingController();
   TextEditingController selectRoles = TextEditingController();
+
+  TextEditingController grossPayController = TextEditingController(text: '0');
+  TextEditingController professionTaxController = TextEditingController(text: '0');
+  TextEditingController generalProvidentFundController = TextEditingController();
+  TextEditingController totalDeductions = TextEditingController();
+  //
+  TextEditingController nationalid = TextEditingController();
+  TextEditingController nationalidnumber = TextEditingController();
+  TextEditingController alternetphonenumber = TextEditingController();
+  TextEditingController nomineename = TextEditingController();
+  TextEditingController nomineenumber = TextEditingController();
+  TextEditingController nomineerelation = TextEditingController();
+  TextEditingController datetimec = TextEditingController();
 
   bool nextPage = true;
   String total = "0";
@@ -105,46 +156,70 @@ class _EditEmployeeState extends State<EditEmployee> {
   String professionTax = "0";
   String generalProvidentFund = "0";
   String totalBalance = "0";
+  String genderVal = 'Gender';
 
-  
+
 
 
   @override
   void initState() {
-     selectedValueBranch = '4L3hXNLK08Wwh2fhPEMe';
-     selectedValuemanager = 'bbiC9LlOWdekemISmJFa6cMKNdl1';
-     selectedValueHR = 'bbiC9LlOWdekemISmJFa6cMKNdl1';
-     selectedValuec = '92cF8tnZ4B26MomVAyp6';
-     selectedValuee = 'ktaDFQum0VTncqJVWITk';
-
-     empname = TextEditingController();
-     professionTaxController = TextEditingController(text: '0');
-     basicPayController = TextEditingController(text: '0');
-     selectBranch = TextEditingController();
-     selectManager = TextEditingController();
-     selectHr = TextEditingController();
-     fullAdsress = TextEditingController();
-     totalDeductions = TextEditingController();
-     houseRentAllowanceController = TextEditingController(text: '0');
-     designation = TextEditingController();
-     medicalAllowanceController = TextEditingController(text: '0');
-     dob = TextEditingController();
-     conveyanceController = TextEditingController(text: '0');
-     email = TextEditingController();
-     mealCouponController = TextEditingController(text: '0');
-     password = TextEditingController();
-     travelAllowanceController = TextEditingController(text: '0');
-     phoneNumber = TextEditingController();
-     generalProvidentFundController = TextEditingController();
-     grossPayController = TextEditingController(text: '0');
-     selectShift = TextEditingController();
-     selectRoles = TextEditingController();
 
 
-     
+     setState(() {
+
+       selectedValueBranch = widget.branchname;
+       selectedValuemanager = widget.managername;
+       selectedValueHR = widget.hrname;
+       selectedValuec = widget.shift;
+       selectedValuee = widget.shift;
+
+       empname = widget.name == null ? TextEditingController() : TextEditingController(text: widget.name);
+       professionTaxController = TextEditingController(text: '0');
+       basicPayController = widget.basic_pay == null ? TextEditingController(text: '0') : TextEditingController(text: widget.basic_pay);
+       // selectBranch = TextEditingController();
+       // selectManager = TextEditingController();
+       // selectHr = TextEditingController();
+       fullAdsress = widget.address == null ? TextEditingController() : TextEditingController(text: widget.address);
+       totalDeductions = TextEditingController();
+       houseRentAllowanceController = widget.house_allowance == null ? TextEditingController(text: '0') : TextEditingController(text: widget.house_allowance);
+       designation = widget.designation == null ? TextEditingController() : TextEditingController(text: widget.designation);
+       medicalAllowanceController = widget.medical_allowance == null ? TextEditingController(text: '0') : TextEditingController(text: widget.medical_allowance);
+       dob = widget.date == null ? TextEditingController() : TextEditingController(text: widget.date);
+       conveyanceController = widget.conveyance == null ? TextEditingController(text: '0') : TextEditingController(text: widget.conveyance);
+       email = widget.email == null ? TextEditingController() : TextEditingController(text: widget.email);
+       mealCouponController = widget.meal_coupon == null ? TextEditingController(text: '0') : TextEditingController(text: widget.meal_coupon);
+       password = widget.pwd == null ? TextEditingController() : TextEditingController(text: widget.pwd);
+       travelAllowanceController = widget.travel_allowance == null ? TextEditingController(text: '0') : TextEditingController(text: widget.travel_allowance);
+       phoneNumber = widget.number == null ? TextEditingController() : TextEditingController(text: widget.number);
+       generalProvidentFundController = TextEditingController();
+       // total =  widget.gross_pay == null ? TextEditingController(text: '0') : TextEditingController(text: widget.gross_pay);
+
+       professionTaxController =  widget.profession_tax == null ? TextEditingController(text: '0') : TextEditingController(text: widget.profession_tax);
+       // selectShift = TextEditingController();
+       // selectRoles = TextEditingController();
+       //
+       // nationalid = widget.national_id == null ? TextEditingController() : TextEditingController(text: national_id);
+       nationalidnumber = widget.national_id == null ? TextEditingController() : TextEditingController(text: widget.national_id);
+       alternetphonenumber = widget.alt_number == null ? TextEditingController() : TextEditingController(text: widget.alt_number);
+       nomineename = widget.nominee_name == null ? TextEditingController() : TextEditingController(text: widget.nominee_name);
+       nomineenumber = widget.nomniee_number == null ? TextEditingController() : TextEditingController(text: widget.nomniee_number);
+       nomineerelation = widget.rel_with_nominee == null ? TextEditingController() : TextEditingController(text: widget.rel_with_nominee);
+       datetimec = widget.date == null ? TextEditingController() : TextEditingController(text: widget.date);
+       genderVal = widget.gender;
+       generalProvidentFundController = widget.gpf == null ? TextEditingController() : TextEditingController(text: widget.gpf);
+
+       total = widget.gross_pay;
+       total2 = widget.total_deduction;
+       totalBalance = widget.net_pay;
+
+     });
+
+
      
     super.initState();
   }
+
+  var gender = ['Gender', 'Male', 'Female', 'Other'];
 
 
   @override
@@ -217,7 +292,7 @@ class _EditEmployeeState extends State<EditEmployee> {
             selectedValuec = shiftDoc[0].id;
             selectedValuee = empDoc[0].id;
 
-            return nextPage ? Container(
+            return nextPage == true ? Container(
 
               width: Get.width,
               decoration: BoxDecoration(
@@ -266,6 +341,42 @@ class _EditEmployeeState extends State<EditEmployee> {
                             ),
                           ),
                           SizedBox(height: 12,),
+
+
+
+                          Row(
+                            children: [
+                              Text("Gender"),
+                            ],
+                          ),
+                          Container(
+                            color: bgGrey,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(7.0),
+                                  child: DropdownButton<String?>(
+                                    value: genderVal,
+                                    onChanged: (String? value) {
+                                      setState(() {
+                                        genderVal = value!;
+                                      });
+                                    },
+                                    items: gender.map((String items) {
+                                      return DropdownMenuItem(
+                                        value: items,
+                                        child: Text(items),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+
                           Row(
                             children: [
                               Text("Branch name"),
@@ -318,32 +429,35 @@ class _EditEmployeeState extends State<EditEmployee> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 12,),
-                          Row(
-                            children: [
-                              Text("HR name"),
-                            ],
-                          ),
-                          Container(
-                            color: bgGrey,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding:   EdgeInsets.only(left: 20.0),
-                                  child: DropdownButton<String?>(
-                                    value: selectedValueHR,
-                                    onChanged: (String? value){
-                                      setState(() {
-                                        selectedValueHR = value!;
-                                      });
-                                    },
-                                    items:empDoc.mapIndexed((index, element) => DropdownMenuItem(child: Text(element.get("name")),value: element.id,),
-                                    ).toList(),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          /////////////HR name
+                          // SizedBox(height: 12,),
+                          // Row(
+                          //   children: [
+                          //     Text("HR name"),
+                          //   ],
+                          // ),
+                          // Container(
+                          //   color: bgGrey,
+                          //   child: Row(
+                          //     children: [
+                          //       // Padding(
+                          //       //   padding:   EdgeInsets.only(left: 20.0),
+                          //       //   child: DropdownButton<String?>(
+                          //       //     value: selectedValueHR,
+                          //       //     onChanged: (String? value){
+                          //       //       setState(() {
+                          //       //         selectedValueHR = value!;
+                          //       //       });
+                          //       //     },
+                          //       //     items:empDoc.mapIndexed((index, element) => DropdownMenuItem(child: Text(element.get("name")),value: element.id,),
+                          //       //     ).toList(),
+                          //       //   ),
+                          //       // ),
+                          //     ],
+                          //   ),
+                          // ),
+
+                          ////hr name
                           SizedBox(height: 12,),
                           Row(
                             children: [
@@ -442,13 +556,13 @@ class _EditEmployeeState extends State<EditEmployee> {
                             ],
                           ),
                           TextFormField(
-                            controller: email,
+                            enabled: false,
+                            // controller: email,
                             decoration: InputDecoration(
                                 filled: true,
                                 fillColor: bgGrey,
                                 contentPadding: EdgeInsets.only(left: 15,top: 20,bottom: 20),
-                                hintText: 'Email',
-                                enabled: true,
+                                hintText: email.text,
                                 hintStyle: TextStyle(
                                     color: Colors.grey
                                 ),
@@ -528,6 +642,171 @@ class _EditEmployeeState extends State<EditEmployee> {
                             ),
                           ),
                           SizedBox(height: 12,),
+
+                          Row(
+                            children: [
+                              Text("Alternet Phone Number"),
+                            ],
+                          ),
+                          TextFormField(
+                            keyboardType: TextInputType.number,
+                            controller: alternetphonenumber,
+                            validator: (value) =>
+                            value!.isEmpty ? 'Field cannot be blank' : null,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, top: 20, bottom: 20),
+                              hintText: 'Alternet Phone Number',
+                              enabled: true,
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+
+                          Row(
+                            children: [
+                              Text("National ID"),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: nationalidnumber,
+                            validator: (value) =>
+                            value!.isEmpty ? 'Field cannot be blank' : null,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, top: 20, bottom: 20),
+                              hintText: 'Ex. Pan Card,Aadhar-Card',
+                              enabled: true,
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+
+
+
+                          Row(
+                            children: [
+                              Text("Nominee Name"),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: nomineename,
+                            validator: (value) =>
+                            value!.isEmpty ? 'Field cannot be blank' : null,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, top: 20, bottom: 20),
+                              hintText: 'Nominee Name',
+                              enabled: true,
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+
+                          Row(
+                            children: [
+                              Text("Relation With Nominee"),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: nomineerelation,
+                            validator: (value) =>
+                            value!.isEmpty ? 'Field cannot be blank' : null,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, top: 20, bottom: 20),
+                              hintText: 'Relation With Nominee',
+                              enabled: true,
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+
+                          Row(
+                            children: [
+                              Text("Nominee Phone Number"),
+                            ],
+                          ),
+                          TextFormField(
+                            keyboardType: TextInputType.number,
+                            controller: nomineenumber,
+                            validator: (value) =>
+                            value!.isEmpty ? 'Field cannot be blank' : null,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: bgGrey,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, top: 20, bottom: 20),
+                              hintText: 'Nominee Phone Number',
+                              enabled: true,
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+
                           Row(
                             children: [
                               Text(
@@ -1180,7 +1459,10 @@ class _EditEmployeeState extends State<EditEmployee> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ElevatedButton(onPressed: (){
-                            Get.back();
+                            // Get.back();
+                            setState(() {
+                              nextPage = true;
+                            });
                           },
                               style: ElevatedButton.styleFrom(
                                   elevation: 0,
@@ -1204,8 +1486,8 @@ class _EditEmployeeState extends State<EditEmployee> {
 
 
                               try{
-                                var createdUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text);
-                                await firestore.collection("Employee").doc(createdUser.user!.uid).set(
+                                // var createdUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text);
+                                await firestore.collection("Employee").doc(widget.uid).update(
                                     {
                                       'name':empname.text,
                                       "bid" : selectedValueBranch,
@@ -1214,7 +1496,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                                       'Address':fullAdsress.text,
                                       'Designation' : designation.text,
                                       "dob" : dob.text,
-                                      "email" : email.text,
+                                      // "email" : email.text,
                                       "password" : password.text,
                                       "phoneNumber" : phoneNumber.text,
                                       "shiftid" : selectedValuec,
@@ -1222,7 +1504,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                                       'cid' : widget.userDoc.get('cid'),
                                       'did' : 'did',
                                       'reporting' : selectedValuemanager,
-                                      'uid' : createdUser.user!.uid,
+                                      'uid' : widget.uid,
                                       'basic_pay' : basicPayController.text,
                                       'house_rent_allowance' : houseRentAllowanceController.text,
                                       'medical_allowance' : medicalAllowanceController.text,
@@ -1233,8 +1515,14 @@ class _EditEmployeeState extends State<EditEmployee> {
                                       'profession_tax' : professionTaxController.text,
                                       'general_provident_fund' : generalProvidentFund,
                                       'total_deductions' : total2,
-                                      'net_pay' : totalBalance
+                                      'net_pay' : totalBalance,
 
+                                      'gender':genderVal,
+                                      'alternetphonenumber': alternetphonenumber.text,
+                                      'nationalIdnumber': nationalidnumber.text,
+                                      'nominee_name' : nomineename.text,
+                                      'nominee_relation' : nomineerelation.text,
+                                      'nominee_number' : nomineenumber.text,
                                     }
                                 );
 
@@ -1269,7 +1557,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                                 borderRadius: BorderRadius.circular(10),
 
                               ),
-                              child: Center(child: Text('Add',style: TextStyle(color: Colors.white),)),
+                              child: Center(child: Text('Update',style: TextStyle(color: Colors.white),)),
                             ),
                           ),
 

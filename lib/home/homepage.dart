@@ -66,7 +66,8 @@ HRMSReports(userDoc: widget.userDoc),//11
             backgroundColor: Colors.white,
             elevation: 0,
             leading: InkWell(
-              onTap: (){print('clicked');
+              onTap: (){
+                print('clicked');
               scafkey.currentState?.openDrawer();
               },
               child: Padding(
@@ -75,15 +76,10 @@ HRMSReports(userDoc: widget.userDoc),//11
                 child: Image.asset('asset/navicon.png'),
               ),
             ),
-            // actions: [
-            //   Image.asset('asset/bellicon.png'),
-            //
-            //   Image.asset('asset/settingsicon.png'),
-            //
-            //   Image.asset('asset/usericon.png'),
-            //
-            //   SizedBox(width: 12,),
-            // ],
+            actions: [
+             Text(empController.myepmlist.value.name!,style: TextStyle(color: Colors.green),),
+
+            ],
           ),
           drawer: empController.myepmlist.value.uid == null ?
               Center(child: CircularProgressIndicator(),)

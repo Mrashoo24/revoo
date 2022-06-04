@@ -138,7 +138,7 @@ class _AddEmployeeState extends State<AddEmployee> {
   TextEditingController selectRoles = TextEditingController();
   //
   TextEditingController nationalid = TextEditingController();
-  TextEditingController nationalidnumber = TextEditingController();
+  // TextEditingController nationalidnumber = TextEditingController();
   TextEditingController alternetphonenumber = TextEditingController();
   TextEditingController nomineename = TextEditingController();
   TextEditingController nomineenumber = TextEditingController();
@@ -1637,8 +1637,8 @@ class _AddEmployeeState extends State<AddEmployee> {
                             children: [
                               ElevatedButton(
                                   onPressed: () {
-                                    Get.back();
-                                    // setState((){nextPage = false;});
+                                    // Get.back();
+                                    setState((){nextPage = true;});
                                   },
                                   style: ElevatedButton.styleFrom(
                                       elevation: 0,
@@ -1685,8 +1685,8 @@ class _AddEmployeeState extends State<AddEmployee> {
                                         "bid": selectedValueBranch,
                                         "mid": selectedValuemanager,
                                         "hid": selectedValueHR,
-                                        'Address': fullAdsress.text,
-                                        'Designation': designation.text,
+                                        'address': fullAdsress.text,
+                                        'designation': designation.text,
                                         "dob": datetimec.text,
                                         "email": email.text,
                                         "password": password.text,
@@ -1717,14 +1717,11 @@ class _AddEmployeeState extends State<AddEmployee> {
                                         ////
                                         'gender': genderVal,
                                         'nationalidDoc': imageUrl,
-                                        'nationalIdnumber':
-                                        nationalid.text,
-                                        'alternetphonenumber':
-                                        alternetphonenumber.text,
+                                        'nationalIdnumber':nationalid.text,
+                                        'alternetphonenumber':alternetphonenumber.text,
                                         'nominee_name': nomineename.text,
                                         'nominee_number': nomineenumber.text,
-                                        'nominee_relation':
-                                        nomineerelation.text,
+                                        'nominee_relation':nomineerelation.text,
                                       });
 
                                       // var docSnap =  await firestore.collection('Employee').doc('QOebgqfRn7wqKCpyrRtw').get();
