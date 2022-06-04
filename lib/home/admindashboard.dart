@@ -220,7 +220,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
                   var empDoc = snapshot1.requireData.docs;
 
-                  return Row(
+                  return
+                    Row(
                     children: [
                       CircleAvatar(
                         child: Container(

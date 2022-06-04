@@ -81,44 +81,8 @@ class _Addorder23State extends State<Addorder23> {
                           ),
                         ),
                         SizedBox(height: 10),
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Customer Name",
-                              style: TextStyle(color: kblue),
-                            )),
-                        SizedBox(height: 3),
-                        Divider(
-                          height: 1,
-                        ),
-                        SizedBox(height: 3),
-                        Container(
-                          height: 32,
-                          child: Container(
-                            child: TextFormField(
-                              controller: customername,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: bgGrey,
-                                contentPadding:
-                                    EdgeInsets.only(left: 20, top: 2, bottom: 3),
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                              ),
-                            ),
-                          ),
-                        ),
+                        buildTexForm(),
+
                         SizedBox(height: 10),
                         Align(
                             alignment: Alignment.centerLeft,
@@ -383,5 +347,50 @@ class _Addorder23State extends State<Addorder23> {
         }
       ),
     );
+  }
+
+  Column buildTexForm() {
+    return Column(
+                        children: [
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Customer Name",
+                                style: TextStyle(color: kblue),
+                              )),
+                          SizedBox(height: 3),
+                          Divider(
+                            height: 1,
+                          ),
+                          SizedBox(height: 3),
+                          Container(
+                            height: 32,
+                            child: Container(
+                              child: TextFormField(
+                                controller: customername,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: bgGrey,
+                                  contentPadding:
+                                  EdgeInsets.only(left: 20, top: 2, bottom: 3),
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.white),
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(12))),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.white),
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(12))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.white),
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(12))),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
   }
 }

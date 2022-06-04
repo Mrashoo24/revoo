@@ -17,6 +17,6 @@ class Inventoryreportcontroller extends GetxController{
         inventory.add(Inventoryreportmodel.fromJson(element.data()));
       });
       return inventory;
-    }));
+    }));  
   }
 }

@@ -5,6 +5,7 @@ import 'package:revoo/Orders/duning.dart';
 import 'package:revoo/Orders/productsa.dart';
 import 'package:revoo/Orders/profit_calculation.dart';
 import 'package:revoo/Orders/quotation.dart';
+import 'package:revoo/Orders/salesReport.dart';
 import 'package:revoo/Orders/servicecallsa.dart';
 
 import '../constants/constants.dart';
@@ -31,11 +32,10 @@ class _SalesDashboardState extends State<SalesDashboard> {
   Widget build(BuildContext context) {
     var homepages = [
       Ordera(),
-      Product(),
       HRMSadmincust(),
-      Quotation(),
-      Serviescall(),
-      ProfitCalculation(),
+      // Quotation(),
+      // Serviescall(),
+      SalesReport(),
       DuningMangement(),
 
 
@@ -166,31 +166,28 @@ class _SalesDashboardState extends State<SalesDashboard> {
                 SizedBox(height: 5,),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
 
-                buildNavCard('asset/lvapproval.png','Products',1),
-                SizedBox(height: 5,),
-                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
 
-                buildNavCard('asset/lvapproval.png','Customers',2),
+                buildNavCard('asset/lvapproval.png','Customers',1),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
 
-                buildNavCard('asset/lvapproval.png','Quotation',3),
-                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                SizedBox(height: 5,),
+                // buildNavCard('asset/lvapproval.png','Quotation',2),
+                // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                // SizedBox(height: 5,),
 
-                buildNavCard('asset/lvapproval.png','Refunds',4),
-                Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
-                SizedBox(height: 5,),
+                // buildNavCard('asset/lvapproval.png','Refunds',2),
+                // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
+                // SizedBox(height: 5,),
 
-                buildNavCard('asset/lvapproval.png','Profit Calc.',5),
+                buildNavCard('asset/lvapproval.png','Sales Report',2),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
 
 
-                buildNavCard('asset/lvapproval.png','Duning Management',6),
+                buildNavCard('asset/lvapproval.png','Duning Management',3),
                 Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 SizedBox(height: 5,),
-                // buildNavCard('asset/lvapproval.png','Bills & Invoice',3),
+                // buildNavCard('asset/lvapproval.png','a & Invoice',3),
                 // Divider(height:0,thickness: 2,endIndent: 50,indent: 25,),
                 // SizedBox(height: 5,),
                 //
