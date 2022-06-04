@@ -38,9 +38,9 @@ class CreatEmpModel {
         this.uid});
 
   CreatEmpModel.fromJson(Map<String, dynamic> json) {
-    address = json['Address'];
+    address = json['address'];
     branchName = json['Branch Name'];
-    designation = json['Designation'];
+    designation = json['designation'];
     bid = json['bid'];
     cid = json['cid'];
     did = json['did'];
@@ -59,9 +59,9 @@ class CreatEmpModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Address'] = this.address;
+    data['address'] = this.address;
     data['Branch Name'] = this.branchName;
-    data['Designation'] = this.designation;
+    data['designation'] = this.designation;
     data['bid'] = this.bid;
     data['cid'] = this.cid;
     data['did'] = this.did;
