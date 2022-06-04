@@ -36,7 +36,7 @@ class _VeiwMeetingsState extends State<VeiwMeetings> {
                       shrinkWrap: true,
                       itemCount: snapshot.requireData.docs.length,
                       itemBuilder: (context, index) {
-                    child: Container(
+                    return Container(
                       width: Get.width,
                       decoration: BoxDecoration(
                         color: Kdblue,
