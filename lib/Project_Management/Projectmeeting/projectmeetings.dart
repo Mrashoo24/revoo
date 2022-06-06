@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
+import 'package:revoo/Project_Management/Projectmeeting/veiwmeetings.dart';
 
 import '../../constants/constants.dart';
 
@@ -12,14 +16,30 @@ class ProjectMeetings extends StatefulWidget {
 }
 
 class _ProjectMeetingsState extends State<ProjectMeetings> {
-
-  var firebase = FirebaseFirestore.instance.collection(" ").toString();
-
   DateTime dateTime = DateTime(2022,12,24, 5, 30);
+
+  var firebase = FirebaseFirestore.instance.collection("Addmeetings").toString();
+  TextEditingController venue = TextEditingController();
+  TextEditingController projectname = TextEditingController();
+  TextEditingController prepareby = TextEditingController();
+  TextEditingController presentername = TextEditingController();
+  TextEditingController antendename = TextEditingController();
+  TextEditingController agenda = TextEditingController();
+  TextEditingController meeting = TextEditingController();
+  TextEditingController description = TextEditingController();
+  TextEditingController date = TextEditingController();
+  TextEditingController time = TextEditingController();
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     final hours = dateTime.hour.toString().padLeft(2, '0');
     final minutes = dateTime.minute.toString().padLeft(2, '0');
+    var firestore = FirebaseFirestore.instance.collection('Addmeetings');
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -86,7 +106,7 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   ),
                   SizedBox(height: 5),
                   Divider(height: 1,),
-                  buildTextFormField(),
+                  buildTextFormField(venue),
                   SizedBox(height: 15),
                   Row(
                     children: [
@@ -95,7 +115,7 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   ),
                   SizedBox(height: 5),
                   Divider(height: 1,),
-                  buildTextFormField(),
+                  buildTextFormField(projectname),
                   SizedBox(height: 15),
                   Row(
                     children: [
@@ -104,7 +124,7 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   ),
                   SizedBox(height: 5),
                   Divider(height: 1,),
-                  buildTextFormField(),
+                  buildTextFormField(prepareby),
                   SizedBox(height: 15),
                   Row(
                     children: [
@@ -113,7 +133,7 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   ),
                   SizedBox(height: 5),
                   Divider(height: 1,),
-                  buildTextFormField(),
+                  buildTextFormField(presentername),
                   SizedBox(height: 15),
                   Row(
                     children: [
@@ -122,7 +142,7 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   ),
                   SizedBox(height: 5),
                   Divider(height: 1,),
-                  buildTextFormField(),
+                  buildTextFormField(antendename),
                   SizedBox(height: 15),
                   Row(
                     children: [
@@ -131,7 +151,7 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   ),
                   SizedBox(height: 5),
                   Divider(height: 1,),
-                  buildTextFormField(),
+                  buildTextFormField(agenda),
                   SizedBox(height: 15),
                   Row(
                     children: [
@@ -140,7 +160,7 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   ),
                   SizedBox(height: 5),
                   Divider(height: 1,),
-                  buildTextFormField(),
+                  buildTextFormField(meeting),
                   SizedBox(height: 15),
                   Row(
                     children: [
@@ -149,12 +169,23 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   ),
                   SizedBox(height: 5),
                   Divider(height: 1,),
-                  buildTextFormField(),
+                  buildTextFormField(description),
 
                   SizedBox(height: 15),
-                  ElevatedButton(onPressed: () async {
-
-
+                  ElevatedButton(onPressed: ()   {
+                    firestore.add(
+                      {
+                        "agenda" : agenda.text,
+                        "venue" : venue.text,
+                        "project_name" : projectname.text,
+                        "presenter_name" : presentername.text,
+                        "prepared_by" : prepareby.text,
+                        "attend_name" : antendename.text,
+                        "meeting" : meeting.text,
+                        "description" : description.text,
+                        "date" : DateFormat('yyyy/MM/dd hh:mm a').format(dateTime)
+                      });
+                    Get.to(VeiwMeetings());
                   },
                     child: Text("Add Meetings"),
                     style:ElevatedButton.styleFrom(
@@ -173,8 +204,9 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
     );
   }
 
-  TextFormField buildTextFormField() {
+  TextFormField buildTextFormField(controller) {
     return TextFormField(
+      controller: controller,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: bgGrey,

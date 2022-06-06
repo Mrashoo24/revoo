@@ -146,7 +146,7 @@ class _HRMSadmincustState extends State<Ordera> {
                                                         onTap: (){Get.defaultDialog(
                                                           radius: 15,
                                                             backgroundColor: Kdblue,
-                                                            title: "Order Details",
+                                                            title: "Meeting Details",
                                                             titleStyle: TextStyle(color: kyellow),
 
                                                             titlePadding: EdgeInsets.all(0),
@@ -217,7 +217,8 @@ class _HRMSadmincustState extends State<Ordera> {
                                                         child: Container(width: 100, height: 25, decoration: BoxDecoration(color: kyellow,
                                                                 borderRadius: BorderRadius.circular(10),
                                                               ), child: Center(child: Text('Veiw Order', style: TextStyle(
-                                                            color: Colors.black, fontSize: 15),),),),
+                                                            color: Colors.black, fontSize: 15),
+                                                        ),),),
                                                       ),],),
                                                   SizedBox(height: 10),
                                                   Row(
