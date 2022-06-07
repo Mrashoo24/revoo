@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:revoo/Project_Management/TimeSheet/timesheet.dart';
 import 'package:revoo/Project_Management/profile/userProjectsProfile.dart';
 
 import '../constants/constants.dart';
@@ -34,6 +35,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
     ModulesSprintsPage(),
     Messages(),
     VeiwMeetings(),
+    TimeSHeet()
 
 
   ];
@@ -205,6 +207,13 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
                   indent: 25,
                 ),
                 buildNavCard( "asset/checkpad.png", 'Project Meeting',5),
+                Divider(
+                  height: 0,
+                  thickness: 2,
+                  endIndent: 50,
+                  indent: 25,
+                ),
+                buildNavCard( "asset/checkpad.png", 'Time Sheet',6),
               ],
             ),
           ),
