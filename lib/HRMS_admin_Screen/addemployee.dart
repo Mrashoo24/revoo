@@ -167,19 +167,23 @@ class _AddEmployeeState extends State<AddEmployee> {
   var firstDate = DateTime(1900);
   var lastDate = DateTime(2100);
   String? fileName;
+  String? photofileName;
 
   String? imageUrl;
+  String? photoimageUrl;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 
 
   File? file;
+  File? photofile;
+
   selectfile() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
     if (result != null) {
-       final path = result.files.single.path!;
+       final path = kIsWeb ? '' :result.files.single.path!;
       Uint8List? fileBytes = result.files.first.bytes;
       String fileName1 = result.files.first.name;
 
@@ -189,6 +193,28 @@ class _AddEmployeeState extends State<AddEmployee> {
         file = kIsWeb ? File.fromRawPath(fileBytes!) : File(path);
         fileName = fileName1;
       });
+
+    } else {
+
+      Get.snackbar('Error', 'No File Picked');
+    }
+  }
+
+  selectPhotofile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+
+    if (result != null) {
+      final path =  kIsWeb ? '' : result.files.single.path!;
+      Uint8List? fileBytes = result.files.first.bytes;
+      String fileName1 = result.files.first.name;
+
+      print('filename = ${result.files.first.name}');
+
+      setState(() {
+        photofile = kIsWeb ? File.fromRawPath(fileBytes!) : File(path);
+        photofileName = fileName1;
+      });
+
     } else {
 
       Get.snackbar('Error', 'No File Picked');
@@ -204,6 +230,18 @@ class _AddEmployeeState extends State<AddEmployee> {
             setState(() {
            imageUrl = imgurl;
             });
+
+  }
+
+  uploadPhotofile() async {
+
+    final destination = "files/$photofileName";
+
+    var imgurl = await   FirebaseApi.uploadFile(destination, photofile!);
+
+    setState(() {
+      photoimageUrl = imgurl;
+    });
 
   }
 
@@ -665,6 +703,58 @@ class _AddEmployeeState extends State<AddEmployee> {
                                                 BorderSide(color: Colors.white))),
                                   ),
 
+                                  ///Imgage
+                                  Row(
+                                    children: [
+                                      Text("Upload Profile Photo"),
+                                    ],
+                                  ),
+                                  InkWell(
+                                    onTap: () async {
+                                      await selectPhotofile();
+                                    },
+                                    child: TextFormField(
+                                      enabled: false,
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: bgGrey,
+                                        contentPadding: EdgeInsets.only(
+                                            left: 15, top: 20, bottom: 20),
+                                        hintText: 'Upload Profile Photo',
+                                        enabled: true,
+                                        hintStyle: TextStyle(color: Colors.grey),
+                                        border: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Colors.white)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Colors.white)),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Colors.white)),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 12,
+                                  ),
+                                  Visibility(
+                                    visible: photofile != null,
+                                    child: Row(
+                                      children: [
+                                        Text(photofileName.toString()  ),
+                                        IconButton(
+                                          icon: Icon(Icons.close),
+                                          onPressed: () {
+                                            setState(() {
+                                              photofile = null;
+                                            });
+                                          },
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  ///Image
                                   SizedBox(
                                     height: 12,
                                   ),
@@ -1672,6 +1762,8 @@ class _AddEmployeeState extends State<AddEmployee> {
 
                                       uploadfile();
 
+                                      uploadPhotofile();
+
                                       var createdUser = await FirebaseAuth
                                           .instance
                                           .createUserWithEmailAndPassword(
@@ -1722,6 +1814,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                                         'nominee_name': nomineename.text,
                                         'nominee_number': nomineenumber.text,
                                         'nominee_relation':nomineerelation.text,
+                                        'photo' : photoimageUrl ?? 'https://firebasestorage.googleapis.com/v0/b/revoo-57e23.appspot.com/o/files%2FIMG_20220601_163444.jpg?alt=media&token=10516c94-1e21-4e46-92c1-1db27b42b761',
                                       });
 
                                       // var docSnap =  await firestore.collection('Employee').doc('QOebgqfRn7wqKCpyrRtw').get();
