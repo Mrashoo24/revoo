@@ -164,7 +164,7 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
                   SizedBox(height: 15),
                   Row(
                     children: [
-                      Text('Description',style: TextStyle(color: kblue ),),
+                      Text('Description',style: TextStyle(color : kblue ),),
                     ],
                   ),
                   SizedBox(height: 5),
@@ -173,6 +173,17 @@ class _ProjectMeetingsState extends State<ProjectMeetings> {
 
                   SizedBox(height: 15),
                   ElevatedButton(onPressed: ()   {
+                    if(agenda.text.isEmpty||agenda.text.isEmpty||projectname.text.isEmpty||presentername.text.isEmpty||prepareby.text.isEmpty||antendename.text.isEmpty||meeting.text.isEmpty||description.text.isEmpty){
+                      print("Not Good");
+                      Get.snackbar('Error', 'please Enter All Details');
+                    }else{
+                      print('all Good');
+                      setState(() {
+                        
+                      });
+                    }
+
+
                     firestore.add(
                       {
                         "agenda" : agenda.text,
