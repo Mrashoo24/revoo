@@ -30,12 +30,15 @@ class _VeiwTimesheetState extends State<VeiwTimesheet> {
                     return Container(
                       child:  Text(
                         snapshot.data!.docs[index]['assign_to'],
-
                         style: TextStyle(
+
                             color: Colors.white, fontSize: 12),
+
+
+
                       ),
                     );
-                  },
+                    },
                 );
               }
             )

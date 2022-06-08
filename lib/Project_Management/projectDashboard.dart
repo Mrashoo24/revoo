@@ -12,6 +12,7 @@ import 'Projectmeeting/projectmeetings.dart';
 import 'Projectmeeting/veiwmeetings.dart';
 import 'Tasks/TasksScreen.dart';
 import 'Teams/ProjectsTeamList.dart';
+import 'TimeSheet/veiwtimesheet.dart';
 
 class ProjectHomePage extends StatefulWidget {
   const ProjectHomePage({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
     ModulesSprintsPage(),
     Messages(),
     VeiwMeetings(),
-    TimeSHeet()
+    VeiwTimesheet()
 
 
   ];
