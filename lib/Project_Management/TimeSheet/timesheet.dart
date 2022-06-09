@@ -209,3 +209,34 @@ class _TimeSHeetState extends State<TimeSHeet> {
   Future<TimeOfDay?> endpickTime() => showTimePicker(context: context, initialTime: TimeOfDay(hour: endsdate.hour, minute: endsdate.minute));
 
 }
+
+
+// DateTime startdate = DateTime(2022,12,24, 5, 30);
+///above @override
+
+// final hours = startdate.hour.toString().padLeft(2, '0');
+// final minutes = startdate.minute.toString().padLeft(2, '0');
+///below widget build(BuildContext context)
+
+// ElevatedButton(onPressed: () async {
+// final date = await endpickDate();
+// if (date == null) return;
+//
+// final newDateTime = DateTime(
+//     date.year,
+//     date.month,
+//     date.day,
+//     endsdate.hour,
+//     endsdate.minute
+// );
+// setState(() => endsdate = newDateTime);
+// },
+// child: Text("${endsdate.year}/${endsdate.month}/${endsdate.day}"),
+// style:ElevatedButton.styleFrom(
+// primary: Kdblue,
+// textStyle: TextStyle(
+// fontWeight: FontWeight.bold))
+// ),
+
+// Future<DateTime?> pickDate() => showDatePicker(context: context, initialDate: endsdate, firstDate: DateTime(1900), lastDate: DateTime(2500));
+// Future<TimeOfDay?> pickTime() => showTimePicker(context: context, initialTime: TimeOfDay(hour: endsdate.hour, minute: endsdate.minute));
