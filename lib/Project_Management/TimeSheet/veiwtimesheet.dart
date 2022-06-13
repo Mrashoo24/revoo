@@ -23,6 +23,12 @@ class _VeiwTimesheetState extends State<VeiwTimesheet> {
       child: Scaffold(
         body: Column(
           children: [
+
+            InkWell(
+                onTap: (){
+
+                },
+                child: Text("Add Task")),
             StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: firestore,
               builder: (context, snapshot) {
@@ -38,14 +44,54 @@ class _VeiwTimesheetState extends State<VeiwTimesheet> {
                         color: Kdblue,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child:  Text(
-                        snapshot.data!.docs[index]['assign_to'],
-                        style: TextStyle(
+                      child:  Padding(
+                        padding:   EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
 
-                            color: Colors.pink, fontSize: 12),
+                            Row(
+                              children: [
+                                Text("Assign To:  ",style: TextStyle(color: kyellow, fontSize: 15),),
+                                Text(
+                                  snapshot.data!.docs[index]['assign_to'],
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("Task Title:  ",style: TextStyle(color: kyellow, fontSize: 15),),
+                                Text(
+                                  snapshot.data!.docs[index]['task_title'],
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                              ],
+                            ),
 
-
-
+                            Row(
+                              children: [
+                                Text("Project Name:  ",style: TextStyle(color: kyellow, fontSize: 15),),
+                                Text(
+                                  snapshot.data!.docs[index]['project_name'],
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("Module:  ",style: TextStyle(color: kyellow, fontSize: 15),),
+                                Text(
+                                  snapshot.data!.docs[index]['module_type'],
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     );
                     },

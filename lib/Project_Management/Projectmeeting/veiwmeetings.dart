@@ -93,11 +93,11 @@ class _VeiwMeetingsState extends State<VeiwMeetings> {
 
                                                             style: TextStyle(
                                                                 color: Colors.white, fontSize: 12),
+
                                                           ),
                                                         ],
                                                       ),
                                                       SizedBox(height: 5),
-
                                                       Row(
                                                         children: [
                                                           OrderFields('Prepared By: '),
@@ -109,7 +109,6 @@ class _VeiwMeetingsState extends State<VeiwMeetings> {
                                                         ],
                                                       ),
                                                       SizedBox(height: 5),
-
                                                       Row(
                                                         children: [
                                                           OrderFields('Presenter Name: '),
@@ -121,7 +120,6 @@ class _VeiwMeetingsState extends State<VeiwMeetings> {
                                                         ],
                                                       ),
                                                       SizedBox(height: 5),
-
                                                       Row(
                                                         children: [
                                                           OrderFields('Attendees Name: '),
@@ -133,7 +131,6 @@ class _VeiwMeetingsState extends State<VeiwMeetings> {
                                                         ],
                                                       ),
                                                       SizedBox(height: 5),
-
                                                       Row(
                                                         children: [
                                                           OrderFields('Agenda: '),
@@ -145,7 +142,6 @@ class _VeiwMeetingsState extends State<VeiwMeetings> {
                                                         ],
                                                       ),
                                                       SizedBox(height: 5),
-
                                                       Row(
                                                         children: [
                                                           OrderFields('Meeting: '),
@@ -197,11 +193,8 @@ class _VeiwMeetingsState extends State<VeiwMeetings> {
                                                           ),
                                                         ),
                                                       ),
-
-
                                                     ],
                                                   ),
-
                                               );
                                             },
                                             child: Container(
@@ -282,6 +275,7 @@ class _VeiwMeetingsState extends State<VeiwMeetings> {
                                                               color: Colors.white, fontSize: 12),
                                                         );
   }
+
   Text OrderFields(text) {
     return Text(
       text,

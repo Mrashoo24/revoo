@@ -25,6 +25,7 @@ class _HRMSadmincustState extends State<Product> {
     DropdownMenuItem(child: Text('Product category2'),value:'Product category2' ,),
     DropdownMenuItem(child: Text('Product category3'),value:'Product category3' ,),
     DropdownMenuItem(child: Text('Product category4'),value:'Product category4' ,),
+
   ];
   @override
   Widget build(BuildContext context) {
