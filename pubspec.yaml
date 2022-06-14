@@ -76,6 +76,9 @@ dependencies:
   shared_preferences: ^2.0.15
   multi_select_item: ^1.0.3
   multi_select_flutter: ^4.1.2
+  graphs: ^2.1.0
+  tiled: ^0.8.1
+
 
 
 

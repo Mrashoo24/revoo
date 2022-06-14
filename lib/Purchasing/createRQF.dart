@@ -374,7 +374,6 @@ class _CreatRQFState extends State<CreatRQF> {
                             ),
                             borderRadius: BorderRadius.circular(10),
 
-
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 10),

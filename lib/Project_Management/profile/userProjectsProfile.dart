@@ -1,4 +1,6 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -28,6 +30,8 @@ class userprofile extends State<AllProjects> {
   final String designationOfEmp = "Designation";
   int _index = 0;
   bool selected = false;
+  var firebase = FirebaseFirestore.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +119,8 @@ class userprofile extends State<AllProjects> {
                             ),
                           )
                         ],
-                      )),
+                      ),
+                  ),
                   Container(
                     margin: EdgeInsets.only(right: Get.width/2),
                     child: TextFormField(
@@ -161,16 +166,31 @@ class userprofile extends State<AllProjects> {
                   SizedBox(
                     height: 5,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      buildContent(context,'Project Name 1'),
-                       buildContent(context,'Project Name 2'),
-                       buildContent(context,'Project Name 3'),
-                      // buildContent(context,3),
-                    ],
+                  StreamBuilder<QuerySnapshot<Map<String,dynamic>>>(
+                    stream: firebase.collection('Create Project').snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData){
+                        return Center(child: Text('Loading Data'));
+                      }
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount:  snapshot.data!.docs.length,
+                              itemBuilder: (context,index){
+                              return buildContent(context,snapshot.data!.docs[index]["Project_Name"],index);
+                              },
+                          ),
+                           // buildContent(context,'Project Name 2'),
+                           // buildContent(context,'Project Name 3'),
+                          // buildContent(context,3),
+                        ],
+                      );
+                    }
                   )
                 ],
               ),
@@ -180,9 +200,8 @@ class userprofile extends State<AllProjects> {
     );
   }
   bool expandName = false;
-  Widget buildContent(BuildContext context,name){
+  Widget buildContent(BuildContext context,name,index){
     return
-
       Padding(
         padding: const EdgeInsets.only(top: 15.0),
         child: ClipRRect(
@@ -200,31 +219,43 @@ class userprofile extends State<AllProjects> {
             ),
           ),
           children: [
-            Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  ContentElements('Front-end Development project','Type'),
-                  Divider(color: Colors.black,thickness: 1,),
-                  Wrap(
-                    alignment: WrapAlignment.spaceAround,
+            StreamBuilder<QuerySnapshot<Map<String,dynamic>>>(
+              stream: firebase.collection('Create Project').snapshots(),
+              builder: (context, snapshot) {
+
+
+                if(!snapshot.hasData){
+                  return kprogressbar
+                      ;
+                }
+
+                return Container(
+                  color: Colors.white,
+                  child: Column(
                     children: [
-                      ContentElements('7 memeber ','Team'),
-                      InkWell(
-                        onTap: (){Get.to(UserProfileTeams());},
-                        child: Text('view all',style: TextStyle(color: Colors.blue )),
+                      ContentElements(snapshot.data!.docs[index]["projecttype"],'Type'),
+                      Divider(color: Colors.black,thickness: 1,),
+                      Wrap(
+                        alignment: WrapAlignment.spaceAround,
+                        children: [
+                          ContentElements('7 memeber ','Team'),
+                          InkWell(
+                            onTap: (){Get.to(UserProfileTeams());},
+                            child: Text('view all',style: TextStyle(color: Colors.blue )),
+                          ),
+                        ],
                       ),
+                      Divider(color: Colors.black,thickness: 1,),
+                      ContentElementsforStatus(),
+                      Divider(color: Colors.black,thickness: 1,),
+                      ContentElements(snapshot.data!.docs[index]["Lead_Name"],'Lead'),
+                      Divider(color: Colors.black,thickness: 1,),
+
+                      ContentElements(snapshot.data!.docs[index]["Deadline"],'Deadline',),
                     ],
                   ),
-                  Divider(color: Colors.black,thickness: 1,),
-                  ContentElementsforStatus(),
-                  Divider(color: Colors.black,thickness: 1,),
-                  ContentElements('Admin/leadname','Lead'),
-                  Divider(color: Colors.black,thickness: 1,),
-
-                  ContentElements('March 07,2022','Deadline',),
-                ],
-              ),
+                );
+              }
             )
 
           ],
@@ -273,8 +304,6 @@ Widget ContentElements (String name,String type){
     ),
   );
 }
-
-
 Widget ContentElementsforStatus (){
   return Padding(
     padding: const EdgeInsets.only(left: 5.0),
@@ -292,7 +321,9 @@ Widget ContentElementsforStatus (){
               Text('In Review',style: TextStyle(color: kyellow)),
               GestureDetector(
                 onTap: (){Marked(true);},
-                onDoubleTap: (){},
+                onDoubleTap: (){
+
+                },
                 child: Wrap(
                   spacing: 20,
                   children: [
@@ -304,7 +335,6 @@ Widget ContentElementsforStatus (){
             ],
           ),
         ),
-
       ],
     ),
   );

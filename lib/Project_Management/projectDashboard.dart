@@ -7,6 +7,7 @@ import 'package:revoo/Project_Management/profile/userProjectsProfile.dart';
 import '../constants/constants.dart';
 import 'Messages/mssages.dart';
 import 'ModuleSprintScreen/modulesSprintsPage.dart';
+import 'ResourceManagement/graph.dart';
 import 'Tasks/TasksScreen.dart';
 import 'Teams/ProjectsTeamList.dart';
 
@@ -31,6 +32,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
     AllTasks(),
     ModulesSprintsPage(),
     Messages(),
+    Graph(),
 
 
   ];
@@ -148,7 +150,7 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
                 SizedBox(
                   height: 30,
                 ),
-                buildNavCard('asset/homeDrawer.png', 'Home',0),
+                buildNavCard('asset/homeDrawer.png', 'Project Stage',0),
                 SizedBox(
                   height: 5,
                 ),
@@ -195,6 +197,16 @@ class _ProjectHomePageState extends State<ProjectHomePage> {
                   indent: 25,
                 ),
                 buildNavCard('asset/MessagePrvIconDrawer.png', 'Messages',4),
+                SizedBox(
+                  height: 5,
+                ),
+                Divider(
+                  height: 0,
+                  thickness: 2,
+                  endIndent: 50,
+                  indent: 25,
+                ),
+                buildNavCard('asset/MessagePrvIconDrawer.png', 'Resource Management',5),
               ],
             ),
           ),

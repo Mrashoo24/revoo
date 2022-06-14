@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -9,6 +10,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import '../../constants/constants.dart';
 import '../Widgets/projectNameinprofile.dart';
 import '../projectDashboard.dart';
+import 'create a module.dart';
 
 
 
@@ -24,8 +26,9 @@ class ModulesSprintsPage extends StatefulWidget {
 class _moduleState extends State<ModulesSprintsPage> {
   final String projectName = "Project Name";
   final String designationOfEmp = "Your roles/Designation";
-  int _index = 0;
+  int index = 0;
   bool selected = false;
+  var firebase = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -40,33 +43,41 @@ class _moduleState extends State<ModulesSprintsPage> {
 
                 child: ListView(
                   children: [
-                    Container(
-                      width: Get.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "$projectName",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.black,
-                              fontFamily: 'Regular',
-                            ),
+                    StreamBuilder<QuerySnapshot<Map<String,dynamic>>>(
+                      stream: firebase.collection('Create Project').snapshots(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData){
+                          return Center(child: Text('Loading Data'));
+                        }
+                        return Container(
+                          width: Get.width,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                snapshot.data!.docs[index]["Project_Name"],
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.black,
+                                  fontFamily: 'Regular',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "${designationOfEmp} of Employee",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontFamily: 'Neue Haas Grotesk Display Pro'),
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "${designationOfEmp} of Employee",
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                                fontFamily: 'Neue Haas Grotesk Display Pro'),
-                          ),
-                        ],
-                      ),
+                        );
+                      }
                     ),
                     SizedBox(height: 10,),
                     Container(
@@ -87,14 +98,14 @@ class _moduleState extends State<ModulesSprintsPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {Get.to(CreateModule());},
                                   icon: Image.asset(
                                     'asset/addicon.png',
                                     fit: BoxFit.fitWidth,
                                   ),
                                 ),
                                 Text(
-                                  "create a modules..",
+                                  "create a module..",
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontFamily: 'Neue Haas Grotesk Display Pro',
@@ -149,17 +160,34 @@ class _moduleState extends State<ModulesSprintsPage> {
                     SizedBox(
                       height: 5,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        buildContent(context,'Module Name 1'),
-                        buildContent(context,'Module Name 2'),
-                        buildContent(context,'Module Name 3'),
-                        buildContent(context,'Module Name 3'),
-                        // buildContent(context,3),
-                      ],
+                    StreamBuilder<QuerySnapshot<Map<String,dynamic>>>(
+                        stream: firebase.collection('Create_module').snapshots(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData){
+                          return Center(child: Container(child: Text('Loading Data....')));
+                        }
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListView.builder(
+                              shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: snapshot.data!.docs.length,
+                                 itemBuilder: (context, index){
+                          return buildContent(context,snapshot.data!.docs[index]["ModuleName"],index,snapshot);
+                          },
+                                   ),
+
+                            // task_titletask_title
+                            // buildContent(context,'Module Name 2'),
+                            // buildContent(context,'Module Name 3'),
+                            // buildContent(context,'Module Name 4'),
+                            // // buildContent(context,3),
+                          ],
+                        );
+                      }
                     )
                   ],
                 ),
@@ -169,7 +197,8 @@ class _moduleState extends State<ModulesSprintsPage> {
     );
   }
   bool expandName = false;
-  Widget buildContent(BuildContext context,name){
+  Widget buildContent(BuildContext context,name, int index,snapshot){
+    print('indx= $index');
     return
       Padding(
         padding: const EdgeInsets.only(top: 15.0),
@@ -180,52 +209,47 @@ class _moduleState extends State<ModulesSprintsPage> {
             collapsedBackgroundColor: Kdblue,
             expandedAlignment: Alignment.center,
             title:  projectNameinprofile(selected: false,name:name),
-            trailing: GestureDetector(
-              onTap: () {},
-              child: ImageIcon(
-                AssetImage('asset/threedots.png'),
-                color: Colors.white,
-              ),
+            trailing: ImageIcon(
+              AssetImage('asset/threedots.png'),
+              color: Colors.white,
             ),
-            children: [
-              Container(
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    ContentElements('30','Tasks Entered'),
-                    Divider(color: Colors.black,thickness: 1,),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                              width: 120,
-                              child: Text('Assigned to')),
-                          Wrap(
-                            alignment: WrapAlignment.end,
+            children: [Container(
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        ContentElements('30','Tasks Entered'),
+                        Divider(color: Colors.black,thickness: 1,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
                             children: [
-                              _addModules(),
-                              _addModules(),_addModules(),
-                              InkWell(
-                                onTap: (){},
-                                child: ImageIcon(AssetImage('asset/addModules.png')),
+                              Container(
+                                  width: 120,
+                                  child: Text('Assigned to')),
+                              Wrap(
+                                alignment: WrapAlignment.end,
+                                children: [
+                                  _addModules(),
+                                  _addModules(),_addModules(),
+                                  InkWell(
+                                    onTap: (){},
+                                    child: ImageIcon(AssetImage('asset/addModules.png')),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+
+                        Divider(color: Colors.black,thickness: 1,),
+                        ContentElementsforStatus(),
+                        Divider(color: Colors.black,thickness: 1,),
+                        ContentElements(snapshot.data!.docs[index]["mouleleadname"],'Lead'),
+                        Divider(color: Colors.black,thickness: 1,),
+                        ContentElements(snapshot.data!.docs[index]["Module_end_date"],'Deadline',),
+                      ],
                     ),
-
-                    Divider(color: Colors.black,thickness: 1,),
-                    ContentElementsforStatus(),
-                    Divider(color: Colors.black,thickness: 1,),
-                    ContentElements('Admin/leadname','Lead'),
-                    Divider(color: Colors.black,thickness: 1,),
-                    ContentElements('March 07,2022','Deadline',),
-                  ],
-                ),
-              )
-
+                  )
             ],
           ),
         ),

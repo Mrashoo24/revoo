@@ -83,7 +83,6 @@ class _AddComponentsState extends State<AddComponents> {
             width: 400,
             child: ListView.builder(
                 shrinkWrap: true,
-
                 itemCount: selectedItems!.length,
                 itemBuilder: (context, index) {
                   return Padding(

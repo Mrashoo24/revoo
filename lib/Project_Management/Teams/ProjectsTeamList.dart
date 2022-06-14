@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,9 @@ class ProjectTeamsList extends StatefulWidget {
 }
 
 class _TeamList extends State<ProjectTeamsList> {
+  var firebase = FirebaseFirestore.instance;
+
+///
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,63 +27,127 @@ class _TeamList extends State<ProjectTeamsList> {
               height: Get.height,
               padding: EdgeInsets.only(left: 5,right: 5),
               // padding: EdgeInsets.all(5),
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  Text(
-                    'Revoo',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: kblue,
-                    ),
-                  ),
-                  Text(
-                    'Your role/Designation',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Kdblue,
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  _LeadTitle('Project Lead'),
-                 Wrap(
-                   spacing: 15,
-                   runSpacing: 20,
-                   alignment: WrapAlignment.start,
-                   children: [
-                     _profile('Jhon'),
-                   ],
-                 ),
-                  SizedBox(height: 15),
-                  _LeadTitle('Project Intermediators'),
-                 Wrap(
-                   spacing: 20,
-                   runSpacing: 20,
-                   alignment: WrapAlignment.start,
-                   children: [
-                     _profile('Mery'),
-                     _profile('Picker'),
-                   ],
-                 ),
-                  SizedBox(height: 15),
-                  _LeadTitle('Members'),
-                Wrap(
-                  spacing: 20,
-                  runSpacing: 20,
-                  alignment: WrapAlignment.start,
-                  children: [
-                    _profile('jensan'),
-                    _profile('jack'),
-                    _profile('polo'),
-                    _profile('nager'),
-                    _profile('hio'),
-                    _profile('chingchu'),
-                    _profile('leriya'),
-                    _profile('nikola'),
-                  ],
-                ),
-                  SizedBox(height: 15),
-                ],
+              child: StreamBuilder<QuerySnapshot<Map<String,dynamic>>>(
+                  stream: firebase.collection('Addmeetings').snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData){
+                    return Center(child: Text('Load ing Data'));
+                  }
+                  return Column(
+                    children: [
+                      ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: 1,
+                        itemBuilder: (context, index){
+                          return Column(
+                            children: [
+                              Text(
+                                snapshot.data!.docs[index]["project_name"],
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  color: kblue,
+                                ),
+                              ),
+                              Text(
+                                'Your role/Designation',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Kdblue,
+                                ),
+                              ),
+                              SizedBox(height: 15),
+                              _LeadTitle('Project Lead'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Wrap(
+                                    spacing: 15,
+                                    runSpacing: 20,
+                                    alignment: WrapAlignment.start,
+                                    children: [
+                                      _profile(  snapshot.data!.docs[index]["prepared_by"],),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        }
+                      ),
+                      ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 1,
+                          itemBuilder: (context, index){
+                            return Column(
+                              children: [
+                                SizedBox(height: 15),
+                                _LeadTitle('Project Intermediators'),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Wrap(
+                                      spacing: 20,
+                                      runSpacing: 20,
+                                      alignment: WrapAlignment.start,
+                                      children: [
+                                        _profile('Mery'),
+                                        _profile('Picker'),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 15),
+                              ],
+                            );
+                          }
+                      ),
+                      SizedBox(height: 15),
+                      _LeadTitle('Members'),
+                      ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 3,
+                          itemBuilder: (context, index){
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Wrap(
+                                        spacing: 20,
+                                        runSpacing: 20,
+                                        alignment: WrapAlignment.start,
+                                        children: [
+                                          _profile(snapshot.data!.docs[index]["attend_name"],),
+                                          // _profile('jack'),
+                                          // _profile('polo'),
+                                          // _profile('nager'),
+                                          // _profile('hio'),
+                                          // _profile('chingchu'),
+
+                                          // _profile('leriya'),
+                                          // _profile('nikola'),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+                              ],
+                            );
+                          }
+                      ),
+                    ],
+                  );
+                }
               ),
             )));
   }

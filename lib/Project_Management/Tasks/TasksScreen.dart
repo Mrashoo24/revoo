@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,6 +7,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:revoo/constants/constants.dart';
 
 import '../projectDashboard.dart';
+import 'Addtask.dart';
 
 class AllTasks extends StatefulWidget {
   @override
@@ -14,6 +16,8 @@ class AllTasks extends StatefulWidget {
 
 class _showTasks extends State<AllTasks> {
   bool value = false;
+  var firebase = FirebaseFirestore.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +59,25 @@ class _showTasks extends State<AllTasks> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Today\'s Tasks',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: kblue,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Today\'s Tasks',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: kblue,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {Get.to(AddNewTask());},
+                      icon: Image.asset(
+                        'asset/addicon.png',
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+
+                  ],
                 ),
                 Divider(
                   thickness: 2,
@@ -70,17 +87,30 @@ class _showTasks extends State<AllTasks> {
             Container(
               height: Get.height * 0.5,
               //color: Colors.black,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  _TasksCard('Tasks name'),
-                _TasksCard('Taske name 2'),
-                  _TasksCard('Taske name 3'),
-                  _TasksCard('Taske name 5'),
-                  _TasksCard('Taske name 4'),
-                  _TasksCard('Taske name 4'),
-                  _TasksCard('Taske name 4'),
-                ],
+              child: StreamBuilder<QuerySnapshot<Map<String,dynamic>>>(
+                stream:  firebase.collection('Addtask').snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData){
+                    return Center(child: Container(child: Text('Loading Data....')));
+                  }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder:(context, index) {
+                     return _TasksCard(snapshot.data!.docs[index]["task_title"],
+                     );
+                    },
+                    // scrollDirection: Axis.vertical,
+                    // _TasksCard('Taske name 2'),
+                    //   _TasksCard('Taske name 3'),
+                    //   _TasksCard('Taske name 5'),
+                    //   _TasksCard('Taske name 4'),
+                    //   _TasksCard('Taske name 4'),
+                    //   _TasksCard('Taske name 4'),
+
+                  );
+                }
               ),
             )
           ],

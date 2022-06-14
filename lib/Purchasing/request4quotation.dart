@@ -127,29 +127,33 @@ class _showTasks extends State<Request4Quotation> {
         children: [
 
           Container(
-            child: Text('Title'),
+            child: Text('Title',  style: TextStyle(color: Colors.white),),
           ),
+          SizedBox(width: 8,),
           Text(
             text,
             style: TextStyle(color: kyellow, fontSize: 16),
           ),
+          VerticalDivider(thickness: 4,),
           SizedBox(width: 10,),
           Container(
-            child: Text('Expiery Date'),
+            child: Text('Expiery Date',style: TextStyle(color: Colors.white)),
           ),
+          SizedBox(width: 8,),
           Text(
             cdate,
             style: TextStyle(color: Colors.white),
           ),
+          VerticalDivider(thickness: 4,),
           SizedBox(width: 10,),
           Container(
-            child: Text('Req Date'),
+            child: Text('Req Date',style: TextStyle(color: Colors.white)),
           ),
+          SizedBox(width: 8,),
           Text(
             date,
             style: TextStyle(color: Colors.white),
           ),
-
         ],
       ),
     );
@@ -191,6 +195,10 @@ AppBar _buildappBar() {
 //         image: AssetImage('asset/Rectangleforbnb.png'),
 //         fit: BoxFit.fitWidth,
 //       )),
+
+
+
+
 //       child: ClipRRect(
 //         borderRadius: BorderRadius.only(
 //           topLeft: Radius.circular(100),
@@ -299,6 +307,7 @@ Widget _bottomNevigationBar() {
         //     ),
         //   ),
         // ),
+        //
       ],
     ),
   );
@@ -343,7 +352,7 @@ Widget _dailCard(name, number) {
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold))
             ],
-          )
+          ),
         ],
       ),
     ),

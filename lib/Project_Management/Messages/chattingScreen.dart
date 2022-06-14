@@ -31,7 +31,7 @@ class _chattingState extends State<chattingPage> {
 
                 ImageIcon(
                   AssetImage('asset/addiconforbnb.png'),
-                  size: 1000,
+
                 ),
                 ImageIcon(
                   AssetImage('asset/addsymbolforbnb.png'),

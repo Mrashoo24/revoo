@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+
+import '../../constants/constants.dart';
+import '../Components/addNewTeamMember.dart';
 
 class UserProfileTeams extends StatefulWidget {
   @override
@@ -13,6 +17,7 @@ class UserProfileTeams extends StatefulWidget {
 }
 
 class _teamState extends State<UserProfileTeams> {
+  var firebase = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class _teamState extends State<UserProfileTeams> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "Welcome, Roshan Prajapati",
+                          "Welcome,Tanishq Bhoir",
                           style: TextStyle(
                             fontSize: 25,
                             color: Colors.black,
@@ -163,43 +168,59 @@ class _teamState extends State<UserProfileTeams> {
                                   SizedBox(
                                     width: Get.width * 0.4,
                                   ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Image.asset(
-                                      'asset/addicon.png',
-                                    ),
+                                  Column(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {Get.to(AddNewMember());},
+                                        icon: Image.asset(
+                                          'asset/addicon.png',
+                                        ),
+                                      ),
+                                      SizedBox(height: 5,),
+                                      Text('Add New Member',style: TextStyle(color: kblue),),
+                                    ],
                                   ),
                                 ],
                               ),
                             ),
                         Container(
-                            height: 40,
-                            width: Get.width,
-                            child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  Image.asset(
-                                      'asset/blackcircleForuserTeams.png'),
-                                  SizedBox(width: 10,),
-                                  Image.asset(
-                                      'asset/blackcircleForuserTeams.png'),
-                                  SizedBox(width: 10,),
-                                  Image.asset(
-                                      'asset/blackcircleForuserTeams.png'),
-                                  SizedBox(width: 10,),
-                                  Image.asset(
-                                      'asset/blackcircleForuserTeams.png'),
-                                  SizedBox(width: 10,),
-                                  Image.asset(
-                                      'asset/blackcircleForuserTeams.png'),
-                                  SizedBox(width: 10,),
-                                  Image.asset(
-                                      'asset/blackcircleForuserTeams.png'),
-                                  SizedBox(width: 10,),
-                                  Image.asset(
-                                      'asset/blackcircleForuserTeams.png'),
-                                ],
-                              )),
+                          height: 300,
+                          width: Get.width,
+                            decoration: BoxDecoration(color: greytxtbx,borderRadius: BorderRadius.circular(30)),
+                            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                              stream: firebase.collection('My_Project_Team').snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData){
+                                  return Center(child: Text('Loading Data'));
+                                }
+                                return ListView.builder(
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      child: Expanded(
+                                        child: Column(
+                                          children: [
+                                            // CircleAvatar(radius: 20,backgroundColor: kblue,)
+                                            //completed code for data read
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 20,top: 20,),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Text(snapshot.data!.docs[index]["Employee"],style: TextStyle(fontSize: 20,color: kblue),),
+                                                ],
+                                              ),
+                                            ),
+                                            Divider(thickness: 2,color: Colors.white,endIndent: 15,indent: 25,)
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  );
+                              }
+                            ),
+                        ),
                         // SizedBox(
                         //   height: 15,
                         // ),
